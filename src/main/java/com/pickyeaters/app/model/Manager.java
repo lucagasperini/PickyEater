@@ -1,4 +1,4 @@
-package com.pickyeater.app.model;
+package com.pickyeaters.app.model;
 
 public class Manager extends User {
     private Restaurant owner;

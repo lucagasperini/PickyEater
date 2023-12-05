@@ -1,4 +1,4 @@
-package com.pickyeater.app.model;
+package com.pickyeaters.app.model;
 
 public abstract class Dish {
     public static final String TYPE_APPETIZER = "APPETIZER";

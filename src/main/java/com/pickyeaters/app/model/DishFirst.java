@@ -1,4 +1,4 @@
-package com.pickyeater.app.model;
+package com.pickyeaters.app.model;
 
 public class DishFirst extends Dish{
     public DishFirst(int id, String name, Ingredient[] ingredientList) {
