@@ -1,4 +1,4 @@
-package com.pickyeater.lib.model;
+package com.pickyeater.app.model;
 
 public class Restaurant {
     private String name;

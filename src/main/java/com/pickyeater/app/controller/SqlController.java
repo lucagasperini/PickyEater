@@ -1,4 +1,4 @@
-package com.pickyeater.cli.controller;
+package com.pickyeater.app.controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

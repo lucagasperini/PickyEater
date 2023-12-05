@@ -1,4 +1,4 @@
-package com.pickyeater.lib.model;
+package com.pickyeater.app.model;
 
 public class DishContour extends Dish {
     public DishContour(int id, String name, Ingredient[] ingredientList) {

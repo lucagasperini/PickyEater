@@ -1,6 +1,6 @@
-package com.pickyeater.cli;
+package com.pickyeater.app;
 
-import com.pickyeater.cli.controller.SqlController;
+import com.pickyeater.app.controller.SqlController;
 
 public class Main {
     public static void main(String[] args) {
