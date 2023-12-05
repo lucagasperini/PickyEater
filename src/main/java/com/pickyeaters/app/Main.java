@@ -1,10 +1,11 @@
 package com.pickyeaters.app;
 
-import com.pickyeaters.app.controller.SqlController;
+import com.pickyeaters.app.view.cli.MainCLI;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(SqlController.connect());
-        System.out.println("Welcome to PickyEaters");
+        // Start the view
+        MainCLI.start();
+
     }
 }
