@@ -1,14 +1,17 @@
 package com.pickyeaters.app.model;
 
 public abstract class User {
-    private int id;
     private String username;
-    private String password;
+    private String firstname;
+    private String lastname;
 
-    public User(int id, String username, String password) {
-        this.id = id;
+    public User(String username) {
         this.username = username;
-        this.password = password;
+    }
+    public User(String username, String firstname, String lastname) {
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
     }
 
 }

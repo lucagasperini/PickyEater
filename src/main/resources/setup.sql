@@ -8,6 +8,8 @@ CREATE TABLE "User" (
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     username varchar(256) NOT NULL,
     password char(64) NOT NULL,
+    firstname varchar(256),
+    lastname varchar(256),
     type varchar(16) NOT NULL,
     unique(username)
 );
@@ -43,14 +45,18 @@ CREATE TABLE "Session" (
 );
 
 
-CREATE OR REPLACE PROCEDURE login(IN username_arg varchar(256), IN password_arg char(64), OUT token_arg UUID)
+CREATE OR REPLACE PROCEDURE login(IN username_arg varchar(256), IN password_arg char(64), OUT token_arg varchar(256))
 LANGUAGE plpgsql
 AS $$
 DECLARE
 	userid UUID;
 BEGIN
     SELECT id INTO userid FROM "User" WHERE username = username_arg AND password = password_arg;
-    INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token INTO token_arg;
+    IF(userid IS NULL) THEN
+		token_arg := NULL;
+		RETURN;
+	END IF;
+	INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token::varchar INTO token_arg;
 END;
 $$;
 

@@ -2,9 +2,7 @@ package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Optional;
 
 public class SqlController {
@@ -24,7 +22,23 @@ public class SqlController {
     }
 
     public static Session login(String username, String password) {
-        return new Session(); // TODO: implement this!!!
+        try {
+            // TODO: What if connection is not ready?
+            Connection conn = SqlController.getConnection();
+            CallableStatement cs = conn.prepareCall("CALL login(?,?,?)");
+            cs.setString(1, username);
+            cs.setString(2, password);
+            cs.registerOutParameter(3, Types.VARCHAR);
+            cs.setNull(3, Types.VARCHAR);
+
+            cs.executeUpdate();
+
+            String token = cs.getString(3);
+            return new Session(token);
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static Connection getConnection() {

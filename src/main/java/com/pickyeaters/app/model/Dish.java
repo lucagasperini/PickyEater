@@ -9,12 +9,10 @@ public abstract class Dish {
     public static final String TYPE_DESSERT = "DESSERT";
 
     private String name;
-    private int id;
     private Ingredient[] ingredientList;
     protected String type;
 
-    protected Dish(int id, String name, Ingredient[] ingredientList) {
-        this.id = id;
+    protected Dish(String name, Ingredient[] ingredientList) {
         this.name = name;
         this.ingredientList = ingredientList;
     }

@@ -1,7 +1,10 @@
 package com.pickyeaters.app.model;
 
 public class Administrator extends User {
-    public Administrator(int id, String username, String password) {
-        super(id, username, password);
+    public Administrator(String username, String firstname, String lastname) {
+        super(username, firstname, lastname);
+    }
+    public Administrator(String username) {
+        super(username);
     }
 }
