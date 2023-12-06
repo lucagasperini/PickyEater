@@ -1,11 +1,16 @@
 package com.pickyeaters.app.view.cli;
 
+import com.pickyeaters.app.controller.SessionController;
+import com.pickyeaters.app.controller.SystemController;
+import com.pickyeaters.app.model.Session;
+
 import java.util.Scanner;
 
 public class MainCLI {
     public static void start() {
-        isRunning = true;
-        System.out.println("Welcome to PickyEaters");
+        load();
+        welcome();
+        login();
         requestLoop();
     }
 
@@ -15,6 +20,22 @@ public class MainCLI {
     }
 
     private static boolean isRunning = false;
+    private static Session session = new Session();
+    private static void load() {
+        isRunning = true;
+        SystemController.load();
+    }
+    private static void login() {
+        Scanner userInput = new Scanner(System.in);
+        do {
+            System.out.print("Username: ");
+            String username = userInput.nextLine();
+            System.out.print("Password: ");
+            String password = userInput.nextLine();
+
+            session = SessionController.login(username, password);
+        } while(!session.isValid());
+    }
     private static void requestLoop() {
         Scanner userInput = new Scanner(System.in);
         while(isRunning) {
@@ -41,5 +62,9 @@ public class MainCLI {
             default:
                 throw new UnsupportedOperationException("Cannot execute " + tmp[0].toLowerCase());
         }
+    }
+
+    private static void welcome() {
+        System.out.println("Welcome to PickyEaters");
     }
 }

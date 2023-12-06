@@ -1,5 +1,7 @@
 package com.pickyeaters.app.controller;
 
+import com.pickyeaters.app.model.Session;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -19,6 +21,10 @@ public class SqlController {
         } catch (SQLException ex) {
             return false;
         }
+    }
+
+    public static Session login(String username, String password) {
+        return new Session(); // TODO: implement this!!!
     }
 
     public static Connection getConnection() {

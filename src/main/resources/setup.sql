@@ -1,9 +1,11 @@
 CREATE database picky;
 CREATE USER picky WITH PASSWORD 'picky';
 ALTER DATABASE picky OWNER TO picky;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE "User" (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     username varchar(256) NOT NULL,
     password char(64) NOT NULL,
     type varchar(16) NOT NULL,
@@ -11,22 +13,46 @@ CREATE TABLE "User" (
 );
 
 CREATE TABLE "Dish" (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
     unique(name)
 );
 
 CREATE TABLE "Ingredient" (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
     unique(name)
 );
 
 CREATE TABLE "Dish_Ingredient" (
-    id SERIAL PRIMARY KEY,
-    fk_ingredient INT NOT NULL,
-    fk_dish INT NOT NULL,
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_ingredient UUID NOT NULL,
+    fk_dish UUID NOT NULL,
     unique(fk_dish, fk_ingredient),
     FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
 );
+
+CREATE TABLE "Session" (
+    token UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL
+);
+
+
+CREATE OR REPLACE PROCEDURE login(IN username_arg varchar(256), IN password_arg char(64), OUT token_arg UUID)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+	userid UUID;
+BEGIN
+    SELECT id INTO userid FROM "User" WHERE username = username_arg AND password = password_arg;
+    INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token INTO token_arg;
+END;
+$$;
+
+
+INSERT INTO "User" (username, password, type) VALUES ('luca', 'luca', 'ADMIN');
