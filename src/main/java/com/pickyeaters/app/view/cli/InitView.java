@@ -27,10 +27,10 @@ public class InitView implements ViewCLI {
     }
 
     private static void loadDatabase() {
-        Settings settings = SettingsController.getSettings();
         boolean success = false;
         while(!success) {
             try {
+                Settings settings = SettingsController.getSettings();
                 // try to init database connection
                 DatabaseController.init(
                         settings.getDatabaseHost(),
