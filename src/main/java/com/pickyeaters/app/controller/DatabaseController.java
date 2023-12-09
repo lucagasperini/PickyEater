@@ -34,22 +34,37 @@ public class DatabaseController {
         }
     }
 
-    public static Session login(String username, String password) {
+    public static Session login(String username, String password) throws DatabaseControllerException {
+        if(conn == null) {
+            throw new DatabaseControllerException("Connection is not ready.");
+        }
+        CallableStatement cs = null;
         try {
-            // TODO: What if connection is not ready?
-            CallableStatement cs = conn.prepareCall("CALL login(?,?,?)");
+            cs = conn.prepareCall("CALL login(?,?,?)");
             cs.setString(1, username);
             cs.setString(2, password);
             cs.registerOutParameter(3, Types.VARCHAR);
             cs.setNull(3, Types.VARCHAR);
-
-            cs.executeUpdate();
-
-            String token = cs.getString(3);
-            return new Session(token);
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new DatabaseControllerException("Cannot create a login call.");
+        }
+
+        try {
+            cs.executeUpdate();
+        } catch (SQLException e) {
+            throw new DatabaseControllerException("Cannot execute a login call.");
+        }
+
+        String token = null;
+        try {
+            token = cs.getString(3);
+        } catch (SQLException e) {
+            throw new DatabaseControllerException("Cannot get response from login call.");
+        }
+        if(token == null) {
+            return new Session();
+        } else {
+            return new Session(token);
         }
     }
 

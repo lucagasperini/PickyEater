@@ -32,6 +32,7 @@ public class InitView implements ViewCLI {
             try {
                 Settings settings = SettingsController.getSettings();
                 // try to init database connection
+                // TODO: It's worth not fetch them inside the DatabaseController?
                 DatabaseController.init(
                         settings.getDatabaseHost(),
                         settings.getDatabasePort(),
@@ -61,9 +62,9 @@ public class InitView implements ViewCLI {
         System.out.print("Database Host: ");
         String host = userInput.nextLine();
 
-        System.out.print("Database Port: ");
         int port = -1;
         while (port == -1) {
+            System.out.print("Database Port: ");
             try {
                 port = Integer.parseInt(userInput.nextLine());
             } catch (NumberFormatException ex) {

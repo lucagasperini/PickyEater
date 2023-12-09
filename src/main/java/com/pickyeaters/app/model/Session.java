@@ -11,6 +11,6 @@ public class Session {
     }
 
     public boolean isValid() {
-        return !this.token.isEmpty();
+        return this.token != null && !this.token.isEmpty();
     }
 }

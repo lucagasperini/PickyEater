@@ -7,6 +7,8 @@ import com.pickyeaters.app.utils.SettingsControllerException;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SettingsController {
@@ -93,10 +95,17 @@ public class SettingsController {
     }
 
     public static void persist() throws SettingsControllerException {
-        saveConfig(OS.getConfigFilePath());
+        saveConfig(OS.getConfigFilePath(), OS.getConfigDir());
     }
 
-    private static void saveConfig(String configFile) throws SettingsControllerException {
+    private static void saveConfig(String configFile, String configDir) throws SettingsControllerException {
+        // TODO: Should we check for coherent configFile and configDir?
+        try {
+            Files.createDirectories(Paths.get(configDir));
+        } catch (IOException ex) {
+            throw new SettingsControllerException("Cannot create config directory: " + configDir);
+        }
+
         Properties prop = new Properties();
         saveProperties(prop);
 
@@ -109,8 +118,8 @@ public class SettingsController {
         }
 
         try {
-            prop.save(fos, null);
-        } catch (ClassCastException ex) {
+            prop.store(fos, null);
+        } catch (IOException e) {
             throw new SettingsControllerException("Cannot save config file: " + configFile);
         }
     }
