@@ -1,8 +1,11 @@
 package com.pickyeaters.app.view.cli;
 
 import com.pickyeaters.app.controller.SessionController;
-import com.pickyeaters.app.controller.SystemController;
+import com.pickyeaters.app.controller.SettingsController;
+import com.pickyeaters.app.controller.DatabaseController;
 import com.pickyeaters.app.model.Session;
+import com.pickyeaters.app.utils.DatabaseControllerException;
+import com.pickyeaters.app.utils.SettingsControllerException;
 
 import java.util.Scanner;
 
@@ -23,7 +26,36 @@ public class MainCLI {
     private static Session session = new Session();
     private static void load() {
         isRunning = true;
-        SystemController.load();
+
+        // Try to load config from file system
+        try {
+            SettingsController.init();
+        } catch (SettingsControllerException ex) {
+            // If you cannot load from file system, ask user input
+            askDatabase();
+        }
+        try {
+            DatabaseController.init();
+        } catch (DatabaseControllerException ex) {
+            // TODO: Code this!!!
+        }
+    }
+    private static void askDatabase() {
+        Scanner userInput = new Scanner(System.in);
+
+        System.out.print("Database URL: ");
+        String url = userInput.nextLine();
+        System.out.print("Database Name: ");
+        String name = userInput.nextLine();
+        System.out.print("Database User: ");
+        String user = userInput.nextLine();
+        System.out.print("Database Password: ");
+        String password = userInput.nextLine();
+        try {
+            SettingsController.init(url, name, user, password);
+        } catch (SettingsControllerException ex) {
+            // Will never throw since args are not null!
+        }
     }
     private static void login() {
         Scanner userInput = new Scanner(System.in);

@@ -1,30 +1,31 @@
 package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
+import com.pickyeaters.app.utils.DatabaseControllerException;
 
 import java.sql.*;
-import java.util.Optional;
 
-public class SqlController {
+public class DatabaseController {
     //TODO: Use Settings!!!
     private static final String url = "jdbc:postgresql://localhost:5432/picky";
     private static final String user = "picky";
     private static final String password = "picky";
 
-    private static Optional<Connection> connection = Optional.empty();
-    public static boolean connect() {
+    private static Connection conn = null;
+    public static void init() throws DatabaseControllerException {
+        connect();
+    }
+    private static void connect() throws DatabaseControllerException {
         try {
-            connection = Optional.ofNullable(DriverManager.getConnection(url, user, password));
-            return true;
+            conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
-            return false;
+            throw new DatabaseControllerException("Cannot connect to database: " + url);
         }
     }
 
     public static Session login(String username, String password) {
         try {
             // TODO: What if connection is not ready?
-            Connection conn = SqlController.getConnection();
             CallableStatement cs = conn.prepareCall("CALL login(?,?,?)");
             cs.setString(1, username);
             cs.setString(2, password);
@@ -41,7 +42,4 @@ public class SqlController {
         }
     }
 
-    public static Connection getConnection() {
-        return connection.orElseThrow();
-    }
 }
