@@ -1,7 +1,6 @@
 package com.pickyeaters.app.view.cli;
 
 import com.pickyeaters.app.controller.DatabaseController;
-import com.pickyeaters.app.controller.SessionController;
 import com.pickyeaters.app.controller.SettingsController;
 import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.utils.DatabaseControllerException;
@@ -11,22 +10,27 @@ import java.util.Scanner;
 
 public class InitView implements ViewCLI {
     public static void show(String[] args) {
-        load();
+        loadSettings();
+        loadDatabase();
+        saveSettings();
     }
 
-    private static void load() {
+    private static void loadSettings() {
+        // Try to load config from file system
+        try {
+            SettingsController.init();
+        } catch (SettingsControllerException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+            // If you cannot load from file system, ask user input
+            askConfig();
+        }
+    }
+
+    private static void loadDatabase() {
+        Settings settings = SettingsController.getSettings();
         // TODO: I dont like this code, there is better way to handle this?
         boolean success = false;
         while(!success) {
-            // Try to load config from file system
-            try {
-                SettingsController.init();
-            } catch (SettingsControllerException ex) {
-                // If you cannot load from file system, ask user input
-                askDatabase();
-            }
-            // get settings
-            Settings settings = SettingsController.getSettings();
             try {
                 // try to init database connection
                 DatabaseController.init(
@@ -39,8 +43,12 @@ public class InitView implements ViewCLI {
                 success = true;
             } catch (DatabaseControllerException ex) {
                 System.out.println("ERROR: " + ex.getMessage());
+                askConfig();
             }
         }
+    }
+
+    private static void saveSettings() {
         // try to save current config on file
         try {
             SettingsController.persist();
@@ -48,7 +56,7 @@ public class InitView implements ViewCLI {
             System.out.println("ERROR: " + ex.getMessage());
         }
     }
-    private static void askDatabase() {
+    private static void askConfig() {
         Scanner userInput = new Scanner(System.in);
 
         System.out.print("Database Host: ");
