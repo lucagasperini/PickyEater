@@ -28,7 +28,6 @@ public class InitView implements ViewCLI {
 
     private static void loadDatabase() {
         Settings settings = SettingsController.getSettings();
-        // TODO: I dont like this code, there is better way to handle this?
         boolean success = false;
         while(!success) {
             try {

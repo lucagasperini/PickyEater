@@ -40,7 +40,7 @@ public class Settings {
     }
 
     public void setDatabaseHost(String databaseUrl) {
-        this.databaseHost = databaseHost;
+        this.databaseHost = databaseUrl;
     }
 
     public void setDatabasePort(int databasePort) {
