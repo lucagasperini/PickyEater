@@ -6,16 +6,27 @@ import com.pickyeaters.app.utils.DatabaseControllerException;
 import java.sql.*;
 
 public class DatabaseController {
-    //TODO: Use Settings!!!
-    private static final String url = "jdbc:postgresql://localhost:5432/picky";
-    private static final String user = "picky";
-    private static final String password = "picky";
+    private static final int MIN_PORT_NUMBER = 0;
+    private static final int MAX_PORT_NUMBER = 65535;
 
     private static Connection conn = null;
-    public static void init() throws DatabaseControllerException {
-        connect();
+    public static void init(String host, int port, String name, String user, String password) throws DatabaseControllerException {
+        String url = formatURL(host, port, name);
+        connect(url, user, password);
     }
-    private static void connect() throws DatabaseControllerException {
+    private static String formatURL(String host, int port, String name) throws DatabaseControllerException {
+        if(host == null || host.isEmpty()) {
+            throw new DatabaseControllerException("Cannot create a jdbc URL. Host invalid.");
+        }
+        if(port <= MIN_PORT_NUMBER || port >= MAX_PORT_NUMBER) {
+            throw new DatabaseControllerException("Cannot create a jdbc URL. Port invalid.");
+        }
+        if(name == null || name.isEmpty()) {
+            throw new DatabaseControllerException("Cannot create a jdbc URL. Name invalid.");
+        }
+        return "jdbc:postgresql://" + host + ":" + port + "/" + name;
+    }
+    private static void connect(String url, String user, String password) throws DatabaseControllerException {
         try {
             conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {

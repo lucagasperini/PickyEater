@@ -1,10 +1,11 @@
 package com.pickyeaters.app.model;
 
 public class Settings {
-    private String databaseUrl;
-    private String databasePassword;
-    private String databaseName;
-    private String databaseUser;
+    private String databaseHost = null;
+    private int databasePort = -1;
+    private String databasePassword = null;
+    private String databaseName = null;
+    private String databaseUser = null;
 
     public Settings() {
 
@@ -18,8 +19,12 @@ public class Settings {
         return databasePassword;
     }
 
-    public String getDatabaseUrl() {
-        return databaseUrl;
+    public String getDatabaseHost() {
+        return databaseHost;
+    }
+
+    public int getDatabasePort() {
+        return databasePort;
     }
 
     public String getDatabaseUser() {
@@ -34,8 +39,12 @@ public class Settings {
         this.databasePassword = databasePassword;
     }
 
-    public void setDatabaseUrl(String databaseUrl) {
-        this.databaseUrl = databaseUrl;
+    public void setDatabaseHost(String databaseUrl) {
+        this.databaseHost = databaseHost;
+    }
+
+    public void setDatabasePort(int databasePort) {
+        this.databasePort = databasePort;
     }
 
     public void setDatabaseUser(String databaseUser) {
