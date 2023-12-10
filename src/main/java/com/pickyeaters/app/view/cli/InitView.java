@@ -3,6 +3,7 @@ package com.pickyeaters.app.view.cli;
 import com.pickyeaters.app.controller.DatabaseController;
 import com.pickyeaters.app.controller.SettingsController;
 import com.pickyeaters.app.model.Settings;
+import com.pickyeaters.app.model.SettingsDatabase;
 import com.pickyeaters.app.utils.DatabaseControllerException;
 import com.pickyeaters.app.utils.SettingsControllerException;
 
@@ -30,15 +31,8 @@ public class InitView implements ViewCLI {
         boolean success = false;
         while(!success) {
             try {
-                Settings settings = SettingsController.getSettings();
                 // try to init database connection
-                // TODO: It's worth not fetch them inside the DatabaseController?
-                DatabaseController.init(
-                        settings.getDatabaseHost(),
-                        settings.getDatabasePort(),
-                        settings.getDatabaseName(),
-                        settings.getDatabaseUser(),
-                        settings.getDatabasePassword());
+                DatabaseController.init();
                 // exit if not catch exception
                 success = true;
             } catch (DatabaseControllerException ex) {
@@ -79,8 +73,17 @@ public class InitView implements ViewCLI {
         System.out.print("Database Password: ");
         String password = userInput.nextLine();
 
+        SettingsDatabase settingsDatabase = new SettingsDatabase(
+                "postgresql",
+                host,
+                port,
+                name,
+                user,
+                password
+        );
+
         try {
-            SettingsController.init(host, port, name, user, password);
+            SettingsController.init(settings);
         } catch (SettingsControllerException ex) {
             // Will never throw since args are not null!
         }

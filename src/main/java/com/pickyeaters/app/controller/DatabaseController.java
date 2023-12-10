@@ -1,6 +1,7 @@
 package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
+import com.pickyeaters.app.model.SettingsDatabase;
 import com.pickyeaters.app.utils.DatabaseControllerException;
 
 import java.sql.*;
@@ -8,13 +9,23 @@ import java.sql.*;
 public class DatabaseController {
     private static final int MIN_PORT_NUMBER = 0;
     private static final int MAX_PORT_NUMBER = 65535;
-
+    private static final String DEFAULT_DRIVER = "postgresql";
     private static Connection conn = null;
-    public static void init(String host, int port, String name, String user, String password) throws DatabaseControllerException {
-        String url = formatURL(host, port, name);
-        connect(url, user, password);
+    public static void init() throws DatabaseControllerException {
+        SettingsDatabase settings = SettingsController.getSettings().getDatabase();
+        String url = formatURL(
+                settings.getDriver(),
+                settings.getHost(),
+                settings.getPort(),
+                settings.getName());
+
+        connect(url, settings.getUser(), settings.getPassword());
     }
-    private static String formatURL(String host, int port, String name) throws DatabaseControllerException {
+    private static String formatURL(String driver, String host, int port, String name) throws DatabaseControllerException {
+        if(driver == null || driver.isEmpty()) {
+            // TODO: Not sure if default value is better on SettingsController
+            driver = DEFAULT_DRIVER;
+        }
         if(host == null || host.isEmpty()) {
             throw new DatabaseControllerException("Cannot create a jdbc URL. Host invalid.");
         }
@@ -24,7 +35,7 @@ public class DatabaseController {
         if(name == null || name.isEmpty()) {
             throw new DatabaseControllerException("Cannot create a jdbc URL. Name invalid.");
         }
-        return "jdbc:postgresql://" + host + ":" + port + "/" + name;
+        return "jdbc:" + driver + "://" + host + ":" + port + "/" + name;
     }
     private static void connect(String url, String user, String password) throws DatabaseControllerException {
         try {
