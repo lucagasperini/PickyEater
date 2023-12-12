@@ -10,6 +10,10 @@ public class SettingsDatabaseController {
 
     private SettingsDatabase settingsDatabase = null;
 
+    public SettingsDatabaseController() {
+        settingsDatabase = new SettingsDatabase();
+    }
+
     public SettingsDatabase getSettingsDatabase() {
         return settingsDatabase;
     }

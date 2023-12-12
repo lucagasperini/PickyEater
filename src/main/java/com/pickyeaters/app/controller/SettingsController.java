@@ -19,12 +19,12 @@ public class SettingsController {
         loadConfig(OS.getConfigFilePath());
         validate();
     }
-
+/*
     public static void init(Settings newSettings) throws SettingsControllerException {
         settings = newSettings;
         validate();
     }
-
+*/
     public static Settings getSettings() {
         return settings;
     }
@@ -52,7 +52,7 @@ public class SettingsController {
         settings = new Settings();
 
         databaseController.load(prop);
-        settings.setDatabase(SettingsDatabaseController.getSettingsDatabase());
+        settings.setDatabase(databaseController.getSettingsDatabase());
     }
 
     private static void validate() throws SettingsControllerException {

@@ -6,6 +6,7 @@ import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.model.SettingsDatabase;
 import com.pickyeaters.app.utils.DatabaseControllerException;
 import com.pickyeaters.app.utils.SettingsControllerException;
+import com.pickyeaters.app.view.cli.bean.SettingsBean;
 
 import java.util.Scanner;
 
@@ -73,8 +74,7 @@ public class InitView implements ViewCLI {
         System.out.print("Database Password: ");
         String password = userInput.nextLine();
 
-        SettingsDatabase settingsDatabase = new SettingsDatabase(
-                "postgresql",
+        SettingsBean settings = new SettingsBean(
                 host,
                 port,
                 name,

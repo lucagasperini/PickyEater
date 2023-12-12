@@ -43,4 +43,28 @@ public class SettingsDatabase {
     public String getUser() {
         return user;
     }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }
