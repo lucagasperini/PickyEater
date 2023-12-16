@@ -7,12 +7,22 @@ import com.pickyeaters.app.utils.DatabaseControllerException;
 import java.sql.*;
 
 public class DatabaseController {
-    private static final int MIN_PORT_NUMBER = 0;
-    private static final int MAX_PORT_NUMBER = 65535;
-    private static final String DEFAULT_DRIVER = "postgresql";
-    private static Connection conn = null;
-    public static void init() throws DatabaseControllerException {
-        SettingsDatabase settings = SettingsController.getSettings().getDatabase();
+    private final int MIN_PORT_NUMBER = 0;
+    private final int MAX_PORT_NUMBER = 65535;
+    private final String DEFAULT_DRIVER = "postgresql";
+    private static DatabaseController instance = new DatabaseController();
+
+    public static DatabaseController getInstance() {
+        return instance;
+    }
+
+    private DatabaseController() {
+
+    }
+
+    private Connection conn = null;
+    public void init() throws DatabaseControllerException {
+        SettingsDatabase settings = SettingsController.getInstance().getSettings().getDatabase();
         String url = formatURL(
                 settings.getDriver(),
                 settings.getHost(),
@@ -21,7 +31,7 @@ public class DatabaseController {
 
         connect(url, settings.getUser(), settings.getPassword());
     }
-    private static String formatURL(String driver, String host, int port, String name) throws DatabaseControllerException {
+    private String formatURL(String driver, String host, int port, String name) throws DatabaseControllerException {
         if(driver == null || driver.isEmpty()) {
             // TODO: Not sure if default value is better on SettingsController
             driver = DEFAULT_DRIVER;
@@ -37,7 +47,7 @@ public class DatabaseController {
         }
         return "jdbc:" + driver + "://" + host + ":" + port + "/" + name;
     }
-    private static void connect(String url, String user, String password) throws DatabaseControllerException {
+    private void connect(String url, String user, String password) throws DatabaseControllerException {
         try {
             conn = DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
@@ -45,7 +55,7 @@ public class DatabaseController {
         }
     }
 
-    public static Session login(String username, String password) throws DatabaseControllerException {
+    public Session login(String username, String password) throws DatabaseControllerException {
         if(conn == null) {
             throw new DatabaseControllerException("Connection is not ready.");
         }

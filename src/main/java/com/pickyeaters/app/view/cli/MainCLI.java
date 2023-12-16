@@ -11,10 +11,9 @@ import com.pickyeaters.app.utils.SettingsControllerException;
 import java.util.Scanner;
 
 public class MainCLI {
-    private InitView initView = new InitView();
-    private HelpView helpView = new HelpView();
     public void start() {
         isRunning = true;
+        InitView initView = new InitView();
         initView.show(null);
         welcome();
         login();
@@ -36,7 +35,7 @@ public class MainCLI {
             System.out.print("Password: ");
             String password = userInput.nextLine();
 
-            session = SessionController.login(username, password);
+            session = SessionController.getInstance().login(username, password);
         } while(!session.isValid());
     }
     private void requestLoop() {
@@ -56,7 +55,12 @@ public class MainCLI {
         switch (tmp[0].toLowerCase()) {
             case "help":
             case "h":
+                HelpView helpView = new HelpView();
                 helpView.show(tmp);
+                break;
+            case "add":
+                //AddView addView = new AddView();
+                //addView.show(tmp);
                 break;
             case "quit":
             case "q":

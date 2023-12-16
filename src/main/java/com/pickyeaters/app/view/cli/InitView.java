@@ -9,6 +9,7 @@ import com.pickyeaters.app.bean.SettingsBean;
 import java.util.Scanner;
 
 public class InitView implements ViewCLI {
+    @Override
     public void show(String[] args) {
         loadSettings();
         loadDatabase();
@@ -18,7 +19,7 @@ public class InitView implements ViewCLI {
     private void loadSettings() {
         // Try to load config from file system
         try {
-            SettingsController.init();
+            SettingsController.getInstance().init();
         } catch (SettingsControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             // If you cannot load from file system, ask user input
@@ -31,7 +32,7 @@ public class InitView implements ViewCLI {
         while(!success) {
             try {
                 // try to init database connection
-                DatabaseController.init();
+                DatabaseController.getInstance().init();
                 // exit if not catch exception
                 success = true;
             } catch (DatabaseControllerException ex) {
@@ -44,7 +45,7 @@ public class InitView implements ViewCLI {
     private void saveSettings() {
         // try to save current config on file
         try {
-            SettingsController.persist();
+            SettingsController.getInstance().persist();
         } catch (SettingsControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
@@ -67,7 +68,7 @@ public class InitView implements ViewCLI {
         settings.setDatabasePassword(userInput.nextLine());
 
         try {
-            SettingsController.init(settings);
+            SettingsController.getInstance().init(settings);
         } catch (SettingsControllerException ex) {
             askConfig();
         }

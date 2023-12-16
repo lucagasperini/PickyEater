@@ -13,14 +13,24 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SettingsController {
-    private static Settings settings = new Settings();
-    private static SettingsDatabaseController databaseController = new SettingsDatabaseController();
-    public static void init() throws SettingsControllerException {
+    private Settings settings = new Settings();
+    private SettingsDatabaseController databaseController = new SettingsDatabaseController();
+    private static SettingsController instance = new SettingsController();
+
+    public static SettingsController getInstance() {
+        return instance;
+    }
+
+    private SettingsController() {
+
+    }
+
+    public void init() throws SettingsControllerException {
         loadConfig(OS.getConfigFilePath());
         validate();
     }
 
-    public static void init(SettingsBean settingsBean) throws SettingsControllerException {
+    public void init(SettingsBean settingsBean) throws SettingsControllerException {
         databaseController.load(
                 settingsBean.getDatabaseDriver(),
                 settingsBean.getDatabaseHost(),
@@ -33,11 +43,11 @@ public class SettingsController {
         validate();
     }
 
-    public static Settings getSettings() {
+    public Settings getSettings() {
         return settings;
     }
 
-    private static void loadConfig(String configFile) throws SettingsControllerException {
+    private void loadConfig(String configFile) throws SettingsControllerException {
         Properties prop = new Properties();
         FileInputStream fis = null;
 
@@ -56,12 +66,12 @@ public class SettingsController {
         loadProperties(prop);
     }
 
-    private static void loadProperties(Properties prop) throws SettingsControllerException {
+    private void loadProperties(Properties prop) throws SettingsControllerException {
         databaseController.load(prop);
         settings.setDatabase(databaseController.getSettingsDatabase());
     }
 
-    private static void validate() throws SettingsControllerException {
+    private void validate() throws SettingsControllerException {
         if(settings == null) {
             throw new SettingsControllerException("Settings not load");
         }
@@ -69,11 +79,11 @@ public class SettingsController {
         databaseController.validate();
     }
 
-    public static void persist() throws SettingsControllerException {
+    public void persist() throws SettingsControllerException {
         saveConfig(OS.getConfigFilePath(), OS.getConfigDir());
     }
 
-    private static void saveConfig(String configFile, String configDir) throws SettingsControllerException {
+    private void saveConfig(String configFile, String configDir) throws SettingsControllerException {
         // TODO: Should we check for coherent configFile and configDir?
         try {
             Files.createDirectories(Paths.get(configDir));
@@ -99,7 +109,7 @@ public class SettingsController {
         }
     }
 
-    private static void saveProperties(Properties prop) throws SettingsControllerException {
+    private void saveProperties(Properties prop) throws SettingsControllerException {
         validate();
 
         databaseController.save(prop);
