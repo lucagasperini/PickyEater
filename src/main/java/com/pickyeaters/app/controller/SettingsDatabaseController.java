@@ -4,11 +4,14 @@ import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.model.SettingsDatabase;
 import com.pickyeaters.app.utils.SettingsControllerException;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 public class SettingsDatabaseController {
 
     private SettingsDatabase settingsDatabase = null;
+
+    private static final String[] DRIVER_LIST = {"postgresql"/*, "mysql"*/};
 
     public SettingsDatabaseController() {
         settingsDatabase = new SettingsDatabase();
@@ -34,13 +37,22 @@ public class SettingsDatabaseController {
         settingsDatabase = new SettingsDatabase(driver, host, port, name, user, password);
     }
 
-    public void load(SettingsDatabase newSettings) {
-        settingsDatabase = newSettings;
+    public void load(String driver, String host, String port, String name, String user, String password) throws SettingsControllerException {
+        try {
+            int portNumber = Integer.parseInt(port);
+            settingsDatabase = new SettingsDatabase(driver, host, portNumber, name, user, password);
+        } catch (NumberFormatException ex) {
+            throw new SettingsControllerException("Cannot convert port into a number!");
+        }
     }
 
     public void validate() throws SettingsControllerException {
         if(settingsDatabase == null) {
             throw new SettingsControllerException("SettingsDatabase not load");
+        }
+
+        if(!validateDriver()) {
+            throw new SettingsControllerException("Database driver not load or invalid");
         }
 
         if(settingsDatabase.getHost() == null) {
@@ -58,6 +70,15 @@ public class SettingsDatabaseController {
         if(settingsDatabase.getPassword() == null) {
             throw new SettingsControllerException("Database password not load");
         }
+    }
+
+    private boolean validateDriver() {
+        for(String str : DRIVER_LIST) {
+            if(str.equals(getSettingsDatabase().getDriver())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void save(Properties prop) throws SettingsControllerException {

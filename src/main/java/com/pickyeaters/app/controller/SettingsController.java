@@ -1,5 +1,6 @@
 package com.pickyeaters.app.controller;
 
+import com.pickyeaters.app.bean.SettingsBean;
 import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.utils.OS;
 import com.pickyeaters.app.utils.SettingsControllerException;
@@ -12,19 +13,26 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SettingsController {
-    private static Settings settings = null;
-    private static SettingsDatabaseController databaseController = null;
+    private static Settings settings = new Settings();
+    private static SettingsDatabaseController databaseController = new SettingsDatabaseController();
     public static void init() throws SettingsControllerException {
-        databaseController = new SettingsDatabaseController();
         loadConfig(OS.getConfigFilePath());
         validate();
     }
-/*
-    public static void init(Settings newSettings) throws SettingsControllerException {
-        settings = newSettings;
+
+    public static void init(SettingsBean settingsBean) throws SettingsControllerException {
+        databaseController.load(
+                settingsBean.getDatabaseDriver(),
+                settingsBean.getDatabaseHost(),
+                settingsBean.getDatabasePort(),
+                settingsBean.getDatabaseName(),
+                settingsBean.getDatabaseUser(),
+                settingsBean.getDatabasePassword()
+        );
+        settings.setDatabase(databaseController.getSettingsDatabase());
         validate();
     }
-*/
+
     public static Settings getSettings() {
         return settings;
     }
@@ -49,8 +57,6 @@ public class SettingsController {
     }
 
     private static void loadProperties(Properties prop) throws SettingsControllerException {
-        settings = new Settings();
-
         databaseController.load(prop);
         settings.setDatabase(databaseController.getSettingsDatabase());
     }
