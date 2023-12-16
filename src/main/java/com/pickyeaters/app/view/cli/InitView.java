@@ -2,9 +2,9 @@ package com.pickyeaters.app.view.cli;
 
 import com.pickyeaters.app.controller.DatabaseController;
 import com.pickyeaters.app.controller.SettingsController;
-import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.utils.DatabaseControllerException;
 import com.pickyeaters.app.utils.SettingsControllerException;
+import com.pickyeaters.app.bean.SettingsBean;
 
 import java.util.Scanner;
 
@@ -30,15 +30,8 @@ public class InitView implements ViewCLI {
         boolean success = false;
         while(!success) {
             try {
-                Settings settings = SettingsController.getSettings();
                 // try to init database connection
-                // TODO: It's worth not fetch them inside the DatabaseController?
-                DatabaseController.init(
-                        settings.getDatabaseHost(),
-                        settings.getDatabasePort(),
-                        settings.getDatabaseName(),
-                        settings.getDatabaseUser(),
-                        settings.getDatabasePassword());
+                DatabaseController.init();
                 // exit if not catch exception
                 success = true;
             } catch (DatabaseControllerException ex) {
@@ -58,31 +51,25 @@ public class InitView implements ViewCLI {
     }
     private static void askConfig() {
         Scanner userInput = new Scanner(System.in);
+        SettingsBean settings = new SettingsBean();
+        // NOTE: Forcing this driver
+        settings.setDatabaseDriver("postgresql");
 
         System.out.print("Database Host: ");
-        String host = userInput.nextLine();
-
-        int port = -1;
-        while (port == -1) {
-            System.out.print("Database Port: ");
-            try {
-                port = Integer.parseInt(userInput.nextLine());
-            } catch (NumberFormatException ex) {
-                System.out.println("ERROR: Please provide a number.");
-            }
-        }
-
+        settings.setDatabaseHost(userInput.nextLine());
+        System.out.print("Database Port: ");
+        settings.setDatabasePort(userInput.nextLine());
         System.out.print("Database Name: ");
-        String name = userInput.nextLine();
+        settings.setDatabaseName(userInput.nextLine());
         System.out.print("Database User: ");
-        String user = userInput.nextLine();
+        settings.setDatabaseUser(userInput.nextLine());
         System.out.print("Database Password: ");
-        String password = userInput.nextLine();
+        settings.setDatabasePassword(userInput.nextLine());
 
         try {
-            SettingsController.init(host, port, name, user, password);
+            SettingsController.init(settings);
         } catch (SettingsControllerException ex) {
-            // Will never throw since args are not null!
+            askConfig();
         }
     }
 
