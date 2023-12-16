@@ -11,22 +11,24 @@ import com.pickyeaters.app.utils.SettingsControllerException;
 import java.util.Scanner;
 
 public class MainCLI {
-    public static void start() {
+    private InitView initView = new InitView();
+    private HelpView helpView = new HelpView();
+    public void start() {
         isRunning = true;
-        InitView.show(null);
+        initView.show(null);
         welcome();
         login();
         requestLoop();
     }
 
-    public static void quit() {
+    public void quit() {
         System.out.println("Goodbye!");
         isRunning = false;
     }
 
-    private static boolean isRunning = false;
-    private static Session session = new Session();
-    private static void login() {
+    private boolean isRunning = false;
+    private Session session = new Session();
+    private void login() {
         Scanner userInput = new Scanner(System.in);
         do {
             System.out.print("Username: ");
@@ -37,7 +39,7 @@ public class MainCLI {
             session = SessionController.login(username, password);
         } while(!session.isValid());
     }
-    private static void requestLoop() {
+    private void requestLoop() {
         Scanner userInput = new Scanner(System.in);
         while(isRunning) {
             System.out.print("> ");
@@ -49,12 +51,12 @@ public class MainCLI {
         }
     }
 
-    private static void requestParser(String request) {
+    private void requestParser(String request) {
         String[] tmp = request.split(" ");
         switch (tmp[0].toLowerCase()) {
             case "help":
             case "h":
-                HelpView.show(tmp);
+                helpView.show(tmp);
                 break;
             case "quit":
             case "q":
@@ -65,7 +67,7 @@ public class MainCLI {
         }
     }
 
-    private static void welcome() {
+    private void welcome() {
         System.out.println("Welcome to PickyEaters");
     }
 }

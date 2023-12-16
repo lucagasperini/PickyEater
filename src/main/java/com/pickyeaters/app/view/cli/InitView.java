@@ -9,13 +9,13 @@ import com.pickyeaters.app.bean.SettingsBean;
 import java.util.Scanner;
 
 public class InitView implements ViewCLI {
-    public static void show(String[] args) {
+    public void show(String[] args) {
         loadSettings();
         loadDatabase();
         saveSettings();
     }
 
-    private static void loadSettings() {
+    private void loadSettings() {
         // Try to load config from file system
         try {
             SettingsController.init();
@@ -26,7 +26,7 @@ public class InitView implements ViewCLI {
         }
     }
 
-    private static void loadDatabase() {
+    private void loadDatabase() {
         boolean success = false;
         while(!success) {
             try {
@@ -41,7 +41,7 @@ public class InitView implements ViewCLI {
         }
     }
 
-    private static void saveSettings() {
+    private void saveSettings() {
         // try to save current config on file
         try {
             SettingsController.persist();
@@ -49,7 +49,7 @@ public class InitView implements ViewCLI {
             System.out.println("ERROR: " + ex.getMessage());
         }
     }
-    private static void askConfig() {
+    private void askConfig() {
         Scanner userInput = new Scanner(System.in);
         SettingsBean settings = new SettingsBean();
         // NOTE: Forcing this driver
