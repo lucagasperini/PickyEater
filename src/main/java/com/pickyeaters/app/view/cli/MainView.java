@@ -4,7 +4,7 @@ import com.pickyeaters.app.view.controller.MainViewController;
 
 import java.util.Scanner;
 
-public class MainCLI {
+public class MainView {
 
     private MainViewController controller = new MainViewController();
     public void start() {

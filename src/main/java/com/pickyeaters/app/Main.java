@@ -1,12 +1,12 @@
 package com.pickyeaters.app;
 
-import com.pickyeaters.app.view.cli.MainCLI;
+import com.pickyeaters.app.view.cli.MainView;
 
 public class Main {
     public static void main(String[] args) {
-        MainCLI mainCLI = new MainCLI();
+        MainView mainView = new MainView();
         // Start the view
-        mainCLI.start();
+        mainView.start();
 
     }
 }
