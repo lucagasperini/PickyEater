@@ -1,6 +1,7 @@
 package com.pickyeaters.app.view.controller;
 
 import com.pickyeaters.app.view.cli.HelpView;
+import com.pickyeaters.app.view.cli.IngredientView;
 import com.pickyeaters.app.view.cli.InitView;
 
 public class MainViewController {
@@ -23,9 +24,10 @@ public class MainViewController {
                 HelpView helpView = new HelpView();
                 helpView.show(tmp);
                 break;
-            case "add":
-                //AddView addView = new AddView();
-                //addView.show(tmp);
+            case "ingredient":
+            case "i":
+                IngredientView ingredientView = new IngredientView();
+                ingredientView.show(tmp);
                 break;
             case "quit":
             case "q":
