@@ -2,26 +2,21 @@ package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
 import com.pickyeaters.app.utils.DatabaseControllerException;
+import com.pickyeaters.app.utils.SessionControllerException;
 
 public class SessionController {
-    private static SessionController instance = new SessionController();
 
-    public static SessionController getInstance() {
-        return instance;
-    }
+    private Session session = null;
 
-    private SessionController() {
+    public SessionController() {
 
     }
 
-    public Session login(String username, String password) {
-        Session session = null;
-        try {
-            session = DatabaseController.getInstance().login(username, password);
-        } catch (DatabaseControllerException ex) {
-            session = new Session();
-            // TODO: Do something, anyway think about a rework
+    public void login(String username, String password) throws SessionControllerException, DatabaseControllerException {
+        session = DatabaseController.getInstance().login(username, password);
+
+        if(!session.isValid()) {
+            throw new SessionControllerException("Login failed");
         }
-        return session;
     }
 }
