@@ -2,6 +2,7 @@ package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.model.SettingsDatabase;
+import com.pickyeaters.app.utils.DatabaseControllerException;
 import com.pickyeaters.app.utils.SettingsControllerException;
 
 import java.util.Arrays;
@@ -9,12 +10,13 @@ import java.util.Properties;
 
 public class SettingsDatabaseController {
 
-    private SettingsDatabase settingsDatabase = null;
+    private SettingsDatabase settingsDatabase = new SettingsDatabase();
+    private final int MIN_PORT_NUMBER = 0;
+    private final int MAX_PORT_NUMBER = 65535;
 
     private static final String[] DRIVER_LIST = {"postgresql"/*, "mysql"*/};
 
     public SettingsDatabaseController() {
-        settingsDatabase = new SettingsDatabase();
     }
 
     public SettingsDatabase getSettingsDatabase() {
@@ -57,6 +59,10 @@ public class SettingsDatabaseController {
 
         if(settingsDatabase.getHost() == null) {
             throw new SettingsControllerException("Database host not load");
+        }
+
+        if(settingsDatabase.getPort() <= MIN_PORT_NUMBER || settingsDatabase.getPort() >= MAX_PORT_NUMBER) {
+            throw new SettingsControllerException("Database port not load.");
         }
 
         if(settingsDatabase.getName() == null) {
