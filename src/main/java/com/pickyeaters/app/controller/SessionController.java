@@ -1,8 +1,8 @@
 package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
-import com.pickyeaters.app.utils.DatabaseControllerException;
-import com.pickyeaters.app.utils.SessionControllerException;
+import com.pickyeaters.app.controller.exception.DatabaseControllerException;
+import com.pickyeaters.app.controller.exception.SessionControllerException;
 
 public class SessionController {
 

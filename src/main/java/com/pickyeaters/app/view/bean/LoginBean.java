@@ -1,4 +1,4 @@
-package com.pickyeaters.app.bean;
+package com.pickyeaters.app.view.bean;
 
 public class LoginBean {
     private String username;

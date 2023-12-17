@@ -1,13 +1,5 @@
 package com.pickyeaters.app.view.cli;
 
-import com.pickyeaters.app.Main;
-import com.pickyeaters.app.controller.SessionController;
-import com.pickyeaters.app.controller.SettingsController;
-import com.pickyeaters.app.controller.DatabaseController;
-import com.pickyeaters.app.model.Session;
-import com.pickyeaters.app.model.Settings;
-import com.pickyeaters.app.utils.DatabaseControllerException;
-import com.pickyeaters.app.utils.SettingsControllerException;
 import com.pickyeaters.app.view.controller.MainViewController;
 
 import java.util.Scanner;

@@ -2,7 +2,7 @@ package com.pickyeaters.app.controller;
 
 import com.pickyeaters.app.model.Session;
 import com.pickyeaters.app.model.SettingsDatabase;
-import com.pickyeaters.app.utils.DatabaseControllerException;
+import com.pickyeaters.app.controller.exception.DatabaseControllerException;
 
 import java.sql.*;
 

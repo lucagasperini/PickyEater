@@ -1,9 +1,8 @@
 package com.pickyeaters.app.controller;
 
-import com.pickyeaters.app.bean.SettingsBean;
 import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.utils.OS;
-import com.pickyeaters.app.utils.SettingsControllerException;
+import com.pickyeaters.app.controller.exception.SettingsControllerException;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -30,14 +29,20 @@ public class SettingsController {
         validate();
     }
 
-    public void init(SettingsBean settingsBean) throws SettingsControllerException {
+    public void init(String databaseDriver,
+                     String databaseHost,
+                     int databasePort,
+                     String databaseName,
+                     String databaseUser,
+                     String databasePassword)
+            throws SettingsControllerException {
         databaseController.load(
-                settingsBean.getDatabaseDriver(),
-                settingsBean.getDatabaseHost(),
-                settingsBean.getDatabasePort(),
-                settingsBean.getDatabaseName(),
-                settingsBean.getDatabaseUser(),
-                settingsBean.getDatabasePassword()
+                databaseDriver,
+                databaseHost,
+                databasePort,
+                databaseName,
+                databaseUser,
+                databasePassword
         );
         settings.setDatabase(databaseController.getSettingsDatabase());
         validate();

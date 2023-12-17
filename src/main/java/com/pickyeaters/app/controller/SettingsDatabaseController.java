@@ -1,11 +1,8 @@
 package com.pickyeaters.app.controller;
 
-import com.pickyeaters.app.model.Settings;
 import com.pickyeaters.app.model.SettingsDatabase;
-import com.pickyeaters.app.utils.DatabaseControllerException;
-import com.pickyeaters.app.utils.SettingsControllerException;
+import com.pickyeaters.app.controller.exception.SettingsControllerException;
 
-import java.util.Arrays;
 import java.util.Properties;
 
 public class SettingsDatabaseController {
@@ -39,13 +36,8 @@ public class SettingsDatabaseController {
         settingsDatabase = new SettingsDatabase(driver, host, port, name, user, password);
     }
 
-    public void load(String driver, String host, String port, String name, String user, String password) throws SettingsControllerException {
-        try {
-            int portNumber = Integer.parseInt(port);
-            settingsDatabase = new SettingsDatabase(driver, host, portNumber, name, user, password);
-        } catch (NumberFormatException ex) {
-            throw new SettingsControllerException("Cannot convert port into a number!");
-        }
+    public void load(String driver, String host, int port, String name, String user, String password) {
+        settingsDatabase = new SettingsDatabase(driver, host, port, name, user, password);
     }
 
     public void validate() throws SettingsControllerException {
