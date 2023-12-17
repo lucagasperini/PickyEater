@@ -9,7 +9,7 @@ public class MainViewController {
     public void start() {
         isRunning = true;
         InitView initView = new InitView();
-        initView.show(null);
+        initView.show();
     }
 
     public boolean isRunning() {
@@ -22,7 +22,7 @@ public class MainViewController {
             case "help":
             case "h":
                 HelpView helpView = new HelpView();
-                helpView.show(tmp);
+                helpView.show();
                 break;
             case "ingredient":
             case "i":

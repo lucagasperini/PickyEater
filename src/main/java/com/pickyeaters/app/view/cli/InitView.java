@@ -9,10 +9,10 @@ import com.pickyeaters.app.view.controller.InitViewController;
 
 import java.util.Scanner;
 
-public class InitView implements ViewCLI {
+public class InitView {
     private InitViewController controller = new InitViewController();
-    @Override
-    public void show(String[] args) {
+
+    public void show() {
         try {
             controller.loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
