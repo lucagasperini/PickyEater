@@ -29,7 +29,7 @@ public class InitViewController {
                     settingsBean.getDatabaseHost(),
                     Integer.parseInt(settingsBean.getDatabasePort()),
                     settingsBean.getDatabaseName(),
-                    settingsBean.getDatabaseName(),
+                    settingsBean.getDatabaseUser(),
                     settingsBean.getDatabasePassword()
             );
         } catch (NumberFormatException ex) {
