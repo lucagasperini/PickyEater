@@ -1,10 +1,11 @@
 package com.pickyeaters.app.view.controller;
 
+import com.pickyeaters.app.controller.IngredientController;
 import com.pickyeaters.app.view.bean.IngredientBean;
 import com.pickyeaters.app.view.cli.IngredientView;
 
 public class IngredientViewController {
-
+    private IngredientController controller = new IngredientController();
     private IngredientView view;
     public IngredientViewController(IngredientView view) {
         this.view = view;
@@ -21,6 +22,6 @@ public class IngredientViewController {
 
     private void requestAdd() {
         IngredientBean ingredientBean = view.askIngredient();
-        // TODO: ...
+        controller.add(ingredientBean.getName());
     }
 }
