@@ -1,4 +1,4 @@
-package com.pickyeaters.app.controller;
+package com.pickyeaters.app.controller.application;
 
 import com.pickyeaters.app.model.SettingsDatabase;
 import com.pickyeaters.app.controller.exception.SettingsControllerException;

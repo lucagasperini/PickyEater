@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.controller;
+package com.pickyeaters.app.controller.graphics;
 
 import com.pickyeaters.app.view.cli.HelpView;
 import com.pickyeaters.app.view.cli.IngredientView;

@@ -1,8 +1,7 @@
 package com.pickyeaters.app.view.cli;
 
-import com.pickyeaters.app.model.Session;
-import com.pickyeaters.app.view.bean.IngredientBean;
-import com.pickyeaters.app.view.controller.IngredientViewController;
+import com.pickyeaters.app.model.bean.IngredientBean;
+import com.pickyeaters.app.controller.graphics.IngredientViewController;
 
 import java.util.Scanner;
 

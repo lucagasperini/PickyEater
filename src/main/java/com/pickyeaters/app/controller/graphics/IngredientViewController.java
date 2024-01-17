@@ -1,7 +1,7 @@
-package com.pickyeaters.app.view.controller;
+package com.pickyeaters.app.controller.graphics;
 
-import com.pickyeaters.app.controller.IngredientController;
-import com.pickyeaters.app.view.bean.IngredientBean;
+import com.pickyeaters.app.controller.application.IngredientController;
+import com.pickyeaters.app.model.bean.IngredientBean;
 import com.pickyeaters.app.view.cli.IngredientView;
 
 public class IngredientViewController {

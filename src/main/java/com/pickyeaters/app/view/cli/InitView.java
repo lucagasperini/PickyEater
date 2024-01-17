@@ -1,11 +1,11 @@
 package com.pickyeaters.app.view.cli;
 
-import com.pickyeaters.app.view.bean.LoginBean;
+import com.pickyeaters.app.model.bean.LoginBean;
 import com.pickyeaters.app.controller.exception.DatabaseControllerException;
-import com.pickyeaters.app.controller.exception.SessionControllerException;
+import com.pickyeaters.app.controller.exception.LoginControllerException;
 import com.pickyeaters.app.controller.exception.SettingsControllerException;
-import com.pickyeaters.app.view.bean.SettingsBean;
-import com.pickyeaters.app.view.controller.InitViewController;
+import com.pickyeaters.app.model.bean.SettingsBean;
+import com.pickyeaters.app.controller.graphics.InitViewController;
 
 import java.util.Scanner;
 
@@ -59,7 +59,7 @@ public class InitView {
         try {
             controller.login(loginBean);
             // TODO: Database should be available at this point
-        } catch (SessionControllerException | DatabaseControllerException ex) {
+        } catch (LoginControllerException | DatabaseControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askLogin();
         }

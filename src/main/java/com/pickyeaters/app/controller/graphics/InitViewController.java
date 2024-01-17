@@ -1,17 +1,17 @@
-package com.pickyeaters.app.view.controller;
+package com.pickyeaters.app.controller.graphics;
 
-import com.pickyeaters.app.view.bean.LoginBean;
-import com.pickyeaters.app.view.bean.SettingsBean;
-import com.pickyeaters.app.controller.DatabaseController;
-import com.pickyeaters.app.controller.SessionController;
-import com.pickyeaters.app.controller.SettingsController;
+import com.pickyeaters.app.model.bean.LoginBean;
+import com.pickyeaters.app.model.bean.SettingsBean;
+import com.pickyeaters.app.controller.application.DatabaseController;
+import com.pickyeaters.app.controller.application.LoginController;
+import com.pickyeaters.app.controller.application.SettingsController;
 import com.pickyeaters.app.controller.exception.DatabaseControllerException;
-import com.pickyeaters.app.controller.exception.SessionControllerException;
+import com.pickyeaters.app.controller.exception.LoginControllerException;
 import com.pickyeaters.app.controller.exception.SettingsControllerException;
 
 public class InitViewController {
 
-    private SessionController sessionController = new SessionController();
+    private LoginController loginController = new LoginController();
     public void loadFromFile() throws SettingsControllerException, DatabaseControllerException {
         // Try to load config from file system
         SettingsController.getInstance().init();
@@ -42,7 +42,7 @@ public class InitViewController {
         SettingsController.getInstance().persist();
     }
 
-    public void login(LoginBean loginBean) throws SessionControllerException, DatabaseControllerException {
-        sessionController.login(loginBean.getUsername(), loginBean.getPassword());
+    public void login(LoginBean loginBean) throws LoginControllerException, DatabaseControllerException {
+        loginController.login(loginBean.getUsername(), loginBean.getPassword());
     }
 }

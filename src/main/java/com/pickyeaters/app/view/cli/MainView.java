@@ -1,6 +1,6 @@
 package com.pickyeaters.app.view.cli;
 
-import com.pickyeaters.app.view.controller.MainViewController;
+import com.pickyeaters.app.controller.graphics.MainViewController;
 
 import java.util.Scanner;
 

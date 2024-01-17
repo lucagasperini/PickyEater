@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.bean;
+package com.pickyeaters.app.model.bean;
 
 public class SettingsBean {
     private String databaseDriver;

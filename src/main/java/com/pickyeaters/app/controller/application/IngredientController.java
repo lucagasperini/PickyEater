@@ -1,4 +1,4 @@
-package com.pickyeaters.app.controller;
+package com.pickyeaters.app.controller.application;
 
 import com.pickyeaters.app.model.Ingredient;
 
