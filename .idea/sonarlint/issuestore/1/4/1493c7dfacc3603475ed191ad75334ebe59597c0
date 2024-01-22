@@ -1,9 +1,0 @@
-
-n	java:S116"ZRename this field "MIN_PORT_NUMBER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ã‹©
-t	java:S116"ZRename this field "MAX_PORT_NUMBER" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(²›Ö½ÿÿÿÿÿ
-6
-java:S1170"!Make this final field static too.(ã‹©
-<
-java:S1170"!Make this final field static too.(²›Ö½ÿÿÿÿÿ
-—
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(õš±â
