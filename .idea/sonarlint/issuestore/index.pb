@@ -311,3 +311,5 @@ n
 >src/main/java/com/pickyeaters/logic/model/bean/ReportBean.java,a\e\aeb4dcf5798894055101e491abf29c5f8d20011d
 i
 9src/main/java/com/pickyeaters/logic/model/ReportType.java,7\f\7f9e8d8a84f3af11ed94dc6b79911bef136043c3
+˜
+hsrc/main/java/com/pickyeaters/logic/controller/graphics/AdministratorManageReportGraphicsController.java,3\b\3b83e00e800d391c96b9166b00b97beb214365aa
