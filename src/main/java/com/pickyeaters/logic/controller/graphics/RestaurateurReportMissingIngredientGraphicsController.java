@@ -1,0 +1,4 @@
+package com.pickyeaters.logic.controller.graphics;
+
+public class RestaurateurReportMissingIngredientGraphicsController extends ReportMissingIngredientGraphicsController{
+}
