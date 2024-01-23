@@ -1,17 +1,10 @@
-package com.pickyeaters.logic.controller.graphics;
+package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.logic.model.bean.LoginBean;
-import com.pickyeaters.logic.model.bean.SettingsBean;
-import com.pickyeaters.logic.controller.application.DatabaseController;
-import com.pickyeaters.logic.controller.application.LoginController;
-import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.app.view.bean.SettingsBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 
-public class InitViewController {
-
-    private LoginController loginController = new LoginController();
+public class InitController {
     public void loadFromFile() throws SettingsControllerException, DatabaseControllerException {
         // Try to load config from file system
         SettingsController.getInstance().init();
@@ -42,7 +35,5 @@ public class InitViewController {
         SettingsController.getInstance().persist();
     }
 
-    public void login(LoginBean loginBean) throws LoginControllerException, DatabaseControllerException {
-        loginController.login(loginBean.getUsername(), loginBean.getPassword());
-    }
+
 }

@@ -1,4 +1,4 @@
-package com.pickyeaters.logic.view.cli;
+package com.pickyeaters.app.view.cli;
 
 public class HelpView {
     public void show() {

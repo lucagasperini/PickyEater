@@ -1,20 +1,22 @@
-package com.pickyeaters.logic.view.cli;
+package com.pickyeaters.app.view.cli;
 
-import com.pickyeaters.logic.model.bean.LoginBean;
+import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.app.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
-import com.pickyeaters.logic.model.bean.SettingsBean;
-import com.pickyeaters.logic.controller.graphics.InitViewController;
+import com.pickyeaters.app.view.bean.SettingsBean;
 
 import java.util.Scanner;
 
-public class InitView {
-    private InitViewController controller = new InitViewController();
+public class InitView extends VirtualView {
+    public InitView(MainController controller) {
+        super(controller);
+    }
 
     public void show() {
         try {
-            controller.loadFromFile();
+            controller.getInitController().loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             // If you cannot load settings/database, ask user input
@@ -42,13 +44,12 @@ public class InitView {
         settings.setDatabasePassword(userInput.nextLine());
 
         try {
-            controller.loadFromInput(settings);
+            controller.getInitController().loadFromInput(settings);
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askConfig();
         }
     }
-
     private void askLogin() {
         Scanner userInput = new Scanner(System.in);
         LoginBean loginBean = new LoginBean();
@@ -57,9 +58,8 @@ public class InitView {
         System.out.print("Password: ");
         loginBean.setPassword(userInput.nextLine());
         try {
-            controller.login(loginBean);
-            // TODO: Database should be available at this point
-        } catch (LoginControllerException | DatabaseControllerException ex) {
+            controller.getLoginController().login(loginBean);
+        } catch (LoginControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askLogin();
         }
