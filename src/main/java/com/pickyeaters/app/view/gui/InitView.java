@@ -36,8 +36,6 @@ public class InitView extends VirtualView {
     @FXML protected void clickDatabaseConnect(ActionEvent event) {
         SettingsBean settings = new SettingsBean();
 
-        // NOTE: Forcing this driver
-        settings.setDatabaseDriver("postgresql");
         settings.setDatabaseHost(inputDatabaseHost.getText());
         settings.setDatabasePort(inputDatabasePort.getText());
         settings.setDatabaseName(inputDatabaseName.getText());

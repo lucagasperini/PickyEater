@@ -7,6 +7,7 @@ public class SettingsBean {
     private String databaseName;
     private String databaseUser;
     private String databasePassword;
+    private String localeLang;
 
     public SettingsBean() {
     }
@@ -35,6 +36,10 @@ public class SettingsBean {
         return databaseUser;
     }
 
+    public String getLocaleLang() {
+        return localeLang;
+    }
+
     public void setDatabaseDriver(String databaseDriver) {
         this.databaseDriver = databaseDriver;
     }
@@ -57,5 +62,9 @@ public class SettingsBean {
 
     public void setDatabaseUser(String databaseUser) {
         this.databaseUser = databaseUser;
+    }
+
+    public void setLocaleLang(String localeLang) {
+        this.localeLang = localeLang;
     }
 }
