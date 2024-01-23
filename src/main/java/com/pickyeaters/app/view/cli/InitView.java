@@ -29,8 +29,6 @@ public class InitView extends VirtualView {
     private void askConfig() {
         Scanner userInput = new Scanner(System.in);
         SettingsBean settings = new SettingsBean();
-        // NOTE: Forcing this driver
-        settings.setDatabaseDriver("postgresql");
 
         System.out.print("Database Host: ");
         settings.setDatabaseHost(userInput.nextLine());
