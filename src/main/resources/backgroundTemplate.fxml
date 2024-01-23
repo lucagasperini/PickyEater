@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane maxHeight="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <AnchorPane prefHeight="36.0" prefWidth="1280.0" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <Separator prefHeight="53.0" prefWidth="600.0" valignment="BOTTOM" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <HBox prefHeight="87.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="87.0" prefWidth="322.0">
+                           <children>
+                              <ImageView fitHeight="101.0" fitWidth="395.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="@logo.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="87.0" prefWidth="980.0">
+                           <children>
+                              <HBox prefHeight="44.0" prefWidth="401.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane prefHeight="87.0" prefWidth="305.0">
+                                       <children>
+                                          <TextFlow layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="339.0">
+                                             <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saluto, " wrappingWidth="39.1640625">
+                                                   <font>
+                                                      <Font name="Calibri" size="18.0" />
+                                                   </font></Text>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="nomeutente" wrappingWidth="54.69921875">
+                                                   <font>
+                                                      <Font name="Calibri Bold Italic" size="18.0" />
+                                                   </font></Text>
+                                             </children>
+                                          </TextFlow>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane>
+                                       <children>
+                                          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="87.0" prefWidth="58.0" scaleShape="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane layoutX="12.0" layoutY="28.0" prefHeight="12.0" prefWidth="21.0">
+                                                   <children>
+                                                      <ImageView fitHeight="30.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@profileIcon.png" />
+                                                         </image>
+                                                         <cursor>
+                                                            <Cursor fx:constant="DEFAULT" />
+                                                         </cursor>
+                                                      </ImageView>
+                                                      <MenuButton alignment="CENTER" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="35.0">
+                                                        <items>
+                                                          <MenuItem mnemonicParsing="false" text="Aggiorna le preferenze alimentari" />
+                                                          <MenuItem mnemonicParsing="false" text="Modifica profilo" />
+                                                            <SeparatorMenuItem mnemonicParsing="false" />
+                                                            <MenuItem mnemonicParsing="false" text="Esci" />
+                                                        </items>
+                                                         <cursor>
+                                                            <Cursor fx:constant="HAND" />
+                                                         </cursor>
+                                                         <font>
+                                                            <Font size="9.0" />
+                                                         </font>
+                                                      </MenuButton>
+                                                   </children>
+                                                   <cursor>
+                                                      <Cursor fx:constant="HAND" />
+                                                   </cursor>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="424.0" prefWidth="601.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
