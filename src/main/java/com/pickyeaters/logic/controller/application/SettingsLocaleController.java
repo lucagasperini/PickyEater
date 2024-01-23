@@ -5,13 +5,20 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.model.SettingsDatabase;
 import com.pickyeaters.logic.model.SettingsLocale;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.Properties;
-public class SettingsLocaleController {
+import java.util.ResourceBundle;
+
+public class SettingsLocaleController implements SettingsVirtualController {
 
     private SettingsLocale settings = new SettingsLocale();
 
     private static final String[] LANG_LIST = {"en", "it"};
     private static final String DEFAULT_LANG = "it";
+    private final Properties properties = new Properties();
+    private ResourceBundle i18nBundle = null;
 
     public SettingsLocaleController() {
     }
@@ -39,6 +46,7 @@ public class SettingsLocaleController {
             settings.setLang(DEFAULT_LANG);
         }
 
+        loadBundle();
     }
 
     private boolean validateLang() {
@@ -54,5 +62,21 @@ public class SettingsLocaleController {
         validate();
 
         prop.setProperty("locale.lang", settings.getLang());
+    }
+
+    private void loadBundle() throws SettingsControllerException {
+        try {
+            properties.load(getClass().getClassLoader().getResourceAsStream("i18n.properties"));
+        } catch (IOException e) {
+            throw new SettingsControllerException("Unable to load property file");
+        }
+        i18nBundle = ResourceBundle.getBundle("i18n", new Locale(settings.getLang()));
+    }
+    public String i18n(String key) {
+        try {
+            return i18nBundle.getString(key);
+        } catch (MissingResourceException e) {
+            return "[" + key + "]";
+        }
     }
 }
