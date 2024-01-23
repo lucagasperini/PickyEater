@@ -118,4 +118,8 @@ public class SettingsController {
         localeController.save(prop);
     }
 
+    public static String i18n(String key) {
+        return getInstance().localeController.i18n(key);
+    }
+
 }

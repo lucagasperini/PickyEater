@@ -47,9 +47,9 @@ public class InitView extends VirtualView {
             stage.close();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("MSG_INVALID_INIT_TITLE");
-            alert.setHeaderText("MSG_INVALID_INIT_HEADER");
-            alert.setContentText("MSG_INVALID_INIT_CONTENT");
+            alert.setTitle("Invalid settings");
+            alert.setHeaderText("Invalid settings");
+            alert.setContentText("Cannot open database or settings");
             alert.showAndWait();
         }
     }

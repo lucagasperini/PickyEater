@@ -6,7 +6,7 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 
 import java.util.Properties;
 
-public class SettingsDatabaseController {
+public class SettingsDatabaseController implements SettingsVirtualController {
 
     private SettingsDatabase settings = new SettingsDatabase();
     private final int MIN_PORT_NUMBER = 0;

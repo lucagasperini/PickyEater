@@ -15,11 +15,13 @@ public class MainView extends VirtualView {
     public MainView(Stage primaryStage) {
         super(new MainController(), "/form/main.fxml", primaryStage);
     }
-
+    private final String APP_NAME = "Picky Eater";
+    private final int WINDOW_HEIGTH = 720;
+    private final int WINDOW_WIDTH = 1280;
     @Override
     public void show() {
         controller.start();
-        stage.setTitle("Picky Eater");
+        stage.setTitle(APP_NAME);
 
         try {
             controller.getInitController().loadFromFile();
@@ -31,7 +33,7 @@ public class MainView extends VirtualView {
         LoginView loginView = new LoginView(controller);
         loginView.show();
 
-        stage.setScene(new Scene(root, 1280, 720));
+        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.show();
     }
 }
