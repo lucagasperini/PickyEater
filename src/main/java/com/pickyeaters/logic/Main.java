@@ -1,6 +1,6 @@
 package com.pickyeaters.logic;
 
-import com.pickyeaters.app.view.cli.MainView;
+import com.pickyeaters.logic.view.cli.MainView;
 
 public class Main {
     public static void main(String[] args) {
