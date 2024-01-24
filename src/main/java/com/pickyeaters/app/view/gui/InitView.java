@@ -17,6 +17,11 @@ public class InitView extends VirtualView {
     }
 
     @Override
+    protected void setup() {
+
+    }
+
+    @Override
     public void show() {
         stage.setScene(new Scene(root, 600, 400));
         stage.showAndWait();

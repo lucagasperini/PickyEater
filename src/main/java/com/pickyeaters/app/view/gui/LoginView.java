@@ -34,7 +34,7 @@ public class LoginView extends VirtualView {
     @FXML
     private Label labelLoginPassword;
 
-    private void setup() {
+    protected void setup() {
         labelLoginUsername.setText(SettingsController.i18n("PICKY_GUI_LOGIN_USERNAME"));
         labelLoginPassword.setText(SettingsController.i18n("PICKY_GUI_LOGIN_PASSWORD"));
         inputLogin.setText(SettingsController.i18n("PICKY_GUI_LOGIN_LOGIN"));
