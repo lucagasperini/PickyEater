@@ -43,26 +43,32 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Circle>
-                              <Text fill="WHITE" layoutX="231.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RestaurateurUC1">
+                              <Text fill="WHITE" layoutX="196.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProvideMenuDetailsText" textAlignment="CENTER" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="196.7109375" AnchorPane.topAnchor="243.0">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri Bold" size="24.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Text>
                            </children>
                         </AnchorPane>
                      </left>
                      <right>
-                        <AnchorPane prefHeight="513.0" prefWidth="640.0" BorderPane.alignment="CENTER_RIGHT">
+                        <AnchorPane prefHeight="513.0" prefWidth="640.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Circle centerX="320.0" centerY="256.0" fill="#ed7d31" layoutY="1.0" radius="130.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Circle>
-                              <Text fill="WHITE" layoutX="231.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RestaurateurUC2">
+                              <Text fill="WHITE" layoutX="195.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProvideRestaurantDetailsText" textAlignment="CENTER" wrappingWidth="250.265625" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="196.7109375" AnchorPane.topAnchor="243.0">
                                  <font>
-                                    <Font size="24.0" />
+                                    <Font name="Calibri Bold" size="24.0" />
                                  </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Text>
                            </children>
                         </AnchorPane>

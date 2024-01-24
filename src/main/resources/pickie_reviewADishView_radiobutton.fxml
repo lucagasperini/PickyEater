@@ -42,27 +42,6 @@
             <AnchorPane prefHeight="513.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
                <children>
                   <BorderPane layoutX="460.0" layoutY="110.0" maxWidth="-Infinity" prefHeight="513.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <top>
-                        <AnchorPane maxWidth="-Infinity" prefHeight="32.0" prefWidth="1276.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <AnchorPane layoutX="15.0" layoutY="1.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0">
-                                 <children>
-                                    <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#bdd7ee" height="25.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Rectangle>
-                                    <Text fill="#4472c4" layoutX="52.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="backText" AnchorPane.rightAnchor="5.0" />
-                                    <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
-                                       <image>
-                                          <Image url="@../backIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
-                     </top>
                      <center>
                         <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
                            <children>
@@ -214,21 +193,21 @@
                                     </HBox>
                                     <AnchorPane maxWidth="-Infinity" prefHeight="32.0" prefWidth="1276.0">
                                        <children>
-                                          <AnchorPane layoutX="490.0" layoutY="4.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="490.0" AnchorPane.topAnchor="4.0">
+                                          <AnchorPane layoutX="490.0" layoutY="4.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="488.0" AnchorPane.rightAnchor="488.0" AnchorPane.topAnchor="4.0">
                                              <children>
-                                                <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#5b9bd5" height="34.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0">
+                                                <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#5b9bd5" height="34.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                                                    <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                    </cursor>
                                                 </Rectangle>
-                                                <Text fill="WHITE" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saveOperationChangesText" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="7.0">
+                                                <Text fill="WHITE" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="saveOperationChangesText" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="7.0">
                                                    <font>
                                                       <Font name="Calibri Bold" size="20.0" />
                                                    </font>
                                                 </Text>
                                                 <ImageView fitHeight="22.0" fitWidth="25.0" layoutX="258.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
                                                    <image>
-                                                      <Image url="@../okIcon.png" />
+                                                      <Image url="@pics/okIcon.png" />
                                                    </image>
                                                 </ImageView>
                                              </children>
@@ -243,6 +222,27 @@
                            </children>
                         </AnchorPane>
                      </center>
+                     <top>
+                        <AnchorPane maxWidth="-Infinity" prefHeight="32.0" prefWidth="1276.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <AnchorPane layoutX="15.0" layoutY="1.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0">
+                                 <children>
+                                    <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#bdd7ee" height="25.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Rectangle>
+                                    <Text fill="#4472c4" layoutX="22.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="backText" textAlignment="RIGHT" wrappingWidth="96.8046875" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="4.0" />
+                                    <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
+                                       <image>
+                                          <Image url="@pics/backIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </top>
                   </BorderPane>
                </children>
             </AnchorPane>
