@@ -3,20 +3,21 @@ package com.pickyeaters.logic.controller.application;
 import com.pickyeaters.logic.model.Session;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.app.view.bean.LoginBean;
 
 public class LoginController {
-
-    private Session session = null;
 
     public LoginController() {
 
     }
 
-    public void login(String username, String password) throws LoginControllerException, DatabaseControllerException {
-        session = DatabaseController.getInstance().login(username, password);
-
-        if(!session.isValid()) {
-            throw new LoginControllerException("Login failed");
+    public void login(LoginBean loginBean) throws LoginControllerException {
+        try {
+            if(!DatabaseController.getInstance().login(loginBean.getUsername(), loginBean.getPassword())) {
+                throw new LoginControllerException("Login failed");
+            }
+        } catch (DatabaseControllerException ex) {
+            throw new LoginControllerException("Cannot connect to database");
         }
     }
 }

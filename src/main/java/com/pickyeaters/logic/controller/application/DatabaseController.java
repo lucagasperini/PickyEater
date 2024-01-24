@@ -40,7 +40,7 @@ public class DatabaseController {
         }
     }
 
-    public Session login(String username, String password) throws DatabaseControllerException {
+    public boolean login(String username, String password) throws DatabaseControllerException {
         if(conn == null) {
             throw new DatabaseControllerException("Connection is not ready.");
         }
@@ -67,11 +67,7 @@ public class DatabaseController {
         } catch (SQLException e) {
             throw new DatabaseControllerException("Cannot get response from login call.");
         }
-        if(token == null) {
-            return new Session();
-        } else {
-            return new Session(token);
-        }
+        return token != null;
     }
 
 }

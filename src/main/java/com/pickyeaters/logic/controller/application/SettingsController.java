@@ -1,5 +1,6 @@
 package com.pickyeaters.logic.controller.application;
 
+import com.pickyeaters.app.view.bean.SettingsBean;
 import com.pickyeaters.logic.model.Settings;
 import com.pickyeaters.logic.utils.OS;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
@@ -14,6 +15,7 @@ import java.util.Properties;
 public class SettingsController {
     private Settings settings = new Settings();
     private SettingsDatabaseController databaseController = new SettingsDatabaseController();
+    private SettingsLocaleController localeController = new SettingsLocaleController();
     private static SettingsController instance = new SettingsController();
 
     public static SettingsController getInstance() {
@@ -29,22 +31,14 @@ public class SettingsController {
         validate();
     }
 
-    public void init(String databaseDriver,
-                     String databaseHost,
-                     int databasePort,
-                     String databaseName,
-                     String databaseUser,
-                     String databasePassword)
+    public void init(SettingsBean settingsBean)
             throws SettingsControllerException {
-        databaseController.load(
-                databaseDriver,
-                databaseHost,
-                databasePort,
-                databaseName,
-                databaseUser,
-                databasePassword
-        );
-        settings.setDatabase(databaseController.getSettingsDatabase());
+        databaseController.load(settingsBean);
+        localeController.load(settingsBean);
+
+        settings.setDatabase(databaseController.getSettings());
+        settings.setLocale(localeController.getSettings());
+
         validate();
     }
 
@@ -73,7 +67,9 @@ public class SettingsController {
 
     private void loadProperties(Properties prop) throws SettingsControllerException {
         databaseController.load(prop);
-        settings.setDatabase(databaseController.getSettingsDatabase());
+        settings.setDatabase(databaseController.getSettings());
+        localeController.load(prop);
+        settings.setLocale(localeController.getSettings());
     }
 
     private void validate() throws SettingsControllerException {
@@ -82,6 +78,7 @@ public class SettingsController {
         }
 
         databaseController.validate();
+        localeController.validate();
     }
 
     public void persist() throws SettingsControllerException {
@@ -118,6 +115,11 @@ public class SettingsController {
         validate();
 
         databaseController.save(prop);
+        localeController.save(prop);
+    }
+
+    public static String i18n(String key) {
+        return getInstance().localeController.i18n(key);
     }
 
 }

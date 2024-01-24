@@ -1,23 +1,25 @@
 package com.pickyeaters.logic.controller.application;
 
+import com.pickyeaters.app.view.bean.SettingsBean;
 import com.pickyeaters.logic.model.SettingsDatabase;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 
 import java.util.Properties;
 
-public class SettingsDatabaseController {
+public class SettingsDatabaseController implements SettingsVirtualController {
 
-    private SettingsDatabase settingsDatabase = new SettingsDatabase();
+    private SettingsDatabase settings = new SettingsDatabase();
     private final int MIN_PORT_NUMBER = 0;
     private final int MAX_PORT_NUMBER = 65535;
 
     private static final String[] DRIVER_LIST = {"postgresql"/*, "mysql"*/};
+    private static final String DEFAULT_DRIVER = "postgresql";
 
     public SettingsDatabaseController() {
     }
 
-    public SettingsDatabase getSettingsDatabase() {
-        return settingsDatabase;
+    public SettingsDatabase getSettings() {
+        return settings;
     }
 
     public void load(Properties prop) throws SettingsControllerException {
@@ -33,46 +35,55 @@ public class SettingsDatabaseController {
         String user = prop.getProperty("database.user");
         String password = prop.getProperty("database.password");
 
-        settingsDatabase = new SettingsDatabase(driver, host, port, name, user, password);
+        settings = new SettingsDatabase(driver, host, port, name, user, password);
     }
 
-    public void load(String driver, String host, int port, String name, String user, String password) {
-        settingsDatabase = new SettingsDatabase(driver, host, port, name, user, password);
+    public void load(SettingsBean settingsBean) throws SettingsControllerException {
+        try {
+        settings = new SettingsDatabase(settingsBean.getDatabaseDriver(),
+                settingsBean.getDatabaseHost(),
+                Integer.parseInt(settingsBean.getDatabasePort()),
+                settingsBean.getDatabaseName(),
+                settingsBean.getDatabaseUser(),
+                settingsBean.getDatabasePassword());
+        } catch (NumberFormatException ex) {
+            throw new SettingsControllerException("Cannot convert port into a number!");
+        }
     }
 
     public void validate() throws SettingsControllerException {
-        if(settingsDatabase == null) {
+        if(settings == null) {
             throw new SettingsControllerException("SettingsDatabase not load");
         }
 
         if(!validateDriver()) {
-            throw new SettingsControllerException("Database driver not load or invalid");
+            settings.setDriver(DEFAULT_DRIVER);
         }
 
-        if(settingsDatabase.getHost() == null) {
+        if(settings.getHost() == null) {
             throw new SettingsControllerException("Database host not load");
         }
 
-        if(settingsDatabase.getPort() <= MIN_PORT_NUMBER || settingsDatabase.getPort() >= MAX_PORT_NUMBER) {
+        if(settings.getPort() <= MIN_PORT_NUMBER || settings.getPort() >= MAX_PORT_NUMBER) {
             throw new SettingsControllerException("Database port not load.");
         }
 
-        if(settingsDatabase.getName() == null) {
+        if(settings.getName() == null) {
             throw new SettingsControllerException("Database name not load");
         }
 
-        if(settingsDatabase.getUser() == null) {
+        if(settings.getUser() == null) {
             throw new SettingsControllerException("Database user not load");
         }
 
-        if(settingsDatabase.getPassword() == null) {
+        if(settings.getPassword() == null) {
             throw new SettingsControllerException("Database password not load");
         }
     }
 
     private boolean validateDriver() {
         for(String str : DRIVER_LIST) {
-            if(str.equals(getSettingsDatabase().getDriver())) {
+            if(str.equals(getSettings().getDriver())) {
                 return true;
             }
         }
@@ -82,11 +93,11 @@ public class SettingsDatabaseController {
     public void save(Properties prop) throws SettingsControllerException {
         validate();
 
-        prop.setProperty("database.driver", settingsDatabase.getDriver());
-        prop.setProperty("database.host", settingsDatabase.getHost());
-        prop.setProperty("database.port", Integer.toString(settingsDatabase.getPort()));
-        prop.setProperty("database.name", settingsDatabase.getName());
-        prop.setProperty("database.user", settingsDatabase.getUser());
-        prop.setProperty("database.password", settingsDatabase.getPassword());
+        prop.setProperty("database.driver", settings.getDriver());
+        prop.setProperty("database.host", settings.getHost());
+        prop.setProperty("database.port", Integer.toString(settings.getPort()));
+        prop.setProperty("database.name", settings.getName());
+        prop.setProperty("database.user", settings.getUser());
+        prop.setProperty("database.password", settings.getPassword());
     }
 }
