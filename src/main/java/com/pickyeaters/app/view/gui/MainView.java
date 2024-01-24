@@ -3,9 +3,12 @@ package com.pickyeaters.app.view.gui;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +21,12 @@ public class MainView extends VirtualView {
     private final String APP_NAME = "Picky Eater";
     private final int WINDOW_HEIGTH = 720;
     private final int WINDOW_WIDTH = 1280;
+
+    @Override
+    protected void setup() {
+
+    }
+
     @Override
     public void show() {
         controller.start();
@@ -35,5 +44,6 @@ public class MainView extends VirtualView {
 
         stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.show();
+
     }
 }

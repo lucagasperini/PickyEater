@@ -7,16 +7,13 @@ import com.pickyeaters.app.view.bean.LoginBean;
 
 public class LoginController {
 
-    private Session session = null;
-
     public LoginController() {
 
     }
 
     public void login(LoginBean loginBean) throws LoginControllerException {
         try {
-            session = DatabaseController.getInstance().login(loginBean.getUsername(), loginBean.getPassword());
-            if(!session.isValid()) {
+            if(!DatabaseController.getInstance().login(loginBean.getUsername(), loginBean.getPassword())) {
                 throw new LoginControllerException("Login failed");
             }
         } catch (DatabaseControllerException ex) {

@@ -32,5 +32,7 @@ public abstract class VirtualView {
         }
     }
 
+    protected abstract void setup();
+
     public abstract void show();
 }
