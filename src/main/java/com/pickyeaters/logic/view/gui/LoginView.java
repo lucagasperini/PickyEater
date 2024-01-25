@@ -9,15 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-public class LoginView extends VirtualView {
+public class LoginView extends VirtualWindowView {
     public LoginView(MainController controller) {
         super(controller, "/form/login.fxml");
-    }
-    @Override
-    public void show() {
-        setup();
-        stage.setScene(new Scene(root, 600, 400));
-        stage.showAndWait();
     }
 
     @FXML
