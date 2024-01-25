@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="mainLayout" maxHeight="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -25,7 +25,7 @@
                      <children>
                         <AnchorPane prefHeight="87.0" prefWidth="322.0">
                            <children>
-                              <ImageView fitHeight="101.0" fitWidth="395.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ImageView fx:id="imageLogo" fitHeight="101.0" fitWidth="395.0" layoutY="7.0" onMouseClicked="#clickLogoImage" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <image>
                                     <Image url="@pics/logo.png" />
                                  </image>
@@ -43,7 +43,7 @@
                                        <children>
                                           <TextFlow layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="339.0">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="...HELLO" wrappingWidth="39.1640625">
+                                                <Text fx:id="textNavbarWelcome" strokeType="OUTSIDE" strokeWidth="0.0" text="HELLO" wrappingWidth="39.1640625">
                                                    <font>
                                                       <Font name="Calibri" size="18.0" />
                                                    </font></Text>
@@ -52,7 +52,7 @@
                                                       <Font name="Calibri" size="18.0" />
                                                    </font>
                                                 </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="USERNAME" wrappingWidth="54.69921875">
+                                                <Text fx:id="textNavbarUser" strokeType="OUTSIDE" strokeWidth="0.0" text="USERNAME" wrappingWidth="54.69921875">
                                                    <font>
                                                       <Font name="Calibri Bold Italic" size="18.0" />
                                                    </font></Text>

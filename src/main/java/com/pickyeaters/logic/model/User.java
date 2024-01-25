@@ -7,7 +7,6 @@ public abstract class User {
     private String email;
     private String firstname;
     private String lastname;
-    private String password;
     private Date birthdate;
 
 
