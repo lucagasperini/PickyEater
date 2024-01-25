@@ -1,38 +1,42 @@
 package com.pickyeaters.app.view.gui;
 
+import com.pickyeaters.app.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class VirtualView {
-    protected MainController controller = null;
+public abstract class VirtualWindowView extends VirtualView {
     protected URL fxml = null;
     protected Parent root = null;
-    protected Stage stage = null;
-    public VirtualView(MainController controller, String fxml) {
-        this(controller, fxml, new Stage());
-    }
-    public VirtualView(MainController controller, String fxml, Stage stage) {
-        this.controller = controller;
+    protected Stage stage = new Stage();
+    public VirtualWindowView(MainController controller, String fxml) {
+        super(controller);
+        FXMLLoader loader = new FXMLLoader();
         this.fxml = getClass().getResource(fxml);
-        this.stage = stage;
+        loader.setLocation(this.fxml);
+        loader.setController(this);
         try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.fxml);
-            loader.setController(this);
             this.root = loader.load();
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
             //TODO:
             System.exit(-1);
         }
+
+        setup();
     }
 
     protected abstract void setup();
 
-    public abstract void show();
+    public void show() {
+        stage.setScene(new Scene(root, 600, 400));
+        stage.showAndWait();
+    }
 }

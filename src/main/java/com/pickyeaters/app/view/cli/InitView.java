@@ -1,5 +1,6 @@
 package com.pickyeaters.app.view.cli;
 
+import com.pickyeaters.app.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.app.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;

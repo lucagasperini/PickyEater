@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.cli;
+package com.pickyeaters.app.view;
 
 import com.pickyeaters.logic.controller.application.MainController;
 

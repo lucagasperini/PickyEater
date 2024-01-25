@@ -1,0 +1,37 @@
+package com.pickyeaters.app.view.gui;
+
+import com.pickyeaters.app.view.VirtualView;
+import com.pickyeaters.logic.controller.application.MainController;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.net.URL;
+
+public abstract class VirtualPaneView extends VirtualView {
+    protected URL fxml = null;
+    protected BorderPane mainLayout = null;
+    protected Parent root = null;
+    public VirtualPaneView(MainController controller, String fxml, BorderPane mainLayout) {
+        super(controller);
+        FXMLLoader loader = new FXMLLoader();
+        this.fxml = getClass().getResource(fxml);
+        loader.setLocation(this.fxml);
+        loader.setController(this);
+        this.mainLayout = mainLayout;
+        try {
+            this.root = loader.load();
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+            //TODO:
+            System.exit(-1);
+        }
+    }
+
+    public void show() {
+        mainLayout.setCenter(this.root);
+    }
+}
