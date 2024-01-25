@@ -6,12 +6,12 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE TABLE "User" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
-    username varchar(256) NOT NULL,
+    email varchar(256) NOT NULL,
     password char(64) NOT NULL,
-    firstname varchar(256),
-    lastname varchar(256),
+    firstname varchar(256) NOT NULL,
+    lastname varchar(256) NOT NULL,
     type varchar(16) NOT NULL,
-    unique(username)
+    unique(email)
 );
 
 CREATE TABLE "Dish" (
@@ -64,21 +64,36 @@ CREATE TABLE "Session" (
     fk_user UUID NOT NULL
 );
 
+CREATE OR REPLACE PROCEDURE userinfo(
+	IN _email character varying,
+	OUT _id character varying,
+	OUT _type character varying,
+	OUT _firstname character varying,
+	OUT _lastname character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT id::varchar, type, firstname, lastname
+		INTO _id, _type, _firstname, _lastname
+		FROM "User" WHERE email = _email;
+END;
+$BODY$;
 
-CREATE OR REPLACE PROCEDURE login(IN username_arg varchar(256), IN password_arg char(64), OUT token_arg varchar(256))
+
+CREATE OR REPLACE PROCEDURE login(IN _email varchar(256), IN _password char(64), OUT _token varchar(256))
 LANGUAGE plpgsql
 AS $$
 DECLARE
 	userid UUID;
 BEGIN
-    SELECT id INTO userid FROM "User" WHERE username = username_arg AND password = password_arg;
+    SELECT id INTO userid FROM "User" WHERE email = _email AND password = _password;
     IF(userid IS NULL) THEN
-		token_arg := NULL;
+		_token := NULL;
 		RETURN;
 	END IF;
-	INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token::varchar INTO token_arg;
+	INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token::varchar INTO _token;
 END;
 $$;
 
 
-INSERT INTO "User" (username, password, type) VALUES ('luca', 'luca', 'ADMIN');
+INSERT INTO "User" (email, password, type, firstname, lastname) VALUES ('luca', 'luca', 'ADMIN', 'Luca', 'Gasperini');

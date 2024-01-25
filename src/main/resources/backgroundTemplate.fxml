@@ -25,7 +25,7 @@
                      <children>
                         <AnchorPane prefHeight="87.0" prefWidth="322.0">
                            <children>
-                              <ImageView fitHeight="101.0" fitWidth="395.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ImageView fx:id="logoImage" fitHeight="101.0" fitWidth="395.0" layoutY="7.0" onMouseClicked="#clickLogoImage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <image>
                                     <Image url="@pics/logo.png" />
                                  </image>
@@ -43,11 +43,11 @@
                                        <children>
                                           <TextFlow layoutY="35.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="339.0">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Saluto, " wrappingWidth="39.1640625">
+                                                <Text fx:id="textNavbarWelcome" strokeType="OUTSIDE" strokeWidth="0.0" text="Saluto, " wrappingWidth="39.1640625">
                                                    <font>
                                                       <Font name="Calibri" size="18.0" />
                                                    </font></Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="nomeutente" wrappingWidth="54.69921875">
+                                                <Text fx:id="textNavbarUser" strokeType="OUTSIDE" strokeWidth="0.0" text="nomeutente" wrappingWidth="54.69921875">
                                                    <font>
                                                       <Font name="Calibri Bold Italic" size="18.0" />
                                                    </font></Text>
