@@ -1,5 +1,6 @@
-package com.pickyeaters.app.view.gui;
+package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;

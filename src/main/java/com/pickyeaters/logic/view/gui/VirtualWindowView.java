@@ -1,6 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.app.view.VirtualView;
+import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

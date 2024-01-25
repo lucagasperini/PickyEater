@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.gui;
+package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import javafx.fxml.FXML;
