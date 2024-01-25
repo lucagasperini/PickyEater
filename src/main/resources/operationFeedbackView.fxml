@@ -2,84 +2,55 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="514.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <top>
-            <AnchorPane prefHeight="121.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bed7edb1" height="317.0" layoutX="132.0" layoutY="59.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox layoutX="148.0" layoutY="59.0" prefHeight="317.0" prefWidth="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="222.0" prefWidth="506.0">
                <children>
-                  <VBox layoutX="35.0" layoutY="35.0">
+                  <VBox layoutX="184.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="222.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="10.0">
                      <children>
-                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="ViewPosition">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MESSAGE" wrappingWidth="500.0">
                            <font>
-                              <Font name="Calibri Bold" size="36.0" />
-                           </font>
-                        </Text>
-                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtitle" wrappingWidth="113.6146011352539">
-                           <font>
-                              <Font name="Calibri Bold" size="32.0" />
+                              <Font name="Calibri" size="18.0" />
                            </font>
                         </Text>
                      </children>
                   </VBox>
                </children>
             </AnchorPane>
-         </top>
-         <center>
-            <AnchorPane prefHeight="252.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Pane layoutX="807.0" layoutY="358.0" prefHeight="141.0" prefWidth="142.0">
+                  <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="514.0">
                      <children>
-                        <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="70.0" layoutY="70.0" radius="70.0" stroke="BLACK" strokeWidth="0.0">
+                        <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#5b9bd5" height="34.0" layoutX="157.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" AnchorPane.bottomAnchor="32.0" AnchorPane.leftAnchor="157.0" AnchorPane.rightAnchor="157.0" AnchorPane.topAnchor="32.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </Circle>
-                        <Text fill="WHITE" layoutX="19.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PickieUC3" textOrigin="CENTER">
+                        </Rectangle>
+                        <Text fill="WHITE" layoutX="227.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OK_TEXT" textAlignment="CENTER" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="227.0" AnchorPane.topAnchor="41.0">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Calibri Bold" size="16.0" />
                            </font>
-                        </Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="208.0" layoutY="253.0" prefHeight="211.0" prefWidth="215.0">
-                     <children>
-                        <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="108.0" layoutY="106.0" radius="100.0" stroke="BLACK" strokeWidth="0.0">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </Circle>
-                        <Text fill="WHITE" layoutX="56.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PickieUC2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
                         </Text>
                      </children>
-                  </Pane>
-                  <Pane layoutX="490.0" layoutY="8.0" prefHeight="301.0" prefWidth="301.0">
-                     <children>
-                        <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="150.0" layoutY="150.0" radius="150.0" stroke="BLACK" strokeWidth="0.0">
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Circle>
-                        <Text fill="WHITE" layoutX="98.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PickieUC1">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </Pane>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </AnchorPane>
                </children>
-            </AnchorPane>
-         </center>
-      </BorderPane>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

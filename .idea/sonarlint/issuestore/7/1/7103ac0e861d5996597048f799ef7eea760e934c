@@ -1,0 +1,12 @@
+
+m	java:S116"SRename this field "APP_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø¬÷×úÿÿÿÿ
+m	java:S116"XRename this field "WINDOW_HEIGTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÒ£Á
+q	java:S116"WRename this field "WINDOW_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•É¥Üûÿÿÿÿ
+<
+java:S1170"!Make this final field static too.(ø¬÷×úÿÿÿÿ
+7
+java:S1170"!Make this final field static too.(ÂÒ£Á
+<
+java:S1170"!Make this final field static too.(•É¥Üûÿÿÿÿ
+œ
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(àÎ°Óýÿÿÿÿ
