@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.gui;
+package com.pickyeaters.logic.view.gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

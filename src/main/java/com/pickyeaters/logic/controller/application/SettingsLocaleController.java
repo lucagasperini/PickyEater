@@ -1,8 +1,7 @@
 package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.app.view.bean.SettingsBean;
+import com.pickyeaters.logic.view.bean.SettingsBean;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
-import com.pickyeaters.logic.model.SettingsDatabase;
 import com.pickyeaters.logic.model.SettingsLocale;
 
 import java.io.IOException;

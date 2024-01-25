@@ -1,6 +1,6 @@
-package com.pickyeaters.app.view.gui;
+package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.app.view.bean.LoginBean;
+import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
@@ -26,8 +26,8 @@ public class LoginView extends VirtualWindowView {
     private Label labelLoginPassword;
 
     protected void setup() {
-        labelLoginUsername.setText(SettingsController.i18n("PICKY_GUI_LOGIN_USERNAME"));
-        labelLoginPassword.setText(SettingsController.i18n("PICKY_GUI_LOGIN_PASSWORD"));
+        labelLoginUsername.setText(SettingsController.i18n("GUI_LOGIN_VIEW_USERNAME"));
+        labelLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
         inputLogin.setText(SettingsController.i18n("PICKY_GUI_LOGIN_LOGIN"));
     }
     @FXML protected void clickLogin(ActionEvent event) {

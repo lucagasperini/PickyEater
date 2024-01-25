@@ -1,12 +1,12 @@
-package com.pickyeaters.app.view.cli;
+package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.app.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
-import com.pickyeaters.app.view.bean.LoginBean;
+import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
-import com.pickyeaters.app.view.bean.SettingsBean;
+import com.pickyeaters.logic.view.bean.SettingsBean;
 
 import java.util.Scanner;
 

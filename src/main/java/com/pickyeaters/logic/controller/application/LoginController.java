@@ -1,9 +1,8 @@
 package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.logic.model.Session;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
-import com.pickyeaters.app.view.bean.LoginBean;
+import com.pickyeaters.logic.view.bean.LoginBean;
 
 public class LoginController {
 

@@ -1,4 +1,4 @@
-package com.pickyeaters.app.view.cli;
+package com.pickyeaters.logic.view.cli;
 
 public class IngredientView {
 /*
