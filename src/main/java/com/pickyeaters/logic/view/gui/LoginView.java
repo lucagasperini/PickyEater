@@ -15,29 +15,30 @@ public class LoginView extends VirtualWindowView {
     }
 
     @FXML
-    private TextField inputLoginUsername;
+    private TextField inputLoginEmail;
     @FXML
     private PasswordField inputLoginPassword;
     @FXML
     private Button inputLogin;
     @FXML
-    private Label labelLoginUsername;
+    private Label labelLoginEmail;
     @FXML
     private Label labelLoginPassword;
 
     protected void setup() {
-        labelLoginUsername.setText(SettingsController.i18n("GUI_LOGIN_VIEW_USERNAME"));
+        labelLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_USERNAME"));
         labelLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
-        inputLogin.setText(SettingsController.i18n("PICKY_GUI_LOGIN_LOGIN"));
+        inputLogin.setText(SettingsController.i18n("GUI_LOGIN_LOGIN"));
     }
     @FXML protected void clickLogin(ActionEvent event) {
 
-        LoginBean loginBean = new LoginBean();
-        loginBean.setUsername(inputLoginUsername.getText());
-        loginBean.setPassword(inputLoginPassword.getText());
+        LoginBean loginBean = new LoginBean(
+                inputLoginEmail.getText(),
+                inputLoginPassword.getText()
+        );
 
         try {
-            controller.getLoginController().login(loginBean);
+            controller.getLoginController().auth(loginBean);
             stage.close();
         } catch (LoginControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

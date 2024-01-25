@@ -33,12 +33,12 @@
         </rowConstraints>
          <children>
             <PasswordField fx:id="inputLoginPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="inputLoginUsername" GridPane.columnIndex="1">
+            <TextField fx:id="inputLoginEmail" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Label fx:id="labelLoginUsername" text="PICKY_GUI_LOGIN_USERNAME" />
+            <Label fx:id="labelLoginEmail" text="PICKY_GUI_LOGIN_EMAIL" />
             <Label fx:id="labelLoginPassword" text="PICKY_GUI_LOGIN_PASSWORD" GridPane.rowIndex="1" />
          </children>
          <VBox.margin>
