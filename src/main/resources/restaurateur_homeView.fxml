@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
@@ -11,17 +12,61 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane prefHeight="252.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="513.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="554.0" prefWidth="640.0">
+                           <children>
+                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Circle>
+                              <Text fill="WHITE" layoutX="189.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROVIDEMENUDETAILS" textAlignment="CENTER" wrappingWidth="261.25390625">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="554.0" prefWidth="640.0">
+                           <children>
+                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Circle>
+                              <Text fill="WHITE" layoutX="189.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROVIDERESTAURANTDETAILS" textAlignment="CENTER" wrappingWidth="261.25390625">
+                                 <font>
+                                    <Font name="Calibri Bold" size="24.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </center>
          <top>
             <AnchorPane prefHeight="121.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <VBox layoutX="35.0" layoutY="35.0">
+                  <VBox layoutX="35.0" layoutY="35.0" prefHeight="48.0" prefWidth="1225.0">
                      <children>
-                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="ViewPosition">
+                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
                            <font>
                               <Font name="Calibri Bold" size="36.0" />
                            </font>
                         </Text>
-                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="Subtitle" wrappingWidth="113.6146011352539">
+                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="261.3125">
                            <font>
                               <Font name="Calibri Bold" size="32.0" />
                            </font>
@@ -31,52 +76,6 @@
                </children>
             </AnchorPane>
          </top>
-         <center>
-            <AnchorPane prefHeight="252.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-               <children>
-                  <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <left>
-                        <AnchorPane prefHeight="513.0" prefWidth="640.0" BorderPane.alignment="CENTER_LEFT">
-                           <children>
-                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Circle>
-                              <Text fill="WHITE" layoutX="196.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProvideMenuDetailsText" textAlignment="CENTER" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="196.7109375" AnchorPane.topAnchor="243.0">
-                                 <font>
-                                    <Font name="Calibri Bold" size="24.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Text>
-                           </children>
-                        </AnchorPane>
-                     </left>
-                     <right>
-                        <AnchorPane prefHeight="513.0" prefWidth="640.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Circle>
-                              <Text fill="WHITE" layoutX="195.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ProvideRestaurantDetailsText" textAlignment="CENTER" wrappingWidth="250.265625" AnchorPane.bottomAnchor="242.0" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="196.7109375" AnchorPane.topAnchor="243.0">
-                                 <font>
-                                    <Font name="Calibri Bold" size="24.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Text>
-                           </children>
-                        </AnchorPane>
-                     </right>
-                  </BorderPane>
-               </children>
-            </AnchorPane>
-         </center>
       </BorderPane>
    </children>
 </AnchorPane>
