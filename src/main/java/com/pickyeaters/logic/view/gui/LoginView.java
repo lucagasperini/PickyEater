@@ -26,9 +26,9 @@ public class LoginView extends VirtualWindowView {
     private Label labelLoginPassword;
 
     protected void setup() {
-        labelLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_USERNAME"));
+        labelLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
         labelLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
-        inputLogin.setText(SettingsController.i18n("GUI_LOGIN_LOGIN"));
+        inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));
     }
     @FXML protected void clickLogin(ActionEvent event) {
 
