@@ -1,10 +1,13 @@
 package com.pickyeaters.logic.controller.application;
 
+import com.pickyeaters.logic.model.Pickie;
 import com.pickyeaters.logic.model.Session;
 import com.pickyeaters.logic.model.SettingsDatabase;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
+import com.pickyeaters.logic.model.User;
 
 import java.sql.*;
+import java.util.Vector;
 
 public class DatabaseController {
     private static DatabaseController instance = new DatabaseController();
@@ -70,4 +73,61 @@ public class DatabaseController {
         return token != null;
     }
 
+    public class Query {
+        int outIndex = 1;
+        String cmd;
+        CallableStatement cs;
+        int index = 1;
+        Query(CallableStatement _cs, String _cmd) {
+            cs = _cs;
+            cmd = _cmd;
+        }
+
+        public void execute() throws DatabaseControllerException {
+            try {
+                cs.executeUpdate();
+            } catch (SQLException ex) {
+                new DatabaseControllerException("Cannot execute: " + ex.getMessage());
+            }
+        }
+
+        public void registerOutParameter(int sqlType) throws DatabaseControllerException {
+            try {
+                cs.registerOutParameter(index, sqlType);
+                cs.setNull(index, Types.VARCHAR);
+                index++;
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot registerOutParameter: " + ex.getMessage());
+            }
+        }
+        public void setString(String val) throws DatabaseControllerException {
+            try {
+                cs.setString(index++, val);
+                outIndex++;
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot setString: " + ex.getMessage());
+            }
+        }
+
+        public String getString() throws DatabaseControllerException {
+            try {
+                return cs.getString(outIndex++);
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot getString: " + ex.getMessage());
+            }
+        }
+
+    }
+
+    public Query query(String query) throws DatabaseControllerException {
+        if(conn == null) {
+            throw new DatabaseControllerException("Connection is not ready");
+        }
+
+        try {
+            return new Query(conn.prepareCall(query), query);
+        } catch (SQLException e) {
+            throw new DatabaseControllerException("Cannot prepare query");
+        }
+    }
 }

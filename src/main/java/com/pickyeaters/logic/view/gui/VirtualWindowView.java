@@ -25,7 +25,7 @@ public abstract class VirtualWindowView extends VirtualView {
         try {
             this.root = loader.load();
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
             //TODO:
             System.exit(-1);
         }

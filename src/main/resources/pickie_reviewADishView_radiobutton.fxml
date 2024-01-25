@@ -52,7 +52,7 @@
                                              <children>
                                                 <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="RESTAURANT">
+                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="RESTAURANT" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -60,7 +60,7 @@
                                                             <Insets />
                                                          </VBox.margin>
                                                       </Text>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESTAURANT_WHATQUESTION" wrappingWidth="462.6146011352539">
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESTAURANT_WHATQUESTION" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>

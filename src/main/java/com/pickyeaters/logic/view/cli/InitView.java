@@ -51,13 +51,14 @@ public class InitView extends VirtualView {
     }
     private void askLogin() {
         Scanner userInput = new Scanner(System.in);
-        LoginBean loginBean = new LoginBean();
-        System.out.print("Username: ");
-        loginBean.setUsername(userInput.nextLine());
+
+        System.out.print("Email: ");
+        String email = userInput.nextLine();
         System.out.print("Password: ");
-        loginBean.setPassword(userInput.nextLine());
+        String password = userInput.nextLine();
+        LoginBean loginBean = new LoginBean(email, password);
         try {
-            controller.getLoginController().login(loginBean);
+            controller.getLoginController().auth(loginBean);
         } catch (LoginControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askLogin();
