@@ -21,10 +21,30 @@ CREATE TABLE "Dish" (
     unique(name)
 );
 
+CREATE TABLE "IngredientCategory"
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    crtime timestamp without time zone NOT NULL DEFAULT now(),
+    name character varying(256) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE "IngredientTypology"
+(
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    crtime timestamp without time zone NOT NULL DEFAULT now(),
+    name character varying(256) NOT NULL,
+    fk_category uuid NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (fk_category) REFERENCES "IngredientCategory" (id)
+);
+
 CREATE TABLE "Ingredient" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
+    fk_typology uuid NOT NULL,
+    FOREIGN KEY (fk_typology) REFERENCES "IngredientTypology" (id),
     unique(name)
 );
 

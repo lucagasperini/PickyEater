@@ -11,7 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class InitView extends VirtualView {
+public class InitView extends VirtualWindowView {
     public InitView(MainController controller) {
         super(controller, "/form/database.fxml");
     }
@@ -19,12 +19,6 @@ public class InitView extends VirtualView {
     @Override
     protected void setup() {
 
-    }
-
-    @Override
-    public void show() {
-        stage.setScene(new Scene(root, 600, 400));
-        stage.showAndWait();
     }
 
     @FXML
