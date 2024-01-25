@@ -113,3 +113,13 @@ i
 9src/main/java/com/pickyeaters/logic/model/ReportType.java,7\f\7f9e8d8a84f3af11ed94dc6b79911bef136043c3
 `
 0src/main/java/com/pickyeaters/logic/MainGUI.java,9\b\9bc39dedc332c65922a7e7cc75fc07386b214762
+m
+=src/main/java/com/pickyeaters/logic/view/gui/VirtualView.java,c\0\c0261000fd5d12660bf4ad48bf14eed1c54432b9
+j
+:src/main/java/com/pickyeaters/logic/view/gui/MainView.java,7\1\7103ac0e861d5996597048f799ef7eea760e934c
+m
+=src/main/java/com/pickyeaters/logic/view/cli/VirtualView.java,9\e\9e43bd158841750a71468a3b81b12d69365f8da4
+~
+Nsrc/main/java/com/pickyeaters/logic/controller/application/MainController.java,2\d\2dcb4e812e52d09217d1cc06886fb3264011f46f
+›
+ksrc/main/java/com/pickyeaters/logic/controller/application/AdministratorManageReportGraphicsController.java,f\5\f5e8f4551e43050f23dbf2c300110277eaea9b3a
