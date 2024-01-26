@@ -301,3 +301,7 @@ Usrc/main/java/com/pickyeaters/logic/view/gui/administrator/AdministratorHomeVie
 \src/main/java/com/pickyeaters/logic/view/gui/restaurateur/RestaurateurAddIngredientView.java,0\2\02209611e0bedfd6882e1302b69c21cbfabc7b2d
 ç
 ]src/main/java/com/pickyeaters/logic/view/gui/administrator/AdministratorManageReportView.java,b\a\badacf008fbf32616a45f15c3ac6c932b2556ace
+í
+bsrc/main/java/com/pickyeaters/logic/view/gui/administrator/AdministratorAddIngredientToDBView.java,1\6\16b873398587db0fb897f7f5c753b4c432e293a6
+í
+bsrc/main/java/com/pickyeaters/logic/view/cli/administrator/AdministratorAddIngredientToDBView.java,e\c\ec346d7f087a673ac6335e4ef07ff05ff80d398a

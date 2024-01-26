@@ -112,11 +112,11 @@
                                                       </Text>
                                                       <VBox prefHeight="85.0" prefWidth="54.0">
                                                          <children>
-                                                            <RadioButton mnemonicParsing="false" text="1" />
-                                                            <RadioButton mnemonicParsing="false" text="2" />
-                                                            <RadioButton mnemonicParsing="false" text="3" />
-                                                            <RadioButton mnemonicParsing="false" text="4" />
-                                                            <RadioButton mnemonicParsing="false" text="5" />
+                                                            <RadioButton mnemonicParsing="false" text="HOWGOODANSWER_POOR" />
+                                                            <RadioButton mnemonicParsing="false" text="HOWGOODANSWER_FAIR" />
+                                                            <RadioButton mnemonicParsing="false" text="HOWGOODANSWER_AVERAGE" />
+                                                            <RadioButton mnemonicParsing="false" text="HOWGOODANSWER_GOOD" />
+                                                            <RadioButton mnemonicParsing="false" text="HOWGOODANSWER_EXCELLENT" />
                                                          </children>
                                                       </VBox>
                                                    </children>
@@ -149,7 +149,7 @@
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="PICKY_GUI_REVIEWADISH_VIEW_REPORTACTION" underline="true" wrappingWidth="540.0">
+                                                      <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="PICKY_GUI_REVIEWADISH_VIEW_REPORT" underline="true" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>

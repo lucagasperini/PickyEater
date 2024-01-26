@@ -227,7 +227,7 @@
                                                                   </TextFlow>
                                                                   <VBox prefHeight="85.0" prefWidth="540.0">
                                                                      <children>
-                                                                        <RadioButton mnemonicParsing="false" text="...FORM_INEXISTENT_INGREDIENT" />
+                                                                        <RadioButton mnemonicParsing="false" text="...FORM_NONEXISTENT_INGREDIENT" />
                                                                         <RadioButton mnemonicParsing="false" text="...FORM_EXISTENT_INDB_INGREDIENT" />
                                                                         <RadioButton mnemonicParsing="false" text="...FORM_EXISTENT_NOTINDB_INGREDIENT" />
                                                                      </children>
