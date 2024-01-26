@@ -6,17 +6,17 @@
 }
 
 .bt-primary:hover {
-    -fx-text-fill: black;
     -fx-background-color: #ed7d3190;
 }
 
 .bt-secondary {
     -fx-background-color: #5b9bd5ff;
     -fx-text-fill: white;
+    -fx-font-family: Calibri;
+    -fx-font-weight: bold;
     -fx-font-size: 20px;
 }
 
 .bt-secondary:hover {
     -fx-background-color: #5b9bd590;
-    -fx-text-fill: black;
 }
