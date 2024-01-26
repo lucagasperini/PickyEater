@@ -6,13 +6,12 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 public class LoginView extends VirtualWindowView {
     public LoginView(MainController controller) {
-        super(controller, "/loginView.fxml");
+        super(controller, "/form/loginView.fxml");
     }
 
     @FXML

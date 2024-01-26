@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 
 public class PickieHomeView extends VirtualPaneView {
     public PickieHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/pickie_homeView.fxml", mainLayout);
+        super(controller, "/form/pickie/homeView.fxml", mainLayout);
     }
 
     @FXML

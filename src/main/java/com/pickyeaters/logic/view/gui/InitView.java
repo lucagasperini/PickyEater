@@ -6,14 +6,13 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class InitView extends VirtualWindowView {
     public InitView(MainController controller) {
-        super(controller, "/form/database.fxml");
+        super(controller, "/form/initView.fxml");
     }
 
     @Override

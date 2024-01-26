@@ -15,7 +15,7 @@
                <children>
                   <AnchorPane layoutX="320.0" prefHeight="513.0" prefWidth="640.0">
                      <children>
-                        <Button layoutX="190.0" layoutY="127.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@css/main.css" text="MANAGEREPORT" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="127.0" />
+                        <Button layoutX="190.0" layoutY="127.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@../../css/main.css" text="MANAGEREPORT" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="127.0" />
                      </children>
                   </AnchorPane>
                </children>

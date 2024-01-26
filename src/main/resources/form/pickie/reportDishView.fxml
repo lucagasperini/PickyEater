@@ -24,7 +24,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <image>
-                              <Image url="@pics/deleteIcon.png" />
+                              <Image url="@../../pics/deleteIcon.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />

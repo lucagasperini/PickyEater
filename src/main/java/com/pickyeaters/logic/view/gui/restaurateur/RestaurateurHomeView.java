@@ -18,7 +18,7 @@ public class RestaurateurHomeView extends VirtualPaneView {
     @FXML
     private Button buttonMenu;
     public RestaurateurHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/restaurateur_homeView.fxml", mainLayout);
+        super(controller, "/form/restaurateur/homeView.fxml", mainLayout);
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_SUBTITLE"));
         buttonMenu.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDEMENUDETAILS"));

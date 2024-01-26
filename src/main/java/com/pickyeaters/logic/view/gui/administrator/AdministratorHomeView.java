@@ -6,6 +6,6 @@ import javafx.scene.layout.BorderPane;
 
 public class AdministratorHomeView extends VirtualPaneView {
     public AdministratorHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/administrator_homeView.fxml", mainLayout);
+        super(controller, "/form/administrator/homeView.fxml", mainLayout);
     }
 }
