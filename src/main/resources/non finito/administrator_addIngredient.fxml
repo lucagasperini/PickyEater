@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -47,9 +46,9 @@
                            <children>
                               <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="463.0" prefWidth="1180.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0">
                                  <top>
-                                    <AnchorPane prefHeight="25.0" prefWidth="0.0" BorderPane.alignment="CENTER_LEFT">
+                                    <AnchorPane prefHeight="25.0" prefWidth="0.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <HBox layoutX="37.0" layoutY="-32.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <HBox layoutX="37.0" layoutY="-32.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="1180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="295.0">
                                                    <children>
@@ -84,85 +83,79 @@
                                              </children>
                                           </HBox>
                                        </children>
-                                       <BorderPane.margin>
-                                          <Insets right="3.0" />
-                                       </BorderPane.margin>
                                     </AnchorPane>
                                  </top>
                                  <center>
                                     <AnchorPane prefHeight="200.0" prefWidth="1180.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <ScrollPane hbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                             <content>
-                                                <VBox prefHeight="438.0" prefWidth="1218.0">
+                                          <VBox layoutX="139.0" layoutY="52.0" prefHeight="438.0" prefWidth="1218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <AnchorPane maxHeight="-Infinity" prefHeight="37.0" prefWidth="200.0">
                                                    <children>
-                                                      <AnchorPane maxHeight="-Infinity" prefHeight="37.0" prefWidth="200.0">
+                                                      <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="1180.0" AnchorPane.bottomAnchor="1.0" AnchorPane.topAnchor="1.0">
                                                          <children>
-                                                            <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="1180.0" AnchorPane.bottomAnchor="1.0" AnchorPane.topAnchor="1.0">
+                                                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
                                                                <children>
-                                                                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
+                                                                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reportIDField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.5">
+                                                                     <font>
+                                                                        <Font name="Calibri" size="18.0" />
+                                                                     </font>
+                                                                  </Text>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
+                                                               <children>
+                                                                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reportTypeField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0">
+                                                                     <font>
+                                                                        <Font name="Calibri" size="18.0" />
+                                                                     </font>
+                                                                  </Text>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
+                                                               <children>
+                                                                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
+                                                                  <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reporterIDField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.5">
+                                                                     <font>
+                                                                        <Font name="Calibri" size="18.0" />
+                                                                     </font>
+                                                                  </Text>
+                                                               </children>
+                                                            </AnchorPane>
+                                                            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
+                                                               <children>
+                                                                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
+                                                                  <AnchorPane prefHeight="200.0" prefWidth="301.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                                                      <children>
-                                                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
-                                                                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reportIDField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="8.5">
-                                                                           <font>
-                                                                              <Font name="Calibri" size="18.0" />
-                                                                           </font>
-                                                                        </Text>
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
-                                                                     <children>
-                                                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
-                                                                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reportTypeField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0">
-                                                                           <font>
-                                                                              <Font name="Calibri" size="18.0" />
-                                                                           </font>
-                                                                        </Text>
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
-                                                                     <children>
-                                                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
-                                                                        <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="reporterIDField" AnchorPane.bottomAnchor="8.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="4.5">
-                                                                           <font>
-                                                                              <Font name="Calibri" size="18.0" />
-                                                                           </font>
-                                                                        </Text>
-                                                                     </children>
-                                                                  </AnchorPane>
-                                                                  <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="295.0">
-                                                                     <children>
-                                                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4b183" height="35.0" opacity="0.1" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0" />
-                                                                        <AnchorPane prefHeight="200.0" prefWidth="301.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
-                                                                           <children>
-                                                                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bdd7ee" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                 <cursor>
-                                                                                    <Cursor fx:constant="HAND" />
-                                                                                 </cursor>
-                                                                              </Rectangle>
-                                                                              <Text fill="#4472c4" strokeType="OUTSIDE" strokeWidth="0.0" text="ManageReportText" AnchorPane.bottomAnchor="3.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.5">
-                                                                                 <font>
-                                                                                    <Font name="Calibri Bold" size="18.0" />
-                                                                                 </font>
-                                                                                 <cursor>
-                                                                                    <Cursor fx:constant="HAND" />
-                                                                                 </cursor>
-                                                                              </Text>
-                                                                           </children>
+                                                                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bdd7ee" height="25.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                            <cursor>
                                                                               <Cursor fx:constant="HAND" />
                                                                            </cursor>
-                                                                        </AnchorPane>
+                                                                        </Rectangle>
+                                                                        <Text fill="#4472c4" strokeType="OUTSIDE" strokeWidth="0.0" text="ManageReportText" AnchorPane.bottomAnchor="3.5" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="3.5">
+                                                                           <font>
+                                                                              <Font name="Calibri Bold" size="18.0" />
+                                                                           </font>
+                                                                           <cursor>
+                                                                              <Cursor fx:constant="HAND" />
+                                                                           </cursor>
+                                                                        </Text>
                                                                      </children>
+                                                                     <cursor>
+                                                                        <Cursor fx:constant="HAND" />
+                                                                     </cursor>
                                                                   </AnchorPane>
                                                                </children>
-                                                            </HBox>
+                                                            </AnchorPane>
                                                          </children>
-                                                      </AnchorPane>
+                                                      </HBox>
                                                    </children>
-                                                </VBox>
-                                             </content>
-                                          </ScrollPane>
+                                                </AnchorPane>
+                                             </children>
+                                          </VBox>
+                                          <ScrollBar layoutX="1159.0" orientation="VERTICAL" prefHeight="438.0" prefWidth="14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
                                  </center>

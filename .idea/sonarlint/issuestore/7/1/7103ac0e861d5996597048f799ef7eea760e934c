@@ -1,12 +1,14 @@
 
-m	java:S116"SRename this field "APP_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø¬÷×úÿÿÿÿ
-m	java:S116"XRename this field "WINDOW_HEIGTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÒ£Á
-q	java:S116"WRename this field "WINDOW_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•É¥Üûÿÿÿÿ
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(èåÖ‚8¨¤Ã°Ô1
+m	java:S116+"SRename this field "APP_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø¬÷×úÿÿÿÿ
+m	java:S116,"XRename this field "WINDOW_HEIGTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÒ£Á
+q	java:S116-"WRename this field "WINDOW_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•É¥Üûÿÿÿÿ
 <
-java:S1170"!Make this final field static too.(ø¬÷×úÿÿÿÿ
+java:S1170+"!Make this final field static too.(ø¬÷×úÿÿÿÿ
 7
-java:S1170"!Make this final field static too.(ÂÒ£Á
+java:S1170,"!Make this final field static too.(ÂÒ£Á
 <
-java:S1170"!Make this final field static too.(•É¥Üûÿÿÿÿ
-œ
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(àÎ°Óýÿÿÿÿ
+java:S1170-"!Make this final field static too.(•É¥Üûÿÿÿÿ
+L	java:S106&"+Replace this use of System.err by a logger.(é©æÒýÿÿÿÿ8Ä¤Ã°Ô1
+O
+java:S1135'"2Complete the task associated to this TODO comment.(ÓñàÍ8Å¤Ã°Ô1
