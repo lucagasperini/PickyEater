@@ -1,4 +1,4 @@
-package com.pickyeaters.logic.view.cli;
+package com.pickyeaters.logic.view.gui.administrator;
 
 public class AdministratorManageMissingIngredientReportView {
 }
