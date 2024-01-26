@@ -16,6 +16,8 @@ public abstract class VirtualWindowView extends VirtualView {
     protected URL fxml = null;
     protected Parent root = null;
     protected Stage stage = new Stage();
+    private final int WINDOW_HEIGTH = 720;
+    private final int WINDOW_WIDTH = 1280;
     public VirtualWindowView(MainController controller, String fxml) {
         super(controller);
         FXMLLoader loader = new FXMLLoader();
@@ -36,7 +38,7 @@ public abstract class VirtualWindowView extends VirtualView {
     protected abstract void setup();
 
     public void show() {
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.showAndWait();
     }
 }
