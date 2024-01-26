@@ -1,12 +1,17 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.DatabaseController;
+import com.pickyeaters.logic.controller.application.LoginController;
+import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.UserDAO;
 import com.pickyeaters.logic.model.User;
 import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
+import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
+import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -74,16 +79,41 @@ public class MainView extends VirtualView {
 
         textNavbarUser.setText(controller.getLoginController().getUser().getName());
 
-        MainPickieView mainPickieView = new MainPickieView(controller, mainLayout);
-        mainPickieView.show();
+        showHomeView();
 
         stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.show();
     }
 
+    private void showHomeView() {
+        try {
+            switch (controller.getLoginController().getUserType()) {
+                case PICKIE -> showPickieHomeView();
+                case RESTAURATEUR -> showRestaurateurHomeView();
+                case ADMIN -> showAdministratorHomeView();
+            }
+        } catch (LoginControllerException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showPickieHomeView() {
+        PickieHomeView pickieHomeView = new PickieHomeView(controller, mainLayout);
+        pickieHomeView.show();
+    }
+
+    private void showRestaurateurHomeView() {
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(controller, mainLayout);
+        restaurateurHomeView.show();
+    }
+
+    private void showAdministratorHomeView() {
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(controller, mainLayout);
+        administratorHomeView.show();
+    }
+
     @FXML
     protected void clickLogoImage() {
-        MainPickieView mainPickieView = new MainPickieView(controller, mainLayout);
-        mainPickieView.show();
+        showHomeView();
     }
 }

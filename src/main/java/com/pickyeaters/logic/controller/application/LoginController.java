@@ -3,11 +3,20 @@ package com.pickyeaters.logic.controller.application;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.UserDAO;
+import com.pickyeaters.logic.model.Administrator;
+import com.pickyeaters.logic.model.Pickie;
+import com.pickyeaters.logic.model.Restaurateur;
 import com.pickyeaters.logic.model.User;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
 public class LoginController {
+
+    public enum UserType {
+        PICKIE,
+        RESTAURATEUR,
+        ADMIN
+    }
 
     private User user = null;
 
@@ -21,6 +30,18 @@ public class LoginController {
 
     public UserBean getUser() {
         return new UserBean(user);
+    }
+
+    public UserType getUserType() throws LoginControllerException {
+        if(user instanceof Pickie) {
+            return UserType.PICKIE;
+        } else if (user instanceof Restaurateur) {
+            return UserType.RESTAURATEUR;
+        } else if (user instanceof Administrator) {
+            return UserType.ADMIN;
+        } else {
+            throw new LoginControllerException("Cannot identify user type");
+        }
     }
 
     public void auth(LoginBean loginBean) throws LoginControllerException {

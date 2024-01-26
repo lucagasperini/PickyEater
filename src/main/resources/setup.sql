@@ -3,6 +3,15 @@ CREATE USER picky WITH PASSWORD 'picky';
 ALTER DATABASE picky OWNER TO picky;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE TABLE "Restaurant" (
+    id uuid NOT NULL DEFAULT uuid_generate_v4(),
+    crtime timestamp without time zone NOT NULL DEFAULT now(),
+    name character varying(256) NOT NULL,
+    phone character varying(16) NOT NULL,
+    address character varying(256) NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE "User" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -11,7 +20,13 @@ CREATE TABLE "User" (
     firstname varchar(256) NOT NULL,
     lastname varchar(256) NOT NULL,
     type varchar(16) NOT NULL,
-    unique(email)
+    username character varying(256),
+    ssn character varying(256),
+    fk_restaurant uuid,
+    FOREIGN KEY (fk_restaurant) REFERENCES "Restaurant" (id),
+    unique(email),
+    unique(ssn),
+    unique(username)
 );
 
 CREATE TABLE "Dish" (
@@ -64,6 +79,20 @@ CREATE TABLE "Session" (
     fk_user UUID NOT NULL
 );
 
+CREATE OR REPLACE PROCEDURE restinfo(
+	IN _id character varying,
+	OUT _name character varying,
+	OUT _phone character varying,
+	OUT _address character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT name, phone, address
+		INTO _name, _phone, _address
+		FROM "Restaurant" WHERE id = _id::uuid;
+END;
+$BODY$;
+
 CREATE OR REPLACE PROCEDURE userinfo(
 	IN _email character varying,
 	OUT _id character varying,
@@ -79,6 +108,26 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE userinfo_pickie(
+	IN _email character varying,
+	OUT _username character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT username INTO _username FROM "User" WHERE email = _email;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE userinfo_rest(
+	IN _email character varying,
+	OUT _ssn character varying,
+	OUT _restaurant character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT ssn, fk_restaurant INTO _ssn, _restaurant FROM "User" WHERE email = _email;
+END;
+$BODY$;
 
 CREATE OR REPLACE PROCEDURE login(IN _email varchar(256), IN _password char(64), OUT _token varchar(256))
 LANGUAGE plpgsql
@@ -96,4 +145,10 @@ END;
 $$;
 
 
-INSERT INTO "User" (email, password, type, firstname, lastname) VALUES ('luca', 'luca', 'ADMIN', 'Luca', 'Gasperini');
+INSERT INTO "User" (email, password, username, type, firstname, lastname) VALUES ('lucaP', 'luca', 'luca', 'PICKIE', 'Luca', 'Gasperini');
+INSERT INTO "User" (email, password, type, firstname, lastname) VALUES ('lucaA', 'luca', 'ADMIN', 'Luca', 'Gasperini');
+WITH rest_id AS (
+	INSERT INTO "Restaurant" (name, phone, address) VALUES
+	('Pickie Express', '+391112223333', 'Via del buon gusto, 1') RETURNING id
+) INSERT INTO "User" (email, password, type, firstname, lastname, ssn, fk_restaurant)
+VALUES ('lucaR', 'luca', 'REST', 'Luca', 'Gasperini', '123456789', (select id from rest_id));

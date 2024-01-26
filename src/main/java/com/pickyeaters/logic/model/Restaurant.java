@@ -6,7 +6,9 @@ public class Restaurant {
     private String address;
     private BusinessHours businessHours;
 
-    public Restaurant(String name) {
+    public Restaurant(String name, String phone, String address) {
         this.name = name;
+        this.phone = phone;
+        this.address = address;
     }
 }

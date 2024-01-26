@@ -64,13 +64,13 @@ public class DatabaseController {
             throw new DatabaseControllerException("Cannot execute a login call.");
         }
 
-        String token = null;
         try {
-            token = cs.getString(3);
+            String token = cs.getString(3);
+            return token != null;
         } catch (SQLException e) {
             throw new DatabaseControllerException("Cannot get response from login call.");
         }
-        return token != null;
+
     }
 
     public class Query {
@@ -85,9 +85,17 @@ public class DatabaseController {
 
         public void execute() throws DatabaseControllerException {
             try {
-                cs.executeUpdate();
+                cs.execute();
             } catch (SQLException ex) {
-                new DatabaseControllerException("Cannot execute: " + ex.getMessage());
+                throw new DatabaseControllerException("Cannot execute: " + ex.getMessage());
+            }
+        }
+
+        public void close() throws DatabaseControllerException {
+            try {
+                cs.close();
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot close: " + ex.getMessage());
             }
         }
 
