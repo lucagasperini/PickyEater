@@ -42,6 +42,7 @@ public class LoginView extends VirtualWindowView {
             controller.getLoginController().auth(loginBean);
             stage.close();
         } catch (LoginControllerException ex) {
+            //TODO: Create different messages if bad auth or internal error!
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle(SettingsController.i18n("MSG_INVALID_LOGIN_TITLE"));
             alert.setHeaderText(SettingsController.i18n("MSG_INVALID_LOGIN_HEADER"));
