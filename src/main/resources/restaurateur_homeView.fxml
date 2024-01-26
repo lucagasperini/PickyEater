@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -19,36 +18,12 @@
                      <children>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Circle>
-                              <Text fill="WHITE" layoutX="189.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROVIDEMENUDETAILS" textAlignment="CENTER" wrappingWidth="261.25390625">
-                                 <font>
-                                    <Font name="Calibri Bold" size="24.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Text>
+                              <Button layoutX="190.0" layoutY="148.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@css/main.css" text="PROVIDEMENUDETAILS" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Circle accessibleRole="PARENT" fill="#ed7d31" layoutX="320.0" layoutY="257.0" radius="130.0" stroke="BLACK" strokeWidth="0.0">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Circle>
-                              <Text fill="WHITE" layoutX="189.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROVIDERESTAURANTDETAILS" textAlignment="CENTER" wrappingWidth="261.25390625">
-                                 <font>
-                                    <Font name="Calibri Bold" size="24.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </Text>
+                              <Button layoutX="190.0" layoutY="127.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@css/main.css" text="PROVIDERESTAURANTDETAILS" />
                            </children>
                         </AnchorPane>
                      </children>

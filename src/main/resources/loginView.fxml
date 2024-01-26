@@ -88,7 +88,7 @@
                   <Insets top="30.0" />
                </VBox.margin>
                <children>
-                  <Button fx:id="inputLogin" contentDisplay="RIGHT" layoutX="140.0" layoutY="1.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="37.0" prefWidth="297.0" styleClass="bt-secondary" text="LOGIN_BUTTON" />
+                  <Button fx:id="inputLogin" contentDisplay="RIGHT" layoutX="140.0" layoutY="1.0" mnemonicParsing="false" onAction="#clickLogin" prefHeight="37.0" prefWidth="297.0" styleClass="bt-saveChanges" text="LOGIN_BUTTON" />
                </children>
             </AnchorPane>
          </children>

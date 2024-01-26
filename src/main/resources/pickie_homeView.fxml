@@ -17,12 +17,12 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-primary" text="REVIEWADISH" />
+                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="REVIEWADISH" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="-3.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickFindRestaurant" prefHeight="370.0" prefWidth="370.0" styleClass="bt-primary" text="FINDARESTAURANT" />
+                        <Button layoutX="-3.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickFindRestaurant" prefHeight="370.0" prefWidth="370.0" styleClass="bt-uc" text="FINDARESTAURANT" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" right="40.0" />
@@ -30,7 +30,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-primary" text="PERSONALIZEEATINGPREFERENCES" />
+                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PERSONALIZEEATINGPREFERENCES" />
                      </children>
                   </AnchorPane>
                </children>
