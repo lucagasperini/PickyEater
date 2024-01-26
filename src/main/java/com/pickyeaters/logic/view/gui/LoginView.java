@@ -8,10 +8,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 public class LoginView extends VirtualWindowView {
     public LoginView(MainController controller) {
-        super(controller, "/form/login.fxml");
+        super(controller, "/loginView.fxml");
     }
 
     @FXML
@@ -21,13 +22,13 @@ public class LoginView extends VirtualWindowView {
     @FXML
     private Button inputLogin;
     @FXML
-    private Label labelLoginEmail;
+    private Text textLoginEmail;
     @FXML
-    private Label labelLoginPassword;
+    private Text textLoginPassword;
 
     protected void setup() {
-        labelLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
-        labelLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
+        textLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
+        textLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
         inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));
     }
     @FXML protected void clickLogin(ActionEvent event) {

@@ -1,11 +1,22 @@
-.button {
+.bt-primary {
     -fx-background-color: #ed7d31ff;
     -fx-background-radius: 50%;
     -fx-text-fill: white;
     -fx-font-size: 24px;
 }
 
-.button:hover {
+.bt-primary:hover {
     -fx-text-fill: black;
     -fx-background-color: #ed7d3190;
+}
+
+.bt-secondary {
+    -fx-background-color: #5b9bd5ff;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+}
+
+.bt-secondary:hover {
+    -fx-background-color: #5b9bd590;
+    -fx-text-fill: black;
 }
