@@ -10,10 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 public class LoginView extends VirtualWindowView {
-    public LoginView(MainController controller) {
-        super(controller, "/form/loginView.fxml");
-    }
-
     @FXML
     private TextField inputLoginEmail;
     @FXML
@@ -24,12 +20,20 @@ public class LoginView extends VirtualWindowView {
     private Text textLoginEmail;
     @FXML
     private Text textLoginPassword;
+    @FXML
+    private Text textTitle;
+    @FXML
+    private Text textSubtitle;
 
-    protected void setup() {
+    public LoginView(MainController controller) {
+        super(controller, "/form/loginView.fxml");
         textLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
         textLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
         inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));
+        textTitle.setText(SettingsController.i18n("GUI_LOGIN_VIEW_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("GUI_LOGIN_VIEW_SUBTITLE"));
     }
+
     @FXML protected void clickLogin(ActionEvent event) {
 
         LoginBean loginBean = new LoginBean(

@@ -54,4 +54,8 @@ public class LoginController {
             throw new LoginControllerException("Cannot connect to database");
         }
     }
+
+    public void logout() {
+        user = null;
+    }
 }

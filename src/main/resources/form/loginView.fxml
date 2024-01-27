@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="imageLogo" fitHeight="146.0" fitWidth="756.0" layoutX="307.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="307.2589111328125">
          <image>
@@ -26,12 +26,12 @@
       </ImageView>
       <VBox alignment="CENTER" layoutX="283.0" layoutY="227.0" maxWidth="-Infinity" prefHeight="208.0" prefWidth="714.0">
          <children>
-            <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE">
+            <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE">
                <font>
                   <Font name="Calibri Bold" size="36.0" />
                </font>
             </Text>
-            <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE">
+            <Text fx:id="textSubtitle" fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE">
                <font>
                   <Font name="Calibri Bold" size="32.0" />
                </font>

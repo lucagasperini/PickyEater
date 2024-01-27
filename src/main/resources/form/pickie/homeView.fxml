@@ -17,12 +17,12 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="REVIEWADISH" />
+                        <Button fx:id="buttonReviewDish" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="REVIEWADISH" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="-3.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickFindRestaurant" prefHeight="370.0" prefWidth="370.0" styleClass="bt-uc" text="FINDARESTAURANT" />
+                        <Button fx:id="buttonFindRestaurant" layoutX="-3.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickFindRestaurant" prefHeight="370.0" prefWidth="370.0" styleClass="bt-uc" text="FINDARESTAURANT" />
                      </children>
                      <HBox.margin>
                         <Insets left="40.0" right="40.0" />
@@ -30,7 +30,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PERSONALIZEEATINGPREFERENCES" />
+                        <Button fx:id="buttonEatingPreferences" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PERSONALIZEEATINGPREFERENCES" />
                      </children>
                   </AnchorPane>
                </children>
@@ -41,12 +41,12 @@
                <children>
                   <VBox layoutX="35.0" layoutY="35.0" prefHeight="48.0" prefWidth="1225.0">
                      <children>
-                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
+                        <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
                            <font>
                               <Font name="Calibri Bold" size="36.0" />
                            </font>
                         </Text>
-                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="261.3125">
+                        <Text fx:id="textSubtitle" fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="261.3125">
                            <font>
                               <Font name="Calibri Bold" size="32.0" />
                            </font>

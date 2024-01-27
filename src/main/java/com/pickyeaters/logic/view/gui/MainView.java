@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.application.LoginController;
+import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.UserDAO;
 import com.pickyeaters.logic.model.User;
@@ -12,11 +13,13 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -38,7 +41,8 @@ public class MainView extends VirtualView {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(this.fxml);
             loader.setController(this);
-            this.root = loader.load();
+            root = loader.load();
+            stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         } catch (IOException ex) {
             System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
             //TODO:
@@ -50,13 +54,17 @@ public class MainView extends VirtualView {
     private final int WINDOW_WIDTH = 1280;
 
     @FXML
-    protected BorderPane mainLayout;
+    private BorderPane mainLayout;
     @FXML
-    protected ImageView imageLogo;
+    private ImageView imageLogo;
     @FXML
-    protected Text textNavbarUser;
+    private Text textNavbarUser;
     @FXML
-    protected Text textNavbarWelcome;
+    private Text textNavbarWelcome;
+    @FXML
+    private MenuItem menuItemProfile;
+    @FXML
+    private MenuItem menuItemLogout;
 
     @Override
     public void show() {
@@ -70,6 +78,10 @@ public class MainView extends VirtualView {
             initView.show();
         }
 
+        showApp();
+    }
+
+    private void showApp() {
         LoginView loginView = new LoginView(controller);
         loginView.show();
 
@@ -77,12 +89,16 @@ public class MainView extends VirtualView {
             return;
         }
 
-        textNavbarUser.setText(controller.getLoginController().getUser().getName());
-
+        setupNavbar();
         showHomeView();
 
-        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.show();
+    }
+
+    private void setupNavbar() {
+        textNavbarUser.setText(controller.getLoginController().getUser().getName());
+        menuItemProfile.setText(SettingsController.i18n("PICKY_GUI_UPDATEPROFILE_TEXT"));
+        menuItemLogout.setText(SettingsController.i18n("PICKY_GUI_LOGOFF_TEXT"));
     }
 
     private void showHomeView() {
@@ -98,16 +114,19 @@ public class MainView extends VirtualView {
     }
 
     private void showPickieHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("PICKY_GUI_HELLO_TEXT"));
         PickieHomeView pickieHomeView = new PickieHomeView(controller, mainLayout);
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_GUI_HELLO_TEXT"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(controller, mainLayout);
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
         AdministratorHomeView administratorHomeView = new AdministratorHomeView(controller, mainLayout);
         administratorHomeView.show();
     }
@@ -115,5 +134,12 @@ public class MainView extends VirtualView {
     @FXML
     protected void clickLogoImage() {
         showHomeView();
+    }
+
+    @FXML
+    private void clickLogout(ActionEvent event) {
+        controller.getLoginController().logout();
+        stage.close();
+        showApp();
     }
 }
