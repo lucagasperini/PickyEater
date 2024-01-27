@@ -36,31 +36,12 @@ CREATE TABLE "Dish" (
     unique(name)
 );
 
-CREATE TABLE "IngredientCategory"
-(
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    crtime timestamp without time zone NOT NULL DEFAULT now(),
-    name character varying(256) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE "IngredientTypology"
-(
-    id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    crtime timestamp without time zone NOT NULL DEFAULT now(),
-    name character varying(256) NOT NULL,
-    fk_category uuid NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (fk_category) REFERENCES "IngredientCategory" (id)
-);
-
 CREATE TABLE "Ingredient" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
-    fk_typology uuid NOT NULL,
-    FOREIGN KEY (fk_typology) REFERENCES "IngredientTypology" (id),
-    unique(name)
+    fk_parent uuid,
+    FOREIGN KEY (fk_parent) REFERENCES "Ingredient" (id)
 );
 
 CREATE TABLE "Dish_Ingredient" (
@@ -144,11 +125,71 @@ BEGIN
 END;
 $$;
 
+CREATE OR REPLACE PROCEDURE add_restaurant(
+    IN _name varchar(256),
+    IN _phone varchar(16),
+    IN _address varchar(256),
+    OUT _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "Restaurant" (name, phone, address)
+	    VALUES (_name, _phone, _address) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
 
-INSERT INTO "User" (email, password, username, type, firstname, lastname) VALUES ('lucaP', 'luca', 'luca', 'PICKIE', 'Luca', 'Gasperini');
-INSERT INTO "User" (email, password, type, firstname, lastname) VALUES ('lucaA', 'luca', 'ADMIN', 'Luca', 'Gasperini');
-WITH rest_id AS (
-	INSERT INTO "Restaurant" (name, phone, address) VALUES
-	('Pickie Express', '+391112223333', 'Via del buon gusto, 1') RETURNING id
-) INSERT INTO "User" (email, password, type, firstname, lastname, ssn, fk_restaurant)
-VALUES ('lucaR', 'luca', 'REST', 'Luca', 'Gasperini', '123456789', (select id from rest_id));
+CREATE OR REPLACE PROCEDURE add_admin(
+    IN _email varchar(256),
+    IN _password char(64),
+    IN _firstname varchar(256),
+    IN _lastname varchar(256),
+    OUT _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User" (email, password, type, firstname, lastname)
+	    VALUES (_email, _password, 'ADMIN', _firstname, _lastname) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_pickie(
+    IN _email varchar(256),
+    IN _password char(64),
+    IN _firstname varchar(256),
+    IN _lastname varchar(256),
+    IN _username varchar(256),
+    OUT _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User" (email, password, type, firstname, lastname, username)
+	    VALUES (_email, _password, 'PICKIE', _firstname, _lastname, _username) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_restaurateur(
+    IN _email varchar(256),
+    IN _password char(64),
+    IN _firstname varchar(256),
+    IN _lastname varchar(256),
+    IN _ssn varchar(256),
+    IN _rest_name varchar(256),
+    IN _rest_phone varchar(16),
+    IN _rest_address varchar(256),
+    OUT _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	restid UUID;
+BEGIN
+    INSERT INTO "Restaurant" (name, phone, address) VALUES
+        	(_rest_name, _rest_phone, _rest_address) RETURNING id::varchar INTO restid;
+
+    INSERT INTO "User" (email, password, type, firstname, lastname, ssn, fk_restaurant)
+        VALUES (_email, _password, 'REST', _firstname, _lastname, _ssn, restid) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
+CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
+CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
