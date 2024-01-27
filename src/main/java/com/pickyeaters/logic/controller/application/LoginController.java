@@ -58,6 +58,11 @@ public class LoginController {
         );
     }
 
+    public void setRestaurateur(RestaurateurBean restaurateurBean) throws LoginControllerException {
+        Restaurateur restaurateur = toRestaurateur();
+
+    }
+
     private Restaurateur toRestaurateur() throws LoginControllerException {
         if(getUserType() == UserType.RESTAURATEUR) {
             return (Restaurateur) user;
