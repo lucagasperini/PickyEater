@@ -21,18 +21,22 @@ public class PickieHomeView extends VirtualPaneView {
     private Button buttonFindRestaurant;
     @FXML
     private Button buttonEatingPreferences;
-    public PickieHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/form/pickie/homeView.fxml", mainLayout);
+    public PickieHomeView(MainController controller, VirtualPaneView parent) {
+        super(controller, "/form/pickie/homeView.fxml", parent);
+    }
+
+    @FXML
+    protected void clickFindRestaurant(ActionEvent event) {
+        FindRestaurantView findRestaurantView = new FindRestaurantView(controller, this);
+        findRestaurantView.show();
+    }
+
+    @Override
+    protected void setup() {
         textTitle.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_TITLE"));
         textSubtitle.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_SUBTITLE"));
         buttonFindRestaurant.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_FINDARESTAURANT"));
         buttonReviewDish.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_REVIEWADISH"));
         buttonEatingPreferences.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_PERSONALIZEEATINGPREFERENCES"));
-    }
-
-    @FXML
-    protected void clickFindRestaurant(ActionEvent event) {
-        FindRestaurantView findRestaurantView = new FindRestaurantView(controller, mainLayout);
-        findRestaurantView.show();
     }
 }

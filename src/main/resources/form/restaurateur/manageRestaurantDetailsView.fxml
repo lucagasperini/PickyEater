@@ -2,19 +2,17 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" stylesheets="@/css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -26,17 +24,7 @@
                            <children>
                               <AnchorPane layoutX="15.0" layoutY="1.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0">
                                  <children>
-                                    <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#bdd7ee" height="25.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Rectangle>
-                                    <Text fill="#4472c4" layoutX="52.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="backText" AnchorPane.rightAnchor="5.0" />
-                                    <ImageView fitHeight="25.0" fitWidth="22.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="2.0">
-                                       <image>
-                                          <Image url="@../../pics/backIcon.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Button fx:id="buttonBack" layoutX="22.0" layoutY="8.0" mnemonicParsing="false" onAction="#clickBack" prefHeight="34.0" prefWidth="120.0" styleClass="bt-back" text="backText" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -51,7 +39,7 @@
                                              <children>
                                                 <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYPERSONALDETAILS" wrappingWidth="540.0">
+                                                      <Text fx:id="textUserDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYPERSONALDETAILS" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -63,7 +51,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                  <Text fx:id="textUserFirstname" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -71,7 +59,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputUserFirstname" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -93,7 +81,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SURNAME">
+                                                                  <Text fx:id="textUserLastname" strokeType="OUTSIDE" strokeWidth="0.0" text="SURNAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -101,7 +89,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputUserLastname" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -147,7 +135,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SSN">
+                                                                  <Text fx:id="textUserSsn" strokeType="OUTSIDE" strokeWidth="0.0" text="SSN">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -155,7 +143,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputUserSsn" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -174,7 +162,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                  <Text fx:id="textUserPhone" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -182,7 +170,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputUserPhone" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -201,7 +189,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EMAILADDRESS">
+                                                                  <Text fx:id="textUserEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="EMAILADDRESS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -209,7 +197,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputUserEmail" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -243,7 +231,7 @@
                                              <children>
                                                 <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYRESTAURANTDETAILS" wrappingWidth="540.0">
+                                                      <Text fx:id="textRestaurantDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYRESTAURANTDETAILS" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -255,7 +243,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                  <Text fx:id="textRestaurantName" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -263,7 +251,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputRestaurantName" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -285,7 +273,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
+                                                                  <Text fx:id="textRestaurantAddress" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -293,7 +281,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputRestaurantAddress" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -312,7 +300,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                  <Text fx:id="textRestaurantPhone" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -320,7 +308,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="inputRestaurantPhone" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -642,21 +630,7 @@
                            <children>
                               <AnchorPane layoutX="492.0" layoutY="4.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="491.0" AnchorPane.topAnchor="4.0">
                                  <children>
-                                    <Rectangle accessibleRole="BUTTON" arcHeight="5.0" arcWidth="5.0" fill="#5b9bd5" height="37.0" layoutX="-3.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <cursor>
-                                          <Cursor fx:constant="HAND" />
-                                       </cursor>
-                                    </Rectangle>
-                                    <Text fill="WHITE" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="...SAVECHANGES_TEXT" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="7.0">
-                                       <font>
-                                          <Font name="Calibri Bold" size="20.0" />
-                                       </font>
-                                    </Text>
-                                    <ImageView fitHeight="22.0" fitWidth="25.0" layoutX="258.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="7.0">
-                                       <image>
-                                          <Image url="@../../pics/okIcon.png" />
-                                       </image>
-                                    </ImageView>
+                                    <Button fx:id="buttonSave" layoutX="68.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="33.0" prefWidth="297.0" styleClass="bt-saveChanges" text="SAVECHANGES_TEXT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -674,12 +648,12 @@
                <children>
                   <VBox layoutX="35.0" layoutY="35.0" prefHeight="48.0" prefWidth="1225.0">
                      <children>
-                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
+                        <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
                            <font>
                               <Font name="Calibri Bold" size="36.0" />
                            </font>
                         </Text>
-                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="1223.614601135254">
+                        <Text fx:id="textSubtitle" fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="1223.614601135254">
                            <font>
                               <Font name="Calibri Bold" size="32.0" />
                            </font>

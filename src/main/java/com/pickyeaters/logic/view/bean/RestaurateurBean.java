@@ -1,35 +1,42 @@
 package com.pickyeaters.logic.view.bean;
 
 public class RestaurateurBean {
-    private String name;
-    private String surname;
+    private String firstname;
+    private String lastname;
     private String birthDate;
     private String ssn;
-    private String phoneNumber;
-    private String emailAddress;
+    private String restaurantPhone;
+    private String email;
+    private String restaurantName;
+    private String restaurantAddress;
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
-    public void setSsn(String ssn) {
+    public RestaurateurBean(
+            String email,
+            String firstname,
+            String lastname,
+            String ssn,
+            String restaurantName,
+            String restaurantPhone,
+            String restaurantAddress) {
+        this.email = email;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.ssn = ssn;
+        this.restaurantName = restaurantName;
+        this.restaurantPhone = restaurantPhone;
+        this.restaurantAddress = restaurantAddress;
     }
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-    public String getName(){ return name; }
-    public String getSurname(){ return surname; }
+    public String getFirstname(){ return firstname; }
+    public String getLastname(){ return lastname; }
     public String getBirthDate(){ return birthDate; }
     public String getSsn(){ return ssn; }
-    public String getPhoneNumber(){ return phoneNumber; }
-    public String getEmailAddress(){ return emailAddress; }
+    public String getRestaurantPhone(){ return restaurantPhone; }
+    public String getEmail(){ return email; }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+    public String getRestaurantAddress() {
+        return restaurantAddress;
+    }
 }

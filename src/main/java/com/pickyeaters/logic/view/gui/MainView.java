@@ -28,26 +28,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public class MainView extends VirtualView {
+public class MainView extends VirtualPaneView {
     public static final String backgroundView = "/backgroundTemplate.fxml";
     private Stage stage;
-    private Parent root;
-    private URL fxml = null;
     public MainView(Stage primaryStage) {
-        super(new MainController());
-        this.fxml = getClass().getResource(backgroundView);
+        super(new MainController(), "/backgroundTemplate.fxml", null);
         this.stage = primaryStage;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.fxml);
-            loader.setController(this);
-            root = loader.load();
-            stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
-        } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
-        }
+        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
+        VirtualPaneView.setMainLayout(mainLayout);
     }
     private final String APP_NAME = "Picky Eater";
     private final int WINDOW_HEIGTH = 720;
@@ -89,13 +77,13 @@ public class MainView extends VirtualView {
             return;
         }
 
-        setupNavbar();
+        setup();
         showHomeView();
 
         stage.show();
     }
-
-    private void setupNavbar() {
+    @Override
+    protected void setup() {
         textNavbarUser.setText(controller.getLoginController().getUser().getName());
         menuItemProfile.setText(SettingsController.i18n("PICKY_GUI_UPDATEPROFILE_TEXT"));
         menuItemLogout.setText(SettingsController.i18n("PICKY_GUI_LOGOFF_TEXT"));
@@ -115,19 +103,19 @@ public class MainView extends VirtualView {
 
     private void showPickieHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("PICKY_GUI_HELLO_TEXT"));
-        PickieHomeView pickieHomeView = new PickieHomeView(controller, mainLayout);
+        PickieHomeView pickieHomeView = new PickieHomeView(controller, this);
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_GUI_HELLO_TEXT"));
-        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(controller, mainLayout);
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(controller, this);
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
-        AdministratorHomeView administratorHomeView = new AdministratorHomeView(controller, mainLayout);
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(controller, this);
         administratorHomeView.show();
     }
 

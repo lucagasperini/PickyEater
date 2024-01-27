@@ -67,7 +67,7 @@ public class UserDAO {
         String restID = query.getString();
         query.close();
 
-        Restaurant rest = RestaurantDAO.getInstance().getRestaurant(restID);
+        Restaurant rest = RestaurantDAO.getInstance().get(restID);
 
         return new Restaurateur(id, email, firstname, lastname, ssn, rest);
     }

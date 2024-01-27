@@ -17,7 +17,7 @@ public class RestaurantDAO {
         return instance;
     }
 
-    public Restaurant getRestaurant(String id) throws DAOException {
+    public Restaurant get(String id) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?)");
             query.setString(id);

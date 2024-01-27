@@ -12,16 +12,17 @@ import java.io.IOException;
 import java.net.URL;
 
 public abstract class VirtualPaneView extends VirtualView {
+    private static BorderPane mainLayout;
     protected URL fxml = null;
-    protected BorderPane mainLayout = null;
+    private VirtualPaneView parent;
     protected Parent root = null;
-    public VirtualPaneView(MainController controller, String fxml, BorderPane mainLayout) {
+    public VirtualPaneView(MainController controller, String fxml, VirtualPaneView parent) {
         super(controller);
         FXMLLoader loader = new FXMLLoader();
         this.fxml = getClass().getResource(fxml);
         loader.setLocation(this.fxml);
         loader.setController(this);
-        this.mainLayout = mainLayout;
+        this.parent = parent;
         try {
             this.root = loader.load();
         } catch (IOException ex) {
@@ -31,7 +32,22 @@ public abstract class VirtualPaneView extends VirtualView {
         }
     }
 
+    protected static void setMainLayout(BorderPane mainLayout) {
+        VirtualPaneView.mainLayout = mainLayout;
+    }
+
+    protected abstract void setup();
+
     public void show() {
+        setup();
         mainLayout.setCenter(this.root);
+    }
+    public void showParent() {
+        if(parent != null) {
+            parent.setup();
+            mainLayout.setCenter(parent.root);
+        } else {
+            throw new RuntimeException("Calling showParent on a root");
+        }
     }
 }

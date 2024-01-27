@@ -15,8 +15,12 @@ public class AdministratorHomeView extends VirtualPaneView {
     private Text textSubtitle;
     @FXML
     private Button buttonManageReport;
-    public AdministratorHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/form/administrator/homeView.fxml", mainLayout);
+    public AdministratorHomeView(MainController controller, VirtualPaneView parent) {
+        super(controller, "/form/administrator/homeView.fxml", parent);
+    }
+
+    @Override
+    protected void setup() {
         textTitle.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_TITLE"));
         textSubtitle.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_SUBTITLE"));
         buttonManageReport.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_MANAGE_REPORT"));

@@ -18,12 +18,12 @@
                      <children>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Button fx:id="buttonMenu" layoutX="190.0" layoutY="148.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@../../css/main.css" text="PROVIDEMENUDETAILS" />
+                              <Button fx:id="buttonMenuDetails" layoutX="190.0" layoutY="148.0" mnemonicParsing="false" onAction="#clickMenuDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@../../css/main.css" text="PROVIDEMENUDETAILS" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Button fx:id="buttonRestaurant" layoutX="190.0" layoutY="127.0" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@../../css/main.css" text="PROVIDERESTAURANTDETAILS" />
+                              <Button fx:id="buttonRestaurantDetails" layoutX="190.0" layoutY="127.0" mnemonicParsing="false" onAction="#clickRestaurantDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" stylesheets="@../../css/main.css" text="PROVIDERESTAURANTDETAILS" />
                            </children>
                         </AnchorPane>
                      </children>

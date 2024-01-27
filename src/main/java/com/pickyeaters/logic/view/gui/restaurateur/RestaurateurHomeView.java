@@ -3,6 +3,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -14,14 +15,30 @@ public class RestaurateurHomeView extends VirtualPaneView {
     @FXML
     private Text textSubtitle;
     @FXML
-    private Button buttonRestaurant;
+    private Button buttonRestaurantDetails;
     @FXML
-    private Button buttonMenu;
-    public RestaurateurHomeView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/form/restaurateur/homeView.fxml", mainLayout);
+    private Button buttonMenuDetails;
+    public RestaurateurHomeView(MainController controller, VirtualPaneView parent) {
+        super(controller, "/form/restaurateur/homeView.fxml", parent);
+    }
+
+    @FXML
+    private void clickMenuDetails(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    private void clickRestaurantDetails(ActionEvent event) {
+        RestaurateurManageRestaurantDetailsView view = new RestaurateurManageRestaurantDetailsView(controller, this);
+        view.show();
+    }
+
+    @Override
+    protected void setup() {
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_SUBTITLE"));
-        buttonMenu.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDEMENUDETAILS"));
-        buttonRestaurant.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDERESTAURANTDETAILS"));
+        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDEMENUDETAILS"));
+        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDERESTAURANTDETAILS"));
     }
 }

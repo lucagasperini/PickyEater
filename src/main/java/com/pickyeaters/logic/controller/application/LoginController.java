@@ -8,6 +8,7 @@ import com.pickyeaters.logic.model.Pickie;
 import com.pickyeaters.logic.model.Restaurateur;
 import com.pickyeaters.logic.model.User;
 import com.pickyeaters.logic.view.bean.LoginBean;
+import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
 public class LoginController {
@@ -42,6 +43,26 @@ public class LoginController {
         } else {
             throw new LoginControllerException("Cannot identify user type");
         }
+    }
+
+    public RestaurateurBean getRestaurateur() throws LoginControllerException {
+        Restaurateur restaurateur = toRestaurateur();
+        return new RestaurateurBean(
+                restaurateur.getEmail(),
+                restaurateur.getFirstname(),
+                restaurateur.getLastname(),
+                restaurateur.getSsn(),
+                restaurateur.getRestaurant().getName(),
+                restaurateur.getRestaurant().getPhone(),
+                restaurateur.getRestaurant().getAddress()
+        );
+    }
+
+    private Restaurateur toRestaurateur() throws LoginControllerException {
+        if(getUserType() == UserType.RESTAURATEUR) {
+            return (Restaurateur) user;
+        }
+        throw new LoginControllerException("Cannot cast to restaurateur");
     }
 
     public void auth(LoginBean loginBean) throws LoginControllerException {
