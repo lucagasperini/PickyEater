@@ -1,4 +1,10 @@
 package com.pickyeaters.logic.controller.application.restaurateur;
 
-public class ProvideMenuDetailsController {
+import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.application.VirtualController;
+
+public class ProvideMenuDetailsController extends VirtualController {
+    public ProvideMenuDetailsController(MainController main) {
+        super(main);
+    }
 }

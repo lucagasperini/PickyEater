@@ -88,7 +88,7 @@ public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
         textRestaurantPhone.setText(SettingsController.i18n("FIELD_RESTAURANT_PHONE"));
 
         try {
-            RestaurateurBean restaurateur = controller.getLoginController().getRestaurateur();
+            RestaurateurBean restaurateur = controller.getRestaurateurController().getProvideRestaurantDetails().get();
             inputUserFirstname.setText(restaurateur.getFirstname());
             inputUserLastname.setText(restaurateur.getLastname());
             inputUserSsn.setText(restaurateur.getSsn());

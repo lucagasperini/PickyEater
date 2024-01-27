@@ -45,25 +45,12 @@ public class LoginController {
         }
     }
 
-    public RestaurateurBean getRestaurateur() throws LoginControllerException {
-        Restaurateur restaurateur = toRestaurateur();
-        return new RestaurateurBean(
-                restaurateur.getEmail(),
-                restaurateur.getFirstname(),
-                restaurateur.getLastname(),
-                restaurateur.getSsn(),
-                restaurateur.getRestaurant().getName(),
-                restaurateur.getRestaurant().getPhone(),
-                restaurateur.getRestaurant().getAddress()
-        );
-    }
-
     public void setRestaurateur(RestaurateurBean restaurateurBean) throws LoginControllerException {
         Restaurateur restaurateur = toRestaurateur();
 
     }
 
-    private Restaurateur toRestaurateur() throws LoginControllerException {
+    public Restaurateur toRestaurateur() throws LoginControllerException {
         if(getUserType() == UserType.RESTAURATEUR) {
             return (Restaurateur) user;
         }
