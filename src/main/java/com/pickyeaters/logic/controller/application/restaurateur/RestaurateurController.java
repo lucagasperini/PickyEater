@@ -1,5 +1,7 @@
-package com.pickyeaters.logic.controller.application;
+package com.pickyeaters.logic.controller.application.restaurateur;
 
+import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.application.VirtualController;
 import com.pickyeaters.logic.controller.application.restaurateur.ProvideMenuDetailsController;
 import com.pickyeaters.logic.controller.application.restaurateur.ProvideRestaurantDetailsController;
 

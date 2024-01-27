@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.application.restaurateur.ProvideRestaurantDetailsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
+    private ProvideRestaurantDetailsController controller;
     @FXML
     private TextField inputUserFirstname;
     @FXML
@@ -58,8 +60,9 @@ public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
     @FXML
     private Text textRestaurantPhone;
 
-    public RestaurateurManageRestaurantDetailsView(MainController controller, VirtualPaneView parent) {
-        super(controller, "/form/restaurateur/manageRestaurantDetailsView.fxml", parent);
+    public RestaurateurManageRestaurantDetailsView(ProvideRestaurantDetailsController controller, VirtualPaneView parent) {
+        super("/form/restaurateur/manageRestaurantDetailsView.fxml", parent);
+        this.controller = controller;
     }
 
     @FXML
@@ -88,7 +91,7 @@ public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
         textRestaurantPhone.setText(SettingsController.i18n("FIELD_RESTAURANT_PHONE"));
 
         try {
-            RestaurateurBean restaurateur = controller.getRestaurateurController().getProvideRestaurantDetails().get();
+            RestaurateurBean restaurateur = controller.get();
             inputUserFirstname.setText(restaurateur.getFirstname());
             inputUserLastname.setText(restaurateur.getLastname());
             inputUserSsn.setText(restaurateur.getSsn());

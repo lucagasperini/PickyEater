@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.pickie;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.view.gui.FindRestaurantView;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
@@ -21,13 +22,18 @@ public class PickieHomeView extends VirtualPaneView {
     private Button buttonFindRestaurant;
     @FXML
     private Button buttonEatingPreferences;
-    public PickieHomeView(MainController controller, VirtualPaneView parent) {
-        super(controller, "/form/pickie/homeView.fxml", parent);
+    private PickieController controller;
+    public PickieHomeView(PickieController controller, VirtualPaneView parent) {
+        super("/form/pickie/homeView.fxml", parent);
+        this.controller = controller;
     }
 
     @FXML
     protected void clickFindRestaurant(ActionEvent event) {
-        FindRestaurantView findRestaurantView = new FindRestaurantView(controller, this);
+        FindRestaurantView findRestaurantView = new FindRestaurantView(
+                controller.getFindRestaurantController(),
+                this
+        );
         findRestaurantView.show();
     }
 

@@ -1,5 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.Main;
 import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import javafx.fxml.FXML;
@@ -11,13 +12,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class VirtualPaneView extends VirtualView {
+public abstract class VirtualPaneView {
     private static BorderPane mainLayout;
     protected URL fxml = null;
     private VirtualPaneView parent;
     protected Parent root = null;
-    public VirtualPaneView(MainController controller, String fxml, VirtualPaneView parent) {
-        super(controller);
+    private static MainController mainController;
+    public VirtualPaneView(String fxml, VirtualPaneView parent) {
         FXMLLoader loader = new FXMLLoader();
         this.fxml = getClass().getResource(fxml);
         loader.setLocation(this.fxml);
@@ -31,9 +32,13 @@ public abstract class VirtualPaneView extends VirtualView {
             System.exit(-1);
         }
     }
-
-    protected static void setMainLayout(BorderPane mainLayout) {
+    protected static void init(MainController mainController, BorderPane mainLayout) {
+        VirtualPaneView.mainController = mainController;
         VirtualPaneView.mainLayout = mainLayout;
+    }
+
+    public static MainController getMainController() {
+        return mainController;
     }
 
     protected abstract void setup();

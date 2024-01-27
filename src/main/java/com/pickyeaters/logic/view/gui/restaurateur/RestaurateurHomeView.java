@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.application.restaurateur.RestaurateurController;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 public class RestaurateurHomeView extends VirtualPaneView {
+    private RestaurateurController controller;
     @FXML
     private Text textTitle;
     @FXML
@@ -18,8 +20,9 @@ public class RestaurateurHomeView extends VirtualPaneView {
     private Button buttonRestaurantDetails;
     @FXML
     private Button buttonMenuDetails;
-    public RestaurateurHomeView(MainController controller, VirtualPaneView parent) {
-        super(controller, "/form/restaurateur/homeView.fxml", parent);
+    public RestaurateurHomeView(RestaurateurController controller, VirtualPaneView parent) {
+        super("/form/restaurateur/homeView.fxml", parent);
+        this.controller = controller;
     }
 
     @FXML
@@ -30,7 +33,10 @@ public class RestaurateurHomeView extends VirtualPaneView {
 
     @FXML
     private void clickRestaurantDetails(ActionEvent event) {
-        RestaurateurManageRestaurantDetailsView view = new RestaurateurManageRestaurantDetailsView(controller, this);
+        RestaurateurManageRestaurantDetailsView view = new RestaurateurManageRestaurantDetailsView(
+                controller.getProvideRestaurantDetails(),
+                this
+        );
         view.show();
     }
 

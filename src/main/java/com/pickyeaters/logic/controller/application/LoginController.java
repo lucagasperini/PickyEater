@@ -11,7 +11,7 @@ import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
-public class LoginController {
+public class LoginController extends VirtualController {
 
     public enum UserType {
         PICKIE,
@@ -21,8 +21,8 @@ public class LoginController {
 
     private User user = null;
 
-    public LoginController() {
-
+    public LoginController(MainController main) {
+        super(main);
     }
 
     public boolean isAuth() {
@@ -63,6 +63,11 @@ public class LoginController {
                 throw new LoginControllerException("Login failed");
             }
             user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
+            switch (getUserType()) {
+                case PICKIE -> main.initPickie();
+                case RESTAURATEUR -> main.initRestaurateur();
+                case ADMIN -> main.initAdministrator();
+            }
         } catch (DatabaseControllerException ex) {
             throw new LoginControllerException("Cannot connect to database");
         }

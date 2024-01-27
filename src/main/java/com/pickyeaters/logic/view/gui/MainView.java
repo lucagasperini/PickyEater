@@ -29,13 +29,14 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MainView extends VirtualPaneView {
+    private MainController controller = new MainController();
     public static final String backgroundView = "/backgroundTemplate.fxml";
     private Stage stage;
     public MainView(Stage primaryStage) {
-        super(new MainController(), "/backgroundTemplate.fxml", null);
+        super("/backgroundTemplate.fxml", null);
         this.stage = primaryStage;
         stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
-        VirtualPaneView.setMainLayout(mainLayout);
+        VirtualPaneView.init(controller, mainLayout);
     }
     private final String APP_NAME = "Picky Eater";
     private final int WINDOW_HEIGTH = 720;
@@ -56,13 +57,13 @@ public class MainView extends VirtualPaneView {
 
     @Override
     public void show() {
-        controller.start();
+        getMainController().start();
         stage.setTitle(APP_NAME);
 
         try {
-            controller.getInitController().loadFromFile();
+            getMainController().getInitController().loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            InitView initView = new InitView(controller);
+            InitView initView = new InitView(getMainController());
             initView.show();
         }
 
@@ -70,10 +71,10 @@ public class MainView extends VirtualPaneView {
     }
 
     private void showApp() {
-        LoginView loginView = new LoginView(controller);
+        LoginView loginView = new LoginView(getMainController());
         loginView.show();
 
-        if(!controller.getLoginController().isAuth()) {
+        if(!getMainController().getLoginController().isAuth()) {
             return;
         }
 
@@ -84,14 +85,14 @@ public class MainView extends VirtualPaneView {
     }
     @Override
     protected void setup() {
-        textNavbarUser.setText(controller.getLoginController().getUser().getName());
+        textNavbarUser.setText(getMainController().getLoginController().getUser().getName());
         menuItemProfile.setText(SettingsController.i18n("PICKY_GUI_UPDATEPROFILE_TEXT"));
         menuItemLogout.setText(SettingsController.i18n("PICKY_GUI_LOGOFF_TEXT"));
     }
 
     private void showHomeView() {
         try {
-            switch (controller.getLoginController().getUserType()) {
+            switch (getMainController().getLoginController().getUserType()) {
                 case PICKIE -> showPickieHomeView();
                 case RESTAURATEUR -> showRestaurateurHomeView();
                 case ADMIN -> showAdministratorHomeView();
@@ -103,19 +104,28 @@ public class MainView extends VirtualPaneView {
 
     private void showPickieHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("PICKY_GUI_HELLO_TEXT"));
-        PickieHomeView pickieHomeView = new PickieHomeView(controller, this);
+        PickieHomeView pickieHomeView = new PickieHomeView(
+                controller.getPickieController(),
+                this
+        );
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_GUI_HELLO_TEXT"));
-        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(controller, this);
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
+                controller.getRestaurateurController(),
+                this
+        );
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
-        AdministratorHomeView administratorHomeView = new AdministratorHomeView(controller, this);
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(
+                controller.getAdministratorController(),
+                this
+        );
         administratorHomeView.show();
     }
 
