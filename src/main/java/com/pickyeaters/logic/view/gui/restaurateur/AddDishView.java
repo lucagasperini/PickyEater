@@ -14,6 +14,8 @@ public class AddDishView extends VirtualPaneView {
     private Text textTitle;
     @FXML
     private Text textSubtitle;
+    @FXML
+    private Button buttonAddIngredient;
     public AddDishView(VirtualPaneView parent) {
         super("/form/restaurateur/AddDish.fxml", parent);
     }
@@ -28,5 +30,11 @@ public class AddDishView extends VirtualPaneView {
     @FXML
     private void clickBack(ActionEvent event) {
         showParent();
+    }
+
+    @FXML
+    private void clickAddIngredient(ActionEvent event) {
+        AddIngredientView view = new AddIngredientView(this);
+        view.show();
     }
 }

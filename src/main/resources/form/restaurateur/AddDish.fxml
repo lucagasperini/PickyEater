@@ -47,13 +47,14 @@
                                  </content>
                               </ScrollPane>
                               <Text layoutX="493.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISH_INGREDIENT_LIST" />
-                              <Button layoutX="483.0" layoutY="303.0" mnemonicParsing="false" text="DISH_ADD_INGREDIENT" />
+                              <Button fx:id="buttonAddIngredient" layoutX="483.0" layoutY="303.0" mnemonicParsing="false" onAction="#clickAddIngredient" text="DISH_ADD_INGREDIENT" />
                               <Text layoutX="902.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DISH_ALLERGENI" />
                               <ScrollPane layoutX="838.0" layoutY="59.0" prefHeight="407.0" prefWidth="249.0">
                                  <content>
-                                    <VBox prefHeight="404.0" prefWidth="247.0" />
+                                    <VBox prefHeight="403.0" prefWidth="247.0" />
                                  </content>
                               </ScrollPane>
+                              <Button layoutX="536.0" layoutY="408.0" mnemonicParsing="false" text="DISH_SAVE" />
                            </children>
                         </AnchorPane>
                      </children>
