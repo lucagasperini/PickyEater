@@ -5,47 +5,47 @@ import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurateurController;
 
 public class MainController {
-    private InitController initController = null;
-    private LoginController loginController = null;
-    private RestaurateurController restaurateurController = null;
-    private PickieController pickieController = null;
-    private AdministratorController administratorController = null;
+    private InitController init = null;
+    private LoginController login = null;
+    private RestaurateurController restaurateur = null;
+    private PickieController pickie = null;
+    private AdministratorController administrator = null;
     private boolean isRunning = false;
 
-    public InitController getInitController() {
-        return initController;
+    public InitController getInit() {
+        return init;
     }
 
-    public LoginController getLoginController() {
-        return loginController;
+    public LoginController getLogin() {
+        return login;
     }
 
-    public RestaurateurController getRestaurateurController() {
-        return restaurateurController;
+    public RestaurateurController getRestaurateur() {
+        return restaurateur;
     }
 
-    public PickieController getPickieController() {
-        return pickieController;
+    public PickieController getPickie() {
+        return pickie;
     }
 
-    public AdministratorController getAdministratorController() {
-        return administratorController;
+    public AdministratorController getAdministrator() {
+        return administrator;
     }
 
     public void start() {
         isRunning = true;
-        initController = new InitController(this);
-        loginController = new LoginController(this);
+        init = new InitController(this);
+        login = new LoginController(this);
     }
 
     public void initRestaurateur() {
-        restaurateurController = new RestaurateurController(this);
+        restaurateur = new RestaurateurController(this);
     }
     public void initPickie() {
-        pickieController = new PickieController(this);
+        pickie = new PickieController(this);
     }
     public void initAdministrator() {
-        administratorController = new AdministratorController(this);
+        administrator = new AdministratorController(this);
     }
 
     public boolean isRunning() {

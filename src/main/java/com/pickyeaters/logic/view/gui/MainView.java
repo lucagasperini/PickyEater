@@ -50,7 +50,7 @@ public class MainView extends VirtualPaneView {
         stage.setTitle(APP_NAME);
 
         try {
-            getMainController().getInitController().loadFromFile();
+            getMainController().getInit().loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             InitView initView = new InitView(getMainController());
             initView.show();
@@ -63,7 +63,7 @@ public class MainView extends VirtualPaneView {
         LoginView loginView = new LoginView(getMainController());
         loginView.show();
 
-        if(!getMainController().getLoginController().isAuth()) {
+        if(!getMainController().getLogin().isAuth()) {
             return;
         }
 
@@ -74,14 +74,14 @@ public class MainView extends VirtualPaneView {
     }
     @Override
     protected void setup() {
-        textNavbarUser.setText(getMainController().getLoginController().getUser().getName());
+        textNavbarUser.setText(getMainController().getLogin().getUser().getName());
         menuItemProfile.setText(SettingsController.i18n("PICKY_NAVBAR_UPDATEPROFILE"));
         menuItemLogout.setText(SettingsController.i18n("PICKY_NAVBAR_LOGOFF"));
     }
 
     private void showHomeView() {
         try {
-            switch (getMainController().getLoginController().getUserType()) {
+            switch (getMainController().getLogin().getUserType()) {
                 case PICKIE -> showPickieHomeView();
                 case RESTAURATEUR -> showRestaurateurHomeView();
                 case ADMIN -> showAdministratorHomeView();
@@ -94,7 +94,7 @@ public class MainView extends VirtualPaneView {
     private void showPickieHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
         PickieHomeView pickieHomeView = new PickieHomeView(
-                controller.getPickieController(),
+                controller.getPickie(),
                 this
         );
         pickieHomeView.show();
@@ -103,7 +103,7 @@ public class MainView extends VirtualPaneView {
     private void showRestaurateurHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_HELLO_TEXT"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
-                controller.getRestaurateurController(),
+                controller.getRestaurateur(),
                 this
         );
         restaurateurHomeView.show();
@@ -112,7 +112,7 @@ public class MainView extends VirtualPaneView {
     private void showAdministratorHomeView() {
         textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
         AdministratorHomeView administratorHomeView = new AdministratorHomeView(
-                controller.getAdministratorController(),
+                controller.getAdministrator(),
                 this
         );
         administratorHomeView.show();
@@ -125,7 +125,7 @@ public class MainView extends VirtualPaneView {
 
     @FXML
     private void clickLogout(ActionEvent event) {
-        controller.getLoginController().logout();
+        controller.getLogin().logout();
         stage.close();
         showApp();
     }

@@ -42,7 +42,7 @@ public class LoginView extends VirtualWindowView {
         );
 
         try {
-            controller.getLoginController().auth(loginBean);
+            controller.getLogin().auth(loginBean);
             stage.close();
         } catch (LoginControllerException ex) {
             //TODO: Create different messages if bad auth or internal error!

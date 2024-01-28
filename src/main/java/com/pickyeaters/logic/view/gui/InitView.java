@@ -35,7 +35,7 @@ public class InitView extends VirtualWindowView {
         settings.setDatabasePassword(inputDatabasePassword.getText());
 
         try {
-            controller.getInitController().loadFromInput(settings);
+            controller.getInit().loadFromInput(settings);
             stage.close();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

@@ -11,7 +11,7 @@ public class RestaurantDetailsController extends VirtualController {
         super(main);
     }
     public RestaurateurBean get() throws LoginControllerException {
-        Restaurateur restaurateur = main.getLoginController().toRestaurateur();
+        Restaurateur restaurateur = main.getLogin().toRestaurateur();
         return new RestaurateurBean(
                 restaurateur.getEmail(),
                 restaurateur.getFirstname(),
@@ -21,5 +21,9 @@ public class RestaurantDetailsController extends VirtualController {
                 restaurateur.getRestaurant().getPhone(),
                 restaurateur.getRestaurant().getAddress()
         );
+    }
+
+    public void set(RestaurateurBean restaurateurBean) {
+
     }
 }
