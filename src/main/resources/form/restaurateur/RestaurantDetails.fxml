@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" stylesheets="@/css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane maxWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane prefHeight="513.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="553.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane maxWidth="-Infinity" prefHeight="32.0" prefWidth="1280.0">
+                           <children>
+                              <AnchorPane layoutX="15.0" layoutY="1.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0">
+                                 <children>
+                                    <Button fx:id="buttonBack" layoutX="22.0" layoutY="8.0" mnemonicParsing="false" onAction="#clickBack" prefHeight="34.0" prefWidth="120.0" styleClass="bt-back" text="backText" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <HBox prefHeight="435.0" prefWidth="1280.0">
+                           <children>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="435.0" prefWidth="640.0">
+                                 <children>
+                                    <VBox maxWidth="-Infinity" prefHeight="405.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="540.0">
+                                             <children>
+                                                <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Text fx:id="textUserDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYPERSONALDETAILS" wrappingWidth="540.0">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="26.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textUserFirstname" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputUserFirstname" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textUserLastname" strokeType="OUTSIDE" strokeWidth="0.0" text="SURNAME">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputUserLastname" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="BIRTHDATE">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textUserSsn" strokeType="OUTSIDE" strokeWidth="0.0" text="SSN">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputUserSsn" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textUserPhone" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputUserPhone" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textUserEmail" strokeType="OUTSIDE" strokeWidth="0.0" text="EMAILADDRESS">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputUserEmail" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </AnchorPane>
+                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="435.0" prefWidth="640.0">
+                                 <children>
+                                    <VBox maxWidth="-Infinity" prefHeight="405.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="106.0" prefWidth="540.0">
+                                             <children>
+                                                <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <children>
+                                                      <Text fx:id="textRestaurantDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYRESTAURANTDETAILS" wrappingWidth="540.0">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="26.0" />
+                                                         </font>
+                                                         <VBox.margin>
+                                                            <Insets />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textRestaurantName" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputRestaurantName" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                         <VBox.margin>
+                                                            <Insets top="10.0" />
+                                                         </VBox.margin>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textRestaurantAddress" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputRestaurantAddress" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text fx:id="textRestaurantPhone" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <TextField fx:id="inputRestaurantPhone" prefHeight="27.0" prefWidth="310.0">
+                                                                     <opaqueInsets>
+                                                                        <Insets />
+                                                                     </opaqueInsets>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" left="5.0" right="5.0" top="2.5" />
+                                                                     </HBox.margin>
+                                                                     <font>
+                                                                        <Font name="Calibri" size="14.0" />
+                                                                     </font>
+                                                                  </TextField>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                      <AnchorPane prefHeight="0.0" prefWidth="500.0">
+                                                         <children>
+                                                            <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="OPENINGHOURS">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <HBox.margin>
+                                                                        <Insets bottom="2.5" top="2.5" />
+                                                                     </HBox.margin>
+                                                                  </Text>
+                                                                  <VBox prefHeight="35.0" prefWidth="451.0">
+                                                                     <children>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MON" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WED" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THU" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                        <HBox prefHeight="35.0" prefWidth="357.0">
+                                                                           <children>
+                                                                              <AnchorPane prefHeight="15.0" prefWidth="58.0">
+                                                                                 <children>
+                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUN" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                       <font>
+                                                                                          <Font name="Calibri Bold" size="17.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                 </children>
+                                                                              </AnchorPane>
+                                                                              <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                       <font>
+                                                                                          <Font name="Calibri" size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                              <HBox alignment="CENTER">
+                                                                                 <children>
+                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                       <font>
+                                                                                          <Font size="16.0" />
+                                                                                       </font>
+                                                                                    </Text>
+                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                 </children>
+                                                                                 <HBox.margin>
+                                                                                    <Insets left="10.0" />
+                                                                                 </HBox.margin>
+                                                                              </HBox>
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
+                                                               </children>
+                                                            </HBox>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </HBox>
+                        <AnchorPane maxWidth="-Infinity" prefHeight="45.0" prefWidth="1280.0">
+                           <children>
+                              <AnchorPane layoutX="492.0" layoutY="4.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="492.0" AnchorPane.rightAnchor="491.0" AnchorPane.topAnchor="4.0">
+                                 <children>
+                                    <Button fx:id="buttonSave" layoutX="68.0" mnemonicParsing="false" onAction="#clickSave" prefHeight="33.0" prefWidth="297.0" styleClass="bt-saveChanges" text="SAVECHANGES_TEXT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </center>
+         <top>
+            <AnchorPane prefHeight="121.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutX="35.0" layoutY="35.0" prefHeight="48.0" prefWidth="1225.0">
+                     <children>
+                        <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
+                           <font>
+                              <Font name="Calibri Bold" size="36.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="textSubtitle" fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="1223.614601135254">
+                           <font>
+                              <Font name="Calibri Bold" size="32.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>

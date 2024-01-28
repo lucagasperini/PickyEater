@@ -29,11 +29,8 @@ public abstract class VirtualWindowView extends VirtualView {
             //TODO:
             System.exit(-1);
         }
-
-        setup();
     }
 
-    protected abstract void setup();
 
     public void show() {
         stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));

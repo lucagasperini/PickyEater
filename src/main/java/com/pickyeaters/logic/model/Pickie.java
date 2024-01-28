@@ -10,6 +10,20 @@ public class Pickie extends User{
         super(id, email, firstname, lastname);
         this.username = username;
     }
+
+    public Pickie(Pickie pickie) {
+        super(pickie);
+        this.username = pickie.username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void addExcludeIngredient(Ingredient ingredient) {
         this.dislikedIngredients.add(ingredient);
     }

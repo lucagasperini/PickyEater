@@ -1,85 +1,132 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.view.VirtualView;
-import com.pickyeaters.logic.controller.MainController;
+import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
+import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
+import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
-
-public class MainView extends VirtualView {
+public class MainView extends VirtualPaneView {
+    private MainController controller = new MainController();
     public static final String backgroundView = "/backgroundTemplate.fxml";
     private Stage stage;
-    private Parent root;
-    private URL fxml = null;
     public MainView(Stage primaryStage) {
-        super(new MainController());
-        this.fxml = getClass().getResource(backgroundView);
+        super("/backgroundTemplate.fxml", null);
         this.stage = primaryStage;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(this.fxml);
-            loader.setController(this);
-            this.root = loader.load();
-        } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
-        }
+        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
+        VirtualPaneView.init(controller, mainLayout);
     }
     private final String APP_NAME = "Picky Eater";
     private final int WINDOW_HEIGTH = 720;
     private final int WINDOW_WIDTH = 1280;
 
     @FXML
-    protected BorderPane mainLayout;
+    private BorderPane mainLayout;
     @FXML
-    protected ImageView imageLogo;
+    private ImageView imageLogo;
     @FXML
-    protected Text textNavbarUser;
+    private Text textNavbarUser;
     @FXML
-    protected Text textNavbarWelcome;
+    private Text textNavbarWelcome;
+    @FXML
+    private MenuItem menuItemProfile;
+    @FXML
+    private MenuItem menuItemLogout;
 
     @Override
     public void show() {
-        controller.start();
+        getMainController().start();
         stage.setTitle(APP_NAME);
 
         try {
-            controller.getInitController().loadFromFile();
+            getMainController().getInit().loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            InitView initView = new InitView(controller);
+            InitView initView = new InitView(getMainController());
             initView.show();
         }
 
-        LoginView loginView = new LoginView(controller);
+        showApp();
+    }
+
+    private void showApp() {
+        LoginView loginView = new LoginView(getMainController());
         loginView.show();
 
-        if(!controller.getLoginController().isAuth()) {
+        if(!getMainController().getLogin().isAuth()) {
             return;
         }
 
-        textNavbarUser.setText(controller.getLoginController().getUser().getName());
+        setup();
+        showHomeView();
 
-        MainPickieView mainPickieView = new MainPickieView(controller, mainLayout);
-        mainPickieView.show();
-
-        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.show();
+    }
+    @Override
+    protected void setup() {
+        textNavbarUser.setText(getMainController().getLogin().getUser().getName());
+        menuItemProfile.setText(SettingsController.i18n("PICKY_NAVBAR_UPDATEPROFILE"));
+        menuItemLogout.setText(SettingsController.i18n("PICKY_NAVBAR_LOGOFF"));
+    }
+
+    private void showHomeView() {
+        try {
+            switch (getMainController().getLogin().getUserType()) {
+                case PICKIE -> showPickieHomeView();
+                case RESTAURATEUR -> showRestaurateurHomeView();
+                case ADMIN -> showAdministratorHomeView();
+            }
+        } catch (LoginControllerException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void showPickieHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
+        PickieHomeView pickieHomeView = new PickieHomeView(
+                controller.getPickie(),
+                this
+        );
+        pickieHomeView.show();
+    }
+
+    private void showRestaurateurHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_HELLO_TEXT"));
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
+                controller.getRestaurateur(),
+                this
+        );
+        restaurateurHomeView.show();
+    }
+
+    private void showAdministratorHomeView() {
+        textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(
+                controller.getAdministrator(),
+                this
+        );
+        administratorHomeView.show();
     }
 
     @FXML
     protected void clickLogoImage() {
-        MainPickieView mainPickieView = new MainPickieView(controller, mainLayout);
-        mainPickieView.show();
+        showHomeView();
+    }
+
+    @FXML
+    private void clickLogout(ActionEvent event) {
+        controller.getLogin().logout();
+        stage.close();
+        showApp();
     }
 }

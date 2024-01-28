@@ -10,10 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 public class LoginView extends VirtualWindowView {
-    public LoginView(MainController controller) {
-        super(controller, "/loginView.fxml");
-    }
-
     @FXML
     private TextField inputLoginEmail;
     @FXML
@@ -24,12 +20,20 @@ public class LoginView extends VirtualWindowView {
     private Text textLoginEmail;
     @FXML
     private Text textLoginPassword;
+    @FXML
+    private Text textTitle;
+    @FXML
+    private Text textSubtitle;
 
-    protected void setup() {
-        textLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
-        textLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
-        inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));
+    public LoginView(MainController controller) {
+        super(controller, "/form/Login.fxml");
+        textLoginEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
+        textLoginPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
+        inputLogin.setText(SettingsController.i18n("LOGIN_BUTTON"));
+        textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
     }
+
     @FXML protected void clickLogin(ActionEvent event) {
 
         LoginBean loginBean = new LoginBean(
@@ -38,13 +42,14 @@ public class LoginView extends VirtualWindowView {
         );
 
         try {
-            controller.getLoginController().auth(loginBean);
+            controller.getLogin().auth(loginBean);
             stage.close();
         } catch (LoginControllerException ex) {
+            //TODO: Create different messages if bad auth or internal error!
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(SettingsController.i18n("MSG_INVALID_LOGIN_TITLE"));
-            alert.setHeaderText(SettingsController.i18n("MSG_INVALID_LOGIN_HEADER"));
-            alert.setContentText(SettingsController.i18n("MSG_INVALID_LOGIN_CONTENT"));
+            alert.setTitle(SettingsController.i18n("LOGIN_MSG_INVALID_TITLE"));
+            alert.setHeaderText(SettingsController.i18n("LOGIN_MSG_INVALID_HEADER"));
+            alert.setContentText(SettingsController.i18n("LOGIN_MSG_INVALID_CONTENT"));
             alert.showAndWait();
         }
     }

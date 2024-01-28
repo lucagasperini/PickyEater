@@ -1,10 +1,16 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.MainController;
-import javafx.scene.layout.BorderPane;
+import com.pickyeaters.logic.controller.application.pickie.FindRestaurantController;
 
 public class FindRestaurantView extends VirtualPaneView {
-    public FindRestaurantView(MainController controller, BorderPane mainLayout) {
-        super(controller, "/pickie_findARestaurantView.fxml", mainLayout);
+    private FindRestaurantController controller;
+    public FindRestaurantView(FindRestaurantController controller, VirtualPaneView parent) {
+        super("/form/pickie/FindRestaurant.fxml", parent);
+        this.controller = controller;
+    }
+
+    @Override
+    protected void setup() {
+
     }
 }

@@ -17,7 +17,7 @@ public class InitView extends VirtualView {
 
     public void show() {
         try {
-            controller.getInitController().loadFromFile();
+            controller.getInit().loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             // If you cannot load settings/database, ask user input
@@ -43,7 +43,7 @@ public class InitView extends VirtualView {
         settings.setDatabasePassword(userInput.nextLine());
 
         try {
-            controller.getInitController().loadFromInput(settings);
+            controller.getInit().loadFromInput(settings);
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askConfig();
@@ -58,7 +58,7 @@ public class InitView extends VirtualView {
         String password = userInput.nextLine();
         LoginBean loginBean = new LoginBean(email, password);
         try {
-            controller.getLoginController().auth(loginBean);
+            controller.getLogin().auth(loginBean);
         } catch (LoginControllerException ex) {
             System.out.println("ERROR: " + ex.getMessage());
             askLogin();

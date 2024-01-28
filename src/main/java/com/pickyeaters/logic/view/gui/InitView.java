@@ -11,15 +11,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class InitView extends VirtualWindowView {
-    public InitView(MainController controller) {
-        super(controller, "/form/database.fxml");
-    }
-
-    @Override
-    protected void setup() {
-
-    }
-
     @FXML
     private TextField inputDatabaseHost;
     @FXML
@@ -30,6 +21,9 @@ public class InitView extends VirtualWindowView {
     private TextField inputDatabaseUsername;
     @FXML
     private PasswordField inputDatabasePassword;
+    public InitView(MainController controller) {
+        super(controller, "/form/Init.fxml");
+    }
 
     @FXML protected void clickDatabaseConnect(ActionEvent event) {
         SettingsBean settings = new SettingsBean();
@@ -41,7 +35,7 @@ public class InitView extends VirtualWindowView {
         settings.setDatabasePassword(inputDatabasePassword.getText());
 
         try {
-            controller.getInitController().loadFromInput(settings);
+            controller.getInit().loadFromInput(settings);
             stage.close();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
