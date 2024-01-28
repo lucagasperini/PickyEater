@@ -25,7 +25,11 @@ public class RestaurateurHomeView extends VirtualPaneView {
 
     @FXML
     private void clickMenuDetails(ActionEvent event) {
-
+        MenuDetailsView view = new MenuDetailsView(
+                controller.getMenuDetails(),
+                this
+        );
+        view.show();
     }
 
 
