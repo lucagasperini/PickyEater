@@ -1,14 +1,18 @@
 
-v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(èåÖ‚8¨¤Ã°Ô1
-m	java:S116+"SRename this field "APP_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø¬÷×úÿÿÿÿ
-m	java:S116,"XRename this field "WINDOW_HEIGTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÒ£Á
-q	java:S116-"WRename this field "WINDOW_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•É¥Üûÿÿÿÿ
+g	java:S112Z"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8™¡Ñ€Õ1
+p
+java:S1192"TUse already-defined constant 'backgroundView' instead of duplicating its value here.(Æúá`8œ¡Ñ€Õ1
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(èåÖ‚8¨¤Ã°Ô1
+m	java:S116"SRename this field "APP_NAME" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ø¬÷×úÿÿÿÿ
+m	java:S116"XRename this field "WINDOW_HEIGTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÂÒ£Á
+q	java:S116 "WRename this field "WINDOW_WIDTH" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•É¥Üûÿÿÿÿ
+R
+java:S2387"5"controller" is the name of a field in "VirtualView".(ÏË‡¢8¯¡Ñ€Õ1
+V
+java:S2387#"9"mainLayout" is the name of a field in "VirtualPaneView".(†ð›þ8¯¡Ñ€Õ1
 <
-java:S1170+"!Make this final field static too.(ø¬÷×úÿÿÿÿ
+java:S1170"!Make this final field static too.(ø¬÷×úÿÿÿÿ
 7
-java:S1170,"!Make this final field static too.(ÂÒ£Á
+java:S1170"!Make this final field static too.(ÂÒ£Á
 <
-java:S1170-"!Make this final field static too.(•É¥Üûÿÿÿÿ
-L	java:S106&"+Replace this use of System.err by a logger.(é©æÒýÿÿÿÿ8Ä¤Ã°Ô1
-O
-java:S1135'"2Complete the task associated to this TODO comment.(ÓñàÍ8Å¤Ã°Ô1
+java:S1170 "!Make this final field static too.(•É¥Üûÿÿÿÿ
