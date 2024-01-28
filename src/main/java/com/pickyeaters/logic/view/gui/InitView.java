@@ -1,12 +1,11 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;

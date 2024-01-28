@@ -1,12 +1,10 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.view.VirtualView;
-import com.pickyeaters.logic.controller.application.MainController;
-import javafx.fxml.FXML;
+import com.pickyeaters.logic.controller.MainController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;

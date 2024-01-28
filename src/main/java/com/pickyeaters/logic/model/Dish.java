@@ -27,4 +27,7 @@ public abstract class Dish {
                 TYPE_DESSERT
         };
     }
+
+    public void deleteIngredient(String ingredientId) {
+    }
 }

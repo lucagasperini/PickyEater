@@ -1,17 +1,13 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.application.DatabaseController;
-import com.pickyeaters.logic.factory.UserDAO;
-import com.pickyeaters.logic.model.User;
 import com.pickyeaters.logic.view.VirtualView;
-import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;

@@ -1,6 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;

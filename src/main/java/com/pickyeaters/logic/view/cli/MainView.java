@@ -1,6 +1,6 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.MainController;
 
 import java.util.Scanner;
 
@@ -36,8 +36,7 @@ public class MainView {
                 HelpView helpView = new HelpView();
                 helpView.show();
                 break;
-            case "ingredient":
-            case "i":
+            case "1":
                 //IngredientView ingredientView = new IngredientView();
                 //ingredientView.show(tmp);
                 break;

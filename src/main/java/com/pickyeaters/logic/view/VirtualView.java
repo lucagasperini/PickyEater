@@ -1,6 +1,6 @@
 package com.pickyeaters.logic.view;
 
-import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.MainController;
 
 public abstract class VirtualView {
     protected MainController controller;
