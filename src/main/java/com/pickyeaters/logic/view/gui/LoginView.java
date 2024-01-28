@@ -27,11 +27,11 @@ public class LoginView extends VirtualWindowView {
 
     public LoginView(MainController controller) {
         super(controller, "/form/Login.fxml");
-        textLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
-        textLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
-        inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));
-        textTitle.setText(SettingsController.i18n("GUI_LOGIN_VIEW_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("GUI_LOGIN_VIEW_SUBTITLE"));
+        textLoginEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
+        textLoginPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
+        inputLogin.setText(SettingsController.i18n("LOGIN_BUTTON"));
+        textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
     }
 
     @FXML protected void clickLogin(ActionEvent event) {
@@ -47,9 +47,9 @@ public class LoginView extends VirtualWindowView {
         } catch (LoginControllerException ex) {
             //TODO: Create different messages if bad auth or internal error!
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(SettingsController.i18n("MSG_INVALID_LOGIN_TITLE"));
-            alert.setHeaderText(SettingsController.i18n("MSG_INVALID_LOGIN_HEADER"));
-            alert.setContentText(SettingsController.i18n("MSG_INVALID_LOGIN_CONTENT"));
+            alert.setTitle(SettingsController.i18n("LOGIN_MSG_INVALID_TITLE"));
+            alert.setHeaderText(SettingsController.i18n("LOGIN_MSG_INVALID_HEADER"));
+            alert.setContentText(SettingsController.i18n("LOGIN_MSG_INVALID_CONTENT"));
             alert.showAndWait();
         }
     }

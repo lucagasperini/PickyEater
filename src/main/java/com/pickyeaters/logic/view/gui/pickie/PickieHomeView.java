@@ -37,10 +37,10 @@ public class PickieHomeView extends VirtualPaneView {
 
     @Override
     protected void setup() {
-        textTitle.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_SUBTITLE"));
-        buttonFindRestaurant.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_FINDARESTAURANT"));
-        buttonReviewDish.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_REVIEWADISH"));
-        buttonEatingPreferences.setText(SettingsController.i18n("PICKY_GUI_HOME_VIEW_PERSONALIZEEATINGPREFERENCES"));
+        textTitle.setText(SettingsController.i18n("PICKY_HOME_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("PICKY_HOME_SUBTITLE"));
+        buttonFindRestaurant.setText(SettingsController.i18n("PICKY_HOME_FINDRESTAURANT"));
+        buttonReviewDish.setText(SettingsController.i18n("PICKY_HOME_REVIEWADISH"));
+        buttonEatingPreferences.setText(SettingsController.i18n("PICKY_HOME_EATINGPREFERENCES"));
     }
 }

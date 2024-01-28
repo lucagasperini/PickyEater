@@ -1,12 +1,7 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.application.DatabaseController;
-import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
-import com.pickyeaters.logic.factory.UserDAO;
-import com.pickyeaters.logic.model.User;
-import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
@@ -15,18 +10,12 @@ import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
 
 public class MainView extends VirtualPaneView {
     private MainController controller = new MainController();
@@ -86,8 +75,8 @@ public class MainView extends VirtualPaneView {
     @Override
     protected void setup() {
         textNavbarUser.setText(getMainController().getLoginController().getUser().getName());
-        menuItemProfile.setText(SettingsController.i18n("PICKY_GUI_UPDATEPROFILE_TEXT"));
-        menuItemLogout.setText(SettingsController.i18n("PICKY_GUI_LOGOFF_TEXT"));
+        menuItemProfile.setText(SettingsController.i18n("PICKY_NAVBAR_UPDATEPROFILE"));
+        menuItemLogout.setText(SettingsController.i18n("PICKY_NAVBAR_LOGOFF"));
     }
 
     private void showHomeView() {
@@ -103,7 +92,7 @@ public class MainView extends VirtualPaneView {
     }
 
     private void showPickieHomeView() {
-        textNavbarWelcome.setText(SettingsController.i18n("PICKY_GUI_HELLO_TEXT"));
+        textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
         PickieHomeView pickieHomeView = new PickieHomeView(
                 controller.getPickieController(),
                 this
@@ -112,7 +101,7 @@ public class MainView extends VirtualPaneView {
     }
 
     private void showRestaurateurHomeView() {
-        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_GUI_HELLO_TEXT"));
+        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_HELLO_TEXT"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
                 controller.getRestaurateurController(),
                 this

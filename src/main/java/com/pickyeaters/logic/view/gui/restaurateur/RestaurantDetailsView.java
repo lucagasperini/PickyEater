@@ -77,8 +77,8 @@ public class RestaurantDetailsView extends VirtualPaneView {
     protected void setup() {
         buttonSave.setText(SettingsController.i18n("SAVECHANGES_TEXT"));
         buttonBack.setText(SettingsController.i18n("BACK_TEXT"));
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_PROVIDERESTAURANTDETAILS_VIEW_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_PROVIDERESTAURANTDETAILS_VIEW_SUBTITLE"));
+        textTitle.setText(SettingsController.i18n("RESTAURANTDETAILS_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("RESTAURANTDETAILS_SUBTITLE"));
         textUserFirstname.setText(SettingsController.i18n("FIELD_USER_FIRSTNAME"));
         textUserLastname.setText(SettingsController.i18n("FIELD_USER_LASTNAME"));
         textUserSsn.setText(SettingsController.i18n("FIELD_USER_SSN"));

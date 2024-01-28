@@ -40,9 +40,9 @@ public class RestaurateurHomeView extends VirtualPaneView {
 
     @Override
     protected void setup() {
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_SUBTITLE"));
-        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDEMENUDETAILS"));
-        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_GUI_HOME_VIEW_PROVIDERESTAURANTDETAILS"));
+        textTitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_SUBTITLE"));
+        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MENUDETAILS"));
+        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_RESTAURANTDETAILS"));
     }
 }
