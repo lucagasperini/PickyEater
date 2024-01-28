@@ -30,8 +30,24 @@ public class RestaurantDAO {
             String name = query.getString();
             String phone = query.getString();
             String address = query.getString();
+            query.close();
 
-            return new Restaurant(name, phone, address);
+            return new Restaurant(id, name, phone, address);
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+    public void update(Restaurant restaurant) throws DAOException {
+        try{
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_restaurant(?, ?, ?, ?)");
+            query.setString(restaurant.getID());
+            query.setString(restaurant.getName());
+            query.setString(restaurant.getPhone());
+            query.setString(restaurant.getAddress());
+
+            query.execute();
+            query.close();
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);
         }

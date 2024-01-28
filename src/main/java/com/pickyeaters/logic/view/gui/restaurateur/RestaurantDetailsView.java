@@ -65,7 +65,17 @@ public class RestaurantDetailsView extends VirtualPaneView {
 
     @FXML
     private void clickSave(ActionEvent event) {
-
+        RestaurateurBean restaurateurBean = new RestaurateurBean(
+                inputUserEmail.getText(),
+                inputUserFirstname.getText(),
+                inputUserLastname.getText(),
+                inputUserSsn.getText(),
+                inputRestaurantName.getText(),
+                inputRestaurantPhone.getText(),
+                inputRestaurantAddress.getText()
+        );
+        controller.set(restaurateurBean);
+        setup();
     }
 
     @FXML

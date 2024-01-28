@@ -190,6 +190,74 @@ BEGIN
 END;
 $BODY$;
 
+CREATE PROCEDURE update_admin(
+    IN _id character varying,
+    IN _email character varying,
+    IN _firstname character varying,
+    IN _lastname character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    UPDATE "User" SET
+		email=_email,
+		firstname=_firstname,
+		lastname=_lastname
+		WHERE id=_id::uuid;
+END;
+$BODY$;
+
+CREATE PROCEDURE update_pickie(
+    IN _id character varying,
+    IN _email character varying,
+    IN _firstname character varying,
+    IN _lastname character varying,
+    IN _username character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    UPDATE "User" SET
+		email=_email,
+		firstname=_firstname,
+		lastname=_lastname,
+		username=_username
+		WHERE id=_id::uuid;
+END;
+$BODY$;
+
+CREATE PROCEDURE update_restaurateur(
+    IN _id character varying,
+    IN _email character varying,
+    IN _firstname character varying,
+    IN _lastname character varying,
+    IN _ssn character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    UPDATE "User" SET
+		email=_email,
+		firstname=_firstname,
+		lastname=_lastname,
+		ssn=_ssn
+		WHERE id=_id::uuid;
+END;
+$BODY$;
+
+CREATE PROCEDURE update_restaurant(
+    IN _id character varying,
+    IN _name character varying,
+    IN _phone character varying,
+    IN _address character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    UPDATE "Restaurant" SET
+		name=_name,
+		phone=_phone,
+		address=_address
+		WHERE id=_id::uuid;
+END;
+$BODY$;
+
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);

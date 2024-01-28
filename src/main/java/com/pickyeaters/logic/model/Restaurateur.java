@@ -10,11 +10,21 @@ public class Restaurateur extends User {
         this.restaurant = restaurant;
     }
 
+    public Restaurateur(Restaurateur restaurateur) {
+        super(restaurateur);
+        this.ssn = restaurateur.ssn;
+        this.restaurant = new Restaurant(restaurateur.restaurant);
+    }
+
     public String getSsn() {
         return ssn;
     }
 
     public Restaurant getRestaurant() {
         return restaurant;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
     }
 }

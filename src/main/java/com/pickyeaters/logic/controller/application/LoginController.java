@@ -33,6 +33,14 @@ public class LoginController extends VirtualController {
         return new UserBean(user);
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getUserID() {
+        return user.getID();
+    }
+
     public UserType getUserType() throws LoginControllerException {
         if(user instanceof Pickie) {
             return UserType.PICKIE;
@@ -43,11 +51,6 @@ public class LoginController extends VirtualController {
         } else {
             throw new LoginControllerException("Cannot identify user type");
         }
-    }
-
-    public void setRestaurateur(RestaurateurBean restaurateurBean) throws LoginControllerException {
-        Restaurateur restaurateur = toRestaurateur();
-
     }
 
     public Restaurateur toRestaurateur() throws LoginControllerException {
