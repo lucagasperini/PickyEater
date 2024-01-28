@@ -29,7 +29,7 @@ public class PickieHomeView extends VirtualPaneView {
     @FXML
     protected void clickFindRestaurant(ActionEvent event) {
         FindRestaurantView findRestaurantView = new FindRestaurantView(
-                controller.getFindRestaurantController(),
+                controller.getFindRestaurant(),
                 this
         );
         findRestaurantView.show();

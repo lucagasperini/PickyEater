@@ -32,7 +32,7 @@ public class RestaurateurHomeView extends VirtualPaneView {
     @FXML
     private void clickRestaurantDetails(ActionEvent event) {
         RestaurantDetailsView view = new RestaurantDetailsView(
-                controller.getProvideRestaurantDetails(),
+                controller.getRestaurantDetails(),
                 this
         );
         view.show();
