@@ -1,4 +1,4 @@
 package com.pickyeaters.logic.controller.application.administrator;
 
-public class ManageMissingIngredientReportController {
+public class MissingIngredientController {
 }

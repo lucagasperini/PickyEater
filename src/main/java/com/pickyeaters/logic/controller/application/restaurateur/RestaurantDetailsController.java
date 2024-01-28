@@ -6,8 +6,8 @@ import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.model.Restaurateur;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 
-public class ProvideRestaurantDetailsController extends VirtualController {
-    public ProvideRestaurantDetailsController(MainController main) {
+public class RestaurantDetailsController extends VirtualController {
+    public RestaurantDetailsController(MainController main) {
         super(main);
     }
     public RestaurateurBean get() throws LoginControllerException {

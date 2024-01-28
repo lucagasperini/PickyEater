@@ -1,4 +1,4 @@
 package com.pickyeaters.logic.view.gui.administrator;
 
-public class AdministratorManageReportView {
+public class ManageDishReportView {
 }

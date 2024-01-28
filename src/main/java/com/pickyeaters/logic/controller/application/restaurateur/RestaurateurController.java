@@ -2,21 +2,19 @@ package com.pickyeaters.logic.controller.application.restaurateur;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.VirtualController;
-import com.pickyeaters.logic.controller.application.restaurateur.ProvideMenuDetailsController;
-import com.pickyeaters.logic.controller.application.restaurateur.ProvideRestaurantDetailsController;
 
 public class RestaurateurController extends VirtualController {
     public RestaurateurController(MainController main) {
         super(main);
     }
-    private ProvideRestaurantDetailsController provideRestaurantDetails = new ProvideRestaurantDetailsController(main);
-    private ProvideMenuDetailsController provideMenuDetails = new ProvideMenuDetailsController(main);
+    private RestaurantDetailsController provideRestaurantDetails = new RestaurantDetailsController(main);
+    private MenuDetailsController provideMenuDetails = new MenuDetailsController(main);
 
-    public ProvideMenuDetailsController getProvideMenuDetails() {
+    public MenuDetailsController getProvideMenuDetails() {
         return provideMenuDetails;
     }
 
-    public ProvideRestaurantDetailsController getProvideRestaurantDetails() {
+    public RestaurantDetailsController getProvideRestaurantDetails() {
         return provideRestaurantDetails;
     }
 }

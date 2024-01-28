@@ -26,7 +26,7 @@ public class LoginView extends VirtualWindowView {
     private Text textSubtitle;
 
     public LoginView(MainController controller) {
-        super(controller, "/form/loginView.fxml");
+        super(controller, "/form/Login.fxml");
         textLoginEmail.setText(SettingsController.i18n("GUI_LOGIN_VIEW_EMAIL"));
         textLoginPassword.setText(SettingsController.i18n("GUI_LOGIN_VIEW_PASSWORD"));
         inputLogin.setText(SettingsController.i18n("GUI_LOGIN_VIEW_LOGIN"));

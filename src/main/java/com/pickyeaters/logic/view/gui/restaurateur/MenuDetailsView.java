@@ -1,4 +1,4 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
-public class RestaurateurRemoveIngredientView {
+public class MenuDetailsView {
 }

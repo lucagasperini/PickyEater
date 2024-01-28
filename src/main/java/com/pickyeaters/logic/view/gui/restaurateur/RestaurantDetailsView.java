@@ -1,8 +1,7 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.application.restaurateur.ProvideRestaurantDetailsController;
+import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetailsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -10,11 +9,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
-public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
-    private ProvideRestaurantDetailsController controller;
+public class RestaurantDetailsView extends VirtualPaneView {
+    private RestaurantDetailsController controller;
     @FXML
     private TextField inputUserFirstname;
     @FXML
@@ -60,8 +58,8 @@ public class RestaurateurManageRestaurantDetailsView extends VirtualPaneView {
     @FXML
     private Text textRestaurantPhone;
 
-    public RestaurateurManageRestaurantDetailsView(ProvideRestaurantDetailsController controller, VirtualPaneView parent) {
-        super("/form/restaurateur/manageRestaurantDetailsView.fxml", parent);
+    public RestaurantDetailsView(RestaurantDetailsController controller, VirtualPaneView parent) {
+        super("/form/restaurateur/RestaurantDetails.fxml", parent);
         this.controller = controller;
     }
 

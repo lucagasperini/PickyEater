@@ -1,4 +1,4 @@
 package com.pickyeaters.logic.view.gui.pickie;
 
-public class PickieAddIngredientView {
+public class ReviewDishView {
 }

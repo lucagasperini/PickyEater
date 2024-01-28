@@ -22,7 +22,7 @@ public class InitView extends VirtualWindowView {
     @FXML
     private PasswordField inputDatabasePassword;
     public InitView(MainController controller) {
-        super(controller, "/form/initView.fxml");
+        super(controller, "/form/Init.fxml");
     }
 
     @FXML protected void clickDatabaseConnect(ActionEvent event) {
