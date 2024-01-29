@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="mainLayout" maxHeight="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -25,9 +25,9 @@
                      <children>
                         <AnchorPane prefHeight="87.0" prefWidth="322.0">
                            <children>
-                              <ImageView fx:id="imageLogo" fitHeight="101.0" fitWidth="395.0" layoutY="7.0" onMouseClicked="#clickLogoImage" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ImageView fx:id="imageLogo" fitHeight="101.0" fitWidth="395.0" layoutY="7.0" onMouseClicked="#clickImageLogo" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <image>
-                                    <Image url="@pics/logo.png" />
+                                    <Image url="@../pics/logo.png" />
                                  </image>
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -52,7 +52,7 @@
                                                       <Font name="Calibri" size="18.0" />
                                                    </font>
                                                 </Text>
-                                                <Text fx:id="textNavbarUser" strokeType="OUTSIDE" strokeWidth="0.0" text="USERNAME" wrappingWidth="54.69921875">
+                                                <Text fx:id="textNavbarUsername" strokeType="OUTSIDE" strokeWidth="0.0" text="USERNAME" wrappingWidth="54.69921875">
                                                    <font>
                                                       <Font name="Calibri Bold Italic" size="18.0" />
                                                    </font></Text>
@@ -66,19 +66,19 @@
                                              <children>
                                                 <AnchorPane layoutX="12.0" layoutY="28.0" prefHeight="12.0" prefWidth="21.0">
                                                    <children>
-                                                      <ImageView fitHeight="30.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="30.0" fitWidth="60.0" onMouseClicked="#clickMenuButton" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@pics/profileIcon.png" />
+                                                            <Image url="@../pics/profileIcon.png" />
                                                          </image>
                                                          <cursor>
                                                             <Cursor fx:constant="DEFAULT" />
                                                          </cursor>
                                                       </ImageView>
-                                                      <MenuButton alignment="CENTER" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="35.0">
+                                                      <MenuButton fx:id="menuNavbar" alignment="CENTER" mnemonicParsing="false" opacity="0.0" prefHeight="31.0" prefWidth="35.0">
                                                         <items>
-                                                          <MenuItem fx:id="menuItemProfile" mnemonicParsing="false" text="...UPDATEPROFILE" />
+                                                          <MenuItem fx:id="menuItemNavbarProfile" mnemonicParsing="false" onAction="#clickMenuItemNavbarProfile" text="...UPDATEPROFILE" />
                                                             <SeparatorMenuItem mnemonicParsing="false" />
-                                                            <MenuItem fx:id="menuItemLogout" mnemonicParsing="false" onAction="#clickLogout" text="...LOGOFF" />
+                                                            <MenuItem fx:id="menuItemNavbarLogout" mnemonicParsing="false" onAction="#clickMenuItemNavbarLogout" text="...LOGOFF" />
                                                         </items>
                                                          <cursor>
                                                             <Cursor fx:constant="HAND" />
