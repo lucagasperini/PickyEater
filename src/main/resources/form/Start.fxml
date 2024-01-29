@@ -15,20 +15,20 @@
             <Image url="@../pics/logo.png" />
          </image>
          <cursor>
-            <Cursor fx:constant="HAND" />
+            <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
       <AnchorPane layoutX="295.0" layoutY="260.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="300.0">
          <children>
-            <Button layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#loginView" prefHeight="390.0" prefWidth="260.0" styleClass="bt-uc" text="SIGNIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="buttonLogin" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickButtonLogin" onMouseClicked="#loginView" prefHeight="390.0" prefWidth="260.0" styleClass="bt-uc" text="SIGNIN" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="771.0" layoutY="170.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="300.0">
          <children>
-            <Button alignment="CENTER" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#registrationView" prefHeight="390.0" prefWidth="260.0" styleClass="bt-uc" text="SIGNUP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="buttonRegistration" alignment="CENTER" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickButtonRegistration" onMouseClicked="#registrationView" prefHeight="390.0" prefWidth="260.0" styleClass="bt-uc" text="SIGNUP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <Text fill="#843c0c" layoutX="534.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" AnchorPane.topAnchor="199.25">
+      <Text fx:id="textWelcome" fill="#843c0c" layoutX="534.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" textAlignment="CENTER" AnchorPane.topAnchor="199.25">
          <font>
             <Font name="Calibri" size="49.0" />
          </font>

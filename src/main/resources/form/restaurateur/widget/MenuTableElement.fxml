@@ -14,12 +14,12 @@
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="28.0">
          <children>
-            <CheckBox layoutX="6.0" layoutY="6.0" mnemonicParsing="false" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+            <CheckBox fx:id="checkBoxShowInMenu" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickCheckBoxShowInMenu" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
          </children>
       </AnchorPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="300.0">
          <children>
-            <Text layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DishName" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <Text fx:id="textName" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DishName" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
@@ -30,7 +30,7 @@
          <children>
             <ScrollPane hbarPolicy="NEVER" layoutX="5.0" layoutY="5.0" prefHeight="80.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DishDescription">
+                  <Text fx:id="textDescription" strokeType="OUTSIDE" strokeWidth="0.0" text="DishDescription">
                      <font>
                         <Font name="Calibri" size="14.0" />
                      </font>
@@ -60,12 +60,12 @@
          <children>
             <VBox alignment="CENTER" layoutX="82.0" layoutY="28.0" prefHeight="80.0" prefWidth="252.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="246.0" styleClass="bt-stepAction3" text="UPDATE DISH">
+                  <Button fx:id="buttonUpdateDish" mnemonicParsing="false" onAction="#clickButtonUpdateDish" prefHeight="32.0" prefWidth="246.0" styleClass="bt-stepAction3" text="UPDATE DISH">
                      <VBox.margin>
                         <Insets bottom="2.0" top="2.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="246.0" styleClass="bt-stepAction3" text="DELETE DISH">
+                  <Button fx:id="buttonDeleteDish" mnemonicParsing="false" onAction="#clickButtonDeleteDish" prefHeight="32.0" prefWidth="246.0" styleClass="bt-stepAction3" text="DELETE DISH">
                      <VBox.margin>
                         <Insets bottom="2.0" top="2.0" />
                      </VBox.margin>

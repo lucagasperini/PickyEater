@@ -54,7 +54,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurateurName" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -84,7 +84,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurateurSurname" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -111,7 +111,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurateurSsn" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -138,7 +138,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurateurPhoneNumber" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -165,7 +165,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurateurEmailAddress" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -219,7 +219,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurantName" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -249,7 +249,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurantAddress" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -276,7 +276,7 @@
                                                                         <Insets bottom="2.5" top="2.5" />
                                                                      </HBox.margin>
                                                                   </Text>
-                                                                  <TextField prefHeight="27.0" prefWidth="310.0">
+                                                                  <TextField fx:id="textFieldRestaurantPhoneNumber" prefHeight="27.0" prefWidth="310.0">
                                                                      <opaqueInsets>
                                                                         <Insets />
                                                                      </opaqueInsets>
@@ -318,12 +318,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom1" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime1" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -331,12 +331,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo1" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime1" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -357,12 +357,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom2" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime2" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -370,12 +370,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo2" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime2" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -396,12 +396,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom3" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime3" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -409,12 +409,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo3" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime3" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -435,12 +435,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom4" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime4" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -448,12 +448,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo4" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime4" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -474,12 +474,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom5" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime5" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -487,12 +487,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo5" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime5" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -513,12 +513,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom6" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime6" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -526,12 +526,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo6" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime6" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -552,12 +552,12 @@
                                                                               </AnchorPane>
                                                                               <HBox alignment="CENTER" prefHeight="19.0" prefWidth="138.0">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
+                                                                                    <Text fx:id="textFrom7" strokeType="OUTSIDE" strokeWidth="0.0" text="FROM">
                                                                                        <font>
                                                                                           <Font name="Calibri" size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxStartTime7" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
@@ -565,12 +565,12 @@
                                                                               </HBox>
                                                                               <HBox alignment="CENTER">
                                                                                  <children>
-                                                                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
+                                                                                    <Text fx:id="textTo7" strokeType="OUTSIDE" strokeWidth="0.0" text="TO">
                                                                                        <font>
                                                                                           <Font size="16.0" />
                                                                                        </font>
                                                                                     </Text>
-                                                                                    <ChoiceBox prefHeight="25.0" prefWidth="97.0" />
+                                                                                    <ChoiceBox fx:id="choiceBoxEndTime7" prefHeight="25.0" prefWidth="97.0" />
                                                                                  </children>
                                                                                  <HBox.margin>
                                                                                     <Insets left="10.0" />
