@@ -25,10 +25,10 @@ import java.util.Vector;
 
 public class MainView extends VirtualPaneView {
     private MainController controller = new MainController();
-    public static final String backgroundView = "/backgroundTemplate.fxml";
+    public static final String backgroundView = "/form/Background.fxml";
     private Stage stage;
     public MainView(Stage primaryStage) {
-        super("/backgroundTemplate.fxml", null);
+        super(backgroundView, null);
         this.stage = primaryStage;
         stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
         VirtualPaneView.init(controller, mainLayout);
