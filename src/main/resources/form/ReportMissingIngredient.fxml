@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="514.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="317.0" prefWidth="514.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bed7edb1" height="317.0" layoutX="132.0" layoutY="59.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <VBox layoutX="148.0" layoutY="59.0" prefHeight="317.0" prefWidth="514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,7 +24,7 @@
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="9.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <image>
-                              <Image url="@../../pics/deleteIcon.png" />
+                              <Image url="@../../../../../../SourceCode-PickyEater-CristianaBranch/src/main/resources/pics/deleteIcon.png" />
                            </image>
                            <cursor>
                               <Cursor fx:constant="HAND" />
@@ -70,7 +69,7 @@
                                              <children>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="INGREDIENT">
                                                    <font>
-                                                      <Font name="Calibri" size="18.0" />
+                                                      <Font name="Calibri" size="16.0" />
                                                    </font>
                                                    <HBox.margin>
                                                       <Insets bottom="2.5" top="2.5" />
@@ -91,27 +90,6 @@
                                           </HBox>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="49.0" prefWidth="500.0">
-                                       <children>
-                                          <VBox prefHeight="58.0" prefWidth="445.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="5.0">
-                                             <children>
-                                                <HBox prefHeight="30.0" prefWidth="500.0">
-                                                   <children>
-                                                      <CheckBox mnemonicParsing="false" text="REPORTDISH_FORM_LISTED_NOTUSED_INGREDIENT_TEXT" />
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="30.0" prefWidth="500.0">
-                                                   <children>
-                                                      <CheckBox mnemonicParsing="false" text="REPORTDISH_FORM_NOTLISTED_USED_INGREDIENT_TEXT" />
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </AnchorPane>
                                  </children>
                               </VBox>
                            </children>
@@ -120,18 +98,14 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="514.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
                <children>
-                  <AnchorPane maxWidth="-Infinity" prefHeight="200.0" prefWidth="514.0">
-                     <children>
-                        <Button layoutX="109.0" layoutY="24.0" mnemonicParsing="false" styleClass="bt-saveChanges" text="SAVECHANGES" />
-                     </children>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </AnchorPane>
+                  <Button layoutX="109.0" layoutY="48.0" mnemonicParsing="false" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.leftAnchor="108.5" AnchorPane.rightAnchor="108.5" />
                </children>
-            </HBox>
+            </AnchorPane>
          </children>
       </VBox>
    </children>
