@@ -1,5 +1,7 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
+import com.pickyeaters.logic.controller.exception.DAOException;
+import com.pickyeaters.logic.factory.IngredientDAO;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,6 @@ public class AddIngredientView extends VirtualPaneView {
 
     @Override
     protected void setup() {
-
     }
     @FXML
     private void clickBack(ActionEvent event) {

@@ -77,17 +77,37 @@ public class DatabaseController {
         int outIndex = 1;
         String cmd;
         CallableStatement cs;
+        ResultSet rs;
+        boolean isResultSet = false;
         int index = 1;
-        Query(CallableStatement _cs, String _cmd) {
+        Query(CallableStatement _cs, String _cmd, boolean isResultSet) {
             cs = _cs;
             cmd = _cmd;
+            this.isResultSet = isResultSet;
         }
 
         public void execute() throws DatabaseControllerException {
             try {
                 cs.execute();
+                if(isResultSet)
+                    rs = cs.getResultSet();
             } catch (SQLException ex) {
                 throw new DatabaseControllerException("Cannot execute: " + ex.getMessage());
+            }
+        }
+
+        public boolean next() throws DatabaseControllerException {
+            if(!isResultSet) {
+                throw new DatabaseControllerException("Not a query Result set");
+            }
+            if(rs == null) {
+                throw new DatabaseControllerException("Result set is null");
+            }
+            try {
+                outIndex = 1;
+                return rs.next();
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot next: " + ex.getMessage());
             }
         }
 
@@ -119,7 +139,13 @@ public class DatabaseController {
 
         public String getString() throws DatabaseControllerException {
             try {
-                return cs.getString(outIndex++);
+                if(!isResultSet)
+                    return cs.getString(outIndex++);
+                else {
+                    if(rs == null)
+                        throw new DatabaseControllerException("Cannot getString from Result set");
+                    return rs.getString(outIndex++);
+                }
             } catch (SQLException ex) {
                 throw new DatabaseControllerException("Cannot getString: " + ex.getMessage());
             }
@@ -133,7 +159,19 @@ public class DatabaseController {
         }
 
         try {
-            return new Query(conn.prepareCall(query), query);
+            return new Query(conn.prepareCall(query), query, false);
+        } catch (SQLException e) {
+            throw new DatabaseControllerException("Cannot prepare query");
+        }
+    }
+
+    public Query queryResultSet(String query) throws DatabaseControllerException {
+        if(conn == null) {
+            throw new DatabaseControllerException("Connection is not ready");
+        }
+
+        try {
+            return new Query(conn.prepareCall(query), query, true);
         } catch (SQLException e) {
             throw new DatabaseControllerException("Cannot prepare query");
         }
