@@ -34,7 +34,7 @@
                                              <children>
                                                 <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYPERSONALDETAILS" wrappingWidth="540.0">
+                                                      <Text fx:id="textMyPersonalDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYPERSONALDETAILS" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -46,7 +46,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                  <Text fx:id="textRestaurateurName" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -76,7 +76,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SURNAME">
+                                                                  <Text fx:id="textRestaurateurSurname" strokeType="OUTSIDE" strokeWidth="0.0" text="SURNAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -103,7 +103,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SSN">
+                                                                  <Text fx:id="textRestaurateurSsn" strokeType="OUTSIDE" strokeWidth="0.0" text="SSN">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -130,7 +130,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                  <Text fx:id="textRestaurateurPhoneNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -157,7 +157,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EMAILADDRESS">
+                                                                  <Text fx:id="textRestaurateurEmailAddress" strokeType="OUTSIDE" strokeWidth="0.0" text="EMAILADDRESS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -199,7 +199,7 @@
                                              <children>
                                                 <VBox layoutX="174.0" maxWidth="-Infinity" prefHeight="92.0" prefWidth="540.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYRESTAURANTDETAILS" wrappingWidth="540.0">
+                                                      <Text fx:id="textMyRestaurantDetails" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="MYRESTAURANTDETAILS" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -211,7 +211,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
+                                                                  <Text fx:id="textRestaurantName" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -241,7 +241,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
+                                                                  <Text fx:id="textRestaurantAddress" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -268,7 +268,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
+                                                                  <Text fx:id="textRestaurantPhoneNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="PHONENUMBER">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -295,7 +295,7 @@
                                                          <children>
                                                             <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="OPENINGHOURS">
+                                                                  <Text fx:id="textOpeningHours" strokeType="OUTSIDE" strokeWidth="0.0" text="OPENINGHOURS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
@@ -309,7 +309,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MON" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textMonday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MON" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -348,7 +348,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textTuesday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TUE" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -387,7 +387,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WED" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textWednesday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WED" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -426,7 +426,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THU" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textThursday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="THU" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -465,7 +465,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textFriday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FRI" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -504,7 +504,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textSaturday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SAT" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -543,7 +543,7 @@
                                                                            <children>
                                                                               <AnchorPane prefHeight="15.0" prefWidth="58.0">
                                                                                  <children>
-                                                                                    <Text layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUN" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+                                                                                    <Text fx:id="textSunday" layoutX="14.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SUN" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                                                                                        <font>
                                                                                           <Font name="Calibri Bold" size="17.0" />
                                                                                        </font>
@@ -596,7 +596,7 @@
                         </HBox>
                         <AnchorPane maxWidth="-Infinity" prefHeight="45.0" prefWidth="1280.0">
                            <children>
-                              <Button layoutX="491.0" layoutY="4.0" mnemonicParsing="false" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
+                              <Button fx:id="buttonSaveChanges" layoutX="491.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickButtonSaveChanges" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -609,12 +609,12 @@
                <children>
                   <VBox layoutX="35.0" layoutY="35.0" prefHeight="48.0" prefWidth="1225.0">
                      <children>
-                        <Text fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
+                        <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE" wrappingWidth="1224.029296875">
                            <font>
                               <Font name="Calibri Bold" size="36.0" />
                            </font>
                         </Text>
-                        <Text fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="1224.029296875">
+                        <Text fx:id="textSubtitle" fill="#ed7d31" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_SUBTITLE" wrappingWidth="1224.029296875">
                            <font>
                               <Font name="Calibri Bold" size="32.0" />
                            </font>

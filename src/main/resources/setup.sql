@@ -41,8 +41,7 @@ CREATE TABLE "Ingredient" (
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
     fk_parent uuid,
-    FOREIGN KEY (fk_parent) REFERENCES "Ingredient" (id),
-    unique(name)
+    FOREIGN KEY (fk_parent) REFERENCES "Ingredient" (id)
 );
 
 CREATE TABLE "Dish_Ingredient" (
@@ -259,50 +258,6 @@ BEGIN
 END;
 $BODY$;
 
-CREATE OR REPLACE PROCEDURE add_root_ingredient(
-    IN _name character varying,
-    OUT _id character varying)
-LANGUAGE plpgsql
-AS $BODY$
-BEGIN
-	INSERT INTO "Ingredient" (name, fk_parent)
-	    VALUES (_name, null) RETURNING id::varchar INTO _id;
-END;
-$BODY$;
-
-CREATE OR REPLACE PROCEDURE add_child_ingredient(
-    IN _name character varying,
-    IN _parent_name character varying,
-    OUT _id character varying)
-LANGUAGE plpgsql
-AS $BODY$
-DECLARE
-	parent_id UUID;
-BEGIN
-    SELECT id INTO parent_id FROM "Ingredient" WHERE name = _parent_name;
-    IF(parent_id IS NULL) THEN
-    		_id := NULL;
-    		RETURN;
-    END IF;
-	INSERT INTO "Ingredient" (name, fk_parent)
-	    VALUES (_name, parent_id) RETURNING id::varchar INTO _id;
-END;
-$BODY$;
-
-CREATE OR REPLACE VIEW all_ingredient AS
-SELECT id::varchar AS id, name FROM "Ingredient";
-
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
-
-CALL add_root_ingredient('Carne', null);
-CALL add_child_ingredient('Manzo', 'Carne', null);
-CALL add_child_ingredient('Suino', 'Carne', null);
-CALL add_child_ingredient('Pollo', 'Carne', null);
-CALL add_child_ingredient('Petto di pollo', 'Pollo', null);
-CALL add_root_ingredient('Pesce', null);
-CALL add_child_ingredient('Tonno', 'Pesce', null);
-CALL add_root_ingredient('Pasta', null);
-CALL add_child_ingredient('Rigatoni', 'Pasta', null);
-CALL add_root_ingredient('Pane', null);
