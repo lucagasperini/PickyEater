@@ -23,7 +23,7 @@
                      <children>
                         <AnchorPane maxWidth="-Infinity" prefHeight="33.0" prefWidth="1280.0">
                            <children>
-                              <Button fx:id="buttonBack1" layoutX="15.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickBack" prefHeight="32.0" prefWidth="120.0" styleClass="bt-back" text="BACK" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0" />
+                              <Button fx:id="buttonBack" layoutX="15.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickBack" prefHeight="32.0" prefWidth="120.0" styleClass="bt-back" text="BACK" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="435.0" prefWidth="1280.0">
@@ -36,7 +36,7 @@
                                              <children>
                                                 <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" wrappingWidth="423.0">
+                                                      <Text fx:id="textName" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="NAME" wrappingWidth="423.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -60,7 +60,7 @@
                                              <children>
                                                 <VBox prefHeight="94.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION" wrappingWidth="393.0">
+                                                      <Text fx:id="textDescription" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="DESCRIPTION" wrappingWidth="393.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
@@ -77,12 +77,12 @@
                                              <children>
                                                 <VBox layoutY="-12.94921875" prefHeight="29.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                    <children>
-                                                      <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="CATEGORY" wrappingWidth="385.0">
+                                                      <Text fx:id="textCategory" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="CATEGORY" wrappingWidth="385.0">
                                                          <font>
                                                             <Font name="Calibri Bold" size="26.0" />
                                                          </font>
                                                       </Text>
-                                                      <ComboBox prefWidth="150.0" />
+                                                      <ComboBox fx:id="comboBoxCategory" prefWidth="150.0" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -94,7 +94,7 @@
                                     </VBox>
                                     <VBox prefWidth="386.3">
                                        <children>
-                                          <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="INGREDIENTS" wrappingWidth="363.0">
+                                          <Text fx:id="textIngredients" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="INGREDIENTS" wrappingWidth="363.0">
                                              <font>
                                                 <Font name="Calibri Bold" size="26.0" />
                                              </font>
@@ -121,7 +121,7 @@
                                                                         <Insets />
                                                                      </HBox.margin>
                                                                      <children>
-                                                                        <Button layoutX="51.0" layoutY="6.0" mnemonicParsing="false" styleClass="bt-stepAction4" text="DELETEINGREDIENT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                        <Button fx:id="buttonDeleteIngredient" layoutX="51.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickDeleteIngredient" styleClass="bt-stepAction4" text="DELETEINGREDIENT" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                                                      </children>
                                                                   </AnchorPane>
                                                                </children>
@@ -143,7 +143,7 @@
                                     </VBox>
                                     <VBox>
                                        <children>
-                                          <Text fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="ALLERGENS" wrappingWidth="363.0">
+                                          <Text fx:id="textAllergens" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="ALLERGENS" wrappingWidth="363.0">
                                              <font>
                                                 <Font name="Calibri Bold" size="26.0" />
                                              </font>
@@ -179,7 +179,7 @@
                         </AnchorPane>
                         <AnchorPane maxWidth="-Infinity" prefHeight="45.0" prefWidth="1280.0">
                            <children>
-                              <Button layoutX="491.0" layoutY="4.0" mnemonicParsing="false" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
+                              <Button fx:id="buttonSaveChanges" layoutX="491.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickSaveChanges" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
                            </children>
                         </AnchorPane>
                      </children>
