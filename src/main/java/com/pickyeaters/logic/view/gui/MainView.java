@@ -62,36 +62,6 @@ public class MainView extends VirtualPaneView {
             initView.show();
         }
 
-        try {
-            Vector<String> str = new Vector<>();
-            IngredientDAO.IngredientForest out = IngredientDAO.getInstance().getAll();
-            for(IngredientDAO.IngredientTree tree : out.getTreeList()) {
-                Stack<IngredientDAO.IngredientNode> nodeStack = new Stack<>();
-                nodeStack.push(tree.getRoot());
-                str.clear();
-                while(!nodeStack.empty()) {
-                    IngredientDAO.IngredientNode node = nodeStack.pop();
-                    str.add(node.toString());
-                    if(node.getChild().isEmpty()) {
-                        String format = "";
-                        for(String i : str) {
-                            format += i;
-                            format += ".";
-                        }
-                        format = format.substring(0, format.length() - 1);
-                        System.out.println(format);
-                        str.remove(str.size() - 1);
-                    }
-                    for (IngredientDAO.IngredientNode i : node.getChild()) {
-                        nodeStack.push(i);
-                    }
-                }
-            }
-
-        } catch (DAOException e) {
-            throw new RuntimeException(e);
-        }
-
         showApp();
     }
 

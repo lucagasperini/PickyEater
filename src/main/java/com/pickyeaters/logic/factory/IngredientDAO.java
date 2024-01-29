@@ -74,7 +74,50 @@ public class IngredientDAO {
     }
 
     public class IngredientForest {
+        public interface Callable {
+            void run(IngredientNode node);
+        }
+
+        public void executeOnNode(Callable callable) {
+            for(IngredientTree tree : list) {
+                Stack<IngredientNode> nodeStack = new Stack<>();
+                nodeStack.push(tree.getRoot());
+                while(!nodeStack.empty()) {
+                    IngredientNode node = nodeStack.pop();
+                    callable.run(node);
+                    for (IngredientNode i : node.getChild()) {
+                        nodeStack.push(i);
+                    }
+                }
+            }
+        }
         LinkedList<IngredientTree> list = new LinkedList<>();
+        public ArrayList<String> getPaths() {
+            ArrayList<String> tmp = new ArrayList<>();
+            ArrayList<String> out = new ArrayList<>();
+            for(IngredientTree tree : list) {
+                Stack<IngredientNode> nodeStack = new Stack<>();
+                nodeStack.push(tree.getRoot());
+                tmp.clear();
+                while(!nodeStack.empty()) {
+                    IngredientNode node = nodeStack.pop();
+                    tmp.add(node.toString());
+                    if(node.getChild().isEmpty()) {
+                        String format = "";
+                        for(String i : tmp) {
+                            format += i;
+                            format += ".";
+                        }
+                        out.add(format.substring(0, format.length() - 1));
+                        tmp.remove(tmp.size() - 1);
+                    }
+                    for (IngredientNode i : node.getChild()) {
+                        nodeStack.push(i);
+                    }
+                }
+            }
+            return out;
+        }
         public void addRoot(Ingredient ingredient) {
             list.add(new IngredientTree(new IngredientNode(ingredient)));
         }

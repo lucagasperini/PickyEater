@@ -30,20 +30,23 @@ public class MenuDetailsView extends VirtualPaneView {
         textTitle.setText(SettingsController.i18n("MENUDETAILS_TITLE"));
         textSubtitle.setText(SettingsController.i18n("MENUDETAILS_SUBTITLE"));
         buttonBack.setText(SettingsController.i18n("BACK_TEXT"));
+        /*
         for(int i = 0; i < 10; i++) {
             DishWidget dishWidget = new DishWidget();
             boxDishList.getChildren().add(dishWidget.getRoot());
         }
+         */
     }
 
     @FXML
-    private void clickAddDish(ActionEvent event) {
+    private void clickButtonAddDish(ActionEvent event) {
         AddDishView view = new AddDishView(this);
         view.show();
     }
 
     @FXML
-    private void clickBack(ActionEvent event) {
+    private void clickButtonBack(ActionEvent event) {
         showParent();
     }
+
 }

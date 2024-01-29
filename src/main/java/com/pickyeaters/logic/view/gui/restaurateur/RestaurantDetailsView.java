@@ -14,15 +14,15 @@ import javafx.scene.text.Text;
 public class RestaurantDetailsView extends VirtualPaneView {
     private RestaurantDetailsController controller;
     @FXML
-    private TextField inputUserFirstname;
+    private TextField inputRestaurateurFirstname;
     @FXML
-    private TextField inputUserLastname;
+    private TextField inputRestaurateurLastname;
     @FXML
-    private TextField inputUserSsn;
+    private TextField inputRestaurateurSsn;
     @FXML
-    private TextField inputUserPhone;
+    private TextField inputRestaurateurPhone;
     @FXML
-    private TextField inputUserEmail;
+    private TextField inputRestaurateurEmail;
     @FXML
     private TextField inputRestaurantName;
     @FXML
@@ -38,17 +38,17 @@ public class RestaurantDetailsView extends VirtualPaneView {
     @FXML
     private Text textSubtitle;
     @FXML
-    private Text textUserFirstname;
+    private Text textRestaurateurFirstname;
     @FXML
-    private Text textUserLastname;
+    private Text textRestaurateurLastname;
     @FXML
-    private Text textUserDetails;
+    private Text textRestaurateurDetails;
     @FXML
-    private Text textUserSsn;
+    private Text textRestaurateurSsn;
     @FXML
-    private Text textUserPhone;
+    private Text textRestaurateurPhone;
     @FXML
-    private Text textUserEmail;
+    private Text textRestaurateurEmail;
     @FXML
     private Text textRestaurantDetails;
     @FXML
@@ -64,12 +64,12 @@ public class RestaurantDetailsView extends VirtualPaneView {
     }
 
     @FXML
-    private void clickSave(ActionEvent event) {
+    private void clickButtonSave(ActionEvent event) {
         RestaurateurBean restaurateurBean = new RestaurateurBean(
-                inputUserEmail.getText(),
-                inputUserFirstname.getText(),
-                inputUserLastname.getText(),
-                inputUserSsn.getText(),
+                inputRestaurateurEmail.getText(),
+                inputRestaurateurFirstname.getText(),
+                inputRestaurateurLastname.getText(),
+                inputRestaurateurSsn.getText(),
                 inputRestaurantName.getText(),
                 inputRestaurantPhone.getText(),
                 inputRestaurantAddress.getText()
@@ -79,7 +79,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
     }
 
     @FXML
-    private void clickBack(ActionEvent event) {
+    private void clickButtonBack(ActionEvent event) {
         showParent();
     }
 
@@ -89,21 +89,21 @@ public class RestaurantDetailsView extends VirtualPaneView {
         buttonBack.setText(SettingsController.i18n("BACK_TEXT"));
         textTitle.setText(SettingsController.i18n("RESTAURANTDETAILS_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURANTDETAILS_SUBTITLE"));
-        textUserFirstname.setText(SettingsController.i18n("FIELD_USER_FIRSTNAME"));
-        textUserLastname.setText(SettingsController.i18n("FIELD_USER_LASTNAME"));
-        textUserSsn.setText(SettingsController.i18n("FIELD_USER_SSN"));
-        textUserPhone.setText(SettingsController.i18n("FIELD_USER_PHONE"));
-        textUserEmail.setText(SettingsController.i18n("FIELD_USER_EMAIL"));
+        textRestaurateurFirstname.setText(SettingsController.i18n("FIELD_USER_FIRSTNAME"));
+        textRestaurateurLastname.setText(SettingsController.i18n("FIELD_USER_LASTNAME"));
+        textRestaurateurSsn.setText(SettingsController.i18n("FIELD_USER_SSN"));
+        textRestaurateurPhone.setText(SettingsController.i18n("FIELD_USER_PHONE"));
+        textRestaurateurEmail.setText(SettingsController.i18n("FIELD_USER_EMAIL"));
         textRestaurantName.setText(SettingsController.i18n("FIELD_RESTAURANT_NAME"));
         textRestaurantAddress.setText(SettingsController.i18n("FIELD_RESTAURANT_ADDRESS"));
         textRestaurantPhone.setText(SettingsController.i18n("FIELD_RESTAURANT_PHONE"));
 
         try {
             RestaurateurBean restaurateur = controller.get();
-            inputUserFirstname.setText(restaurateur.getFirstname());
-            inputUserLastname.setText(restaurateur.getLastname());
-            inputUserSsn.setText(restaurateur.getSsn());
-            inputUserEmail.setText(restaurateur.getEmail());
+            inputRestaurateurFirstname.setText(restaurateur.getFirstname());
+            inputRestaurateurLastname.setText(restaurateur.getLastname());
+            inputRestaurateurSsn.setText(restaurateur.getSsn());
+            inputRestaurateurEmail.setText(restaurateur.getEmail());
             inputRestaurantName.setText(restaurateur.getRestaurantName());
             inputRestaurantAddress.setText(restaurateur.getRestaurantAddress());
             inputRestaurantPhone.setText(restaurateur.getRestaurantPhone());

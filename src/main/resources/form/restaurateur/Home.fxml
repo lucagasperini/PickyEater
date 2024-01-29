@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -18,12 +18,12 @@
                      <children>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Button fx:id="buttonProvideMenuDetails" layoutX="190.0" layoutY="148.0" mnemonicParsing="false" onAction="#clickButtonProvideMenuDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PROVIDEMENUDETAILS" />
+                              <Button fx:id="buttonMenuDetails" layoutX="190.0" layoutY="148.0" mnemonicParsing="false" onAction="#clickButtonMenuDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PROVIDEMENUDETAILS" />
                            </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="554.0" prefWidth="640.0">
                            <children>
-                              <Button fx:id="buttonProvideRestaurantDetails" layoutX="190.0" layoutY="127.0" mnemonicParsing="false" onAction="#clickButtonProvideRestaurantDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PROVIDERESTAURANTDETAILS" />
+                              <Button fx:id="buttonRestaurantDetails" layoutX="190.0" layoutY="127.0" mnemonicParsing="false" onAction="#clickButtonRestaurantDetails" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PROVIDERESTAURANTDETAILS" />
                            </children>
                         </AnchorPane>
                      </children>

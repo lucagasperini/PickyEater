@@ -24,7 +24,7 @@ public class RestaurateurHomeView extends VirtualPaneView {
     }
 
     @FXML
-    private void clickMenuDetails(ActionEvent event) {
+    private void clickButtonMenuDetails(ActionEvent event) {
         MenuDetailsView view = new MenuDetailsView(
                 controller.getMenuDetails(),
                 this
@@ -32,9 +32,8 @@ public class RestaurateurHomeView extends VirtualPaneView {
         view.show();
     }
 
-
     @FXML
-    private void clickRestaurantDetails(ActionEvent event) {
+    private void clickButtonRestaurantDetails(ActionEvent event) {
         RestaurantDetailsView view = new RestaurantDetailsView(
                 controller.getRestaurantDetails(),
                 this

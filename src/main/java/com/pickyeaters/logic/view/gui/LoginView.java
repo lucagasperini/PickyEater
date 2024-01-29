@@ -11,15 +11,15 @@ import javafx.scene.text.Text;
 
 public class LoginView extends VirtualWindowView {
     @FXML
-    private TextField inputLoginEmail;
+    private TextField inputEmail;
     @FXML
-    private PasswordField inputLoginPassword;
+    private PasswordField inputPassword;
     @FXML
-    private Button inputLogin;
+    private Button buttonLogin;
     @FXML
-    private Text textLoginEmail;
+    private Text textEmail;
     @FXML
-    private Text textLoginPassword;
+    private Text textPassword;
     @FXML
     private Text textTitle;
     @FXML
@@ -27,18 +27,19 @@ public class LoginView extends VirtualWindowView {
 
     public LoginView(MainController controller) {
         super(controller, "/form/Login.fxml");
-        textLoginEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
-        textLoginPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
-        inputLogin.setText(SettingsController.i18n("LOGIN_BUTTON"));
+        textEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
+        textPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
+        buttonLogin.setText(SettingsController.i18n("LOGIN_LOGIN"));
         textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
         textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
     }
 
-    @FXML protected void clickLogin(ActionEvent event) {
+    @FXML
+    private void clickButtonLogin(ActionEvent event) {
 
         LoginBean loginBean = new LoginBean(
-                inputLoginEmail.getText(),
-                inputLoginPassword.getText()
+                inputEmail.getText(),
+                inputPassword.getText()
         );
 
         try {
@@ -54,4 +55,7 @@ public class LoginView extends VirtualWindowView {
         }
     }
 
+    @FXML
+    private void clickButtonBack(ActionEvent event) {
+    }
 }

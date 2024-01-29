@@ -28,7 +28,7 @@ public class AddDishView extends VirtualPaneView {
     }
 
     @FXML
-    private void clickBack(ActionEvent event) {
+    private void clickButtonBack(ActionEvent event) {
         showParent();
     }
 
@@ -36,5 +36,14 @@ public class AddDishView extends VirtualPaneView {
     private void clickAddIngredient(ActionEvent event) {
         AddIngredientView view = new AddIngredientView(this);
         view.show();
+    }
+    @FXML
+    private void clickSaveChanges(ActionEvent event) {
+
+    }
+
+    @FXML
+    private void clickDeleteIngredient(ActionEvent event) {
+
     }
 }

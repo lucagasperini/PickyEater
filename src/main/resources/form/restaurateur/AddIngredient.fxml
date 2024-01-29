@@ -6,8 +6,8 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="634.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane maxWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -26,7 +26,7 @@
                      <children>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="1280.0" VBox.vgrow="NEVER">
                            <children>
-                              <Button fx:id="buttonBack" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickBack" prefHeight="28.0" prefWidth="120.0" styleClass="bt-back" text="BACK" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0" />
+                              <Button fx:id="buttonBack" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickButtonBack" prefHeight="28.0" prefWidth="120.0" styleClass="bt-back" text="BACK" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="4.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="436.0" prefWidth="1280.0">
@@ -57,13 +57,13 @@
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <TreeView prefHeight="254.0" prefWidth="540.0" />
+                                                      <TreeView fx:id="treeIngredient" prefHeight="254.0" prefWidth="540.0" />
                                                       <Text fx:id="textReportMissingIngredientQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="REPORTMISSINGINGREDIENT_QUESTION" wrappingWidth="540.0">
                                                          <font>
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <Button fx:id="buttonReport" mnemonicParsing="false" onAction="#clickReport" styleClass="bt-stepAction3" text="REPORT" underline="true" />
+                                                      <Button fx:id="buttonReport" mnemonicParsing="false" onAction="#clickButtonReport" styleClass="bt-stepAction3" text="REPORT" underline="true" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -149,37 +149,13 @@
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <RadioButton fx:id="radioButtonCookingMethodCanBeCookedYes" mnemonicParsing="false" onAction="#clickRadioButtonCookingMethodCanBeCookedYes" text="YES">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="3.0" />
-                                                         </VBox.margin>
-                                                      </RadioButton>
-                                                      <RadioButton fx:id="radioButtonCookingMethodCanBeCookedNo" mnemonicParsing="false" onAction="#clickRadioButtonCookingMethodCanBeCookedNo" text="NO">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="3.0" />
-                                                         </VBox.margin>
-                                                      </RadioButton>
+                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                                                       <Text fx:id="textCookingMethodIsCooked" strokeType="OUTSIDE" strokeWidth="0.0" text="ISCOOKED" wrappingWidth="318.015625">
                                                          <font>
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <RadioButton fx:id="radioButtonCookingMethodIsCookedYes" mnemonicParsing="false" onAction="#clickRadioButtonCookingMethodIsCookedYes" text="YES">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                      </RadioButton>
-                                                      <RadioButton fx:id="radioButtonCookingMethodIsCookedNo" mnemonicParsing="false" onAction="#clickRadioButtonCookingMethodIsCookedNo" text="NO">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                      </RadioButton>
+                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -238,22 +214,7 @@
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <RadioButton fx:id="radioButtonOptionalityYes" mnemonicParsing="false" onAction="#clickRadioButtonOptionalityYes" text="YES">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="3.0" />
-                                                         </VBox.margin>
-                                                      </RadioButton>
-                                                      <RadioButton fx:id="radioButtonOptionalityNo" mnemonicParsing="false" onAction="#clickRadioButtonOptionalityNo" text="NO">
-                                                         <font>
-                                                            <Font name="Calibri" size="16.0" />
-                                                         </font>
-                                                         <VBox.margin>
-                                                            <Insets top="3.0" />
-                                                         </VBox.margin>
-                                                      </RadioButton>
+                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
                                                    </children>
                                                    <padding>
                                                       <Insets top="30.0" />
@@ -272,7 +233,7 @@
                         </AnchorPane>
                         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="1280.0">
                            <children>
-                              <Button fx:id="buttonSaveChanges" layoutX="492.0" layoutY="3.0" mnemonicParsing="false" onAction="#clickSaveChanges" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
+                              <Button fx:id="buttonSave" layoutX="492.0" layoutY="3.0" mnemonicParsing="false" onAction="#clickButtonSave" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
                            </children>
                         </AnchorPane>
                      </children>
