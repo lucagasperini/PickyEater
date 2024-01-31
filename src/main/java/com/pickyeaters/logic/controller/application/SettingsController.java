@@ -56,10 +56,17 @@ public class SettingsController {
     }
 
     private Properties loadConfigFile(String configFile) throws IOException {
-        Properties out = new Properties();
-        FileInputStream fis = new FileInputStream(configFile);
-        out.load(fis);
-        fis.close();
+        Properties out = null;
+        FileInputStream fis = null;
+        try {
+            out = new Properties();
+            fis = new FileInputStream(configFile);
+            out.load(fis);
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        } finally {
+            fis.close();
+        }
         return out;
     }
 
@@ -101,9 +108,15 @@ public class SettingsController {
     }
 
     private void saveConfigFile(String configFile, Properties prop) throws IOException {
-        FileOutputStream fos = new FileOutputStream(configFile);
-        prop.store(fos, null);
-        fos.close();
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(configFile);
+            prop.store(fos, null);
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        } finally {
+            fos.close();
+        }
     }
 
     private void saveProperties(Properties prop) throws SettingsControllerException {
