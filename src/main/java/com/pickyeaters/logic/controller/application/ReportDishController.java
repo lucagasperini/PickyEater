@@ -1,4 +1,8 @@
 package com.pickyeaters.logic.controller.application;
 
-public class ReportDishController {
+import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.application.VirtualController;
+
+public class ReportDishController extends VirtualController {
+    public ReportDishController(MainController main) { super(main); }
 }

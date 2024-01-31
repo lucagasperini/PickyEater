@@ -11,12 +11,9 @@ public class SettingsDatabaseController implements SettingsVirtualController {
     private SettingsDatabase settings = new SettingsDatabase();
     private final int MIN_PORT_NUMBER = 0;
     private final int MAX_PORT_NUMBER = 65535;
-
-    private static final String[] DRIVER_LIST = {"postgresql"/*, "mysql"*/};
     private static final String DEFAULT_DRIVER = "postgresql";
 
-    public SettingsDatabaseController() {
-    }
+    private static final String[] DRIVER_LIST = {DEFAULT_DRIVER/*, "mysql"*/};
 
     public SettingsDatabase getSettings() {
         return settings;

@@ -19,9 +19,6 @@ public class SettingsLocaleController implements SettingsVirtualController {
     private final Properties properties = new Properties();
     private ResourceBundle i18nBundle = null;
 
-    public SettingsLocaleController() {
-    }
-
     public SettingsLocale getSettings() {
         return settings;
     }
