@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Map;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -42,13 +43,13 @@ public class MainView extends VirtualPaneView {
     @FXML
     private ImageView imageLogo;
     @FXML
-    private Text textNavbarUser;
+    private Text textNavbarUsername;
     @FXML
     private Text textNavbarWelcome;
     @FXML
-    private MenuItem menuItemProfile;
+    private MenuItem menuItemNavbarProfile;
     @FXML
-    private MenuItem menuItemLogout;
+    private MenuItem menuItemNavbarLogout;
 
     @Override
     public void show() {
@@ -73,16 +74,16 @@ public class MainView extends VirtualPaneView {
             return;
         }
 
-        setup();
+        setup(null);
         showHomeView();
 
         stage.show();
     }
     @Override
-    protected void setup() {
-        textNavbarUser.setText(getMainController().getLogin().getUser().getName());
-        menuItemProfile.setText(SettingsController.i18n("PICKY_NAVBAR_UPDATEPROFILE"));
-        menuItemLogout.setText(SettingsController.i18n("PICKY_NAVBAR_LOGOFF"));
+    protected void setup(Map<String, String> arg) {
+        textNavbarUsername.setText(getMainController().getLogin().getUser().getName());
+        menuItemNavbarProfile.setText(SettingsController.i18n("NAVBAR_UPDATEPROFILE"));
+        menuItemNavbarLogout.setText(SettingsController.i18n("NAVBAR_LOGOFF"));
     }
 
     private void showHomeView() {
@@ -107,7 +108,7 @@ public class MainView extends VirtualPaneView {
     }
 
     private void showRestaurateurHomeView() {
-        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_HELLO_TEXT"));
+        textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_NAVBAR_HELLO"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
                 controller.getRestaurateur(),
                 this
@@ -116,7 +117,7 @@ public class MainView extends VirtualPaneView {
     }
 
     private void showAdministratorHomeView() {
-        textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HELLO_TEXT"));
+        textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_NAVBAR_HELLO"));
         AdministratorHomeView administratorHomeView = new AdministratorHomeView(
                 controller.getAdministrator(),
                 this
@@ -125,12 +126,15 @@ public class MainView extends VirtualPaneView {
     }
 
     @FXML
-    protected void clickLogoImage() {
+    protected void clickImageLogo() {
         showHomeView();
     }
 
     @FXML
-    private void clickLogout(ActionEvent event) {
+    private void clickMenuItemNavbarProfile(ActionEvent event) {}
+
+    @FXML
+    private void clickMenuItemNavbarLogout(ActionEvent event) {
         controller.getLogin().logout();
         stage.close();
         showApp();

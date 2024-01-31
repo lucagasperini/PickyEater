@@ -32,8 +32,12 @@ CREATE TABLE "User" (
 CREATE TABLE "Dish" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    type varchar(16) NOT NULL,
     name varchar(256) NOT NULL,
-    unique(name)
+    description varchar(4096) NOT NULL,
+    fk_restaurant uuid NOT NULL,
+    active boolean NOT NULL DEFAULT true,
+    FOREIGN KEY (fk_restaurant) REFERENCES "Restaurant" (id)
 );
 
 CREATE TABLE "Ingredient" (
@@ -288,6 +292,38 @@ BEGIN
 	    VALUES (_name, parent_id) RETURNING id::varchar INTO _id;
 END;
 $BODY$;
+
+CREATE OR REPLACE PROCEDURE add_dish(
+    IN _name varchar(256),
+    IN _type varchar(16),
+    IN _description varchar(4096),
+    IN _restaurant_id varchar(256),
+    OUT _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "Dish" (name, type, description, fk_restaurant)
+	    VALUES (_name, _type, _description, _restaurant_id::uuid) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_dish_ingredient(
+    IN _dish_id varchar(256),
+    IN _ingredient_name varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name;
+    IF(ingredient_id IS NULL) THEN
+    		RETURN;
+    END IF;
+	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish)
+	    VALUES (ingredient_id, _dish_id::uuid);
+END;
+$BODY$;
+
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name FROM "Ingredient";

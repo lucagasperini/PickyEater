@@ -45,6 +45,26 @@ public class IngredientDAO {
         }
     }
 
+    public List<Ingredient> getIngredientListOfDish(String dishID) throws DAOException {
+        try {
+            LinkedList<Ingredient> out = new LinkedList<>();
+            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+                    "SELECT name FROM \"Dish_Ingredient\" JOIN \"Ingredient\" AS I ON fk_ingredient=I.id WHERE fk_dish::varchar = ?"
+            );
+            query.setString(dishID);
+
+            query.execute();
+            while(query.next()) {
+                out.add(new Ingredient(query.getString()));
+            }
+            query.close();
+
+            return out;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
     private IngredientForest toForest(Stack<Ingredient> roots, Stack<IngredientTuple> nodes) {
         IngredientForest forest = new IngredientForest();
         while(!roots.empty()) {
@@ -74,23 +94,6 @@ public class IngredientDAO {
     }
 
     public class IngredientForest {
-        public interface Callable {
-            void run(IngredientNode node);
-        }
-
-        public void executeOnNode(Callable callable) {
-            for(IngredientTree tree : list) {
-                Stack<IngredientNode> nodeStack = new Stack<>();
-                nodeStack.push(tree.getRoot());
-                while(!nodeStack.empty()) {
-                    IngredientNode node = nodeStack.pop();
-                    callable.run(node);
-                    for (IngredientNode i : node.getChild()) {
-                        nodeStack.push(i);
-                    }
-                }
-            }
-        }
         LinkedList<IngredientTree> list = new LinkedList<>();
         public ArrayList<String> getPaths() {
             ArrayList<String> tmp = new ArrayList<>();

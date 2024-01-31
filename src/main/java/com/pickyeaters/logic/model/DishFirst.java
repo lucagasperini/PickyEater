@@ -1,8 +1,12 @@
 package com.pickyeaters.logic.model;
 
 public class DishFirst extends Dish{
-    public DishFirst(String name, Ingredient[] ingredientList) {
-        super(name, ingredientList);
-        this.type = TYPE_FIRST;
+    public DishFirst(String name, String description) {
+        super(name, description);
+    }
+
+    @Override
+    public String getType() {
+        return TYPE_FIRST;
     }
 }

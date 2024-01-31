@@ -3,6 +3,9 @@ package com.pickyeaters.logic.model;
 public class Ingredient {
     private String id;
     private String name;
+    public Ingredient(String name) {
+        this(null, name);
+    }
     public Ingredient(String id, String name) {
         this.id = id;
         this.name = name;

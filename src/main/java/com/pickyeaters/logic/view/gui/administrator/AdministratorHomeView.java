@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.util.Map;
+
 public class AdministratorHomeView extends VirtualPaneView {
     private AdministratorController controller;
     @FXML
@@ -21,7 +23,7 @@ public class AdministratorHomeView extends VirtualPaneView {
     }
 
     @Override
-    protected void setup() {
+    protected void setup(Map<String, String> arg) {
         textTitle.setText(SettingsController.i18n("ADMINISTRATOR_HOME_TITLE"));
         textSubtitle.setText(SettingsController.i18n("ADMINISTRATOR_HOME_SUBTITLE"));
         buttonManageReport.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_MANAGE_REPORT"));

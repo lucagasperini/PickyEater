@@ -5,14 +5,17 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import java.io.IOException;
+import java.util.Map;
 
 public abstract class VirtualWidget {
     Parent root;
+    private VirtualPaneView parent;
 
-    public VirtualWidget(String fxml) {
+    public VirtualWidget(String fxml, VirtualPaneView parent) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxml));
         loader.setController(this);
+        this.parent = parent;
         try {
             this.root = loader.load();
         } catch (IOException ex) {
@@ -24,5 +27,12 @@ public abstract class VirtualWidget {
 
     public Parent getRoot() {
         return root;
+    }
+    protected void toParent(Map<String, String> arg) {
+        if(parent != null) {
+            parent.setup(arg);
+        } else {
+            throw new RuntimeException("Calling showParent on a root");
+        }
     }
 }

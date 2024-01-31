@@ -1,5 +1,8 @@
 package com.pickyeaters.logic.model;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public abstract class Dish {
     public static final String TYPE_APPETIZER = "APPETIZER";
     public static final String TYPE_DRINK = "DRINK";
@@ -8,23 +11,57 @@ public abstract class Dish {
     public static final String TYPE_CONTOUR = "CONTOUR";
     public static final String TYPE_DESSERT = "DESSERT";
 
+    private String id;
     private String name;
-    private Ingredient[] ingredientList;
-    protected String type;
+    private String description;
+    private LinkedList<Ingredient> ingredientList = new LinkedList<>();
 
-    protected Dish(String name, Ingredient[] ingredientList) {
+    private boolean active = true;
+
+    public Dish(String id, String name, String description) {
+        this.id = id;
         this.name = name;
-        this.ingredientList = ingredientList;
+        this.description = description;
     }
-    public static String[] getAllType() {
 
-        return new String[]{
-                TYPE_APPETIZER,
-                TYPE_DRINK,
-                TYPE_FIRST,
-                TYPE_SECOND,
-                TYPE_CONTOUR,
-                TYPE_DESSERT
-        };
+    public Dish(String name, String description) {
+        this(null, name, description);
     }
+
+    public void addIngredient(Ingredient ingredient) {
+        ingredientList.add(ingredient);
+    }
+    public void addIngredientList(List<Ingredient> list) {
+        ingredientList.addAll(list);
+    }
+    public LinkedList<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getID() {
+        return id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public abstract String getType();
+
 }

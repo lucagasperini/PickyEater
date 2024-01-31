@@ -2,17 +2,24 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
+import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
-import com.pickyeaters.logic.view.gui.restaurateur.widget.DishWidget;
+import com.pickyeaters.logic.view.gui.restaurateur.widget.DishListItemWidget;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.List;
+import java.util.Map;
+
 public class MenuDetailsView extends VirtualPaneView {
+    MenuDetailsController controller;
     public MenuDetailsView(MenuDetailsController controller, VirtualPaneView parent) {
         super("/form/restaurateur/MenuDetails.fxml", parent);
+        this.controller = controller;
     }
 
     @FXML
@@ -22,25 +29,32 @@ public class MenuDetailsView extends VirtualPaneView {
     @FXML
     private Text textSubtitle;
     @FXML
-    private VBox boxDishList;
+    private VBox vboxMenu;
     @FXML
     private Button buttonAddDish;
+    @FXML
+    private Text textShowinMenu;
     @Override
-    protected void setup() {
-        textTitle.setText(SettingsController.i18n("MENUDETAILS_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("MENUDETAILS_SUBTITLE"));
-        buttonBack.setText(SettingsController.i18n("BACK_TEXT"));
-        /*
-        for(int i = 0; i < 10; i++) {
-            DishWidget dishWidget = new DishWidget();
-            boxDishList.getChildren().add(dishWidget.getRoot());
+    protected void setup(Map<String, String> arg) {
+        textTitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_TITLE"));
+        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SUBTITLE"));
+        buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
+        buttonBack.setText(SettingsController.i18n("BACK"));
+        textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
+
+        try {
+            List<DishBean> dishBeanList = controller.getMenu();
+            for(DishBean i : dishBeanList) {
+                vboxMenu.getChildren().add(new DishListItemWidget(this, i).getRoot());
+            }
+        } catch (ControllerException e) {
+            throw new RuntimeException(e);
         }
-         */
     }
 
     @FXML
     private void clickButtonAddDish(ActionEvent event) {
-        AddDishView view = new AddDishView(this);
+        AddDishView view = new AddDishView(controller.getAddDish(), this);
         view.show();
     }
 

@@ -24,9 +24,12 @@ public class LoginView extends VirtualWindowView {
     private Text textTitle;
     @FXML
     private Text textSubtitle;
+    @FXML
+    private Button buttonBack;
 
     public LoginView(MainController controller) {
         super(controller, "/form/Login.fxml");
+        buttonBack.setText(SettingsController.i18n("BACK"));
         textEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
         textPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
         buttonLogin.setText(SettingsController.i18n("LOGIN_LOGIN"));
@@ -48,9 +51,9 @@ public class LoginView extends VirtualWindowView {
         } catch (LoginControllerException ex) {
             //TODO: Create different messages if bad auth or internal error!
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(SettingsController.i18n("LOGIN_MSG_INVALID_TITLE"));
-            alert.setHeaderText(SettingsController.i18n("LOGIN_MSG_INVALID_HEADER"));
-            alert.setContentText(SettingsController.i18n("LOGIN_MSG_INVALID_CONTENT"));
+            alert.setTitle(SettingsController.i18n("ERROR_LOGIN_TITLE"));
+            alert.setHeaderText(SettingsController.i18n("ERROR_LOGIN_HEADER"));
+            alert.setContentText(SettingsController.i18n("ERROR_LOGIN_CONTENT"));
             alert.showAndWait();
         }
     }

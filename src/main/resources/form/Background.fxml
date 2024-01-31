@@ -66,7 +66,7 @@
                                              <children>
                                                 <AnchorPane layoutX="12.0" layoutY="28.0" prefHeight="12.0" prefWidth="21.0">
                                                    <children>
-                                                      <ImageView fitHeight="30.0" fitWidth="60.0" onMouseClicked="#clickMenuButton" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="30.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
                                                             <Image url="@../pics/profileIcon.png" />
                                                          </image>

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
 public abstract class VirtualPaneView {
     private static BorderPane mainLayout;
@@ -41,15 +42,28 @@ public abstract class VirtualPaneView {
         return mainController;
     }
 
-    protected abstract void setup();
+    protected abstract void setup(Map<String, String> arg);
 
-    public void show() {
-        setup();
+    public void show(Map<String, String> arg) {
+        setup(arg);
         mainLayout.setCenter(this.root);
     }
+    public void show() {
+        setup(null);
+        mainLayout.setCenter(this.root);
+    }
+
     public void showParent() {
         if(parent != null) {
-            parent.setup();
+            parent.setup(null);
+            mainLayout.setCenter(parent.root);
+        } else {
+            throw new RuntimeException("Calling showParent on a root");
+        }
+    }
+    public void showParent(Map<String, String> arg) {
+        if(parent != null) {
+            parent.setup(arg);
             mainLayout.setCenter(parent.root);
         } else {
             throw new RuntimeException("Calling showParent on a root");

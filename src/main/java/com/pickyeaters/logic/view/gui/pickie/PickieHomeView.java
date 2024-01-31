@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.util.Map;
+
 public class PickieHomeView extends VirtualPaneView {
     @FXML
     private Text textTitle;
@@ -36,11 +38,11 @@ public class PickieHomeView extends VirtualPaneView {
     }
 
     @Override
-    protected void setup() {
+    protected void setup(Map<String, String> arg) {
         textTitle.setText(SettingsController.i18n("PICKY_HOME_TITLE"));
         textSubtitle.setText(SettingsController.i18n("PICKY_HOME_SUBTITLE"));
         buttonFindRestaurant.setText(SettingsController.i18n("PICKY_HOME_FINDRESTAURANT"));
         buttonReviewDish.setText(SettingsController.i18n("PICKY_HOME_REVIEWADISH"));
-        buttonEatingPreferences.setText(SettingsController.i18n("PICKY_HOME_EATINGPREFERENCES"));
+        buttonEatingPreferences.setText(SettingsController.i18n("PICKY_HOME_PERSONALIZEEATINGPREFERENCES"));
     }
 }

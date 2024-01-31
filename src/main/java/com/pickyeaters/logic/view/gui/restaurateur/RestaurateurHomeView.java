@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
+import java.util.Map;
+
 public class RestaurateurHomeView extends VirtualPaneView {
     private RestaurateurController controller;
     @FXML
@@ -42,10 +44,10 @@ public class RestaurateurHomeView extends VirtualPaneView {
     }
 
     @Override
-    protected void setup() {
+    protected void setup(Map<String, String> arg) {
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_SUBTITLE"));
-        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MENUDETAILS"));
-        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_RESTAURANTDETAILS"));
+        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGEMENUDETAILS"));
+        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGERESTAURANTDETAILS"));
     }
 }

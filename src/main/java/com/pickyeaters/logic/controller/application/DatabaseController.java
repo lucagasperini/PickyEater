@@ -151,6 +151,20 @@ public class DatabaseController {
             }
         }
 
+        public boolean getBoolean() throws DatabaseControllerException {
+            try {
+                if(!isResultSet)
+                    return cs.getBoolean(outIndex++);
+                else {
+                    if(rs == null)
+                        throw new DatabaseControllerException("Cannot getBoolean from Result set");
+                    return rs.getBoolean(outIndex++);
+                }
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot getBoolean: " + ex.getMessage());
+            }
+        }
+
     }
 
     public Query query(String query) throws DatabaseControllerException {
