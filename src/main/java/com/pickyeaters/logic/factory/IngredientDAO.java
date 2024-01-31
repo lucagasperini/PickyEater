@@ -96,7 +96,7 @@ public class IngredientDAO {
 
     public class IngredientForest {
         LinkedList<IngredientTree> list = new LinkedList<>();
-        public ArrayList<String> getPaths() {
+        public List<String> getPaths() {
             ArrayList<String> tmp = new ArrayList<>();
             ArrayList<String> out = new ArrayList<>();
             for(IngredientTree tree : list) {
@@ -137,7 +137,7 @@ public class IngredientDAO {
             return false;
         }
 
-        public LinkedList<IngredientTree> getTreeList() {
+        public List<IngredientTree> getTreeList() {
             return list;
         }
     }
@@ -177,7 +177,7 @@ public class IngredientDAO {
         public IngredientNode(Ingredient value) {
             // TODO: CC?
             this.value = new Ingredient(value);
-            this.child = new LinkedList<IngredientNode>();
+            this.child = new LinkedList<>();
         }
 
         public boolean hasID(String id) {
@@ -188,7 +188,7 @@ public class IngredientDAO {
             return value;
         }
 
-        public LinkedList<IngredientNode> getChild() {
+        public List<IngredientNode> getChild() {
             return child;
         }
 

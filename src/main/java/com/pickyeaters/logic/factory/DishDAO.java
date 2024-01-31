@@ -1,7 +1,6 @@
 package com.pickyeaters.logic.factory;
 
 import com.pickyeaters.logic.controller.application.DatabaseController;
-import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;

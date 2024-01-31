@@ -34,7 +34,7 @@ public abstract class Dish {
     public void addIngredientList(List<Ingredient> list) {
         ingredientList.addAll(list);
     }
-    public LinkedList<Ingredient> getIngredientList() {
+    public List<Ingredient> getIngredientList() {
         return ingredientList;
     }
 

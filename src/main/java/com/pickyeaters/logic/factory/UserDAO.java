@@ -5,8 +5,6 @@ import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
 
-import java.sql.CallableStatement;
-import java.sql.SQLException;
 import java.sql.Types;
 
 public class UserDAO {
