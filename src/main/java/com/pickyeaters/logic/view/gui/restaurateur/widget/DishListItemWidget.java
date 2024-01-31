@@ -1,6 +1,5 @@
 package com.pickyeaters.logic.view.gui.restaurateur.widget;
 
-import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.VirtualWidget;
@@ -11,7 +10,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DishListItemWidget extends VirtualWidget {
     @FXML
@@ -26,10 +26,12 @@ public class DishListItemWidget extends VirtualWidget {
     private ListView<String> listviewIngredient;
     @FXML
     private CheckBox checkBoxActive;
+    private String dishID;
 
     public DishListItemWidget(VirtualPaneView parent, DishBean dishBean) {
-        super("/form/restaurateur/widget/MenuTableElement.fxml", parent);
-
+        super("/form/restaurateur/widget/DishListItemWidget.fxml", parent);
+        this.dishID = dishBean.getID();
+        checkBoxActive.setSelected(dishBean.isActive());
         textName.setText(dishBean.getName());
         textDescription.setText(dishBean.getDescription());
 
@@ -41,16 +43,22 @@ public class DishListItemWidget extends VirtualWidget {
 
     @FXML
     private void clickCheckBoxActive(ActionEvent actionEvent) {
-
+        Map<String, String> arg = new HashMap<>();
+        arg.put("activeDish", dishID);
+        toParent(arg);
     }
 
     @FXML
     private void clickButtonUpdateDish(ActionEvent actionEvent) {
-
+        Map<String, String> arg = new HashMap<>();
+        arg.put("updateDish", dishID);
+        toParent(arg);
     }
 
     @FXML
     private void clickButtonDeleteDish(ActionEvent actionEvent) {
-
+        Map<String, String> arg = new HashMap<>();
+        arg.put("deleteDish", dishID);
+        toParent(arg);
     }
 }

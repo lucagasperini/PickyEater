@@ -55,7 +55,7 @@ public class DishDAO {
         try {
             LinkedList<Dish> out = new LinkedList<>();
             DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
-                    "SELECT id, name, description, type, active FROM \"Dish\" WHERE fk_restaurant::varchar = ?"
+                    "SELECT id, name, description, type, active FROM \"Dish\" WHERE fk_restaurant::varchar = ? ORDER BY name"
             );
             query.setString(restaurantID);
             query.execute();
@@ -88,5 +88,27 @@ public class DishDAO {
         out.setID(id);
         out.setActive(active);
         return out;
+    }
+
+    public void delete(String dishID) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL delete_dish(?)");
+            query.setString(dishID);
+            query.execute();
+            query.close();
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+    public void toggle(String dishID) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL toggle_dish(?)");
+            query.setString(dishID);
+            query.execute();
+            query.close();
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
     }
 }

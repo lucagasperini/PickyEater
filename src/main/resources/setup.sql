@@ -324,6 +324,22 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE delete_dish(IN _dish_id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	DELETE FROM "Dish_Ingredient" WHERE fk_dish = _dish_id::uuid;
+    DELETE FROM "Dish" WHERE id = _dish_id::uuid;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE toggle_dish(IN _id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+    UPDATE "Dish" SET active = NOT active WHERE id = _id::uuid;
+END;
+$BODY$;
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name FROM "Ingredient";

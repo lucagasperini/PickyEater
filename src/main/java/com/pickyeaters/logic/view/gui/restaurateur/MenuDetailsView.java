@@ -34,14 +34,25 @@ public class MenuDetailsView extends VirtualPaneView {
     private Button buttonAddDish;
     @FXML
     private Text textShowinMenu;
+
     @Override
     protected void setup(Map<String, String> arg) {
+        if(arg != null) {
+            setupDeleteDish(arg.get("deleteDish"));
+            setupUpdateDish(arg.get("updateDish"));
+            setupActiveDish(arg.get("activeDish"));
+        }
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SUBTITLE"));
         buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
         buttonBack.setText(SettingsController.i18n("BACK"));
         textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
 
+        setupDishList();
+    }
+
+    private void setupDishList() {
+        vboxMenu.getChildren().clear();
         try {
             List<DishBean> dishBeanList = controller.getMenu();
             for(DishBean i : dishBeanList) {
@@ -52,6 +63,31 @@ public class MenuDetailsView extends VirtualPaneView {
         }
     }
 
+    private void setupActiveDish(String dishID) {
+        if(dishID != null) {
+            try {
+                controller.toggleDish(dishID);
+            } catch (ControllerException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private void setupDeleteDish(String dishID) {
+        if(dishID != null) {
+            try {
+                controller.deleteDish(dishID);
+            } catch (ControllerException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void setupUpdateDish(String dishID) {
+        if(dishID != null) {
+            AddDishView view = new AddDishView(controller.getAddDish(), this);
+            view.show();
+        }
+    }
     @FXML
     private void clickButtonAddDish(ActionEvent event) {
         AddDishView view = new AddDishView(controller.getAddDish(), this);

@@ -13,9 +13,9 @@
 
 <HBox prefHeight="80.0" prefWidth="1180.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="checkboxActive" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="28.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="28.0">
          <children>
-            <CheckBox fx:id="checkBoxShowInMenu" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickCheckBoxActive" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
+            <CheckBox fx:id="checkBoxActive" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickCheckBoxActive" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="6.0" />
          </children>
       </AnchorPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="300.0">

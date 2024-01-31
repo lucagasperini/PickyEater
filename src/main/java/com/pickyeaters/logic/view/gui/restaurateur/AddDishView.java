@@ -127,6 +127,8 @@ public class AddDishView extends VirtualPaneView {
         } catch (ControllerException e) {
             throw new RuntimeException(e);
         }
+
+        showParent();
     }
 
     @FXML

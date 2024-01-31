@@ -5,9 +5,11 @@ import com.pickyeaters.logic.model.*;
 import java.util.LinkedList;
 
 public class DishBean {
+    private String id;
     private String name;
     private String description;
     private String category;
+    private boolean active;
     private LinkedList<String> ingredientList = new LinkedList<>();
 
     //TODO: check category?
@@ -18,8 +20,10 @@ public class DishBean {
     }
 
     public DishBean(Dish dish) {
+        this.id = dish.getID();
         this.name = dish.getName();
         this.description = dish.getDescription();
+        this.active = dish.isActive();
         this.category = dish.getType();
         for(Ingredient i : dish.getIngredientList()) {
             ingredientList.add(i.getName());
@@ -30,8 +34,16 @@ public class DishBean {
         ingredientList.add(name);
     }
 
+    public String getID() {
+        return id;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     public String getName() {
