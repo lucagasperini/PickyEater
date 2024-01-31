@@ -19,6 +19,46 @@ public class DishDAO {
         return instance;
     }
 
+    public void update(Dish dish) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?)");
+            query.setString(dish.getID());
+            query.setString(dish.getName());
+            query.setString(dish.getDescription());
+            query.setString(dish.getType());
+
+            query.execute();
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+    public Dish get(String dishID) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_dish(?, ?, ?, ?, ?)");
+            query.setString(dishID);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.BIT);
+
+            query.execute();
+
+            String name = query.getString();
+            String description = query.getString();
+            String type = query.getString();
+            boolean active = query.getBoolean();
+
+            query.close();
+
+            Dish dish = rowToDish(dishID, name, description, type, active);
+            dish.addIngredientList(IngredientDAO.getInstance().getIngredientListOfDish(dishID));
+            return dish;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
     public String addDish(String restaurantID, Dish dish) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish(?, ?, ?, ?, ?)");
@@ -104,6 +144,17 @@ public class DishDAO {
     public void toggle(String dishID) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL toggle_dish(?)");
+            query.setString(dishID);
+            query.execute();
+            query.close();
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+    public void unlinkIngredient(String dishID) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL unlink_dish_ingredient(?)");
             query.setString(dishID);
             query.execute();
             query.close();

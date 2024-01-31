@@ -11,12 +11,16 @@ public class DishBean {
     private String category;
     private boolean active;
     private LinkedList<String> ingredientList = new LinkedList<>();
-
-    //TODO: check category?
-    public DishBean(String name, String description, String category) {
+    public DishBean(String id, String name, String description, String category) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
+    }
+
+    //TODO: check category?
+    public DishBean(String name, String description, String category) {
+        this(null, name, description,category);
     }
 
     public DishBean(Dish dish) {
@@ -46,6 +50,10 @@ public class DishBean {
         return active;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public String getName() {
         return name;
     }
@@ -55,7 +63,7 @@ public class DishBean {
     }
 
     public Dish toDish() {
-        return switch (category) {
+        Dish out = switch (category) {
             case Dish.TYPE_APPETIZER -> new DishAppetizer(name, description);
             case Dish.TYPE_CONTOUR -> new DishContour(name, description);
             case Dish.TYPE_DESSERT -> new DishDessert(name, description);
@@ -64,5 +72,8 @@ public class DishBean {
             case Dish.TYPE_FIRST -> new DishFirst(name, description);
             default -> throw new IllegalStateException("Unexpected value: " + category);
         };
+        out.setID(id);
+        out.setActive(active);
+        return out;
     }
 }

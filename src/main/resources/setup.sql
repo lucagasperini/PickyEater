@@ -333,6 +333,14 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE unlink_dish_ingredient(IN _dish_id varchar(256))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	DELETE FROM "Dish_Ingredient" WHERE fk_dish = _dish_id::uuid;
+END;
+$BODY$;
+
 CREATE OR REPLACE PROCEDURE toggle_dish(IN _id varchar(256))
 LANGUAGE plpgsql
 AS $BODY$
@@ -340,6 +348,32 @@ BEGIN
     UPDATE "Dish" SET active = NOT active WHERE id = _id::uuid;
 END;
 $BODY$;
+
+CREATE OR REPLACE PROCEDURE get_dish(
+    IN _id varchar(256),
+    OUT _name varchar(256),
+    OUT _description varchar(4096),
+    OUT _type varchar(16),
+    OUT _active boolean)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+    SELECT name, description, type, active INTO _name, _description, _type, _active FROM "Dish" WHERE id = _id::uuid;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE update_dish(
+    IN _id varchar(256),
+    IN _name varchar(256),
+    IN _description varchar(4096),
+    IN _type varchar(16))
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+    UPDATE "Dish" SET name = _name, description = _description, type = _type WHERE id = _id::uuid;
+END;
+$BODY$;
+
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name FROM "Ingredient";

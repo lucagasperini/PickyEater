@@ -122,7 +122,7 @@ public class DatabaseController {
         public void registerOutParameter(int sqlType) throws DatabaseControllerException {
             try {
                 cs.registerOutParameter(index, sqlType);
-                cs.setNull(index, Types.VARCHAR);
+                cs.setNull(index, sqlType);
                 index++;
             } catch (SQLException ex) {
                 throw new DatabaseControllerException("Cannot registerOutParameter: " + ex.getMessage());

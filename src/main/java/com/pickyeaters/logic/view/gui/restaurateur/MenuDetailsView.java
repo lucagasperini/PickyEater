@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
+import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -84,7 +85,7 @@ public class MenuDetailsView extends VirtualPaneView {
 
     private void setupUpdateDish(String dishID) {
         if(dishID != null) {
-            AddDishView view = new AddDishView(controller.getAddDish(), this);
+            UpdateDishView view = new UpdateDishView(controller.getUpdateDish(), this, dishID);
             view.show();
         }
     }
