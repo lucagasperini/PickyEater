@@ -51,8 +51,8 @@ public class MenuDetailsView extends VirtualPaneView {
             for(DishBean i : dishBeanList) {
                 vboxMenu.getChildren().add(new DishListItemWidget(this, i).getRoot());
             }
-        } catch (ControllerException e) {
-            throw new RuntimeException(e);
+        } catch (ControllerException ex) {
+            showError(ex);
         }
     }
 
@@ -60,8 +60,8 @@ public class MenuDetailsView extends VirtualPaneView {
         if(dishID != null) {
             try {
                 controller.toggleDish(dishID);
-            } catch (ControllerException e) {
-                throw new RuntimeException(e);
+            } catch (ControllerException ex) {
+                showError(ex);
             }
         }
     }
@@ -69,8 +69,8 @@ public class MenuDetailsView extends VirtualPaneView {
         if(dishID != null) {
             try {
                 controller.deleteDish(dishID);
-            } catch (ControllerException e) {
-                throw new RuntimeException(e);
+            } catch (ControllerException ex) {
+                showError(ex);
             }
         }
     }

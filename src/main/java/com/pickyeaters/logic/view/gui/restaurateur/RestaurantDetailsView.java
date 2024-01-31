@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetailsController;
+import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -122,8 +123,12 @@ public class RestaurantDetailsView extends VirtualPaneView {
                 inputRestaurantPhone.getText(),
                 inputRestaurantAddress.getText()
         );
-        controller.set(restaurateurBean);
-        setup(null);
+        try {
+            controller.set(restaurateurBean);
+            setup(null);
+        } catch (ControllerException ex) {
+            showError(ex);
+        }
     }
 
     @Override

@@ -20,7 +20,7 @@ public class UpdateDishView extends EditDishView {
         try {
             dishBean = controller.get(dishID);
         } catch (ControllerException e) {
-            throw new RuntimeException(e);
+            showError(e);
         }
         for(String s : dishBean.getIngredientList()) {
             setupAddIngredient(s);
@@ -58,11 +58,10 @@ public class UpdateDishView extends EditDishView {
 
         try {
             controller.update(tmp);
-        } catch (ControllerException e) {
-            throw new RuntimeException(e);
+            showParent();
+        } catch (ControllerException ex) {
+            showError(ex);
         }
-
-        showParent();
     }
 
 }

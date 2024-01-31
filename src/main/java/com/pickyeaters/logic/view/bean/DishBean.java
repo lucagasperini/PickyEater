@@ -34,6 +34,10 @@ public class DishBean {
         }
     }
 
+    public boolean hasIngredients(){
+        return !ingredientList.isEmpty();
+    }
+
     public void addIngredient(String name) {
         ingredientList.add(name);
     }

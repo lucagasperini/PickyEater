@@ -42,13 +42,13 @@ public class AddDishView extends EditDishView {
         for(IngredientListItemWidget widget : ingredientListItemWidgets) {
             dishBean.addIngredient(widget.getName());
         }
+
         try {
             controller.add(dishBean);
-        } catch (ControllerException e) {
-            throw new RuntimeException(e);
+            showParent();
+        } catch (ControllerException ex) {
+            showError(ex);
         }
-
-        showParent();
     }
 
 }

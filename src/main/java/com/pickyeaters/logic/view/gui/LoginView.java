@@ -60,12 +60,7 @@ public class LoginView extends VirtualPaneView {
             result.put("login", "true");
             showParent(result);
         } catch (LoginControllerException ex) {
-            //TODO: Create different messages if bad auth or internal error!
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle(SettingsController.i18n("ERROR_LOGIN_TITLE"));
-            alert.setHeaderText(SettingsController.i18n("ERROR_LOGIN_HEADER"));
-            alert.setContentText(SettingsController.i18n("ERROR_LOGIN_CONTENT"));
-            alert.showAndWait();
+            showError(ex);
         }
     }
 }

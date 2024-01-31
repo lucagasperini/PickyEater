@@ -13,21 +13,13 @@ public class UpdateDishController extends VirtualController {
     }
 
     public DishBean get(String dishID) throws ControllerException {
-        try {
-            return new DishBean(DishDAO.getInstance().get(dishID));
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error: " + ex.getMessage());
-        }
+        return new DishBean(DishDAO.getInstance().get(dishID));
     }
 
     public void update(DishBean dishBean) throws ControllerException {
-        try {
-            DishDAO.getInstance().update(dishBean.toDish());
-            DishDAO.getInstance().unlinkIngredient(dishBean.getID());
-            for(String i : dishBean.getIngredientList())
-                DishDAO.getInstance().addDishIngredient(dishBean.getID(), i);
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error: " + ex.getMessage());
-        }
+        DishDAO.getInstance().update(dishBean.toDish());
+        DishDAO.getInstance().unlinkIngredient(dishBean.getID());
+        for(String i : dishBean.getIngredientList())
+            DishDAO.getInstance().addDishIngredient(dishBean.getID(), i);
     }
 }

@@ -16,14 +16,15 @@ public class AddDishController extends VirtualController {
 
     public void add(DishBean dishBean) throws ControllerException {
         try {
+            if(!dishBean.hasIngredients()) {
+                throw new ControllerException("DISH_NO_INGREDIENT","Cannot add dish without ingredients");
+            }
             String restaurantID = main.getLogin().toRestaurateur().getRestaurant().getID();
             String dishID = DishDAO.getInstance().addDish(restaurantID, dishBean.toDish());
             for(String i : dishBean.getIngredientList())
                 DishDAO.getInstance().addDishIngredient(dishID, i);
         } catch (LoginControllerException ex) {
             throw new ControllerException("Current user is not a restaurateur");
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error");
         }
     }
 }

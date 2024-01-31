@@ -43,24 +43,14 @@ public class MenuDetailsController extends VirtualController {
             return out;
         } catch (LoginControllerException ex) {
             throw new ControllerException("Current user is not a restaurateur");
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error: " + ex.getMessage());
         }
     }
 
     public void deleteDish(String dishID) throws ControllerException {
-        try {
-            DishDAO.getInstance().delete(dishID);
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error: " + ex.getMessage());
-        }
+        DishDAO.getInstance().delete(dishID);
     }
 
     public void toggleDish(String dishID) throws ControllerException {
-        try {
-            DishDAO.getInstance().toggle(dishID);
-        } catch (DAOException ex) {
-            throw new ControllerException("Database error: " + ex.getMessage());
-        }
+        DishDAO.getInstance().toggle(dishID);
     }
 }

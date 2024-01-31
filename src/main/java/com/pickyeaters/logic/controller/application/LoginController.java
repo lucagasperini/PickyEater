@@ -63,7 +63,7 @@ public class LoginController extends VirtualController {
     public void auth(LoginBean loginBean) throws LoginControllerException {
         try {
             if(!DatabaseController.getInstance().login(loginBean.getEmail(), loginBean.getPassword())) {
-                throw new LoginControllerException("Login failed");
+                throw new LoginControllerException("BAD_AUTH", "Login failed");
             }
             user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
             switch (getUserType()) {
@@ -72,7 +72,7 @@ public class LoginController extends VirtualController {
                 case ADMIN -> main.initAdministrator();
             }
         } catch (DatabaseControllerException ex) {
-            throw new LoginControllerException("Cannot connect to database");
+            throw new LoginControllerException("NO_DB_CONNECTION", "Cannot connect to database");
         }
     }
 
