@@ -6,7 +6,6 @@ import com.pickyeaters.logic.utils.OS;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -65,7 +64,11 @@ public class SettingsController {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            fis.close();
+            try {
+                fis.close();
+            } catch (NullPointerException ignored) {
+
+            }
         }
         return out;
     }
@@ -115,7 +118,11 @@ public class SettingsController {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            fos.close();
+            try {
+                fos.close();
+            } catch (NullPointerException ignored) {
+
+            }
         }
     }
 
