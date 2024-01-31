@@ -5,6 +5,8 @@ import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
 
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.sql.Types;
 
 public class UserDAO {
@@ -13,6 +15,26 @@ public class UserDAO {
 
     public static UserDAO getInstance() {
         return instance;
+    }
+
+    public String login(String username, String password) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL login(?,?,?)");
+
+            query.setString(username);
+            query.setString(password);
+            query.registerOutParameter(Types.VARCHAR);
+
+            query.execute();
+
+            String token = query.getString();
+            query.close();
+
+            return token;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+
     }
 
     public User getUserInfo(String email) throws DAOException {

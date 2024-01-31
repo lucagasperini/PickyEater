@@ -43,35 +43,6 @@ public class DatabaseController {
         }
     }
 
-    public boolean login(String username, String password) throws DatabaseControllerException {
-        if(conn == null) {
-            throw new DatabaseControllerException("Connection is not ready.");
-        }
-        CallableStatement cs = null;
-        try {
-            cs = conn.prepareCall("CALL login(?,?,?)");
-            cs.setString(1, username);
-            cs.setString(2, password);
-            cs.registerOutParameter(3, Types.VARCHAR);
-            cs.setNull(3, Types.VARCHAR);
-        } catch (SQLException e) {
-            throw new DatabaseControllerException("Cannot create a login call.");
-        }
-
-        try {
-            cs.executeUpdate();
-        } catch (SQLException e) {
-            throw new DatabaseControllerException("Cannot execute a login call.");
-        }
-
-        try {
-            String token = cs.getString(3);
-            return token != null;
-        } catch (SQLException e) {
-            throw new DatabaseControllerException("Cannot get response from login call.");
-        }
-
-    }
 
     public class Query {
         int outIndex = 1;

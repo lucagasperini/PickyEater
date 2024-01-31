@@ -62,7 +62,8 @@ public class LoginController extends VirtualController {
 
     public void auth(LoginBean loginBean) throws LoginControllerException {
         try {
-            if(!DatabaseController.getInstance().login(loginBean.getEmail(), loginBean.getPassword())) {
+            String token = UserDAO.getInstance().login(loginBean.getEmail(), loginBean.getPassword());
+            if(token == null) {
                 throw new LoginControllerException("BAD_AUTH", "Login failed");
             }
             user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
