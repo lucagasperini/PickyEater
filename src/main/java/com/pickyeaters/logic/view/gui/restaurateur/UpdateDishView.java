@@ -3,20 +3,12 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
-import com.pickyeaters.logic.model.Dish;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 
-import java.util.LinkedList;
 import java.util.Map;
 
 public class UpdateDishView extends EditDishView {
@@ -43,7 +35,6 @@ public class UpdateDishView extends EditDishView {
         }
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_UPDATEDISH_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_UPDATEDISH_SUBTITLE"));
-
         buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
 
         inputName.setText(dishBean.getName());

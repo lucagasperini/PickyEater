@@ -20,12 +20,6 @@ import java.util.Map;
 
 public abstract class EditDishView extends VirtualPaneView {
     @FXML
-    protected Button buttonBack;
-    @FXML
-    protected Text textTitle;
-    @FXML
-    protected Text textSubtitle;
-    @FXML
     protected Button buttonAddIngredient;
 
     @FXML
@@ -66,7 +60,6 @@ public abstract class EditDishView extends VirtualPaneView {
         comboBoxItemContour = SettingsController.i18n("DISH_TYPE_CONTOUR");
         comboBoxItemDessert = SettingsController.i18n("DISH_TYPE_DESSERT");
 
-        buttonBack.setText(SettingsController.i18n("BACK"));
         textCategory.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_CATEGORY"));
         textDescription.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_DESCRIPTION"));
         textAllergens.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_ALLERGENS"));
@@ -118,10 +111,6 @@ public abstract class EditDishView extends VirtualPaneView {
                 return;
             }
         }
-    }
-    @FXML
-    private void clickButtonBack(ActionEvent event) {
-        showParent();
     }
 
     @FXML

@@ -19,12 +19,6 @@ import java.util.Stack;
 
 public class AddIngredientView extends VirtualPaneView {
     @FXML
-    private Button buttonBack;
-    @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
-    @FXML
     private Text textIngredient;
     @FXML
     private Text textAllergens;
@@ -69,7 +63,6 @@ public class AddIngredientView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        buttonBack.setText(SettingsController.i18n("BACK"));
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_SUBTITLE"));
         textIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));

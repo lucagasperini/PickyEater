@@ -34,12 +34,6 @@ public class RestaurantDetailsView extends VirtualPaneView {
     @FXML
     private Button buttonSave;
     @FXML
-    private Button buttonBack;
-    @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
-    @FXML
     private Text textRestaurateurFirstname;
     @FXML
     private Text textRestaurateurLastname;
@@ -132,15 +126,9 @@ public class RestaurantDetailsView extends VirtualPaneView {
         setup(null);
     }
 
-    @FXML
-    private void clickButtonBack(ActionEvent event) {
-        showParent();
-    }
-
     @Override
     protected void setup(Map<String, String> arg) {
         buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
-        buttonBack.setText(SettingsController.i18n("BACK"));
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_SUBTITLE"));
         textRestaurateurFirstname.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME"));

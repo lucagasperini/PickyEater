@@ -22,13 +22,6 @@ public class MenuDetailsView extends VirtualPaneView {
         super("/form/restaurateur/MenuDetails.fxml", parent);
         this.controller = controller;
     }
-
-    @FXML
-    private Button buttonBack;
-    @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
     @FXML
     private VBox vboxMenu;
     @FXML
@@ -46,7 +39,6 @@ public class MenuDetailsView extends VirtualPaneView {
         textTitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_TITLE"));
         textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SUBTITLE"));
         buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
-        buttonBack.setText(SettingsController.i18n("BACK"));
         textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
 
         setupDishList();
@@ -94,10 +86,4 @@ public class MenuDetailsView extends VirtualPaneView {
         AddDishView view = new AddDishView(controller.getAddDish(), this);
         view.show();
     }
-
-    @FXML
-    private void clickButtonBack(ActionEvent event) {
-        showParent();
-    }
-
 }

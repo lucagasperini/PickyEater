@@ -1,12 +1,16 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.Main;
+import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,15 +18,19 @@ import java.net.URL;
 import java.util.Map;
 
 public abstract class VirtualPaneView {
+    @FXML
+    protected Text textTitle;
+    @FXML
+    protected Text textSubtitle;
+    @FXML
+    private Button buttonBack;
     private static BorderPane mainLayout;
-    protected URL fxml = null;
     private VirtualPaneView parent;
     protected Parent root = null;
     private static MainController mainController;
     public VirtualPaneView(String fxml, VirtualPaneView parent) {
         FXMLLoader loader = new FXMLLoader();
-        this.fxml = getClass().getResource(fxml);
-        loader.setLocation(this.fxml);
+        loader.setLocation(getClass().getResource(fxml));
         loader.setController(this);
         this.parent = parent;
         try {
@@ -45,10 +53,16 @@ public abstract class VirtualPaneView {
     protected abstract void setup(Map<String, String> arg);
 
     public void show(Map<String, String> arg) {
+        if(buttonBack != null) {
+            buttonBack.setText(SettingsController.i18n("BACK"));
+        }
         setup(arg);
         mainLayout.setCenter(this.root);
     }
     public void show() {
+        if(buttonBack != null) {
+            buttonBack.setText(SettingsController.i18n("BACK"));
+        }
         setup(null);
         mainLayout.setCenter(this.root);
     }
@@ -68,5 +82,10 @@ public abstract class VirtualPaneView {
         } else {
             throw new RuntimeException("Calling showParent on a root");
         }
+    }
+
+    @FXML
+    private void clickButtonBack(ActionEvent event) {
+        showParent();
     }
 }

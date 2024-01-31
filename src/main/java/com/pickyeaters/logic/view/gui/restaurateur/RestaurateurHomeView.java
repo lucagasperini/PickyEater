@@ -13,10 +13,6 @@ import java.util.Map;
 public class RestaurateurHomeView extends VirtualPaneView {
     private RestaurateurController controller;
     @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
-    @FXML
     private Button buttonRestaurantDetails;
     @FXML
     private Button buttonMenuDetails;

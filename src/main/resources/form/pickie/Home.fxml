@@ -17,7 +17,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="buttonReviewDish" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="REVIEWADISH" />
+                        <Button fx:id="buttonReviewDish" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickButtonReviewDish" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="REVIEWADISH" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -30,7 +30,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="buttonEatingPreferences" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PERSONALIZEEATINGPREFERENCES" />
+                        <Button fx:id="buttonEatingPreferences" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#clickButtonEatingPreferences" prefHeight="260.0" prefWidth="260.0" styleClass="bt-uc" text="PERSONALIZEEATINGPREFERENCES" />
                      </children>
                   </AnchorPane>
                </children>

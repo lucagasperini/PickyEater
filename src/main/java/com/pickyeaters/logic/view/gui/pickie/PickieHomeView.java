@@ -2,20 +2,15 @@ package com.pickyeaters.logic.view.gui.pickie;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.pickie.PickieController;
-import com.pickyeaters.logic.view.gui.FindRestaurantView;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 
 import java.util.Map;
 
 public class PickieHomeView extends VirtualPaneView {
-    @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
+
     @FXML
     private Button buttonReviewDish;
     @FXML
@@ -29,13 +24,33 @@ public class PickieHomeView extends VirtualPaneView {
     }
 
     @FXML
-    protected void clickFindRestaurant(ActionEvent event) {
-        FindRestaurantView findRestaurantView = new FindRestaurantView(
+    private void clickFindRestaurant(ActionEvent event) {
+        FindRestaurantView view = new FindRestaurantView(
                 controller.getFindRestaurant(),
                 this
         );
-        findRestaurantView.show();
+        view.show();
     }
+
+    @FXML
+    private void clickButtonReviewDish(ActionEvent event) {
+        ReviewDishView view = new ReviewDishView(
+                controller.getReviewDish(),
+                this
+        );
+        view.show();
+    }
+
+    @FXML
+    private void clickButtonEatingPreferences(ActionEvent event) {
+        EatingPreferencesView view = new EatingPreferencesView(
+                controller.getEatingPreferences(),
+                this
+        );
+        view.show();
+    }
+
+
 
     @Override
     protected void setup(Map<String, String> arg) {
