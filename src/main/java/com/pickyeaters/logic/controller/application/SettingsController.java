@@ -64,11 +64,8 @@ public class SettingsController {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            try {
+            if(fis != null)
                 fis.close();
-            } catch (NullPointerException ignored) {
-
-            }
         }
         return out;
     }
@@ -118,11 +115,8 @@ public class SettingsController {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            try {
+            if(fos != null)
                 fos.close();
-            } catch (NullPointerException ignored) {
-
-            }
         }
     }
 
