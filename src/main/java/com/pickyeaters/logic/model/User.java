@@ -10,17 +10,17 @@ public abstract class User {
     private Date birthdate;
 
 
-    public User(String id, String email) {
+    protected User(String id, String email) {
         this(id, email, null, null);
     }
-    public User(String id, String email, String firstname, String lastname) {
+    protected User(String id, String email, String firstname, String lastname) {
         this.id = id;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public User(User user) {
+    protected User(User user) {
         this.id = user.id;
         this.email = user.email;
         this.firstname = user.firstname;

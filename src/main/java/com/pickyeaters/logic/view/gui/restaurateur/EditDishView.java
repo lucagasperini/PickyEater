@@ -51,7 +51,7 @@ public abstract class EditDishView extends VirtualPaneView {
     protected final String comboBoxItemSecond;
     protected final String comboBoxItemContour;
     protected final String comboBoxItemDessert;
-    public EditDishView(VirtualPaneView parent) {
+    protected EditDishView(VirtualPaneView parent) {
         super("/form/restaurateur/EditDish.fxml", parent);
         comboBoxItemDrink = SettingsController.i18n("DISH_TYPE_DRINK");
         comboBoxItemFirst = SettingsController.i18n("DISH_TYPE_FIRST");

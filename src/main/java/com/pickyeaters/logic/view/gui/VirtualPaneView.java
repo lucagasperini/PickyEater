@@ -27,7 +27,7 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
     private final VirtualPaneView parent;
     private static MainController mainController;
     private static MainView mainView;
-    public VirtualPaneView(String fxml, VirtualPaneView parent) {
+    protected VirtualPaneView(String fxml, VirtualPaneView parent) {
         super(fxml);
         this.parent = parent;
     }

@@ -18,13 +18,13 @@ public abstract class Dish {
 
     private boolean active = true;
 
-    public Dish(String id, String name, String description) {
+    protected Dish(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Dish(String name, String description) {
+    protected Dish(String name, String description) {
         this(null, name, description);
     }
 

@@ -17,7 +17,7 @@ public abstract class VirtualWindowView extends VirtualViewGUI {
     protected Stage stage = new Stage();
     private final int WINDOW_HEIGTH = 720;
     private final int WINDOW_WIDTH = 1280;
-    public VirtualWindowView(String fxml) {
+    protected VirtualWindowView(String fxml) {
         super(fxml);
     }
 

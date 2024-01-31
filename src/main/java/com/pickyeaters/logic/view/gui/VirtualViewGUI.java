@@ -12,7 +12,7 @@ import java.util.Map;
 
 public abstract class VirtualViewGUI {
     private Parent root = null;
-    public VirtualViewGUI(String fxml) {
+    protected VirtualViewGUI(String fxml) {
         loadFXML(fxml);
     }
 

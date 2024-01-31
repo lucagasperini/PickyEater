@@ -11,7 +11,7 @@ public abstract class VirtualWidget extends VirtualViewGUI {
     Parent root;
     private VirtualPaneView parent;
 
-    public VirtualWidget(String fxml, VirtualPaneView parent) {
+    protected VirtualWidget(String fxml, VirtualPaneView parent) {
         super(fxml);
         this.parent = parent;
     }
