@@ -122,7 +122,9 @@ public class MainView extends VirtualViewGUI {
     }
 
     @FXML
-    private void clickMenuItemNavbarProfile(ActionEvent event) {}
+    private void clickMenuItemNavbarProfile(ActionEvent event) {
+        throw new UnsupportedOperationException();
+    }
 
     @FXML
     private void clickMenuItemNavbarLogout(ActionEvent event) {

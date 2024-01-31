@@ -14,6 +14,6 @@ public class FindRestaurantView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-
+        throw new UnsupportedOperationException();
     }
 }

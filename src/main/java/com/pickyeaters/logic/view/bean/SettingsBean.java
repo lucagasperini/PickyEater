@@ -9,9 +9,6 @@ public class SettingsBean {
     private String databasePassword;
     private String localeLang;
 
-    public SettingsBean() {
-    }
-
     public String getDatabaseDriver() {
         return databaseDriver;
     }

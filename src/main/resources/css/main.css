@@ -76,10 +76,6 @@
     -fx-cursor: hand;
 }
 
-.bt-back:hover {
-    -fx-background-color: #5b9bd590;
-}
-
 /*stepAction button*/
 .bt-stepAction1 {
     -fx-background-color: #bdd7eeff;

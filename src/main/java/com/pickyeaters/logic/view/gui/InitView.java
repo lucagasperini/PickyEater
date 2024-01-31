@@ -32,7 +32,7 @@ public class InitView extends VirtualWindowView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-
+        throw new UnsupportedOperationException();
     }
 
     @FXML protected void clickDatabaseConnect(ActionEvent event) {

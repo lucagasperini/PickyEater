@@ -24,12 +24,6 @@ public class LoginView extends VirtualPaneView {
     private Text textEmail;
     @FXML
     private Text textPassword;
-    @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
-    @FXML
-    private Button buttonBack;
 
     private LoginController controller;
 

@@ -4,10 +4,6 @@ public class Settings {
     SettingsDatabase database = null;
     SettingsLocale locale = null;
 
-    public Settings() {
-
-    }
-
     public SettingsDatabase getDatabase() {
         return database;
     }

@@ -12,10 +12,6 @@ import java.util.Map;
 public class AdministratorHomeView extends VirtualPaneView {
     private AdministratorController controller;
     @FXML
-    private Text textTitle;
-    @FXML
-    private Text textSubtitle;
-    @FXML
     private Button buttonManageReport;
     public AdministratorHomeView(AdministratorController controller, VirtualPaneView parent) {
         super("/form/administrator/Home.fxml", parent);

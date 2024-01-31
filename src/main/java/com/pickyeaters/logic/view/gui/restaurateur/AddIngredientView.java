@@ -124,7 +124,7 @@ public class AddIngredientView extends VirtualPaneView {
     }
     @FXML
     private void clickButtonReport(ActionEvent event) {
-
+        throw new UnsupportedOperationException();
     }
     @FXML
     private void clickButtonSave(ActionEvent event) {
@@ -140,11 +140,11 @@ public class AddIngredientView extends VirtualPaneView {
 
     @FXML
     private void clickCheckboxReligiousNeedsHalal(ActionEvent event) {
-
+        throw new UnsupportedOperationException();
     }
 
     @FXML
     private void clickCheckboxReligiousNeedsKosher(ActionEvent event) {
-
+        throw new UnsupportedOperationException();
     }
 }
