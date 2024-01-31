@@ -1,5 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.controller.application.InitController;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
@@ -9,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.util.Map;
 
 public class InitView extends VirtualWindowView {
     @FXML
@@ -21,8 +24,15 @@ public class InitView extends VirtualWindowView {
     private TextField inputDatabaseUsername;
     @FXML
     private PasswordField inputDatabasePassword;
-    public InitView(MainController controller) {
-        super(controller, "/form/Init.fxml");
+    private InitController controller;
+    public InitView(InitController controller) {
+        super("/form/Init.fxml");
+        this.controller = controller;
+    }
+
+    @Override
+    protected void setup(Map<String, String> arg) {
+
     }
 
     @FXML protected void clickDatabaseConnect(ActionEvent event) {
@@ -35,7 +45,7 @@ public class InitView extends VirtualWindowView {
         settings.setDatabasePassword(inputDatabasePassword.getText());
 
         try {
-            controller.getInit().loadFromInput(settings);
+            controller.loadFromInput(settings);
             stage.close();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -45,5 +55,4 @@ public class InitView extends VirtualWindowView {
             alert.showAndWait();
         }
     }
-
 }

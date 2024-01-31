@@ -1,5 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
@@ -9,7 +10,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
-public class LoginView extends VirtualWindowView {
+import java.util.HashMap;
+import java.util.Map;
+
+public class LoginView extends VirtualPaneView {
     @FXML
     private TextField inputEmail;
     @FXML
@@ -27,15 +31,21 @@ public class LoginView extends VirtualWindowView {
     @FXML
     private Button buttonBack;
 
-    public LoginView(MainController controller) {
-        super(controller, "/form/Login.fxml");
+    private LoginController controller;
+
+    public LoginView(LoginController controller, VirtualPaneView parent) {
+        super("/form/Login.fxml", parent);
+        this.controller = controller;
+    }
+
+    @Override
+    protected void setup(Map<String, String> arg) {
         textEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
         textPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
         buttonLogin.setText(SettingsController.i18n("LOGIN_LOGIN"));
         textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
         textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
     }
-
     @FXML
     private void clickButtonLogin(ActionEvent event) {
 
@@ -45,8 +55,10 @@ public class LoginView extends VirtualWindowView {
         );
 
         try {
-            controller.getLogin().auth(loginBean);
-            stage.close();
+            controller.auth(loginBean);
+            Map<String, String> result = new HashMap<>();
+            result.put("login", "true");
+            showParent(result);
         } catch (LoginControllerException ex) {
             //TODO: Create different messages if bad auth or internal error!
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -55,9 +67,5 @@ public class LoginView extends VirtualWindowView {
             alert.setContentText(SettingsController.i18n("ERROR_LOGIN_CONTENT"));
             alert.showAndWait();
         }
-    }
-
-    @FXML
-    private void clickButtonBack(ActionEvent event) {
     }
 }

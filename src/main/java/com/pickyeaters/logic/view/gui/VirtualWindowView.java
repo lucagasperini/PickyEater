@@ -11,31 +11,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 
-public abstract class VirtualWindowView extends VirtualView {
-    protected URL fxml = null;
-    protected Parent root = null;
+public abstract class VirtualWindowView extends VirtualViewGUI {
     protected Stage stage = new Stage();
     private final int WINDOW_HEIGTH = 720;
     private final int WINDOW_WIDTH = 1280;
-    public VirtualWindowView(MainController controller, String fxml) {
-        super(controller);
-        FXMLLoader loader = new FXMLLoader();
-        this.fxml = getClass().getResource(fxml);
-        loader.setLocation(this.fxml);
-        loader.setController(this);
-        try {
-            this.root = loader.load();
-        } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
-        }
+    public VirtualWindowView(String fxml) {
+        super(fxml);
     }
 
+    protected abstract void setup(Map<String, String> arg);
 
     public void show() {
-        stage.setScene(new Scene(root, WINDOW_WIDTH, WINDOW_HEIGTH));
+        setup(null);
+        stage.setScene(new Scene(getRoot(), WINDOW_WIDTH, WINDOW_HEIGTH));
         stage.showAndWait();
     }
 }

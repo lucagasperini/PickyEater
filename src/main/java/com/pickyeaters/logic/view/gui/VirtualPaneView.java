@@ -17,33 +17,30 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
-public abstract class VirtualPaneView {
+public abstract class VirtualPaneView extends VirtualViewGUI {
     @FXML
     protected Text textTitle;
     @FXML
     protected Text textSubtitle;
     @FXML
     private Button buttonBack;
-    private static BorderPane mainLayout;
-    private VirtualPaneView parent;
-    protected Parent root = null;
+    private final VirtualPaneView parent;
     private static MainController mainController;
+    private static MainView mainView;
     public VirtualPaneView(String fxml, VirtualPaneView parent) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxml));
-        loader.setController(this);
+        super(fxml);
         this.parent = parent;
-        try {
-            this.root = loader.load();
-        } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
-        }
     }
-    protected static void init(MainController mainController, BorderPane mainLayout) {
+    protected static void init(MainController mainController, MainView mainView) {
         VirtualPaneView.mainController = mainController;
-        VirtualPaneView.mainLayout = mainLayout;
+        VirtualPaneView.mainView = mainView;
+    }
+    protected static BorderPane getMainLayout() {
+        return VirtualPaneView.mainView.getMainLayout();
+    }
+
+    protected static MainView getMainView() {
+        return VirtualPaneView.mainView;
     }
 
     public static MainController getMainController() {
@@ -57,28 +54,28 @@ public abstract class VirtualPaneView {
             buttonBack.setText(SettingsController.i18n("BACK"));
         }
         setup(arg);
-        mainLayout.setCenter(this.root);
+        getMainLayout().setCenter(getRoot());
     }
     public void show() {
         if(buttonBack != null) {
             buttonBack.setText(SettingsController.i18n("BACK"));
         }
         setup(null);
-        mainLayout.setCenter(this.root);
+        getMainLayout().setCenter(getRoot());
     }
 
     public void showParent() {
         if(parent != null) {
             parent.setup(null);
-            mainLayout.setCenter(parent.root);
+            getMainLayout().setCenter(parent.getRoot());
         } else {
             throw new RuntimeException("Calling showParent on a root");
         }
     }
     public void showParent(Map<String, String> arg) {
         if(parent != null) {
+            getMainLayout().setCenter(parent.getRoot());
             parent.setup(arg);
-            mainLayout.setCenter(parent.root);
         } else {
             throw new RuntimeException("Calling showParent on a root");
         }

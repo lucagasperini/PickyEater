@@ -7,27 +7,15 @@ import javafx.scene.Parent;
 import java.io.IOException;
 import java.util.Map;
 
-public abstract class VirtualWidget {
+public abstract class VirtualWidget extends VirtualViewGUI {
     Parent root;
     private VirtualPaneView parent;
 
     public VirtualWidget(String fxml, VirtualPaneView parent) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource(fxml));
-        loader.setController(this);
+        super(fxml);
         this.parent = parent;
-        try {
-            this.root = loader.load();
-        } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
-        }
     }
 
-    public Parent getRoot() {
-        return root;
-    }
     protected void toParent(Map<String, String> arg) {
         if(parent != null) {
             parent.setup(arg);
