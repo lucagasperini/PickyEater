@@ -6,6 +6,7 @@ import com.pickyeaters.logic.utils.OS;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,22 +48,19 @@ public class SettingsController {
     }
 
     private void loadConfig(String configFile) throws SettingsControllerException {
-        Properties prop = new Properties();
-        FileInputStream fis = null;
-
         try {
-            fis = new FileInputStream(configFile);
-        } catch (IOException ex) {
-            throw new SettingsControllerException("Cannot read config file: " + configFile);
-        }
-
-        try {
-            prop.load(fis);
+            loadProperties(loadConfigFile(configFile));
         } catch (IOException ex) {
             throw new SettingsControllerException("Cannot load config file: " + configFile);
         }
+    }
 
-        loadProperties(prop);
+    private Properties loadConfigFile(String configFile) throws IOException {
+        Properties out = new Properties();
+        FileInputStream fis = new FileInputStream(configFile);
+        out.load(fis);
+        fis.close();
+        return out;
     }
 
     private void loadProperties(Properties prop) throws SettingsControllerException {
@@ -95,20 +93,17 @@ public class SettingsController {
 
         Properties prop = new Properties();
         saveProperties(prop);
-
-        FileOutputStream fos = null;
-
         try {
-            fos = new FileOutputStream(configFile);
-        } catch (IOException ex) {
-            throw new SettingsControllerException("Cannot write config file: " + configFile);
-        }
-
-        try {
-            prop.store(fos, null);
+            saveConfigFile(configFile, prop);
         } catch (IOException e) {
             throw new SettingsControllerException("Cannot save config file: " + configFile);
         }
+    }
+
+    private void saveConfigFile(String configFile, Properties prop) throws IOException {
+        FileOutputStream fos = new FileOutputStream(configFile);
+        prop.store(fos, null);
+        fos.close();
     }
 
     private void saveProperties(Properties prop) throws SettingsControllerException {
