@@ -1,8 +1,8 @@
 package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.logic.view.bean.SettingsBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.bean.SettingsBean;
 
 public class InitController extends VirtualController {
     public InitController(MainController main) {

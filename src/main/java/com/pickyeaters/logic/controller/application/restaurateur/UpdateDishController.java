@@ -3,7 +3,6 @@ package com.pickyeaters.logic.controller.application.restaurateur;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.VirtualController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
-import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.factory.DishDAO;
 import com.pickyeaters.logic.view.bean.DishBean;
 

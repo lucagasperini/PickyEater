@@ -8,7 +8,6 @@ import com.pickyeaters.logic.model.Pickie;
 import com.pickyeaters.logic.model.Restaurateur;
 import com.pickyeaters.logic.model.User;
 import com.pickyeaters.logic.view.bean.LoginBean;
-import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
 public class LoginController extends VirtualController {

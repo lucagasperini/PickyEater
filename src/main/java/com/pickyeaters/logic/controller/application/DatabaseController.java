@@ -1,13 +1,9 @@
 package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.logic.model.Pickie;
-import com.pickyeaters.logic.model.Session;
-import com.pickyeaters.logic.model.SettingsDatabase;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.model.User;
+import com.pickyeaters.logic.model.SettingsDatabase;
 
 import java.sql.*;
-import java.util.Vector;
 
 public class DatabaseController {
     private static DatabaseController instance = new DatabaseController();

@@ -1,9 +1,9 @@
 package com.pickyeaters.logic.controller.application;
 
-import com.pickyeaters.logic.view.bean.SettingsBean;
+import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.model.Settings;
 import com.pickyeaters.logic.utils.OS;
-import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.bean.SettingsBean;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
