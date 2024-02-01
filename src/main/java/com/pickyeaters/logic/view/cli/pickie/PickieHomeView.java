@@ -1,21 +1,21 @@
-package com.pickyeaters.logic.view.cli.restaurateur;
+package com.pickyeaters.logic.view.cli.pickie;
 
-import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
+import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 import com.pickyeaters.logic.view.cli.VirtualViewCLI;
 
 import java.util.Map;
 
-public class MenuDetailsView extends VirtualRequestView {
-    private MenuDetailsController controller;
-    public MenuDetailsView(MenuDetailsController controller) {
-        super("MenuDetails");
+public class PickieHomeView extends VirtualRequestView {
+    private PickieController controller;
+    public PickieHomeView(PickieController controller) {
+        super("Home");
         this.controller = controller;
     }
 
     @Override
     public void show(Map<String, String> arg) {
-        requestLoop();
+
     }
 
     @Override

@@ -1,6 +1,10 @@
 package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.cli.administrator.AdministratorHomeView;
+import com.pickyeaters.logic.view.cli.pickie.PickieHomeView;
+import com.pickyeaters.logic.view.cli.restaurateur.RestaurateurHomeView;
 
 import java.util.Map;
 import java.util.Scanner;
@@ -11,35 +15,6 @@ public class MainView extends VirtualViewCLI {
     public MainView() {
         init(controller);
     }
-    private void requestLoop() {
-        Scanner userInput = new Scanner(System.in);
-        while(controller.isRunning()) {
-            System.out.print("> ");
-            try {
-                request(userInput.nextLine());
-            } catch (UnsupportedOperationException ex) {
-                showError("UNSUPPORTED_OPERATION");
-            }
-        }
-    }
-
-    public void request(String request) {
-        String[] tmp = request.split(" ");
-        switch (tmp[0].toLowerCase()) {
-            case "help", "h":
-                HelpView helpView = new HelpView();
-                helpView.show();
-                break;
-            case "ingredient", "i":
-                break;
-            case "quit", "q":
-                controller.quit();
-                break;
-            default:
-                throw new UnsupportedOperationException("Cannot execute " + tmp[0].toLowerCase());
-        }
-    }
-
     @Override
     public void show(Map<String, String> arg) {
         controller.start();
@@ -49,8 +24,43 @@ public class MainView extends VirtualViewCLI {
         LoginView loginView = new LoginView(controller.getLogin());
         loginView.show();
 
-        System.out.println("Welcome to PickyEaters");
-        requestLoop();
+        showHomeView();
+
         System.out.println("Goodbye!");
     }
+
+
+    private void showHomeView() {
+        try {
+            switch (controller.getLogin().getUserType()) {
+                case PICKIE -> showPickieHomeView();
+                case RESTAURATEUR -> showRestaurateurHomeView();
+                case ADMIN -> showAdministratorHomeView();
+            }
+        } catch (LoginControllerException ex) {
+            showError(ex);
+        }
+    }
+
+    private void showPickieHomeView() {
+        PickieHomeView pickieHomeView = new PickieHomeView(
+                controller.getPickie()
+        );
+        pickieHomeView.show();
+    }
+
+    private void showRestaurateurHomeView() {
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
+                controller.getRestaurateur()
+        );
+        restaurateurHomeView.show();
+    }
+
+    private void showAdministratorHomeView() {
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(
+                controller.getAdministrator()
+        );
+        administratorHomeView.show();
+    }
+
 }

@@ -48,4 +48,5 @@ public class InitView extends VirtualViewCLI {
             askConfig();
         }
     }
+
 }

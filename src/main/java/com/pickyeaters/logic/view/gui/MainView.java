@@ -129,7 +129,7 @@ public class MainView extends VirtualViewGUI {
     private void showPickieHomeView() {
         //textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
         PickieHomeView pickieHomeView = new PickieHomeView(
-                VirtualPaneView.getMainController().getPickie(),
+                controller.getPickie(),
                 startView
         );
         pickieHomeView.show();

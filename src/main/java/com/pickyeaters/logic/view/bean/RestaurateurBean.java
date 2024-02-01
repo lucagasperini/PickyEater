@@ -39,4 +39,36 @@ public class RestaurateurBean {
     public String getRestaurantAddress() {
         return restaurantAddress;
     }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setRestaurantAddress(String restaurantAddress) {
+        this.restaurantAddress = restaurantAddress;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
+    }
+
+    public void setRestaurantPhone(String restaurantPhone) {
+        this.restaurantPhone = restaurantPhone;
+    }
 }

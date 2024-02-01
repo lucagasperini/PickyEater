@@ -6,6 +6,7 @@ import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.ViewInterface;
 
 import java.util.Map;
+import java.util.Scanner;
 
 public abstract class VirtualViewCLI implements ViewInterface {
 
@@ -27,13 +28,13 @@ public abstract class VirtualViewCLI implements ViewInterface {
         String header = SettingsController.i18n(key + "_ALERT_ERROR_HEADER");
         String content = SettingsController.i18n(key + "_ALERT_ERROR_CONTENT");
         if(!title.isEmpty()) {
-            System.out.println(title);
+            print(title);
         }
         if(!header.isEmpty()) {
-            System.out.println(header);
+            print(header);
         }
         if(!content.isEmpty()) {
-            System.out.println(content);
+            print(content);
         }
     }
 
@@ -44,5 +45,24 @@ public abstract class VirtualViewCLI implements ViewInterface {
     public abstract void show(Map<String, String> arg);
     public void show() {
         show(null);
+    }
+
+    public void print(String text) {
+        System.out.println(text);
+    }
+
+    public void printField(String key, String value) {
+        System.out.println(SettingsController.i18n(key) + ": " + value);
+    }
+
+    public String askField(String key, String value) {
+        Scanner userInput = new Scanner(System.in);
+        System.out.print(SettingsController.i18n(key) + " [" + value + "]: ");
+        String out = userInput.nextLine();
+        if(out.isEmpty()) {
+            return value;
+        } else {
+            return out;
+        }
     }
 }
