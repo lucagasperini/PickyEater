@@ -28,7 +28,7 @@ public class LoginView extends VirtualPaneView {
     @FXML
     protected Text textSubtitle;
     @FXML
-    protected Text buttonBackLogin;
+    protected Button buttonBackLogin;
 
     private final LoginController controller;
 
