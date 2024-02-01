@@ -1,7 +1,6 @@
 package com.pickyeaters.logic.view.bean;
 
-import com.pickyeaters.logic.model.ReportType;
-import com.pickyeaters.logic.model.User;
+import java.util.List;
 
 public class DishReportBean extends ReportBean{
     private String reason;
@@ -11,6 +10,6 @@ public class DishReportBean extends ReportBean{
     private String restaurateurSurname;
     private String restaurateurNumber;
     private String dishName;
-    private String dishIngredients[];
+    private List<String> dishIngredients;
 
 }

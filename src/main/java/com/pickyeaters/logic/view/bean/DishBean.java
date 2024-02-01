@@ -3,6 +3,7 @@ package com.pickyeaters.logic.view.bean;
 import com.pickyeaters.logic.model.*;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class DishBean {
     private String id;
@@ -62,7 +63,7 @@ public class DishBean {
         return name;
     }
 
-    public LinkedList<String> getIngredientList() {
+    public List<String> getIngredientList() {
         return ingredientList;
     }
 

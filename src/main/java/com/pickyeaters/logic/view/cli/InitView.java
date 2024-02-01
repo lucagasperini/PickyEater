@@ -1,10 +1,7 @@
 package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.application.InitController;
-import com.pickyeaters.logic.controller.application.MainController;
-import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 

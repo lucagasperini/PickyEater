@@ -47,9 +47,9 @@ public class DatabaseController {
         ResultSet rs;
         boolean isResultSet = false;
         int index = 1;
-        Query(CallableStatement _cs, String _cmd, boolean isResultSet) {
-            cs = _cs;
-            cmd = _cmd;
+        Query(CallableStatement cs, String cmd, boolean isResultSet) {
+            this.cs = cs;
+            this.cmd = cmd;
             this.isResultSet = isResultSet;
         }
 

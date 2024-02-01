@@ -26,16 +26,13 @@ public class MainView extends VirtualViewCLI {
     public void request(String request) {
         String[] tmp = request.split(" ");
         switch (tmp[0].toLowerCase()) {
-            case "help":
-            case "h":
+            case "help", "h":
                 HelpView helpView = new HelpView();
                 helpView.show();
                 break;
-            case "ingredient":
-            case "i":
+            case "ingredient", "i":
                 break;
-            case "quit":
-            case "q":
+            case "quit", "q":
                 controller.quit();
                 break;
             default:

@@ -72,19 +72,15 @@ public enum OS {
 
         OS currentOS = getCurrentOS();
 
-        switch (currentOS) {
-            case LINUX:
-            case UNIX:
-                return getConfigDirUnix();
-            case WINDOWS:
-                return getConfigDirWindows();
-            case MAC:
-                return getConfigDirMac();
-            default:
+        return switch (currentOS) {
+            case LINUX, UNIX -> getConfigDirUnix();
+            case WINDOWS -> getConfigDirWindows();
+            case MAC -> getConfigDirMac();
+            default ->
                 // TODO: Should we throw exception?
                 // return an empty string if cant figure out which os
-                return "";
-        }
+                    "";
+        };
     }
 
     private static String getConfigDirUnix() {

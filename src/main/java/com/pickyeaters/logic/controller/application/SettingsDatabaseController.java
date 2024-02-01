@@ -9,8 +9,6 @@ import java.util.Properties;
 public class SettingsDatabaseController implements SettingsVirtualController {
 
     private SettingsDatabase settings = new SettingsDatabase();
-    private final int MIN_PORT_NUMBER = 0;
-    private final int MAX_PORT_NUMBER = 65535;
     private static final String DEFAULT_DRIVER = "postgresql";
 
     private static final String[] DRIVER_LIST = {DEFAULT_DRIVER/*, "mysql"*/};
@@ -61,7 +59,7 @@ public class SettingsDatabaseController implements SettingsVirtualController {
             throw new SettingsControllerException("Database host not load");
         }
 
-        if(settings.getPort() <= MIN_PORT_NUMBER || settings.getPort() >= MAX_PORT_NUMBER) {
+        if(settings.getPort() <= 0 || settings.getPort() >= 65535) {
             throw new SettingsControllerException("Database port not load.");
         }
 

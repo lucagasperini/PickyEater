@@ -7,8 +7,6 @@ import java.util.Map;
 
 public abstract class VirtualWindowView extends VirtualViewGUI {
     protected Stage stage = new Stage();
-    private final int WINDOW_HEIGTH = 720;
-    private final int WINDOW_WIDTH = 1280;
     protected VirtualWindowView(String fxml) {
         super(fxml);
     }
@@ -17,7 +15,7 @@ public abstract class VirtualWindowView extends VirtualViewGUI {
 
     public void show() {
         setup(null);
-        stage.setScene(new Scene(getRoot(), WINDOW_WIDTH, WINDOW_HEIGTH));
+        stage.setScene(new Scene(getRoot(), 1280, 720));
         stage.showAndWait();
     }
 }
