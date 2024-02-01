@@ -1,8 +1,10 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.application.MainController;
+import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
@@ -57,9 +59,17 @@ public class MainView extends VirtualViewGUI {
 
     public void show() {
         stage.setTitle("Picky Eater");
-        buttonBack.setText(SettingsController.i18n("BACK"));
 
         stage.show();
+
+        try {
+            controller.getInit().loadFromFile();
+        } catch (SettingsControllerException | DatabaseControllerException ex) {
+            InitView initView = new InitView(controller.getInit(), startView);
+            initView.show();
+            return;
+        }
+
 
         startView.show();
     }
@@ -72,6 +82,8 @@ public class MainView extends VirtualViewGUI {
         buttonBack.setVisible(true);
         textTitle.setVisible(true);
         textSubtitle.setVisible(true);
+
+        buttonBack.setText(SettingsController.i18n("BACK"));
     }
 
     public void showNavbar() {

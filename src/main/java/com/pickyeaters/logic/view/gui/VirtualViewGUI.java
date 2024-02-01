@@ -22,23 +22,33 @@ public abstract class VirtualViewGUI implements ViewInterface {
         try {
             this.root = loader.load();
         } catch (IOException ex) {
-            System.err.println("[FXML] FATAL ERROR: " + ex.getMessage());
-            //TODO:
-            System.exit(-1);
+            showError("FXML ERROR", "FXML ERROR", ex.getMessage());
         }
     }
 
-    public void showError(String key) {
+    public void showError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(key.isEmpty()) {
-            key = "DEFAULT";
-        }
 
-        alert.setTitle(SettingsController.i18n(key + "_ALERT_ERROR_TITLE"));
-        alert.setHeaderText(SettingsController.i18n(key + "_ALERT_ERROR_HEADER"));
-        alert.setContentText(SettingsController.i18n(key + "_ALERT_ERROR_CONTENT"));
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
 
         alert.showAndWait();
+    }
+    public void showError(String key) {
+        if(key.isEmpty()) {
+            showError(
+                    "DEFAULT_ALERT_ERROR_TITLE",
+                    "DEFAULT_ALERT_ERROR_HEADER",
+                    "DEFAULT_ALERT_ERROR_CONTENT"
+            );
+        } else {
+            showError(
+                SettingsController.i18n(key + "_ALERT_ERROR_TITLE"),
+                SettingsController.i18n(key + "_ALERT_ERROR_HEADER"),
+                SettingsController.i18n(key + "_ALERT_ERROR_CONTENT")
+            );
+        }
     }
 
     public void showError(ControllerException ex) {

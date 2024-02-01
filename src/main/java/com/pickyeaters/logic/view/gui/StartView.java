@@ -30,14 +30,6 @@ public class StartView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        try {
-            getMainController().getInit().loadFromFile();
-        } catch (SettingsControllerException | DatabaseControllerException ex) {
-            InitView initView = new InitView(getMainController().getInit(), this);
-            initView.show();
-            return;
-        }
-
         if(arg != null) {
             setupLogin(arg.get("login"));
         }

@@ -27,6 +27,8 @@ public class LoginView extends VirtualPaneView {
     protected Text textTitle;
     @FXML
     protected Text textSubtitle;
+    @FXML
+    protected Text buttonBackLogin;
 
     private final LoginController controller;
 
@@ -42,6 +44,7 @@ public class LoginView extends VirtualPaneView {
         buttonLogin.setText(SettingsController.i18n("LOGIN_LOGIN"));
         textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
         textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
+        buttonBackLogin.setText(SettingsController.i18n("BACK"));
     }
     @FXML
     private void clickButtonLogin(ActionEvent event) {
@@ -62,7 +65,7 @@ public class LoginView extends VirtualPaneView {
     }
 
     @FXML
-    private void clickButtonBack(ActionEvent event) {
+    private void clickButtonBackLogin(ActionEvent event) {
         VirtualPaneView.getActiveView().showParent();
     }
 }

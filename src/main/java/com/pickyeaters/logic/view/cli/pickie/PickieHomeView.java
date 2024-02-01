@@ -2,6 +2,8 @@ package com.pickyeaters.logic.view.cli.pickie;
 
 import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
+import com.pickyeaters.logic.view.cli.restaurateur.MenuDetailsView;
+import com.pickyeaters.logic.view.cli.restaurateur.RestaurantDetailsView;
 
 import java.util.Map;
 
@@ -19,11 +21,25 @@ public class PickieHomeView extends VirtualRequestView {
 
     @Override
     protected boolean request(String request) {
-        return false;
+        switch (request) {
+            case "find", "f":
+                FindRestaurantView findRestaurantView = new FindRestaurantView(controller.getFindRestaurant());
+                findRestaurantView.show();
+                return true;
+            case "pref", "p":
+                return true;
+            case "review", "r":
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
     protected String requestHelp() {
-        throw new UnsupportedOperationException();
+        return """
+                [find, f]
+                [pref, p]
+                [review, r]""";
     }
 }

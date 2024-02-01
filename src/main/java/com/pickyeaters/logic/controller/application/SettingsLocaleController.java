@@ -66,6 +66,9 @@ public class SettingsLocaleController implements SettingsVirtualController {
     }
     public String i18n(String key) {
         try {
+            if(i18nBundle == null) {
+                return "#" + key + "#";
+            }
             return i18nBundle.getString(key);
         } catch (MissingResourceException e) {
             return "[" + key + "]";
