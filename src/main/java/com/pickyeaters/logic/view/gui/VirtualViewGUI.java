@@ -1,16 +1,15 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.ViewInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
-import java.util.Map;
 
-public abstract class VirtualViewGUI {
+public abstract class VirtualViewGUI implements ViewInterface {
     private Parent root = null;
     protected VirtualViewGUI(String fxml) {
         loadFXML(fxml);

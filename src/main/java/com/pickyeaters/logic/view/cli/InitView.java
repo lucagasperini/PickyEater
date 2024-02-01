@@ -1,6 +1,6 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.view.VirtualView;
+import com.pickyeaters.logic.controller.application.InitController;
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
@@ -8,23 +8,13 @@ import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 
+import java.util.Map;
 import java.util.Scanner;
 
-public class InitView extends VirtualView {
-    public InitView(MainController controller) {
-        super(controller);
-    }
-
-    public void show() {
-        try {
-            controller.getInit().loadFromFile();
-        } catch (SettingsControllerException | DatabaseControllerException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-            // If you cannot load settings/database, ask user input
-            askConfig();
-        }
-
-        askLogin();
+public class InitView extends VirtualViewCLI {
+    InitController controller;
+    public InitView(InitController controller) {
+        this.controller = controller;
     }
 
     private void askConfig() {
@@ -43,26 +33,22 @@ public class InitView extends VirtualView {
         settings.setDatabasePassword(userInput.nextLine());
 
         try {
-            controller.getInit().loadFromInput(settings);
+            controller.loadFromInput(settings);
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
+            showError(ex);
             askConfig();
         }
     }
-    private void askLogin() {
-        Scanner userInput = new Scanner(System.in);
 
-        System.out.print("Email: ");
-        String email = userInput.nextLine();
-        System.out.print("Password: ");
-        String password = userInput.nextLine();
-        LoginBean loginBean = new LoginBean(email, password);
+
+    @Override
+    public void show(Map<String, String> arg) {
         try {
-            controller.getLogin().auth(loginBean);
-        } catch (LoginControllerException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-            askLogin();
+            controller.loadFromFile();
+        } catch (SettingsControllerException | DatabaseControllerException ex) {
+            showError(ex);
+            // If you cannot load settings/database, ask user input
+            askConfig();
         }
     }
-
 }

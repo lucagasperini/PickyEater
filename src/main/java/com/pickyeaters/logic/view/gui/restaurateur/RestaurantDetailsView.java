@@ -154,21 +154,25 @@ public class RestaurantDetailsView extends VirtualPaneView {
         textSaturday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_SATURDAY"));
         textSunday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_SUNDAY"));
 
-        textFrom1.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom2.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom3.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom4.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom5.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom6.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
-        textFrom7.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM"));
+        String from = SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM");
 
-        textTo1.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo2.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo3.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo4.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo5.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo6.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
-        textTo7.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO"));
+        textFrom1.setText(from);
+        textFrom2.setText(from);
+        textFrom3.setText(from);
+        textFrom4.setText(from);
+        textFrom5.setText(from);
+        textFrom6.setText(from);
+        textFrom7.setText(from);
+
+        String to = SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO");
+
+        textTo1.setText(to);
+        textTo2.setText(to);
+        textTo3.setText(to);
+        textTo4.setText(to);
+        textTo5.setText(to);
+        textTo6.setText(to);
+        textTo7.setText(to);
 
         textMyPersonalDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYPERSONALDETAILS"));
         textMyRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYRESTAURANTDETAILS"));

@@ -2,20 +2,15 @@ package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.application.MainController;
 
+import java.util.Map;
 import java.util.Scanner;
 
-public class MainView {
+public class MainView extends VirtualViewCLI {
 
     private MainController controller = new MainController();
-    public void start() {
-        controller.start();
-        InitView initView = new InitView(controller);
-        initView.show();
-        System.out.println("Welcome to PickyEaters");
-        requestLoop();
-        System.out.println("Goodbye!");
+    public MainView() {
+        init(controller);
     }
-
     private void requestLoop() {
         Scanner userInput = new Scanner(System.in);
         while(controller.isRunning()) {
@@ -23,7 +18,7 @@ public class MainView {
             try {
                 request(userInput.nextLine());
             } catch (UnsupportedOperationException ex) {
-                System.out.println("ERROR: " + ex.getMessage());
+                showError("UNSUPPORTED_OPERATION");
             }
         }
     }
@@ -38,8 +33,6 @@ public class MainView {
                 break;
             case "ingredient":
             case "i":
-                //IngredientView ingredientView = new IngredientView();
-                //ingredientView.show(tmp);
                 break;
             case "quit":
             case "q":
@@ -50,4 +43,13 @@ public class MainView {
         }
     }
 
+    @Override
+    public void show(Map<String, String> arg) {
+        controller.start();
+        InitView initView = new InitView(controller.getInit());
+        initView.show();
+        System.out.println("Welcome to PickyEaters");
+        requestLoop();
+        System.out.println("Goodbye!");
+    }
 }

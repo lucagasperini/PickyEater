@@ -1,15 +1,9 @@
 package com.pickyeaters.logic.view.gui;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-
-import java.io.IOException;
 import java.util.Map;
 
 public abstract class VirtualWidget extends VirtualViewGUI {
-    Parent root;
-    private VirtualPaneView parent;
+    private final VirtualPaneView parent;
 
     protected VirtualWidget(String fxml, VirtualPaneView parent) {
         super(fxml);

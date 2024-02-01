@@ -1,20 +1,13 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.Main;
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.view.VirtualView;
 import com.pickyeaters.logic.controller.application.MainController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.Map;
 
 public abstract class VirtualPaneView extends VirtualViewGUI {

@@ -7,8 +7,8 @@ public enum OS {
     WINDOWS,
     MAC;
 
-    private static final String appDirectoryName = "PickyEaters";
-    private static final String appConfigFile = "PickyEaters.conf";
+    private static final String APP_DIRECTORY_NAME = "PickyEaters";
+    private static final String APP_CONFIG_FILE = "PickyEaters.conf";
 
     public static String getConfigFilePath() {
         String configDir = getConfigDir();
@@ -61,11 +61,11 @@ public enum OS {
     }
 
     public static String getAppConfigFile() {
-        return appConfigFile;
+        return APP_CONFIG_FILE;
     }
 
     public static String getAppDirectoryName() {
-        return appDirectoryName;
+        return APP_DIRECTORY_NAME;
     }
 
     public static String getConfigDir() {
