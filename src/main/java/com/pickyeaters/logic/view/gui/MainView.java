@@ -56,8 +56,8 @@ public class MainView extends VirtualViewGUI {
     protected Text textSubtitle;
 
     public void show() {
-        VirtualPaneView.getMainController().start();
         stage.setTitle("Picky Eater");
+        buttonBack.setText(SettingsController.i18n("BACK"));
 
         stage.show();
 
@@ -87,7 +87,6 @@ public class MainView extends VirtualViewGUI {
     }
     public void showBack() {
         showHeader();
-        buttonBack.setText(SettingsController.i18n("BACK"));
     }
 
     public void hideTitle() {

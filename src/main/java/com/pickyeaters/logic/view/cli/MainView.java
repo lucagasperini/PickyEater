@@ -16,7 +16,6 @@ public class MainView extends VirtualViewCLI {
     }
     @Override
     public void show(Map<String, String> arg) {
-        controller.start();
         InitView initView = new InitView(controller.getInit());
         initView.show();
 

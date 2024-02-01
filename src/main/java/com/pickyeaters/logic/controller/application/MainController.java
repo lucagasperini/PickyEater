@@ -5,12 +5,12 @@ import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurateurController;
 
 public class MainController {
-    private InitController init = null;
-    private LoginController login = null;
+    private InitController init = new InitController(this);
+    private LoginController login = new LoginController(this);
     private RestaurateurController restaurateur = null;
     private PickieController pickie = null;
     private AdministratorController administrator = null;
-    private boolean isRunning = false;
+    private AddIngredientController addIngredient = new AddIngredientController(this);
 
     public InitController getInit() {
         return init;
@@ -18,6 +18,10 @@ public class MainController {
 
     public LoginController getLogin() {
         return login;
+    }
+
+    public AddIngredientController getAddIngredient() {
+        return addIngredient;
     }
 
     public RestaurateurController getRestaurateur() {
@@ -32,12 +36,6 @@ public class MainController {
         return administrator;
     }
 
-    public void start() {
-        isRunning = true;
-        init = new InitController(this);
-        login = new LoginController(this);
-    }
-
     public void initRestaurateur() {
         restaurateur = new RestaurateurController(this);
     }
@@ -48,10 +46,4 @@ public class MainController {
         administrator = new AdministratorController(this);
     }
 
-    public boolean isRunning() {
-        return isRunning;
-    }
-    public void quit() {
-        isRunning = false;
-    }
 }

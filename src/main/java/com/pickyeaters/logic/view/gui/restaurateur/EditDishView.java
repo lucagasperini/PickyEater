@@ -1,9 +1,7 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.model.Dish;
-import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
@@ -115,7 +113,7 @@ public abstract class EditDishView extends VirtualPaneView {
 
     @FXML
     private void clickAddIngredient(ActionEvent event) {
-        AddIngredientView view = new AddIngredientView(this);
+        AddIngredientView view = new AddIngredientView(getMainController().getAddIngredient(), this);
         view.show();
     }
     @FXML

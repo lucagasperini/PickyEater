@@ -1,8 +1,10 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
+import com.pickyeaters.logic.controller.application.AddIngredientController;
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.exception.DAOException;
-import com.pickyeaters.logic.factory.IngredientDAO;
+import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.bean.IngredientBean;
+import com.pickyeaters.logic.view.bean.IngredientTreeBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,8 +56,11 @@ public class AddIngredientView extends VirtualPaneView {
 
     @FXML
     private TreeView<String> treeIngredient;
-    public AddIngredientView(VirtualPaneView parent) {
+
+    AddIngredientController controller;
+    public AddIngredientView(AddIngredientController controller, VirtualPaneView parent) {
         super("/form/restaurateur/AddIngredient.fxml", parent);
+        this.controller = controller;
     }
 
     @Override
@@ -82,30 +87,29 @@ public class AddIngredientView extends VirtualPaneView {
 
         try {
             setupTreeIngredient();
-        } catch (DAOException e) {
+        } catch (ControllerException e) {
             showError(e);
         }
 
     }
 
-    private void setupTreeIngredient() throws DAOException {
+    private void setupTreeIngredient() throws ControllerException {
         TreeItem<String> treeIngredientRoot = new TreeItem<>(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
 
-        IngredientDAO.IngredientForest forest = IngredientDAO.getInstance().getAll();
-        for(IngredientDAO.IngredientTree tree : forest.getTreeList()) {
-            Deque<IngredientDAO.IngredientNode> nodeStack = new LinkedList<>();
+        List<IngredientTreeBean> treeBeanList = controller.getIngrendientTreeList();
+        for(IngredientTreeBean tree : treeBeanList) {
+            Deque<IngredientBean> beanStack = new LinkedList<>();
             Deque<TreeItem<String>> treeItemStack = new LinkedList<>();
-            nodeStack.push(tree.getRoot());
-            TreeItem<String> subRoot = new TreeItem<>(tree.getRoot().toString());
+            beanStack.push(tree.getRoot());
+            TreeItem<String> subRoot = new TreeItem<>(tree.getRoot().getName());
             treeIngredientRoot.getChildren().add(subRoot);
             treeItemStack.push(subRoot);
-
-            while(!nodeStack.isEmpty()) {
-                IngredientDAO.IngredientNode node = nodeStack.pop();
+            while(!beanStack.isEmpty()) {
+                IngredientBean bean = beanStack.pop();
                 TreeItem<String> item = treeItemStack.pop();
-                for (IngredientDAO.IngredientNode i : node.getChild()) {
-                    nodeStack.push(i);
-                    TreeItem<String> childItem = new TreeItem<>(i.toString());
+                for(IngredientBean i : bean.getChildList()) {
+                    beanStack.push(i);
+                    TreeItem<String> childItem = new TreeItem<>(i.getName());
                     treeItemStack.push(childItem);
                     item.getChildren().add(childItem);
                 }
