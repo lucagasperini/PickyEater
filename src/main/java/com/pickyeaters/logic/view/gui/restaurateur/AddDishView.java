@@ -25,8 +25,7 @@ public class AddDishView extends EditDishView {
             setupAddIngredient(arg.get("addIngredient"));
             setupRemoveIngredient(arg.get("removeIngredient"));
         }
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_SUBTITLE"));
+        showTitle("RESTAURATEUR_ADDDISH");
 
         buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
     }

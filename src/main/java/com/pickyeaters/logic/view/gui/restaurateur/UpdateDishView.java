@@ -33,8 +33,7 @@ public class UpdateDishView extends EditDishView {
             setupAddIngredient(arg.get("addIngredient"));
             setupRemoveIngredient(arg.get("removeIngredient"));
         }
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_UPDATEDISH_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_UPDATEDISH_SUBTITLE"));
+        showTitle("RESTAURATEUR_UPDATEDISH");
         buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
 
         inputName.setText(dishBean.getName());

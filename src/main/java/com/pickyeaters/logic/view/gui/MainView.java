@@ -13,7 +13,9 @@ import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -27,11 +29,14 @@ import java.util.Vector;
 public class MainView extends VirtualViewGUI {
     private Stage stage;
     private MainController controller = new MainController();
-    StartView startView = new StartView();
+    private StartView startView = new StartView();
+
+    private Node nodeHeader;
     public MainView(Stage primaryStage) {
         super("/form/Background.fxml");
         this.stage = primaryStage;
         stage.setScene(new Scene(getRoot(), 1280, 720));
+        nodeHeader = mainLayout.getTop();
         VirtualPaneView.init(controller, this);
     }
 
@@ -51,10 +56,15 @@ public class MainView extends VirtualViewGUI {
     private MenuItem menuItemNavbarProfile;
     @FXML
     private MenuItem menuItemNavbarLogout;
+    @FXML
+    private Button buttonBack;
+    @FXML
+    protected Text textTitle;
+    @FXML
+    protected Text textSubtitle;
 
     public void show() {
         VirtualPaneView.getMainController().start();
-        mainLayout.getTop().setVisible(false);
         stage.setTitle("Picky Eater");
 
         try {
@@ -69,12 +79,39 @@ public class MainView extends VirtualViewGUI {
         startView.show();
     }
 
-    public void showNavbar() {
-        mainLayout.getTop().setVisible(true);
+    public void hideHeader() {
+        mainLayout.setTop(null);
+    }
+    public void showHeader() {
+        mainLayout.setTop(nodeHeader);
+        buttonBack.setVisible(true);
+        textTitle.setVisible(true);
+        textSubtitle.setVisible(true);
+    }
 
+    public void showNavbar() {
         textNavbarUsername.setText(VirtualPaneView.getMainController().getLogin().getUser().getName());
         menuItemNavbarProfile.setText(SettingsController.i18n("NAVBAR_UPDATEPROFILE"));
         menuItemNavbarLogout.setText(SettingsController.i18n("NAVBAR_LOGOFF"));
+    }
+
+    public void showTitle(String title, String subtitle) {
+        showHeader();
+        textTitle.setText(title);
+        textSubtitle.setText(subtitle);
+    }
+    public void showBack() {
+        showHeader();
+        buttonBack.setText(SettingsController.i18n("BACK"));
+    }
+
+    public void hideTitle() {
+        textTitle.setVisible(false);
+        textSubtitle.setVisible(false);
+    }
+
+    public void hideBack() {
+        buttonBack.setVisible(false);
     }
 
     public void showHomeView() {
@@ -130,5 +167,10 @@ public class MainView extends VirtualViewGUI {
     private void clickMenuItemNavbarLogout(ActionEvent event) {
         controller.getLogin().logout();
         startView.show();
+    }
+
+    @FXML
+    private void clickButtonBack(ActionEvent event) {
+        VirtualPaneView.getActiveView().showParent();
     }
 }

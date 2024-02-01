@@ -36,8 +36,7 @@ public class MenuDetailsView extends VirtualPaneView {
             setupUpdateDish(arg.get("updateDish"));
             setupActiveDish(arg.get("activeDish"));
         }
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SUBTITLE"));
+        showTitle("RESTAURATEUR_MANAGEMENUDETAILS");
         buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
         textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
 

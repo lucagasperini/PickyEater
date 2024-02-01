@@ -20,8 +20,8 @@ public class AdministratorHomeView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textTitle.setText(SettingsController.i18n("ADMINISTRATOR_HOME_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("ADMINISTRATOR_HOME_SUBTITLE"));
+        showTitle("ADMINISTRATOR_HOME");
+
         buttonManageReport.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_MANAGE_REPORT"));
     }
 }

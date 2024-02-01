@@ -54,8 +54,7 @@ public class PickieHomeView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textTitle.setText(SettingsController.i18n("PICKY_HOME_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("PICKY_HOME_SUBTITLE"));
+        showTitle("PICKY_HOME");
         buttonFindRestaurant.setText(SettingsController.i18n("PICKY_HOME_FINDRESTAURANT"));
         buttonReviewDish.setText(SettingsController.i18n("PICKY_HOME_REVIEWADISH"));
         buttonEatingPreferences.setText(SettingsController.i18n("PICKY_HOME_PERSONALIZEEATINGPREFERENCES"));

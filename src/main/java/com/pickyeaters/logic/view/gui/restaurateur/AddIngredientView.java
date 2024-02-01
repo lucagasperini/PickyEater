@@ -60,8 +60,7 @@ public class AddIngredientView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_SUBTITLE"));
+        showTitle("RESTAURATEUR_ADDINGREDIENT");
         textIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
         textIngredientSelect.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT_SELECT"));
         textIngredientSelectExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT_SELECTEXPLANATION"));

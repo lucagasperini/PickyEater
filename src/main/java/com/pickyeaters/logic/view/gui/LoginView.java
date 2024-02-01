@@ -24,6 +24,10 @@ public class LoginView extends VirtualPaneView {
     private Text textEmail;
     @FXML
     private Text textPassword;
+    @FXML
+    protected Text textTitle;
+    @FXML
+    protected Text textSubtitle;
 
     private LoginController controller;
 
@@ -56,5 +60,10 @@ public class LoginView extends VirtualPaneView {
         } catch (LoginControllerException ex) {
             showError(ex);
         }
+    }
+
+    @FXML
+    private void clickButtonBack(ActionEvent event) {
+        VirtualPaneView.getActiveView().showParent();
     }
 }

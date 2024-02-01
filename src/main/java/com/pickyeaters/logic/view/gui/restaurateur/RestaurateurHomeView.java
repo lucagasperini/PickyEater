@@ -41,8 +41,8 @@ public class RestaurateurHomeView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textTitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("RESTAURATEUR_HOME_SUBTITLE"));
+        showTitle("RESTAURATEUR_HOME");
+        hideBack();
         buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGEMENUDETAILS"));
         buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGERESTAURANTDETAILS"));
     }

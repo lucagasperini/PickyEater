@@ -11,15 +11,10 @@ import javafx.scene.text.Text;
 import java.util.Map;
 
 public abstract class VirtualPaneView extends VirtualViewGUI {
-    @FXML
-    protected Text textTitle;
-    @FXML
-    protected Text textSubtitle;
-    @FXML
-    private Button buttonBack;
     private final VirtualPaneView parent;
     private static MainController mainController;
     private static MainView mainView;
+    private static VirtualPaneView activeView;
     protected VirtualPaneView(String fxml, VirtualPaneView parent) {
         super(fxml);
         this.parent = parent;
@@ -28,8 +23,13 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
         VirtualPaneView.mainController = mainController;
         VirtualPaneView.mainView = mainView;
     }
-    protected static BorderPane getMainLayout() {
-        return VirtualPaneView.mainView.getMainLayout();
+    protected static void setActiveView(VirtualPaneView view) {
+        VirtualPaneView.mainView.getMainLayout().setCenter(view.getRoot());
+        activeView = view;
+    }
+
+    public static VirtualPaneView getActiveView() {
+        return activeView;
     }
 
     protected static MainView getMainView() {
@@ -43,39 +43,44 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
     protected abstract void setup(Map<String, String> arg);
 
     public void show(Map<String, String> arg) {
-        if(buttonBack != null) {
-            buttonBack.setText(SettingsController.i18n("BACK"));
-        }
+        mainView.hideHeader();
+        setActiveView(this);
         setup(arg);
-        getMainLayout().setCenter(getRoot());
     }
     public void show() {
-        if(buttonBack != null) {
-            buttonBack.setText(SettingsController.i18n("BACK"));
-        }
-        setup(null);
-        getMainLayout().setCenter(getRoot());
+        show(null);
     }
 
     public void showParent() {
-        if(parent != null) {
-            parent.setup(null);
-            getMainLayout().setCenter(parent.getRoot());
-        } else {
-            throw new RuntimeException("Calling showParent on a root");
-        }
+        showParent(null);
     }
     public void showParent(Map<String, String> arg) {
         if(parent != null) {
-            getMainLayout().setCenter(parent.getRoot());
+            mainView.hideHeader();
+            setActiveView(parent);
             parent.setup(arg);
         } else {
             throw new RuntimeException("Calling showParent on a root");
         }
     }
 
-    @FXML
-    private void clickButtonBack(ActionEvent event) {
-        showParent();
+    public void showTitle(String key) {
+        if(key.isEmpty()) {
+            key = "DEFAULT";
+        }
+
+        mainView.showTitle(
+                SettingsController.i18n(key + "_TITLE"),
+                SettingsController.i18n(key + "_SUBTITLE")
+        );
     }
+
+    public void hideTitle() {
+        mainView.hideTitle();
+    }
+
+    public void hideBack() {
+        mainView.hideBack();
+    }
+
 }
