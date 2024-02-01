@@ -67,13 +67,6 @@ public class MainView extends VirtualViewGUI {
         VirtualPaneView.getMainController().start();
         stage.setTitle("Picky Eater");
 
-        try {
-            VirtualPaneView.getMainController().getInit().loadFromFile();
-        } catch (SettingsControllerException | DatabaseControllerException ex) {
-            InitView initView = new InitView(VirtualPaneView.getMainController().getInit());
-            initView.show();
-        }
-
         stage.show();
 
         startView.show();

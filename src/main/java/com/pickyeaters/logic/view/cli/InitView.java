@@ -32,7 +32,7 @@ public class InitView extends VirtualViewCLI {
         try {
             controller.loadFromInput(settings);
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            showError(ex);
+            System.out.println("ERROR: " + ex.getMessage());
             askConfig();
         }
     }
@@ -43,7 +43,6 @@ public class InitView extends VirtualViewCLI {
         try {
             controller.loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            showError(ex);
             // If you cannot load settings/database, ask user input
             askConfig();
         }

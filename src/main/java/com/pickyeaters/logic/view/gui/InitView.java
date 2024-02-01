@@ -7,13 +7,12 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
 import java.util.Map;
 
-public class InitView extends VirtualWindowView {
+public class InitView extends VirtualPaneView {
     @FXML
     private TextField inputDatabaseHost;
     @FXML
@@ -21,32 +20,56 @@ public class InitView extends VirtualWindowView {
     @FXML
     private TextField inputDatabaseName;
     @FXML
-    private TextField inputDatabaseUsername;
+    private TextField inputDatabaseUser;
     @FXML
     private PasswordField inputDatabasePassword;
+    @FXML
+    private ComboBox<String> comboBoxLocale;
+    @FXML
+    private Text textDatabaseHost;
+    @FXML
+    private Text textDatabasePort;
+    @FXML
+    private Text textDatabaseName;
+    @FXML
+    private Text textDatabaseUser;
+    @FXML
+    private Text textDatabasePassword;
+    @FXML
+    private Text textLocale;
+    @FXML
+    private Button buttonSave;
     private InitController controller;
-    public InitView(InitController controller) {
-        super("/form/Init.fxml");
+    public InitView(InitController controller, VirtualPaneView parent) {
+        super("/form/Init.fxml", parent);
         this.controller = controller;
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        throw new UnsupportedOperationException();
+        textDatabaseHost.setText("Database Host");
+        textDatabasePort.setText("Database Port");
+        textDatabaseName.setText("Database Name");
+        textDatabaseUser.setText("Database User");
+        textDatabasePassword.setText("Database Password");
+        textLocale.setText("Locale");
+        buttonSave.setText("Save");
+        comboBoxLocale.getItems().addAll("it", "en");
+        comboBoxLocale.getSelectionModel().select(0);
     }
 
-    @FXML protected void clickDatabaseConnect(ActionEvent event) {
+    @FXML protected void clickButtonSave(ActionEvent event) {
         SettingsBean settings = new SettingsBean();
 
         settings.setDatabaseHost(inputDatabaseHost.getText());
         settings.setDatabasePort(inputDatabasePort.getText());
         settings.setDatabaseName(inputDatabaseName.getText());
-        settings.setDatabaseUser(inputDatabaseUsername.getText());
+        settings.setDatabaseUser(inputDatabaseUser.getText());
         settings.setDatabasePassword(inputDatabasePassword.getText());
 
         try {
             controller.loadFromInput(settings);
-            stage.close();
+            showParent();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid settings");

@@ -1,5 +1,7 @@
 package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
+import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -28,6 +30,14 @@ public class StartView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
+        try {
+            getMainController().getInit().loadFromFile();
+        } catch (SettingsControllerException | DatabaseControllerException ex) {
+            InitView initView = new InitView(getMainController().getInit(), this);
+            initView.show();
+            return;
+        }
+
         if(arg != null) {
             setupLogin(arg.get("login"));
         }
