@@ -2,7 +2,6 @@ package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.view.bean.LoginBean;
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import javafx.event.ActionEvent;
@@ -29,7 +28,7 @@ public class LoginView extends VirtualPaneView {
     @FXML
     protected Text textSubtitle;
 
-    private LoginController controller;
+    private final LoginController controller;
 
     public LoginView(LoginController controller, VirtualPaneView parent) {
         super("/form/Login.fxml", parent);

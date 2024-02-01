@@ -2,12 +2,11 @@ package com.pickyeaters.logic.view.cli.pickie;
 
 import com.pickyeaters.logic.controller.application.pickie.PickieController;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
-import com.pickyeaters.logic.view.cli.VirtualViewCLI;
 
 import java.util.Map;
 
 public class PickieHomeView extends VirtualRequestView {
-    private PickieController controller;
+    private final PickieController controller;
     public PickieHomeView(PickieController controller) {
         super("Home");
         this.controller = controller;

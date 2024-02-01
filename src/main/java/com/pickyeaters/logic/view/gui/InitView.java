@@ -1,7 +1,6 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.InitController;
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
@@ -39,7 +38,7 @@ public class InitView extends VirtualPaneView {
     private Text textLocale;
     @FXML
     private Button buttonSave;
-    private InitController controller;
+    private final InitController controller;
     public InitView(InitController controller, VirtualPaneView parent) {
         super("/form/Init.fxml", parent);
         this.controller = controller;

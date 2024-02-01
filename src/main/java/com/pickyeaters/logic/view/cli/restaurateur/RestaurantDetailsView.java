@@ -1,17 +1,15 @@
 package com.pickyeaters.logic.view.cli.restaurateur;
 
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetailsController;
-import com.pickyeaters.logic.controller.application.restaurateur.RestaurateurController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
-import com.pickyeaters.logic.view.cli.VirtualViewCLI;
 
 import java.util.Map;
 
 public class RestaurantDetailsView extends VirtualRequestView {
-    private RestaurantDetailsController controller;
+    private final RestaurantDetailsController controller;
     public RestaurantDetailsView(RestaurantDetailsController controller) {
         super("RestaurantDetails");
         this.controller = controller;

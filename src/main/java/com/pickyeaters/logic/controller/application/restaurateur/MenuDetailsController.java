@@ -18,8 +18,8 @@ public class MenuDetailsController extends VirtualController {
         super(main);
     }
 
-    private AddDishController addDish = new AddDishController(main);
-    private UpdateDishController updateDish = new UpdateDishController(main);
+    private final AddDishController addDish = new AddDishController(main);
+    private final UpdateDishController updateDish = new UpdateDishController(main);
     public AddDishController getAddDish() {
         return addDish;
     }

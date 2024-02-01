@@ -26,7 +26,7 @@ public class DishListItemWidget extends VirtualWidget {
     private ListView<String> listviewIngredient;
     @FXML
     private CheckBox checkBoxActive;
-    private String dishID;
+    private final String dishID;
 
     public DishListItemWidget(VirtualPaneView parent, DishBean dishBean) {
         super("/form/restaurateur/widget/DishListItemWidget.fxml", parent);

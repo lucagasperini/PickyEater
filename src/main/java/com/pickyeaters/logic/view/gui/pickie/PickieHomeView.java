@@ -17,7 +17,7 @@ public class PickieHomeView extends VirtualPaneView {
     private Button buttonFindRestaurant;
     @FXML
     private Button buttonEatingPreferences;
-    private PickieController controller;
+    private final PickieController controller;
     public PickieHomeView(PickieController controller, VirtualPaneView parent) {
         super("/form/pickie/Home.fxml", parent);
         this.controller = controller;

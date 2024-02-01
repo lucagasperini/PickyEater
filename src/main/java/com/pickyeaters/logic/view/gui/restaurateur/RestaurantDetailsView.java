@@ -15,7 +15,7 @@ import javafx.scene.text.Text;
 import java.util.Map;
 
 public class RestaurantDetailsView extends VirtualPaneView {
-    private RestaurantDetailsController controller;
+    private final RestaurantDetailsController controller;
     @FXML
     private TextField inputRestaurateurFirstname;
     @FXML

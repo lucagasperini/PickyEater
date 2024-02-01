@@ -1,16 +1,10 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.controller.application.MainController;
-import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.exception.ControllerException;
-import com.pickyeaters.logic.view.ViewInterface;
-
-import java.util.Map;
 import java.util.Scanner;
 
 public abstract class VirtualRequestView extends VirtualViewCLI {
 
-    private String viewName;
+    private final String viewName;
     protected VirtualRequestView(String viewName) {
         this.viewName = viewName;
     }

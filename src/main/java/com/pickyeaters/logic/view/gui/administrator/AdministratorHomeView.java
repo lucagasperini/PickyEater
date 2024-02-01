@@ -5,12 +5,11 @@ import com.pickyeaters.logic.controller.application.administrator.AdministratorC
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 
 import java.util.Map;
 
 public class AdministratorHomeView extends VirtualPaneView {
-    private AdministratorController controller;
+    private final AdministratorController controller;
     @FXML
     private Button buttonManageReport;
     public AdministratorHomeView(AdministratorController controller, VirtualPaneView parent) {

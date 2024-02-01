@@ -7,8 +7,8 @@ public class RestaurateurController extends VirtualController {
     public RestaurateurController(MainController main) {
         super(main);
     }
-    private RestaurantDetailsController restaurantDetails = new RestaurantDetailsController(main);
-    private MenuDetailsController menuDetails = new MenuDetailsController(main);
+    private final RestaurantDetailsController restaurantDetails = new RestaurantDetailsController(main);
+    private final MenuDetailsController menuDetails = new MenuDetailsController(main);
 
     public MenuDetailsController getMenuDetails() {
         return menuDetails;

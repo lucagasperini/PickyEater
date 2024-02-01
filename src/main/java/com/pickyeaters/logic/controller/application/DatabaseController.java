@@ -6,7 +6,7 @@ import com.pickyeaters.logic.model.SettingsDatabase;
 import java.sql.*;
 
 public class DatabaseController {
-    private static DatabaseController instance = new DatabaseController();
+    private static final DatabaseController instance = new DatabaseController();
 
     public static DatabaseController getInstance() {
         return instance;

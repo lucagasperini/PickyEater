@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 
 public class SettingsLocaleController implements SettingsVirtualController {
 
-    private SettingsLocale settings = new SettingsLocale();
+    private final SettingsLocale settings = new SettingsLocale();
 
     private static final String[] LANG_LIST = {"en", "it"};
     private static final String DEFAULT_LANG = "it";

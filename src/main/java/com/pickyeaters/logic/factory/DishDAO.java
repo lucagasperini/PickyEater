@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DishDAO {
-    private static DishDAO instance = new DishDAO();
+    private static final DishDAO instance = new DishDAO();
 
     private DishDAO() {}
 

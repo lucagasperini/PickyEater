@@ -8,7 +8,7 @@ import com.pickyeaters.logic.model.*;
 import java.sql.Types;
 
 public class UserDAO {
-    private static UserDAO instance = new UserDAO();
+    private static final UserDAO instance = new UserDAO();
     private UserDAO() {}
 
     public static UserDAO getInstance() {

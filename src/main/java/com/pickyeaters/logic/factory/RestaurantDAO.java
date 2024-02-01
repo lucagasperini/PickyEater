@@ -9,7 +9,7 @@ import java.sql.Types;
 
 public class RestaurantDAO {
 
-    private static RestaurantDAO instance = new RestaurantDAO();
+    private static final RestaurantDAO instance = new RestaurantDAO();
 
     private RestaurantDAO() {}
 

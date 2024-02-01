@@ -6,7 +6,7 @@ import com.pickyeaters.logic.view.cli.VirtualRequestView;
 import java.util.Map;
 
 public class RestaurateurHomeView extends VirtualRequestView {
-    private RestaurateurController controller;
+    private final RestaurateurController controller;
     public RestaurateurHomeView(RestaurateurController controller) {
         super("Home");
         this.controller = controller;

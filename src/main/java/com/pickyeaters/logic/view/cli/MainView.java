@@ -7,11 +7,10 @@ import com.pickyeaters.logic.view.cli.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.cli.restaurateur.RestaurateurHomeView;
 
 import java.util.Map;
-import java.util.Scanner;
 
 public class MainView extends VirtualViewCLI {
 
-    private MainController controller = new MainController();
+    private final MainController controller = new MainController();
     public MainView() {
         init(controller);
     }

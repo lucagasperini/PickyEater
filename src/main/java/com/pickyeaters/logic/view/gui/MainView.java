@@ -1,13 +1,8 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.application.MainController;
-import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.controller.exception.SettingsControllerException;
-import com.pickyeaters.logic.factory.IngredientDAO;
-import com.pickyeaters.logic.model.Ingredient;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
@@ -22,16 +17,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.util.Map;
-import java.util.Stack;
-import java.util.Vector;
 
 public class MainView extends VirtualViewGUI {
-    private Stage stage;
-    private MainController controller = new MainController();
-    private StartView startView = new StartView();
+    private final Stage stage;
+    private final MainController controller = new MainController();
+    private final StartView startView = new StartView();
 
-    private Node nodeHeader;
+    private final Node nodeHeader;
     public MainView(Stage primaryStage) {
         super("/form/Background.fxml");
         this.stage = primaryStage;

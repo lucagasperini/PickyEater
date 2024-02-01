@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class IngredientDAO {
-    private static IngredientDAO instance = new IngredientDAO();
+    private static final IngredientDAO instance = new IngredientDAO();
 
     private IngredientDAO() {}
 
@@ -84,8 +84,8 @@ public class IngredientDAO {
     }
 
     private class IngredientTuple {
-        private Ingredient ingredient;
-        private String parentID;
+        private final Ingredient ingredient;
+        private final String parentID;
 
         public IngredientTuple(Ingredient ingredient, String parentID) {
             this.ingredient = ingredient;
@@ -146,7 +146,7 @@ public class IngredientDAO {
     }
 
     public class IngredientTree {
-        private IngredientNode root;
+        private final IngredientNode root;
         public IngredientTree(IngredientNode root) {
             this.root = root;
         }
@@ -174,8 +174,8 @@ public class IngredientDAO {
     }
 
     public class IngredientNode {
-        private Ingredient value;
-        private LinkedList<IngredientNode> child;
+        private final Ingredient value;
+        private final LinkedList<IngredientNode> child;
 
         public IngredientNode(Ingredient value) {
             // TODO: CC?

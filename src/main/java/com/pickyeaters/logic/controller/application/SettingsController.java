@@ -13,10 +13,10 @@ import java.nio.file.Paths;
 import java.util.Properties;
 
 public class SettingsController {
-    private Settings settings = new Settings();
-    private SettingsDatabaseController databaseController = new SettingsDatabaseController();
-    private SettingsLocaleController localeController = new SettingsLocaleController();
-    private static SettingsController instance = new SettingsController();
+    private final Settings settings = new Settings();
+    private final SettingsDatabaseController databaseController = new SettingsDatabaseController();
+    private final SettingsLocaleController localeController = new SettingsLocaleController();
+    private static final SettingsController instance = new SettingsController();
 
     public static SettingsController getInstance() {
         return instance;
