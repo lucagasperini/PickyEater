@@ -23,10 +23,18 @@ public abstract class VirtualViewCLI implements ViewInterface {
         if(key.isEmpty()) {
             key = "DEFAULT";
         }
-
-        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_TITLE"));
-        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_HEADER"));
-        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_CONTENT"));
+        String title = SettingsController.i18n(key + "_ALERT_ERROR_TITLE");
+        String header = SettingsController.i18n(key + "_ALERT_ERROR_HEADER");
+        String content = SettingsController.i18n(key + "_ALERT_ERROR_CONTENT");
+        if(!title.isEmpty()) {
+            System.out.println(title);
+        }
+        if(!header.isEmpty()) {
+            System.out.println(header);
+        }
+        if(!content.isEmpty()) {
+            System.out.println(content);
+        }
     }
 
     public void showError(ControllerException ex) {
