@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.ViewInterface;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -53,6 +54,22 @@ public abstract class VirtualViewCLI implements ViewInterface {
 
     public void printField(String key, String value) {
         System.out.println(SettingsController.i18n(key) + ": " + value);
+    }
+
+    public void printFieldList(String key, List<String> value) {
+        StringBuilder builder = new StringBuilder();
+        for(String i : value) {
+            builder.append(i);
+            builder.append(",");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        System.out.println(SettingsController.i18n(key) + ": " + builder);
+    }
+
+    public void printFieldBoolean(String key, boolean value) {
+        String yes = SettingsController.i18n("YES");
+        String no = SettingsController.i18n("NO");
+        System.out.println(SettingsController.i18n(key) + ": " + (value ? yes : no));
     }
 
     public String askField(String key, String value) {
