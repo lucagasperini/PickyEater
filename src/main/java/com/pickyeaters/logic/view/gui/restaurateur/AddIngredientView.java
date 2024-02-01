@@ -12,10 +12,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.text.Text;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class AddIngredientView extends VirtualPaneView {
     @FXML
@@ -97,14 +94,14 @@ public class AddIngredientView extends VirtualPaneView {
 
         IngredientDAO.IngredientForest forest = IngredientDAO.getInstance().getAll();
         for(IngredientDAO.IngredientTree tree : forest.getTreeList()) {
-            Stack<IngredientDAO.IngredientNode> nodeStack = new Stack<>();
-            Stack<TreeItem<String>> treeItemStack = new Stack<>();
+            Deque<IngredientDAO.IngredientNode> nodeStack = new LinkedList<>();
+            Deque<TreeItem<String>> treeItemStack = new LinkedList<>();
             nodeStack.push(tree.getRoot());
             TreeItem<String> subRoot = new TreeItem<>(tree.getRoot().toString());
             treeIngredientRoot.getChildren().add(subRoot);
             treeItemStack.push(subRoot);
 
-            while(!nodeStack.empty()) {
+            while(!nodeStack.isEmpty()) {
                 IngredientDAO.IngredientNode node = nodeStack.pop();
                 TreeItem<String> item = treeItemStack.pop();
                 for (IngredientDAO.IngredientNode i : node.getChild()) {

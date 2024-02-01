@@ -5,7 +5,10 @@ import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.Ingredient;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
 
 public class IngredientDAO {
     private static IngredientDAO instance = new IngredientDAO();
@@ -18,8 +21,8 @@ public class IngredientDAO {
 
     public IngredientForest getAll() throws DAOException{
         try {
-            Stack<IngredientTuple> nodes = new Stack<>();
-            Stack<Ingredient> roots = new Stack<>();
+            Deque<IngredientTuple> nodes = new LinkedList<>();
+            Deque<Ingredient> roots = new LinkedList<>();
             DatabaseController.Query query = DatabaseController.getInstance().queryResultSet("SELECT * FROM all_ingredient");
 
             query.execute();
@@ -66,15 +69,15 @@ public class IngredientDAO {
     }
 
 
-    private IngredientForest toForest(Stack<Ingredient> roots, Stack<IngredientTuple> nodes) {
+    private IngredientForest toForest(Deque<Ingredient> roots, Deque<IngredientTuple> nodes) {
         IngredientForest forest = new IngredientForest();
-        while(!roots.empty()) {
+        while(!roots.isEmpty()) {
             forest.addRoot(roots.pop());
         }
-        while(!nodes.empty()) {
+        while(!nodes.isEmpty()) {
             IngredientTuple tuple = nodes.pop();
             if(!forest.addNode(tuple)) {
-                nodes.insertElementAt(tuple, 0);
+                nodes.addLast(tuple);
             }
         }
         return forest;
@@ -100,19 +103,19 @@ public class IngredientDAO {
             ArrayList<String> tmp = new ArrayList<>();
             ArrayList<String> out = new ArrayList<>();
             for(IngredientTree tree : list) {
-                Stack<IngredientNode> nodeStack = new Stack<>();
+                Deque<IngredientNode> nodeStack = new LinkedList<>();
                 nodeStack.push(tree.getRoot());
                 tmp.clear();
-                while(!nodeStack.empty()) {
+                while(!nodeStack.isEmpty()) {
                     IngredientNode node = nodeStack.pop();
                     tmp.add(node.toString());
                     if(node.getChild().isEmpty()) {
-                        String format = "";
+                        StringBuilder builder = new StringBuilder();
                         for(String i : tmp) {
-                            format += i;
-                            format += ".";
+                            builder.append(i);
+                            builder.append(".");
                         }
-                        out.add(format.substring(0, format.length() - 1));
+                        out.add(builder.substring(0, builder.length() - 1));
                         tmp.remove(tmp.size() - 1);
                     }
                     for (IngredientNode i : node.getChild()) {
@@ -153,10 +156,10 @@ public class IngredientDAO {
         }
 
         public IngredientNode searchNode(String id) {
-            Stack<IngredientNode> stack = new Stack<>();
+            Deque<IngredientNode> stack = new LinkedList<>();
             stack.push(root);
             IngredientNode cur = null;
-            while(!stack.empty()) {
+            while(!stack.isEmpty()) {
                 cur = stack.pop();
                 if (cur.hasID(id)) {
                     return cur;

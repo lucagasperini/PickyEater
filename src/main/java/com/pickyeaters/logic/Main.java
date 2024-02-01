@@ -9,7 +9,7 @@ public class Main  {
             mainGUI.run(args);
         } else {
             MainCLI mainCLI = new MainCLI();
-            mainCLI.run(args);
+            mainCLI.run();
         }
     }
 }
