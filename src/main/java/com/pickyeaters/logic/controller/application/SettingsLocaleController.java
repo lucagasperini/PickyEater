@@ -34,10 +34,6 @@ public class SettingsLocaleController implements SettingsVirtualController {
     }
 
     public void validate() throws SettingsControllerException {
-        if(settings == null) {
-            throw new SettingsControllerException("SettingsLocale not load");
-        }
-
         if(!validateLang()) {
             settings.setLang(DEFAULT_LANG);
         }

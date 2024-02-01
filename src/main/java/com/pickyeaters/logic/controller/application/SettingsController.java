@@ -78,10 +78,6 @@ public class SettingsController {
     }
 
     private void validate() throws SettingsControllerException {
-        if(settings == null) {
-            throw new SettingsControllerException("Settings not load");
-        }
-
         databaseController.validate();
         localeController.validate();
     }
