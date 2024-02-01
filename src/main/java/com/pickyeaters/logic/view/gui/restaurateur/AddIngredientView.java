@@ -83,7 +83,7 @@ public class AddIngredientView extends VirtualPaneView {
         try {
             setupTreeIngredient();
         } catch (DAOException e) {
-            throw new RuntimeException(e);
+            showError(e);
         }
 
     }

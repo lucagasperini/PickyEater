@@ -45,6 +45,10 @@ public class MainView extends VirtualViewCLI {
         controller.start();
         InitView initView = new InitView(controller.getInit());
         initView.show();
+
+        LoginView loginView = new LoginView(controller.getLogin());
+        loginView.show();
+
         System.out.println("Welcome to PickyEaters");
         requestLoop();
         System.out.println("Goodbye!");

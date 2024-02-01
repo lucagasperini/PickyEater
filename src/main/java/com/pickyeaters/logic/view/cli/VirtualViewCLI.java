@@ -15,7 +15,7 @@ public abstract class VirtualViewCLI implements ViewInterface {
         VirtualViewCLI.mainController = mainController;
     }
 
-    public static MainController getMainController() {
+    protected static MainController getMainController() {
         return mainController;
     }
 
@@ -24,9 +24,9 @@ public abstract class VirtualViewCLI implements ViewInterface {
             key = "DEFAULT";
         }
 
-        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_TITLE") +
-                ":" + SettingsController.i18n(key + "_ALERT_ERROR_HEADER") + ":"
-                + SettingsController.i18n(key + "_ALERT_ERROR_HEADER"));
+        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_TITLE"));
+        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_HEADER"));
+        System.out.println(SettingsController.i18n(key + "_ALERT_ERROR_CONTENT"));
     }
 
     public void showError(ControllerException ex) {

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class LoginView extends VirtualViewCLI {
-    LoginController controller;
+    private LoginController controller;
     public LoginView(LoginController controller) {
         this.controller = controller;
     }
