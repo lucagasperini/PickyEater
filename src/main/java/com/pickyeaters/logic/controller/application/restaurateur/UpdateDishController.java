@@ -16,6 +16,9 @@ public class UpdateDishController extends VirtualController {
     }
 
     public void update(DishBean dishBean) throws ControllerException {
+        if(!dishBean.hasIngredients()) {
+            throw new ControllerException("DISH_NO_INGREDIENT","Cannot update dish without ingredients");
+        }
         DishDAO.getInstance().update(dishBean.toDish());
         DishDAO.getInstance().unlinkIngredient(dishBean.getID());
         for(String i : dishBean.getIngredientList())
