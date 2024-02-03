@@ -22,6 +22,7 @@ CREATE TABLE "User" (
     lastname varchar(256) NOT NULL,
     type varchar(16) NOT NULL,
     username varchar(256),
+    phone varchar(16),
     ssn varchar(256),
     fk_restaurant uuid,
     FOREIGN KEY (fk_restaurant) REFERENCES "Restaurant" (id),
@@ -38,7 +39,8 @@ CREATE TABLE "Dish" (
     description varchar(4096) NOT NULL,
     fk_restaurant uuid NOT NULL,
     active boolean NOT NULL DEFAULT true,
-    FOREIGN KEY (fk_restaurant) REFERENCES "Restaurant" (id)
+    FOREIGN KEY (fk_restaurant) REFERENCES "Restaurant" (id),
+    unique(name, fk_restaurant)
 );
 
 CREATE TABLE "Ingredient" (
@@ -55,6 +57,8 @@ CREATE TABLE "Dish_Ingredient" (
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     fk_ingredient UUID NOT NULL,
     fk_dish UUID NOT NULL,
+    cooked BOOLEAN NOT NULL DEFAULT false,
+    optional BOOLEAN NOT NULL DEFAULT false,
     unique(fk_dish, fk_ingredient),
     FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
@@ -107,12 +111,13 @@ $BODY$;
 
 CREATE OR REPLACE PROCEDURE userinfo_rest(
 	IN _email varchar,
+	OUT _phone varchar,
 	OUT _ssn varchar,
 	OUT _restaurant varchar)
 LANGUAGE 'plpgsql'
 AS $BODY$
 BEGIN
-    SELECT ssn, fk_restaurant INTO _ssn, _restaurant FROM "User" WHERE email = _email::CITEXT;
+    SELECT phone, ssn, fk_restaurant INTO _phone, _ssn, _restaurant FROM "User" WHERE email = _email::CITEXT;
 END;
 $BODY$;
 
@@ -178,6 +183,7 @@ CREATE OR REPLACE PROCEDURE add_restaurateur(
     IN _password char(64),
     IN _firstname varchar(256),
     IN _lastname varchar(256),
+    IN _phone varchar(16),
     IN _ssn varchar(256),
     IN _rest_name varchar(256),
     IN _rest_phone varchar(16),
@@ -191,8 +197,8 @@ BEGIN
     INSERT INTO "Restaurant" (name, phone, address) VALUES
         	(_rest_name, _rest_phone, _rest_address) RETURNING id::varchar INTO restid;
 
-    INSERT INTO "User" (email, password, type, firstname, lastname, ssn, fk_restaurant)
-        VALUES (_email, _password, 'REST', _firstname, _lastname, _ssn, restid) RETURNING id::varchar INTO _id;
+    INSERT INTO "User" (email, password, type, firstname, lastname, phone, ssn, fk_restaurant)
+        VALUES (_email, _password, 'REST', _firstname, _lastname, _phone, _ssn, restid) RETURNING id::varchar INTO _id;
 END;
 $BODY$;
 
@@ -235,6 +241,7 @@ CREATE PROCEDURE update_restaurateur(
     IN _email varchar,
     IN _firstname varchar,
     IN _lastname varchar,
+    IN _phone varchar,
     IN _ssn varchar)
 LANGUAGE 'plpgsql'
 AS $BODY$
@@ -243,6 +250,7 @@ BEGIN
 		email=_email,
 		firstname=_firstname,
 		lastname=_lastname,
+		phone=_phone,
 		ssn=_ssn
 		WHERE id=_id::uuid;
 END;
@@ -310,7 +318,9 @@ $BODY$;
 
 CREATE OR REPLACE PROCEDURE add_dish_ingredient(
     IN _dish_id varchar(256),
-    IN _ingredient_name varchar(256))
+    IN _ingredient_name varchar(256),
+    IN _cooked boolean,
+    IN _optional boolean)
 LANGUAGE plpgsql
 AS $BODY$
 DECLARE
@@ -320,8 +330,8 @@ BEGIN
     IF(ingredient_id IS NULL) THEN
     		RETURN;
     END IF;
-	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish)
-	    VALUES (ingredient_id, _dish_id::uuid);
+	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish, cooked, optional)
+	    VALUES (ingredient_id, _dish_id::uuid, _cooked, _optional);
 END;
 $BODY$;
 
@@ -379,7 +389,7 @@ $BODY$;
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
-CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
+CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
 

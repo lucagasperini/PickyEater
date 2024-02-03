@@ -1,5 +1,6 @@
 package com.pickyeaters.logic.view.bean;
 
+import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.model.*;
 
 import java.util.LinkedList;
@@ -11,27 +12,24 @@ public class DishBean {
     private String description;
     private String category;
     private boolean active;
-    private LinkedList<String> ingredientList = new LinkedList<>();
-    public DishBean(String id, String name, String description, String category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.category = category;
+    private List<DishIngredientBean> ingredientList = new LinkedList<>();
+    public DishBean() {}
+    public DishBean(String id, String name, String description, String category) throws BeanException {
+        setID(id);
+        setName(name);
+        setDescription(description);
+        setCategory(category);
     }
 
     //TODO: check category?
-    public DishBean(String name, String description, String category) {
-        this(null, name, description,category);
+    public DishBean(String name, String description, String category) throws BeanException {
+        this("", name, description,category);
     }
 
-    public DishBean(Dish dish) {
-        this.id = dish.getID();
-        this.name = dish.getName();
-        this.description = dish.getDescription();
-        this.active = dish.isActive();
-        this.category = dish.getType();
+    public DishBean(Dish dish) throws BeanException {
+        this(dish.getID(), dish.getName(), dish.getDescription(), dish.getType());
         for(Ingredient i : dish.getIngredientList()) {
-            ingredientList.add(i.getName());
+            ingredientList.add(new DishIngredientBean(i.getName(), i.isCooked(), i.isOptional()));
         }
     }
 
@@ -39,8 +37,8 @@ public class DishBean {
         return !ingredientList.isEmpty();
     }
 
-    public void addIngredient(String name) {
-        ingredientList.add(name);
+    public void addIngredient(DishIngredientBean ingredientBean) {
+        ingredientList.add(ingredientBean);
     }
 
     public String getID() {
@@ -63,7 +61,7 @@ public class DishBean {
         return name;
     }
 
-    public List<String> getIngredientList() {
+    public List<DishIngredientBean> getIngredientList() {
         return ingredientList;
     }
 
@@ -80,5 +78,28 @@ public class DishBean {
         out.setID(id);
         out.setActive(active);
         return out;
+    }
+
+    public void setName(String name) throws BeanException {
+        if (name.isEmpty()) {
+            throw new BeanException("DISH_NAME_EMPTY", "Dish cannot be empty");
+        }
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

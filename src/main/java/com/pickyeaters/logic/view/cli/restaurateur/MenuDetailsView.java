@@ -4,8 +4,10 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.DishBean;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +62,11 @@ public class MenuDetailsView extends VirtualRequestView {
                         "RESTAURATEUR_MANAGEMENUDETAILS_CATEGORY",
                         SettingsController.i18n("DISH_TYPE_" + i.getCategory())
                 );
-                printFieldList("RESTAURATEUR_MANAGEMENUDETAILS_INGREDIENTS",i.getIngredientList());
+                List<String> dishIngredients = new ArrayList<>();
+                for(DishIngredientBean ingredient : i.getIngredientList()) {
+                    dishIngredients.add(ingredient.getName());
+                }
+                printFieldList("RESTAURATEUR_MANAGEMENUDETAILS_INGREDIENTS",dishIngredients);
                 printFieldBoolean("RESTAURATEUR_MANAGEMENUDETAILS_ACTIVE",i.isActive());
                 print("##################################");
             }

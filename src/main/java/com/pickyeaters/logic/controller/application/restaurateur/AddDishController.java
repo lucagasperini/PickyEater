@@ -6,6 +6,7 @@ import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.DishDAO;
 import com.pickyeaters.logic.view.bean.DishBean;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 
 public class AddDishController extends VirtualController {
     public AddDishController(MainController main) {
@@ -19,7 +20,7 @@ public class AddDishController extends VirtualController {
             }
             String restaurantID = main.getLogin().toRestaurateur().getRestaurant().getID();
             String dishID = DishDAO.getInstance().addDish(restaurantID, dishBean.toDish());
-            for(String i : dishBean.getIngredientList())
+            for(DishIngredientBean i : dishBean.getIngredientList())
                 DishDAO.getInstance().addDishIngredient(dishID, i);
         } catch (LoginControllerException ex) {
             throw new ControllerException("Current user is not a restaurateur");

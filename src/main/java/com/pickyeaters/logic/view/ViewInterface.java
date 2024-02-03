@@ -1,8 +1,8 @@
 package com.pickyeaters.logic.view;
 
-import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.VirtualException;
 
 public interface ViewInterface {
-    void showError(ControllerException ex);
+    void showError(VirtualException ex);
     void showError(String key);
 }

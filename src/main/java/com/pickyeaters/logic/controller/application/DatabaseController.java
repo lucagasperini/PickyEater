@@ -45,7 +45,7 @@ public class DatabaseController {
         String cmd;
         CallableStatement cs;
         ResultSet rs;
-        boolean isResultSet = false;
+        boolean isResultSet;
         int index = 1;
         Query(CallableStatement cs, String cmd, boolean isResultSet) {
             this.cs = cs;
@@ -101,6 +101,15 @@ public class DatabaseController {
                 outIndex++;
             } catch (SQLException ex) {
                 throw new DatabaseControllerException("Cannot setString: " + ex.getMessage());
+            }
+        }
+
+        public void setBoolean(boolean val) throws DatabaseControllerException {
+            try {
+                cs.setBoolean(index++, val);
+                outIndex++;
+            } catch (SQLException ex) {
+                throw new DatabaseControllerException("Cannot setBoolean: " + ex.getMessage());
             }
         }
 

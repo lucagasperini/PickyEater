@@ -85,18 +85,21 @@ public class UserDAO {
             String email,
             String firstname,
             String lastname) throws DatabaseControllerException {
-        DatabaseController.Query query = DatabaseController.getInstance().query("CALL userinfo_rest(?, ?, ?)");
+        DatabaseController.Query query = DatabaseController.getInstance().query("CALL userinfo_rest(?, ?, ?, ?)");
         query.setString(email);
         query.registerOutParameter(Types.VARCHAR);
         query.registerOutParameter(Types.VARCHAR);
+        query.registerOutParameter(Types.VARCHAR);
         query.execute();
+
+        String phone = query.getString();
         String ssn = query.getString();
         String restID = query.getString();
         query.close();
 
         Restaurant rest = RestaurantDAO.getInstance().get(restID);
 
-        return new Restaurateur(id, email, firstname, lastname, ssn, rest);
+        return new Restaurateur(id, email, firstname, lastname, phone, ssn, rest);
     }
 
     public void updateUser(User user) throws DAOException {
@@ -142,11 +145,12 @@ public class UserDAO {
 
     private void updateUserRestaurateur(Restaurateur restaurateur) throws DatabaseControllerException {
         DatabaseController.Query query =
-                DatabaseController.getInstance().query("CALL update_restaurateur(?, ?, ?, ?, ?)");
+                DatabaseController.getInstance().query("CALL update_restaurateur(?, ?, ?, ?, ?, ?)");
         query.setString(restaurateur.getID());
         query.setString(restaurateur.getEmail());
         query.setString(restaurateur.getFirstname());
         query.setString(restaurateur.getLastname());
+        query.setString(restaurateur.getPhone());
         query.setString(restaurateur.getSsn());
 
         query.execute();

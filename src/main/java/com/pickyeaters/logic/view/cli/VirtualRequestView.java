@@ -24,7 +24,12 @@ public abstract class VirtualRequestView extends VirtualViewCLI {
                     return;
                 }
                 case "q", "quit" -> System.exit(0);
-                case "h", "help" -> System.out.println(requestHelp());
+                case "h", "help" -> System.out.println("""
+                                [back, b]
+                                [quit, q]
+                                """ +
+                        requestHelp()
+                );
                 default -> {
                     if (!request(input)) {
                         showError("UNSUPPORTED_OPERATION");

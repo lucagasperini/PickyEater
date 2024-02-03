@@ -2,6 +2,7 @@ package com.pickyeaters.logic.controller.application.restaurateur;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.VirtualController;
+import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.DishDAO;
@@ -36,7 +37,11 @@ public class MenuDetailsController extends VirtualController {
             for(Dish i : dishList) {
                 List<Ingredient> ingredientList = IngredientDAO.getInstance().getIngredientListOfDish(i.getID());
                 i.addIngredientList(ingredientList);
-                out.add(new DishBean(i));
+                try {
+                    out.add(new DishBean(i));
+                } catch (BeanException e) {
+                    throw new RuntimeException(e);
+                }
             }
             return out;
         } catch (LoginControllerException ex) {

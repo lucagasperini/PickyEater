@@ -2,7 +2,7 @@ package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.VirtualException;
 import com.pickyeaters.logic.view.ViewInterface;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public abstract class VirtualViewCLI implements ViewInterface {
         }
     }
 
-    public void showError(ControllerException ex) {
+    public void showError(VirtualException ex) {
         showError(ex.getKey());
     }
 

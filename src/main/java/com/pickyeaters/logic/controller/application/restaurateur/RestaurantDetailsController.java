@@ -18,6 +18,7 @@ public class RestaurantDetailsController extends VirtualController {
                 restaurateur.getEmail(),
                 restaurateur.getFirstname(),
                 restaurateur.getLastname(),
+                restaurateur.getPhone(),
                 restaurateur.getSsn(),
                 restaurateur.getRestaurant().getName(),
                 restaurateur.getRestaurant().getPhone(),
@@ -30,6 +31,7 @@ public class RestaurantDetailsController extends VirtualController {
         restaurateur.setEmail(restaurateurBean.getEmail());
         restaurateur.setFirstname(restaurateurBean.getFirstname());
         restaurateur.setLastname(restaurateurBean.getLastname());
+        restaurateur.setPhone(restaurateurBean.getPhone());
         restaurateur.setSsn(restaurateurBean.getSsn());
         restaurateur.getRestaurant().setName(restaurateurBean.getRestaurantName());
         restaurateur.getRestaurant().setPhone(restaurateurBean.getRestaurantPhone());

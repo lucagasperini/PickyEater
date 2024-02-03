@@ -1,16 +1,10 @@
 package com.pickyeaters.logic.controller.exception;
 
-public class ControllerException extends Exception {
-    private final String key;
+public class ControllerException extends VirtualException {
     public ControllerException(String msg) {
-        this("", msg);
+        super(msg);
     }
     public ControllerException(String key, String msg) {
-        super(msg);
-        this.key = key;
-    }
-
-    public String getKey() {
-        return key;
+        super(key, msg);
     }
 }

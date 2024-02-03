@@ -3,7 +3,7 @@ package com.pickyeaters.logic.view.bean;
 public class RestaurateurBean {
     private String firstname;
     private String lastname;
-    private String birthDate;
+    private String phone;
     private String ssn;
     private String restaurantPhone;
     private String email;
@@ -14,6 +14,7 @@ public class RestaurateurBean {
             String email,
             String firstname,
             String lastname,
+            String phone,
             String ssn,
             String restaurantName,
             String restaurantPhone,
@@ -21,6 +22,7 @@ public class RestaurateurBean {
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.phone = phone;
         this.ssn = ssn;
         this.restaurantName = restaurantName;
         this.restaurantPhone = restaurantPhone;
@@ -28,7 +30,11 @@ public class RestaurateurBean {
     }
     public String getFirstname(){ return firstname; }
     public String getLastname(){ return lastname; }
-    public String getBirthDate(){ return birthDate; }
+
+    public String getPhone() {
+        return phone;
+    }
+
     public String getSsn(){ return ssn; }
     public String getRestaurantPhone(){ return restaurantPhone; }
     public String getEmail(){ return email; }
@@ -52,12 +58,12 @@ public class RestaurateurBean {
         this.email = email;
     }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
     }
 
     public void setRestaurantAddress(String restaurantAddress) {

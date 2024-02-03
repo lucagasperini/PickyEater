@@ -118,6 +118,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
                 inputRestaurateurEmail.getText(),
                 inputRestaurateurFirstname.getText(),
                 inputRestaurateurLastname.getText(),
+                inputRestaurateurPhone.getText(),
                 inputRestaurateurSsn.getText(),
                 inputRestaurantName.getText(),
                 inputRestaurantPhone.getText(),
@@ -125,7 +126,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
         );
         try {
             controller.set(restaurateurBean);
-            setup(null);
+            showParent();
         } catch (ControllerException ex) {
             showError(ex);
         }
@@ -179,6 +180,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
             RestaurateurBean restaurateur = controller.get();
             inputRestaurateurFirstname.setText(restaurateur.getFirstname());
             inputRestaurateurLastname.setText(restaurateur.getLastname());
+            inputRestaurateurPhone.setText(restaurateur.getPhone());
             inputRestaurateurSsn.setText(restaurateur.getSsn());
             inputRestaurateurEmail.setText(restaurateur.getEmail());
             inputRestaurantName.setText(restaurateur.getRestaurantName());

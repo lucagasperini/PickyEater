@@ -1,7 +1,7 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.VirtualException;
 import com.pickyeaters.logic.view.ViewInterface;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,7 +51,7 @@ public abstract class VirtualViewGUI implements ViewInterface {
         }
     }
 
-    public void showError(ControllerException ex) {
+    public void showError(VirtualException ex) {
         showError(ex.getKey());
     }
 

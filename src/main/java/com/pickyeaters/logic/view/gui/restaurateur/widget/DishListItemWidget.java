@@ -1,6 +1,7 @@
 package com.pickyeaters.logic.view.gui.restaurateur.widget;
 
 import com.pickyeaters.logic.view.bean.DishBean;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.VirtualWidget;
 import javafx.event.ActionEvent;
@@ -35,8 +36,8 @@ public class DishListItemWidget extends VirtualWidget {
         textName.setText(dishBean.getName());
         textDescription.setText(dishBean.getDescription());
 
-        for(String i : dishBean.getIngredientList()) {
-            listviewIngredient.getItems().add(i);
+        for(DishIngredientBean i : dishBean.getIngredientList()) {
+            listviewIngredient.getItems().add(i.getName());
         }
     }
 

@@ -3,12 +3,22 @@ package com.pickyeaters.logic.model;
 public class Ingredient {
     private String id;
     private String name;
+    private boolean cooked;
+    private boolean optional;
     public Ingredient(String name) {
-        this(null, name);
+        this("", name, false, false);
+    }
+    public Ingredient(String name, boolean cooked, boolean optional) {
+        this("", name, cooked, optional);
     }
     public Ingredient(String id, String name) {
-        this.id = id;
-        this.name = name;
+        this(id, name, false, false);
+    }
+    public Ingredient(String id, String name, boolean cooked, boolean optional) {
+        setID(id);
+        setName(name);
+        setCooked(cooked);
+        setOptional(optional);
     }
 
     public Ingredient(Ingredient ingredient) {
@@ -22,6 +32,30 @@ public class Ingredient {
 
     public String getID() {
         return id;
+    }
+
+    public boolean isCooked() {
+        return cooked;
+    }
+
+    public boolean isOptional() {
+        return optional;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setID(String id) {
+        this.id = id;
+    }
+
+    public void setCooked(boolean cooked) {
+        this.cooked = cooked;
+    }
+
+    public void setOptional(boolean optional) {
+        this.optional = optional;
     }
 
     @Override

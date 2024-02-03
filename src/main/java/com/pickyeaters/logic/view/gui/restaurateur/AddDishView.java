@@ -2,8 +2,10 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.AddDishController;
+import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.DishBean;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
@@ -32,20 +34,19 @@ public class AddDishView extends EditDishView {
 
     @FXML
     protected void clickSaveChanges(ActionEvent event) {
-        DishBean dishBean = new DishBean(
-                inputName.getText(),
-                inputDescription.getText(),
-                getCurrentComboBoxItem()
-        );
-
-        for(IngredientListItemWidget widget : ingredientListItemWidgets) {
-            dishBean.addIngredient(widget.getName());
-        }
-
         try {
+            DishBean dishBean = new DishBean();
+            dishBean.setName(inputName.getText());
+            dishBean.setDescription(inputDescription.getText());
+            dishBean.setCategory(getCurrentComboBoxItem());
+
+            for(IngredientListItemWidget widget : ingredientListItemWidgets) {
+                dishBean.addIngredient(new DishIngredientBean(widget.getName()));
+            }
+
             controller.add(dishBean);
             showParent();
-        } catch (ControllerException ex) {
+        } catch (ControllerException | BeanException ex) {
             showError(ex);
         }
     }

@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 
 import java.sql.Types;
 import java.util.LinkedList;
@@ -77,11 +78,13 @@ public class DishDAO {
             throw new DAOException(ex);
         }
     }
-    public void addDishIngredient(String dishID, String ingredientName) throws DAOException {
+    public void addDishIngredient(String dishID, DishIngredientBean ingredient) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish_ingredient(?, ?)");
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish_ingredient(?, ?, ?, ?)");
             query.setString(dishID);
-            query.setString(ingredientName);
+            query.setString(ingredient.getName());
+            query.setBoolean(ingredient.isCooked());
+            query.setBoolean(ingredient.isOptional());
 
             query.execute();
             query.close();
