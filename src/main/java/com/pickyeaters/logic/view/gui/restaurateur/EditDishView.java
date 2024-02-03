@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.model.Dish;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
@@ -13,7 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 public abstract class EditDishView extends VirtualPaneView {
@@ -42,7 +45,7 @@ public abstract class EditDishView extends VirtualPaneView {
     @FXML
     protected ComboBox<String> comboBoxCategory;
     protected LinkedList<IngredientListItemWidget> ingredientListItemWidgets = new LinkedList<>();
-
+    protected List<DishIngredientBean> ingredientBeanList = new ArrayList<>();
     protected final String comboBoxItemDrink;
     protected final String comboBoxItemFirst;
     protected final String comboBoxItemAppetizer;
@@ -94,16 +97,29 @@ public abstract class EditDishView extends VirtualPaneView {
             return "";
     }
 
-    protected void setupAddIngredient(String name) {
+    protected void setupAddIngredient(DishIngredientBean bean) {
+        ingredientBeanList.add(bean);
+        ingredientListItemWidgets.add(new IngredientListItemWidget(this, bean));
+        vboxIngredient.getChildren().add(ingredientListItemWidgets.getLast().getRoot());
+    }
+    protected void setupAddIngredient(String name, String cooked, String optional) {
         if(name != null) {
-            ingredientListItemWidgets.add(new IngredientListItemWidget(this, name));
-            vboxIngredient.getChildren().add(ingredientListItemWidgets.getLast().getRoot());
+            boolean isCooked = false;
+            boolean isOptional = false;
+            if(cooked != null) {
+                isCooked = cooked.equals("true");
+            }
+            if(optional != null) {
+                isOptional = optional.equals("true");
+            }
+
+            setupAddIngredient(new DishIngredientBean(name, isCooked, isOptional));
         }
     }
 
     protected void setupRemoveIngredient(String name) {
         for(IngredientListItemWidget widget : ingredientListItemWidgets) {
-            if(widget.hasName(name)) {
+            if(widget.getBean().getName().equals(name)) {
                 vboxIngredient.getChildren().remove(widget.getRoot());
                 ingredientListItemWidgets.remove(widget);
                 return;

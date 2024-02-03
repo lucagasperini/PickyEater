@@ -8,10 +8,7 @@ import com.pickyeaters.logic.view.bean.IngredientTreeBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.util.*;
@@ -38,21 +35,19 @@ public class AddIngredientView extends VirtualPaneView {
     @FXML
     private Text textReportMissingIngredientQuestion;
     @FXML
-    private Text textCookingMethodCanBeCooked;
-    @FXML
-    private Text textCookingMethodIsCooked;
-    @FXML
     private Text textReligiousNeedsIngredientIs;
     @FXML
     private CheckBox checkboxReligiousNeedsHalal;
     @FXML
     private CheckBox checkboxReligiousNeedsKosher;
     @FXML
-    private Text textOptionalityQuestion;
-    @FXML
     private Button buttonReport;
     @FXML
     private Button buttonSave;
+    @FXML
+    private CheckBox checkBoxCooked;
+    @FXML
+    private CheckBox checkBoxOptional;
 
     @FXML
     private TreeView<String> treeIngredient;
@@ -73,14 +68,11 @@ public class AddIngredientView extends VirtualPaneView {
         textAllergensExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_ALLERGENS_EXPLANATION"));
         textAllergensSelectExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_ALLERGENS_SELECTEXPLANATION"));
         textCookingMethod.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_COOKINGMETHOD"));
-        textCookingMethodCanBeCooked.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_COOKINGMETHOD_CANBECOOKED"));
-        textCookingMethodIsCooked.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_COOKINGMETHOD_ISCOOKED"));
         textReligiousNeeds.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS"));
         textReligiousNeedsIngredientIs.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_INGREDIENTIS"));
         checkboxReligiousNeedsHalal.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_HALAL"));
         checkboxReligiousNeedsKosher.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_KOSHER"));
         textOptionality.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_OPTIONALITY"));
-        textOptionalityQuestion.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_OPTIONALITY_QUESTION"));
         textReportMissingIngredientQuestion.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_REPORTMISSINGINGREDIENT_QUESTION"));
         buttonReport.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_REPORTMISSINGINGREDIENT"));
         buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
@@ -133,18 +125,10 @@ public class AddIngredientView extends VirtualPaneView {
             showParent();
         } else {
             Map<String, String> arg = new HashMap<>();
-            arg.put("addIngredient", selectedItem.getValue());
+            arg.put("addIngredientName", selectedItem.getValue());
+            arg.put("addIngredientCooked", checkBoxCooked.isSelected() ? "true" : "false");
+            arg.put("addIngredientOptional", checkBoxOptional.isSelected() ? "true" : "false");
             showParent(arg);
         }
-    }
-
-    @FXML
-    private void clickCheckboxReligiousNeedsHalal(ActionEvent event) {
-        throw new UnsupportedOperationException();
-    }
-
-    @FXML
-    private void clickCheckboxReligiousNeedsKosher(ActionEvent event) {
-        throw new UnsupportedOperationException();
     }
 }

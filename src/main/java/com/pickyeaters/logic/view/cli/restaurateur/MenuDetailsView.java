@@ -2,9 +2,11 @@ package com.pickyeaters.logic.view.cli.restaurateur;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
+import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
+import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 
 import java.util.ArrayList;
@@ -54,8 +56,8 @@ public class MenuDetailsView extends VirtualRequestView {
 
     private void showMenu() {
         try {
-            List<DishBean> list = controller.getMenu();
-            for(DishBean i : list) {
+            List<ShowDishBean> list = controller.getMenu();
+            for(ShowDishBean i : list) {
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_NAME",i.getName());
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_DESCRIPTION",i.getDescription());
                 printField(
@@ -63,14 +65,14 @@ public class MenuDetailsView extends VirtualRequestView {
                         SettingsController.i18n("DISH_TYPE_" + i.getCategory())
                 );
                 List<String> dishIngredients = new ArrayList<>();
-                for(DishIngredientBean ingredient : i.getIngredientList()) {
-                    dishIngredients.add(ingredient.getName());
+                for(String ingredient : i.getIngredientList()) {
+                    dishIngredients.add(ingredient);
                 }
                 printFieldList("RESTAURATEUR_MANAGEMENUDETAILS_INGREDIENTS",dishIngredients);
                 printFieldBoolean("RESTAURATEUR_MANAGEMENUDETAILS_ACTIVE",i.isActive());
                 print("##################################");
             }
-        } catch (ControllerException e) {
+        } catch (ControllerException | BeanException e) {
             showError(e);
         }
     }

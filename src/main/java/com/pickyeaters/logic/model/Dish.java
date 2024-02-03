@@ -25,7 +25,9 @@ public abstract class Dish {
     }
 
     protected Dish(String name, String description) {
-        this(null, name, description);
+        this("", name, description);
+    }
+    protected Dish() {
     }
 
     public void addIngredient(Ingredient ingredient) {
@@ -64,4 +66,11 @@ public abstract class Dish {
 
     public abstract String getType();
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

@@ -3,8 +3,10 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
 import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
+import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.DishBean;
+import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.DishListItemWidget;
 import javafx.event.ActionEvent;
@@ -46,37 +48,37 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupDishList() {
         vboxMenu.getChildren().clear();
         try {
-            List<DishBean> dishBeanList = controller.getMenu();
-            for(DishBean i : dishBeanList) {
+            List<ShowDishBean> dishBeanList = controller.getMenu();
+            for(ShowDishBean i : dishBeanList) {
                 vboxMenu.getChildren().add(new DishListItemWidget(this, i).getRoot());
             }
-        } catch (ControllerException ex) {
+        } catch (ControllerException | BeanException ex) {
             showError(ex);
         }
     }
 
-    private void setupActiveDish(String dishID) {
-        if(dishID != null) {
+    private void setupActiveDish(String name) {
+        if(name != null) {
             try {
-                controller.toggleDish(dishID);
+                controller.toggleDish(name);
             } catch (ControllerException ex) {
                 showError(ex);
             }
         }
     }
-    private void setupDeleteDish(String dishID) {
-        if(dishID != null) {
+    private void setupDeleteDish(String name) {
+        if(name != null) {
             try {
-                controller.deleteDish(dishID);
+                controller.deleteDish(name);
             } catch (ControllerException ex) {
                 showError(ex);
             }
         }
     }
 
-    private void setupUpdateDish(String dishID) {
-        if(dishID != null) {
-            UpdateDishView view = new UpdateDishView(controller.getUpdateDish(), this, dishID);
+    private void setupUpdateDish(String name) {
+        if(name != null) {
+            UpdateDishView view = new UpdateDishView(controller.getUpdateDish(), this, name);
             view.show();
         }
     }

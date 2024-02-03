@@ -317,59 +317,90 @@ END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE add_dish_ingredient(
-    IN _dish_id varchar(256),
+    IN _dish_name varchar,
+    IN _restaurant_id varchar,
     IN _ingredient_name varchar(256),
     IN _cooked boolean,
     IN _optional boolean)
 LANGUAGE plpgsql
 AS $BODY$
 DECLARE
-	ingredient_id UUID;
+    ingredient_id UUID;
+	dish_id UUID;
 BEGIN
+    SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
+    IF(dish_id IS NULL) THEN
+            RETURN;
+    END IF;
     SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
     IF(ingredient_id IS NULL) THEN
     		RETURN;
     END IF;
 	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish, cooked, optional)
-	    VALUES (ingredient_id, _dish_id::uuid, _cooked, _optional);
+	    VALUES (ingredient_id, dish_id, _cooked, _optional);
 END;
 $BODY$;
 
-CREATE OR REPLACE PROCEDURE delete_dish(IN _dish_id varchar(256))
+CREATE OR REPLACE PROCEDURE delete_dish(IN _dish_name varchar,IN _restaurant_id varchar)
 LANGUAGE plpgsql
 AS $BODY$
+DECLARE
+	dish_id UUID;
 BEGIN
-	DELETE FROM "Dish_Ingredient" WHERE fk_dish = _dish_id::uuid;
-    DELETE FROM "Dish" WHERE id = _dish_id::uuid;
+    SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
+    IF(dish_id IS NULL) THEN
+            RETURN;
+    END IF;
+	DELETE FROM "Dish_Ingredient" WHERE fk_dish = dish_id;
+    DELETE FROM "Dish" WHERE id = dish_id;
 END;
 $BODY$;
 
-CREATE OR REPLACE PROCEDURE unlink_dish_ingredient(IN _dish_id varchar(256))
+CREATE OR REPLACE PROCEDURE unlink_dish_ingredient(IN _dish_name varchar, IN _restaurant_id varchar)
 LANGUAGE plpgsql
 AS $BODY$
+DECLARE
+	dish_id UUID;
 BEGIN
-	DELETE FROM "Dish_Ingredient" WHERE fk_dish = _dish_id::uuid;
+    SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
+    IF(dish_id IS NULL) THEN
+        		RETURN;
+    END IF;
+	DELETE FROM "Dish_Ingredient" WHERE fk_dish = dish_id;
 END;
 $BODY$;
 
-CREATE OR REPLACE PROCEDURE toggle_dish(IN _id varchar(256))
+CREATE OR REPLACE PROCEDURE toggle_dish(IN _dish_name varchar,IN _restaurant_id varchar)
 LANGUAGE plpgsql
 AS $BODY$
+DECLARE
+	dish_id UUID;
 BEGIN
-    UPDATE "Dish" SET active = NOT active WHERE id = _id::uuid;
+    SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
+    IF(dish_id IS NULL) THEN
+            RETURN;
+    END IF;
+    UPDATE "Dish" SET active = NOT active WHERE id = dish_id;
 END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE get_dish(
-    IN _id varchar(256),
-    OUT _name varchar(256),
+    IN _dish_name varchar,
+    IN _restaurant_id varchar,
+	OUT _id varchar,
     OUT _description varchar(4096),
     OUT _type varchar(16),
     OUT _active boolean)
 LANGUAGE plpgsql
 AS $BODY$
+DECLARE
+	dish_id UUID;
 BEGIN
-    SELECT name, description, type, active INTO _name, _description, _type, _active FROM "Dish" WHERE id = _id::uuid;
+    SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
+    IF(dish_id IS NULL) THEN
+            RETURN;
+    END IF;
+    SELECT id, description, type, active INTO _id, _description, _type, _active FROM "Dish" WHERE id = dish_id;
 END;
 $BODY$;
 

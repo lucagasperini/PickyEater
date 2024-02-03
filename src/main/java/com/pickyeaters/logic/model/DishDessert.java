@@ -1,6 +1,7 @@
 package com.pickyeaters.logic.model;
 
 public class DishDessert extends Dish {
+    public DishDessert() {}
     public DishDessert(String name, String description) {
         super(name, description);
     }

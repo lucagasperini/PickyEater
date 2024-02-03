@@ -1,7 +1,6 @@
 package com.pickyeaters.logic.view.gui.restaurateur.widget;
 
-import com.pickyeaters.logic.view.bean.DishBean;
-import com.pickyeaters.logic.view.bean.DishIngredientBean;
+import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.VirtualWidget;
 import javafx.event.ActionEvent;
@@ -27,17 +26,15 @@ public class DishListItemWidget extends VirtualWidget {
     private ListView<String> listviewIngredient;
     @FXML
     private CheckBox checkBoxActive;
-    private final String dishID;
 
-    public DishListItemWidget(VirtualPaneView parent, DishBean dishBean) {
+    public DishListItemWidget(VirtualPaneView parent, ShowDishBean dishBean) {
         super("/form/restaurateur/widget/DishListItemWidget.fxml", parent);
-        this.dishID = dishBean.getID();
         checkBoxActive.setSelected(dishBean.isActive());
         textName.setText(dishBean.getName());
         textDescription.setText(dishBean.getDescription());
 
-        for(DishIngredientBean i : dishBean.getIngredientList()) {
-            listviewIngredient.getItems().add(i.getName());
+        for(String i : dishBean.getIngredientList()) {
+            listviewIngredient.getItems().add(i);
         }
     }
 
@@ -45,21 +42,21 @@ public class DishListItemWidget extends VirtualWidget {
     @FXML
     private void clickCheckBoxActive(ActionEvent actionEvent) {
         Map<String, String> arg = new HashMap<>();
-        arg.put("activeDish", dishID);
+        arg.put("activeDish", textName.getText());
         toParent(arg);
     }
 
     @FXML
     private void clickButtonUpdateDish(ActionEvent actionEvent) {
         Map<String, String> arg = new HashMap<>();
-        arg.put("updateDish", dishID);
+        arg.put("updateDish", textName.getText());
         toParent(arg);
     }
 
     @FXML
     private void clickButtonDeleteDish(ActionEvent actionEvent) {
         Map<String, String> arg = new HashMap<>();
-        arg.put("deleteDish", dishID);
+        arg.put("deleteDish", textName.getText());
         toParent(arg);
     }
 }

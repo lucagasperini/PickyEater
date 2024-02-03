@@ -7,7 +7,6 @@
 <?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -139,18 +138,7 @@
                                                             <Insets />
                                                          </VBox.margin>
                                                       </Text>
-                                                      <Text fx:id="textCookingMethodCanBeCooked" strokeType="OUTSIDE" strokeWidth="0.0" text="CANBECOOKED" wrappingWidth="308.015625">
-                                                         <font>
-                                                            <Font name="Calibri" size="18.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
-                                                      <Text fx:id="textCookingMethodIsCooked" strokeType="OUTSIDE" strokeWidth="0.0" text="ISCOOKED" wrappingWidth="318.015625">
-                                                         <font>
-                                                            <Font name="Calibri" size="18.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                                                      <CheckBox fx:id="checkBoxCooked" mnemonicParsing="false" text="ISCOOKED" />
                                                    </children>
                                                 </VBox>
                                              </children>
@@ -172,7 +160,7 @@
                                                             <Font name="Calibri" size="18.0" />
                                                          </font>
                                                       </Text>
-                                                      <CheckBox fx:id="checkboxReligiousNeedsHalal" mnemonicParsing="false" onAction="#clickCheckboxReligiousNeedsHalal" text="HALAL">
+                                                      <CheckBox fx:id="checkboxReligiousNeedsHalal" mnemonicParsing="false" text="HALAL">
                                                          <font>
                                                             <Font name="Calibri" size="16.0" />
                                                          </font>
@@ -180,7 +168,7 @@
                                                             <Insets bottom="3.0" top="3.0" />
                                                          </VBox.margin>
                                                       </CheckBox>
-                                                      <CheckBox fx:id="checkboxReligiousNeedsKosher" mnemonicParsing="false" onAction="#clickCheckboxReligiousNeedsKosher" text="KOSHER">
+                                                      <CheckBox fx:id="checkboxReligiousNeedsKosher" mnemonicParsing="false" text="KOSHER">
                                                          <font>
                                                             <Font name="Calibri" size="16.0" />
                                                          </font>
@@ -204,12 +192,7 @@
                                                             <Insets />
                                                          </VBox.margin>
                                                       </Text>
-                                                      <Text fx:id="textOptionalityQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="OPTIONALITYQUESTION" wrappingWidth="314.6845703125">
-                                                         <font>
-                                                            <Font name="Calibri" size="18.0" />
-                                                         </font>
-                                                      </Text>
-                                                      <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+                                                      <CheckBox fx:id="checkBoxOptional" mnemonicParsing="false" text="OPTIONALITYQUESTION" />
                                                    </children>
                                                    <padding>
                                                       <Insets top="30.0" />

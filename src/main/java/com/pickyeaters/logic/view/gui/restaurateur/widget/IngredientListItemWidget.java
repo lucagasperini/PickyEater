@@ -1,6 +1,7 @@
 package com.pickyeaters.logic.view.gui.restaurateur.widget;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.VirtualWidget;
 import javafx.event.ActionEvent;
@@ -16,9 +17,11 @@ public class IngredientListItemWidget extends VirtualWidget {
     private Button buttonDeleteIngredient;
     @FXML
     private Text textIngredient;
-    public IngredientListItemWidget(VirtualPaneView parent, String name) {
+    private DishIngredientBean bean;
+    public IngredientListItemWidget(VirtualPaneView parent, DishIngredientBean bean) {
         super("/form/restaurateur/widget/IngredientListItemWidget.fxml", parent);
-        textIngredient.setText(name);
+        this.bean = bean;
+        textIngredient.setText(bean.getName());
         buttonDeleteIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_REMOVEINGREDIENT"));
     }
 
@@ -29,11 +32,7 @@ public class IngredientListItemWidget extends VirtualWidget {
         toParent(arg);
     }
 
-    public boolean hasName(String name) {
-        return getName().equals(name);
-    }
-
-    public String getName() {
-        return textIngredient.getText();
+    public DishIngredientBean getBean() {
+        return bean;
     }
 }
