@@ -26,8 +26,15 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+    - name: Prepare files
+      run: |
+          mv 1.0-SNAPSHOT/PickyEaters-1.0-SNAPSHOT.jar PickyEater.jar
+    - name: Package
+      uses: papeloto/action-zip@v1
+      with:
+          files: PickyEater.jar
+          dest: PickyEater.zip
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+          files: PickyEater.zip
