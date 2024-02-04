@@ -317,7 +317,7 @@ $BODY$;
 CREATE OR REPLACE PROCEDURE add_dish_ingredient(
     IN _dish_name varchar,
     IN _restaurant_id varchar,
-    IN _ingredient_name varchar(256),
+    IN _ingredient_name varchar,
     IN _cooked boolean,
     IN _optional boolean)
 LANGUAGE plpgsql

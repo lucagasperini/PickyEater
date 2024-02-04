@@ -44,13 +44,18 @@ public class IngredientDAO {
         try {
             LinkedList<Ingredient> out = new LinkedList<>();
             DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
-                    "SELECT name FROM \"Dish_Ingredient\" JOIN \"Ingredient\" AS I ON fk_ingredient=I.id WHERE fk_dish::varchar = ?"
+                    "SELECT name, cooked, optional FROM \"Dish_Ingredient\" JOIN \"Ingredient\" AS I ON fk_ingredient=I.id WHERE fk_dish::varchar = ?"
             );
             query.setString(dishID);
 
             query.execute();
             while(query.next()) {
-                out.add(new Ingredient(query.getString()));
+                Ingredient i = new Ingredient(
+                        query.getString(),
+                        query.getBoolean(),
+                        query.getBoolean()
+                );
+                out.add(i);
             }
             query.close();
 
