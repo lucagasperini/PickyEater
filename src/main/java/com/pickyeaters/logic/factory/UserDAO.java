@@ -8,20 +8,20 @@ import com.pickyeaters.logic.model.*;
 import java.sql.Types;
 
 public class UserDAO {
-    public String login(String username, String password) throws DAOException {
+    public boolean login(String username, String password) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL login(?,?,?)");
 
             query.setString(username);
             query.setString(password);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.BIT);
 
             query.execute();
 
-            String token = query.getString();
+            boolean check = query.getBoolean();
             query.close();
 
-            return token;
+            return check;
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);
         }
