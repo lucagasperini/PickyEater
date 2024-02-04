@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -33,11 +34,12 @@ public class MainView extends VirtualViewGUI {
         nodeHeader = mainLayout.getTop();
         VirtualPaneView.init(this);
     }
-
-    public BorderPane getMainLayout() {
-        return mainLayout;
+    public ScrollPane getMainPane() {
+        return mainPane;
     }
 
+    @FXML
+    private ScrollPane mainPane;
     @FXML
     private BorderPane mainLayout;
     @FXML
