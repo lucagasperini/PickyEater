@@ -28,6 +28,7 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Prepare files
       run: |
+          ls
           mv 1.0-SNAPSHOT/PickyEaters-1.0-SNAPSHOT.jar PickyEater.jar
     - name: Package
       uses: papeloto/action-zip@v1
