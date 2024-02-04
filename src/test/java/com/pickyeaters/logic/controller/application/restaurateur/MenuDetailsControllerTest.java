@@ -32,16 +32,16 @@ class MenuDetailsControllerTest {
         dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
 
         EditDishBean dish2 = new EditDishBean("Second", "", "DRINK");
-        dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
+        dish2.getIngredientList().add(new DishIngredientBean("Pollo"));
 
         EditDishBean dish3 = new EditDishBean("Third", "", "DRINK");
-        dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
+        dish3.getIngredientList().add(new DishIngredientBean("Pollo"));
 
         EditDishBean dishRemove = new EditDishBean("To remove", "", "DRINK");
-        dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
+        dishRemove.getIngredientList().add(new DishIngredientBean("Pollo"));
 
         EditDishBean dishToggle = new EditDishBean("To toggle", "", "DRINK");
-        dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
+        dishToggle.getIngredientList().add(new DishIngredientBean("Pollo"));
 
         addDishController.add(dish1, user.getRestaurant().getID());
         addDishController.add(dish2, user.getRestaurant().getID());
