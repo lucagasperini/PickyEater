@@ -39,6 +39,8 @@ jobs:
 
     steps:
     - name: Setup database
+      env:
+          POSTGRES_PASSWORD: postgres
       run: psql -h localhost -U postgres -f src/main/resources/setup.sql
     - uses: actions/checkout@v3
     - name: Set up JDK 19
