@@ -52,8 +52,8 @@ jobs:
     - name: Build with Maven
       env:
           PICKY_DATABASE_HOST: localhost
-          PICKY_DATABASE_NAME: picky
+          PICKY_DATABASE_NAME: postgres
           PICKY_DATABASE_PORT: 5432
-          PICKY_DATABASE_USER: picky
-          PICKY_DATABASE_PASS: picky
+          PICKY_DATABASE_USER: postgres
+          PICKY_DATABASE_PASS: postgres
       run: mvn -B test --file pom.xml
