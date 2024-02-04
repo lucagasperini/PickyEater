@@ -9,10 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class InitView extends VirtualViewCLI {
-    InitController controller;
-    public InitView(InitController controller) {
-        this.controller = controller;
-    }
+    private final InitController controller = new InitController();
 
     private void askConfig() {
         Scanner userInput = new Scanner(System.in);

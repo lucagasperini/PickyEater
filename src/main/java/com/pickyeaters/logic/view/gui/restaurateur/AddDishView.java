@@ -15,11 +15,10 @@ import javafx.fxml.FXML;
 import java.util.Map;
 
 public class AddDishView extends EditDishView {
-    AddDishController controller;
+    private final AddDishController controller = new AddDishController();
 
-    public AddDishView(AddDishController controller, VirtualPaneView parent) {
+    public AddDishView(VirtualPaneView parent) {
         super(parent);
-        this.controller = controller;
         comboBoxCategory.getSelectionModel().select(0);
     }
     @Override
@@ -50,7 +49,7 @@ public class AddDishView extends EditDishView {
                 dishBean.getIngredientList().add(ingredientBean);
             }
 
-            controller.add(dishBean);
+            controller.add(dishBean, getMainView().getCurrentUser().getRestaurantID());
             showParent();
         } catch (ControllerException | BeanException ex) {
             showError(ex);

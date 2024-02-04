@@ -6,10 +6,9 @@ import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import java.util.Map;
 
 public class EatingPreferencesView extends VirtualPaneView {
-    EatingPreferencesController controller;
-    public EatingPreferencesView(EatingPreferencesController controller, VirtualPaneView parent) {
+    private final EatingPreferencesController controller = new EatingPreferencesController();
+    public EatingPreferencesView(VirtualPaneView parent) {
         super("/form/pickie/EatingPreferences.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

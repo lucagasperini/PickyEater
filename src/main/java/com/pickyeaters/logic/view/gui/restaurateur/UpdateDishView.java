@@ -15,13 +15,12 @@ import javafx.fxml.FXML;
 import java.util.Map;
 
 public class UpdateDishView extends EditDishView {
-    private UpdateDishController controller;
+    private final UpdateDishController controller = new UpdateDishController();
     private EditDishBean dishBean;
-    public UpdateDishView(UpdateDishController controller, VirtualPaneView parent, String name) {
+    public UpdateDishView(VirtualPaneView parent, String name) {
         super(parent);
-        this.controller = controller;
         try {
-            dishBean = controller.get(name);
+            dishBean = controller.get(name, getMainView().getCurrentUser().getRestaurantID());
             for(DishIngredientBean s : dishBean.getIngredientList()) {
                 setupAddIngredient(s);
             }
@@ -63,7 +62,7 @@ public class UpdateDishView extends EditDishView {
                 tmp.getIngredientList().add(widget.getBean());
             }
 
-            controller.update(tmp);
+            controller.update(tmp, getMainView().getCurrentUser().getRestaurantID());
             showParent();
         } catch (ControllerException | BeanException ex) {
             showError(ex);

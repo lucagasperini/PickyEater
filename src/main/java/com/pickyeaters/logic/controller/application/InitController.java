@@ -5,9 +5,6 @@ import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.SettingsBean;
 
 public class InitController extends VirtualController {
-    public InitController(MainController main) {
-        super(main);
-    }
     public void loadFromFile() throws SettingsControllerException, DatabaseControllerException {
         // Try to load config from file system
         SettingsController.getInstance().init();

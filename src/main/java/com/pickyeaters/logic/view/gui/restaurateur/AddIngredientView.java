@@ -52,10 +52,9 @@ public class AddIngredientView extends VirtualPaneView {
     @FXML
     private TreeView<String> treeIngredient;
 
-    AddIngredientController controller;
-    public AddIngredientView(AddIngredientController controller, VirtualPaneView parent) {
+    private final AddIngredientController controller = new AddIngredientController();
+    public AddIngredientView(VirtualPaneView parent) {
         super("/form/restaurateur/AddIngredient.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

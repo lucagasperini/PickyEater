@@ -9,12 +9,10 @@ import javafx.scene.control.Button;
 import java.util.Map;
 
 public class AdministratorHomeView extends VirtualPaneView {
-    private final AdministratorController controller;
     @FXML
     private Button buttonManageReport;
-    public AdministratorHomeView(AdministratorController controller, VirtualPaneView parent) {
+    public AdministratorHomeView(VirtualPaneView parent) {
         super("/form/administrator/Home.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

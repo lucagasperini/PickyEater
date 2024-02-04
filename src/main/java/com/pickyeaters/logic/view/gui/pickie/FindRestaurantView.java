@@ -6,10 +6,9 @@ import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import java.util.Map;
 
 public class FindRestaurantView extends VirtualPaneView {
-    private final FindRestaurantController controller;
-    public FindRestaurantView(FindRestaurantController controller, VirtualPaneView parent) {
+    private final FindRestaurantController controller = new FindRestaurantController();
+    public FindRestaurantView(VirtualPaneView parent) {
         super("/form/pickie/FindRestaurant.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

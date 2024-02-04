@@ -1,7 +1,7 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.cli.administrator.AdministratorHomeView;
 import com.pickyeaters.logic.view.cli.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.cli.restaurateur.RestaurateurHomeView;
@@ -9,17 +9,25 @@ import com.pickyeaters.logic.view.cli.restaurateur.RestaurateurHomeView;
 import java.util.Map;
 
 public class MainView extends VirtualViewCLI {
-
-    private final MainController controller = new MainController();
+    private UserBean currentUser;
     public MainView() {
-        init(controller);
+        setMainView(this);
     }
+
+    public UserBean getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserBean currentUser) {
+        this.currentUser = currentUser;
+    }
+
     @Override
     public void show(Map<String, String> arg) {
-        InitView initView = new InitView(controller.getInit());
+        InitView initView = new InitView();
         initView.show();
 
-        LoginView loginView = new LoginView(controller.getLogin());
+        LoginView loginView = new LoginView();
         loginView.show();
 
         showHomeView();
@@ -29,35 +37,25 @@ public class MainView extends VirtualViewCLI {
 
 
     private void showHomeView() {
-        try {
-            switch (controller.getLogin().getUserType()) {
-                case PICKIE -> showPickieHomeView();
-                case RESTAURATEUR -> showRestaurateurHomeView();
-                case ADMIN -> showAdministratorHomeView();
-            }
-        } catch (LoginControllerException ex) {
-            showError(ex);
+        switch (currentUser.getType()) {
+            case PICKIE -> showPickieHomeView();
+            case RESTAURATEUR -> showRestaurateurHomeView();
+            case ADMIN -> showAdministratorHomeView();
         }
     }
 
     private void showPickieHomeView() {
-        PickieHomeView pickieHomeView = new PickieHomeView(
-                controller.getPickie()
-        );
+        PickieHomeView pickieHomeView = new PickieHomeView();
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
-        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
-                controller.getRestaurateur()
-        );
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView();
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
-        AdministratorHomeView administratorHomeView = new AdministratorHomeView(
-                controller.getAdministrator()
-        );
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView();
         administratorHomeView.show();
     }
 

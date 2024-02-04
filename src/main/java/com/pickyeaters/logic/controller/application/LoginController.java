@@ -1,5 +1,7 @@
 package com.pickyeaters.logic.controller.application;
 
+import com.pickyeaters.logic.controller.exception.BeanException;
+import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.UserDAO;
@@ -12,71 +14,14 @@ import com.pickyeaters.logic.view.bean.UserBean;
 
 public class LoginController extends VirtualController {
 
-    public enum UserType {
-        PICKIE,
-        RESTAURATEUR,
-        ADMIN
-    }
 
-    private User user = null;
-
-    public LoginController(MainController main) {
-        super(main);
-    }
-
-    public boolean isAuth() {
-        return user != null;
-    }
-
-    public UserBean getUser() {
+    public UserBean auth(LoginBean loginBean) throws ControllerException, BeanException {
+        String token = UserDAO.getInstance().login(loginBean.getEmail(), loginBean.getPassword());
+        if(token == null) {
+            throw new ControllerException("BAD_AUTH", "Login failed");
+        }
+        User user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
         return new UserBean(user);
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getUserID() {
-        return user.getID();
-    }
-
-    public UserType getUserType() throws LoginControllerException {
-        if(user instanceof Pickie) {
-            return UserType.PICKIE;
-        } else if (user instanceof Restaurateur) {
-            return UserType.RESTAURATEUR;
-        } else if (user instanceof Administrator) {
-            return UserType.ADMIN;
-        } else {
-            throw new LoginControllerException("Cannot identify user type");
-        }
-    }
-
-    public Restaurateur toRestaurateur() throws LoginControllerException {
-        if(getUserType() == UserType.RESTAURATEUR) {
-            return (Restaurateur) user;
-        }
-        throw new LoginControllerException("Cannot cast to restaurateur");
-    }
-
-    public void auth(LoginBean loginBean) throws LoginControllerException {
-        try {
-            String token = UserDAO.getInstance().login(loginBean.getEmail(), loginBean.getPassword());
-            if(token == null) {
-                throw new LoginControllerException("BAD_AUTH", "Login failed");
-            }
-            user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
-            switch (getUserType()) {
-                case PICKIE -> main.initPickie();
-                case RESTAURATEUR -> main.initRestaurateur();
-                case ADMIN -> main.initAdministrator();
-            }
-        } catch (DatabaseControllerException ex) {
-            throw new LoginControllerException("NO_DB_CONNECTION", "Cannot connect to database");
-        }
-    }
-
-    public void logout() {
-        user = null;
-    }
 }

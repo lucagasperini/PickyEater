@@ -1,6 +1,5 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.VirtualException;
 import com.pickyeaters.logic.view.ViewInterface;
@@ -10,15 +9,14 @@ import java.util.Map;
 import java.util.Scanner;
 
 public abstract class VirtualViewCLI implements ViewInterface {
+    private static MainView mainView;
 
-    private static MainController mainController;
-
-    protected static void init(MainController mainController) {
-        VirtualViewCLI.mainController = mainController;
+    public static MainView getMainView() {
+        return mainView;
     }
 
-    protected static MainController getMainController() {
-        return mainController;
+    public static void setMainView(MainView mainView) {
+        VirtualViewCLI.mainView = mainView;
     }
 
     public void showError(String key) {

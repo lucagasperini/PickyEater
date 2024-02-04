@@ -19,10 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class MenuDetailsView extends VirtualPaneView {
-    MenuDetailsController controller;
-    public MenuDetailsView(MenuDetailsController controller, VirtualPaneView parent) {
+    private final MenuDetailsController controller = new MenuDetailsController();
+    public MenuDetailsView(VirtualPaneView parent) {
         super("/form/restaurateur/MenuDetails.fxml", parent);
-        this.controller = controller;
     }
     @FXML
     private VBox vboxMenu;
@@ -48,7 +47,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupDishList() {
         vboxMenu.getChildren().clear();
         try {
-            List<ShowDishBean> dishBeanList = controller.getMenu();
+            List<ShowDishBean> dishBeanList = controller.getMenu(getMainView().getCurrentUser().getRestaurantID());
             for(ShowDishBean i : dishBeanList) {
                 vboxMenu.getChildren().add(new DishListItemWidget(this, i).getRoot());
             }
@@ -60,7 +59,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupActiveDish(String name) {
         if(name != null) {
             try {
-                controller.toggleDish(name);
+                controller.toggleDish(name, getMainView().getCurrentUser().getRestaurantID());
             } catch (ControllerException ex) {
                 showError(ex);
             }
@@ -69,7 +68,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupDeleteDish(String name) {
         if(name != null) {
             try {
-                controller.deleteDish(name);
+                controller.deleteDish(name, getMainView().getCurrentUser().getRestaurantID());
             } catch (ControllerException ex) {
                 showError(ex);
             }
@@ -78,13 +77,13 @@ public class MenuDetailsView extends VirtualPaneView {
 
     private void setupUpdateDish(String name) {
         if(name != null) {
-            UpdateDishView view = new UpdateDishView(controller.getUpdateDish(), this, name);
+            UpdateDishView view = new UpdateDishView(this, name);
             view.show();
         }
     }
     @FXML
     private void clickButtonAddDish(ActionEvent event) {
-        AddDishView view = new AddDishView(controller.getAddDish(), this);
+        AddDishView view = new AddDishView(this);
         view.show();
     }
 }

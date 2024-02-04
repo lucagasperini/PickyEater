@@ -1,5 +1,8 @@
 package com.pickyeaters.logic.view.bean;
 
+import com.pickyeaters.logic.model.Restaurant;
+import com.pickyeaters.logic.model.Restaurateur;
+
 public class RestaurateurBean {
     private String firstname;
     private String lastname;
@@ -76,5 +79,21 @@ public class RestaurateurBean {
 
     public void setRestaurantPhone(String restaurantPhone) {
         this.restaurantPhone = restaurantPhone;
+    }
+
+    public Restaurateur toModel() {
+        Restaurant restaurant = new Restaurant(
+                restaurantName,
+                restaurantPhone,
+                restaurantAddress
+        );
+        return new Restaurateur(
+                email,
+                firstname,
+                lastname,
+                phone,
+                ssn,
+                restaurant
+        );
     }
 }

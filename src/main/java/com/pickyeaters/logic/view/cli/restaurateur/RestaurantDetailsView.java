@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.cli.restaurateur;
 
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetailsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
@@ -9,10 +10,9 @@ import com.pickyeaters.logic.view.cli.VirtualRequestView;
 import java.util.Map;
 
 public class RestaurantDetailsView extends VirtualRequestView {
-    private final RestaurantDetailsController controller;
-    public RestaurantDetailsView(RestaurantDetailsController controller) {
+    private final RestaurantDetailsController controller = new RestaurantDetailsController();
+    public RestaurantDetailsView() {
         super("RestaurantDetails");
-        this.controller = controller;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
     private void showDetails() {
         try {
-            RestaurateurBean bean = controller.get();
+            RestaurateurBean bean = controller.get(getMainView().getCurrentUser().getEmail());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME", bean.getFirstname());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_LASTNAME", bean.getLastname());
@@ -51,14 +51,14 @@ public class RestaurantDetailsView extends VirtualRequestView {
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_NAME", bean.getRestaurantName());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_ADDRESS", bean.getRestaurantAddress());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_PHONE", bean.getRestaurantPhone());
-        } catch (LoginControllerException e) {
+        } catch (DAOException e) {
             showError(e);
         }
     }
 
     private void editDetails() {
         try {
-            RestaurateurBean bean = controller.get();
+            RestaurateurBean bean = controller.get(getMainView().getCurrentUser().getEmail());
             bean.setEmail(
                     askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail())
             );

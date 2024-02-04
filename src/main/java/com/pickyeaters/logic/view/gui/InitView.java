@@ -38,10 +38,9 @@ public class InitView extends VirtualPaneView {
     private Text textLocale;
     @FXML
     private Button buttonSave;
-    private final InitController controller;
-    public InitView(InitController controller, VirtualPaneView parent) {
+    private final InitController controller = new InitController();
+    public InitView(VirtualPaneView parent) {
         super("/form/Init.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

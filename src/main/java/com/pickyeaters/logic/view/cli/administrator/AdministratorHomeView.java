@@ -7,10 +7,8 @@ import com.pickyeaters.logic.view.cli.pickie.FindRestaurantView;
 import java.util.Map;
 
 public class AdministratorHomeView extends VirtualRequestView {
-    private final AdministratorController controller;
-    public AdministratorHomeView(AdministratorController controller) {
+    public AdministratorHomeView() {
         super("Home");
-        this.controller = controller;
     }
 
     @Override

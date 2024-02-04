@@ -19,10 +19,14 @@ public class Restaurateur extends User {
         this.restaurant = restaurant;
     }
 
-    public Restaurateur(Restaurateur restaurateur) {
-        super(restaurateur);
-        this.ssn = restaurateur.ssn;
-        this.restaurant = new Restaurant(restaurateur.restaurant);
+    public Restaurateur(
+            String email,
+            String firstname,
+            String lastname,
+            String phone,
+            String ssn,
+            Restaurant restaurant) {
+        this("", email, firstname, lastname, phone, ssn, restaurant);
     }
 
     public String getPhone() {

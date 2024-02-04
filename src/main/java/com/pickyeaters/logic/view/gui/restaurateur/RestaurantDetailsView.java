@@ -3,6 +3,7 @@ package com.pickyeaters.logic.view.gui.restaurateur;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetailsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -15,7 +16,12 @@ import javafx.scene.text.Text;
 import java.util.Map;
 
 public class RestaurantDetailsView extends VirtualPaneView {
-    private final RestaurantDetailsController controller;
+    private final RestaurantDetailsController controller = new RestaurantDetailsController();
+
+    public RestaurantDetailsView(VirtualPaneView parent) {
+        super("/form/restaurateur/RestaurantDetails.fxml", parent);
+    }
+
     @FXML
     private TextField inputRestaurateurFirstname;
     @FXML
@@ -106,12 +112,6 @@ public class RestaurantDetailsView extends VirtualPaneView {
     private Text textMyPersonalDetails;
     @FXML
     private Text textMyRestaurantDetails;
-
-    public RestaurantDetailsView(RestaurantDetailsController controller, VirtualPaneView parent) {
-        super("/form/restaurateur/RestaurantDetails.fxml", parent);
-        this.controller = controller;
-    }
-
     @FXML
     private void clickButtonSave(ActionEvent event) {
         RestaurateurBean restaurateurBean = new RestaurateurBean(
@@ -177,7 +177,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
         textMyPersonalDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYPERSONALDETAILS"));
         textMyRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYRESTAURANTDETAILS"));
         try {
-            RestaurateurBean restaurateur = controller.get();
+            RestaurateurBean restaurateur = controller.get(getMainView().getCurrentUser().getEmail());
             inputRestaurateurFirstname.setText(restaurateur.getFirstname());
             inputRestaurateurLastname.setText(restaurateur.getLastname());
             inputRestaurateurPhone.setText(restaurateur.getPhone());
@@ -186,9 +186,9 @@ public class RestaurantDetailsView extends VirtualPaneView {
             inputRestaurantName.setText(restaurateur.getRestaurantName());
             inputRestaurantAddress.setText(restaurateur.getRestaurantAddress());
             inputRestaurantPhone.setText(restaurateur.getRestaurantPhone());
-        } catch (LoginControllerException e) {
+        } catch (DAOException ex) {
             //TODO: Add error
-            throw new RuntimeException(e);
+            showError(ex);
         }
     }
 }

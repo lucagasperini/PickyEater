@@ -5,10 +5,9 @@ import com.pickyeaters.logic.controller.application.LoginController;
 import java.util.Map;
 
 public class RegistrationView extends VirtualPaneView {
-    LoginController controller;
-    public RegistrationView(LoginController controller, VirtualPaneView parent) {
+    private final LoginController controller = new LoginController();
+    public RegistrationView(VirtualPaneView parent) {
         super("/form/Registration.fxml", parent);
-        this.controller = controller;
     }
 
     @Override

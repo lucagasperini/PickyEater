@@ -1,15 +1,12 @@
 package com.pickyeaters.logic.view.cli.restaurateur;
 
-import com.pickyeaters.logic.controller.application.restaurateur.RestaurateurController;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 
 import java.util.Map;
 
 public class RestaurateurHomeView extends VirtualRequestView {
-    private final RestaurateurController controller;
-    public RestaurateurHomeView(RestaurateurController controller) {
+    public RestaurateurHomeView() {
         super("Home");
-        this.controller = controller;
     }
 
     @Override
@@ -20,11 +17,11 @@ public class RestaurateurHomeView extends VirtualRequestView {
     public boolean request(String request) {
         switch (request) {
             case "restaurant", "r":
-                RestaurantDetailsView restaurantDetailsView = new RestaurantDetailsView(controller.getRestaurantDetails());
+                RestaurantDetailsView restaurantDetailsView = new RestaurantDetailsView();
                 restaurantDetailsView.show();
                 return true;
             case "menu", "m":
-                MenuDetailsView menuDetailsView = new MenuDetailsView(controller.getMenuDetails());
+                MenuDetailsView menuDetailsView = new MenuDetailsView();
                 menuDetailsView.show();
                 return true;
             default:

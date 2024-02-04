@@ -14,11 +14,8 @@ public class Restaurant {
         this.address = address;
     }
 
-    public Restaurant(Restaurant restaurant) {
-        this.id = restaurant.id;
-        this.name = restaurant.name;
-        this.phone = restaurant.phone;
-        this.address = restaurant.address;
+    public Restaurant(String name, String phone, String address) {
+        this("", name, phone, address);
     }
 
     public String getID() {

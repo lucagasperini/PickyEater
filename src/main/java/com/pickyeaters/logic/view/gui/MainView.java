@@ -1,10 +1,11 @@
 package com.pickyeaters.logic.view.gui;
 
+import com.pickyeaters.logic.controller.application.InitController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
-import com.pickyeaters.logic.controller.application.MainController;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
 import com.pickyeaters.logic.view.gui.administrator.AdministratorHomeView;
@@ -22,16 +23,23 @@ import javafx.stage.Stage;
 
 public class MainView extends VirtualViewGUI {
     private final Stage stage;
-    private final MainController controller = new MainController();
     private final StartView startView = new StartView();
+    private UserBean currentUser;
 
+    public UserBean getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(UserBean currentUser) {
+        this.currentUser = currentUser;
+    }
     private final Node nodeHeader;
     public MainView(Stage primaryStage) {
         super("/form/Background.fxml");
         this.stage = primaryStage;
         stage.setScene(new Scene(getRoot(), 1280, 720));
         nodeHeader = mainLayout.getTop();
-        VirtualPaneView.init(controller, this);
+        VirtualPaneView.init(this);
     }
 
     public BorderPane getMainLayout() {
@@ -63,9 +71,10 @@ public class MainView extends VirtualViewGUI {
         stage.show();
 
         try {
-            controller.getInit().loadFromFile();
+            InitController init = new InitController();
+            init.loadFromFile();
         } catch (SettingsControllerException | DatabaseControllerException ex) {
-            InitView initView = new InitView(controller.getInit(), startView);
+            InitView initView = new InitView(startView);
             initView.show();
             return;
         }
@@ -87,7 +96,7 @@ public class MainView extends VirtualViewGUI {
     }
 
     public void showNavbar() {
-        textNavbarUsername.setText(VirtualPaneView.getMainController().getLogin().getUser().getName());
+        textNavbarUsername.setText(currentUser.getName());
         menuItemNavbarProfile.setText(SettingsController.i18n("NAVBAR_UPDATEPROFILE"));
         menuItemNavbarLogout.setText(SettingsController.i18n("NAVBAR_LOGOFF"));
     }
@@ -111,41 +120,28 @@ public class MainView extends VirtualViewGUI {
     }
 
     public void showHomeView() {
-        try {
-            switch (controller.getLogin().getUserType()) {
-                case PICKIE -> showPickieHomeView();
-                case RESTAURATEUR -> showRestaurateurHomeView();
-                case ADMIN -> showAdministratorHomeView();
-            }
-        } catch (LoginControllerException e) {
-            throw new RuntimeException(e);
+        switch (getCurrentUser().getType()) {
+            case PICKIE -> showPickieHomeView();
+            case RESTAURATEUR -> showRestaurateurHomeView();
+            case ADMIN -> showAdministratorHomeView();
         }
     }
 
     private void showPickieHomeView() {
         //textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
-        PickieHomeView pickieHomeView = new PickieHomeView(
-                controller.getPickie(),
-                startView
-        );
+        PickieHomeView pickieHomeView = new PickieHomeView(startView);
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
         //textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_NAVBAR_HELLO"));
-        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(
-                controller.getRestaurateur(),
-                startView
-        );
+        RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(startView);
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
         //textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_NAVBAR_HELLO"));
-        AdministratorHomeView administratorHomeView = new AdministratorHomeView(
-                controller.getAdministrator(),
-                startView
-        );
+        AdministratorHomeView administratorHomeView = new AdministratorHomeView(startView);
         administratorHomeView.show();
     }
 
@@ -161,7 +157,7 @@ public class MainView extends VirtualViewGUI {
 
     @FXML
     private void clickMenuItemNavbarLogout(ActionEvent event) {
-        controller.getLogin().logout();
+        setCurrentUser(null);
         startView.show();
     }
 

@@ -45,12 +45,12 @@ public class StartView extends VirtualPaneView {
 
     @FXML
     private void clickButtonLogin(ActionEvent actionEvent) {
-        LoginView loginView = new LoginView(getMainController().getLogin(), this);
+        LoginView loginView = new LoginView(this);
         loginView.show();
     }
     @FXML
     private void clickButtonRegistration(ActionEvent actionEvent) {
-        RegistrationView registrationView = new RegistrationView(getMainController().getLogin(), this);
+        RegistrationView registrationView = new RegistrationView(this);
         registrationView.show();
     }
 }

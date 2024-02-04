@@ -14,10 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 public class MenuDetailsView extends VirtualRequestView {
-    private final MenuDetailsController controller;
-    public MenuDetailsView(MenuDetailsController controller) {
+    private final MenuDetailsController controller = new MenuDetailsController();
+    public MenuDetailsView() {
         super("MenuDetails");
-        this.controller = controller;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class MenuDetailsView extends VirtualRequestView {
 
     private void showMenu() {
         try {
-            List<ShowDishBean> list = controller.getMenu();
+            List<ShowDishBean> list = controller.getMenu(getMainView().getCurrentUser().getRestaurantID());
             for(ShowDishBean i : list) {
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_NAME",i.getName());
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_DESCRIPTION",i.getDescription());

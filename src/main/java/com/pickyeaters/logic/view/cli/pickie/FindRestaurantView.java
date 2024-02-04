@@ -6,10 +6,9 @@ import com.pickyeaters.logic.view.cli.VirtualRequestView;
 import java.util.Map;
 
 public class FindRestaurantView extends VirtualRequestView {
-    private final FindRestaurantController controller;
-    public FindRestaurantView(FindRestaurantController controller) {
+    private final FindRestaurantController controller = new FindRestaurantController();
+    public FindRestaurantView() {
         super("FindRestaurant");
-        this.controller = controller;
     }
 
     @Override

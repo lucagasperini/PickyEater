@@ -1,6 +1,8 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.LoginController;
+import com.pickyeaters.logic.controller.exception.BeanException;
+import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
@@ -30,11 +32,10 @@ public class LoginView extends VirtualPaneView {
     @FXML
     protected Button buttonBackLogin;
 
-    private final LoginController controller;
+    private final LoginController controller = new LoginController();
 
-    public LoginView(LoginController controller, VirtualPaneView parent) {
+    public LoginView(VirtualPaneView parent) {
         super("/form/Login.fxml", parent);
-        this.controller = controller;
     }
 
     @Override
@@ -55,11 +56,11 @@ public class LoginView extends VirtualPaneView {
         );
 
         try {
-            controller.auth(loginBean);
+            getMainView().setCurrentUser(controller.auth(loginBean));
             Map<String, String> result = new HashMap<>();
             result.put("login", "true");
             showParent(result);
-        } catch (LoginControllerException ex) {
+        } catch (ControllerException | BeanException ex) {
             showError(ex);
         }
     }

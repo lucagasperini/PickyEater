@@ -1,26 +1,18 @@
 package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
-import com.pickyeaters.logic.controller.application.MainController;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 
 import java.util.Map;
 
 public abstract class VirtualPaneView extends VirtualViewGUI {
     private final VirtualPaneView parent;
-    private static MainController mainController;
     private static MainView mainView;
     private static VirtualPaneView activeView;
     protected VirtualPaneView(String fxml, VirtualPaneView parent) {
         super(fxml);
         this.parent = parent;
     }
-    protected static void init(MainController mainController, MainView mainView) {
-        VirtualPaneView.mainController = mainController;
+    protected static void init(MainView mainView) {
         VirtualPaneView.mainView = mainView;
     }
     protected static void setActiveView(VirtualPaneView view) {
@@ -34,10 +26,6 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
 
     protected static MainView getMainView() {
         return VirtualPaneView.mainView;
-    }
-
-    public static MainController getMainController() {
-        return mainController;
     }
 
     protected abstract void setup(Map<String, String> arg);

@@ -129,7 +129,7 @@ public abstract class EditDishView extends VirtualPaneView {
 
     @FXML
     private void clickAddIngredient(ActionEvent event) {
-        AddIngredientView view = new AddIngredientView(getMainController().getAddIngredient(), this);
+        AddIngredientView view = new AddIngredientView(this);
         view.show();
     }
     @FXML

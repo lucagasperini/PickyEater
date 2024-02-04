@@ -6,10 +6,9 @@ import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import java.util.Map;
 
 public class ReviewDishView extends VirtualPaneView {
-    ReviewDishController controller;
-    public ReviewDishView(ReviewDishController controller, VirtualPaneView parent) {
+    private final ReviewDishController controller = new ReviewDishController();
+    public ReviewDishView(VirtualPaneView parent) {
         super("/form/pickie/ReviewDish.fxml",parent);
-        this.controller = controller;
     }
 
     @Override

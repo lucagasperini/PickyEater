@@ -13,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class AddIngredientController extends VirtualController {
-    public AddIngredientController(MainController main) { super(main); }
-
     public List<IngredientTreeBean> getIngrendientTreeList() throws ControllerException {
         List<IngredientTreeBean> out = new ArrayList<>();
         IngredientDAO.IngredientForest forest = IngredientDAO.getInstance().getAll();
