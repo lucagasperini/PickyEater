@@ -1,6 +1,3 @@
-CREATE database picky;
-CREATE USER picky WITH PASSWORD 'picky';
-ALTER DATABASE picky OWNER TO picky;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS citext;
 
@@ -64,12 +61,6 @@ CREATE TABLE "Dish_Ingredient" (
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
 );
 
-CREATE TABLE "Session" (
-    token UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
-    fk_user UUID NOT NULL
-);
-
 CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
 	OUT _name varchar,
@@ -121,7 +112,7 @@ BEGIN
 END;
 $BODY$;
 
-CREATE OR REPLACE PROCEDURE login(IN _email varchar, IN _password varchar, OUT _token varchar)
+CREATE OR REPLACE PROCEDURE login(IN _email varchar, IN _password varchar, OUT _check boolean)
 LANGUAGE plpgsql
 AS $$
 DECLARE
@@ -129,10 +120,10 @@ DECLARE
 BEGIN
     SELECT id INTO userid FROM "User" WHERE email = _email::CITEXT AND password = _password;
     IF(userid IS NULL) THEN
-		_token := NULL;
+		_check := false;
 		RETURN;
 	END IF;
-	INSERT INTO "Session" (fk_user) VALUES (userid) RETURNING token::varchar INTO _token;
+	_check := true;
 END;
 $$;
 
@@ -294,8 +285,7 @@ DECLARE
 BEGIN
     SELECT id INTO parent_id FROM "Ingredient" WHERE name = _parent_name::CITEXT;
     IF(parent_id IS NULL) THEN
-    		_id := NULL;
-    		RETURN;
+    		RAISE 'Invalid parent ingredient provided [_parent_name="%"]', _parent_name;
     END IF;
 	INSERT INTO "Ingredient" (name, fk_parent)
 	    VALUES (_name, parent_id) RETURNING id::varchar INTO _id;
@@ -307,7 +297,6 @@ LANGUAGE 'plpgsql'
 AS $BODY$
 BEGIN
     SELECT id INTO _out FROM (SELECT '1' AS id UNION SELECT '2' AS id) AS t WHERE id=_in;
-    RETURN;
 END;
 $BODY$;
 
@@ -339,11 +328,11 @@ DECLARE
 BEGIN
     SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
     IF(dish_id IS NULL) THEN
-            RETURN;
+            RAISE 'Invalid dish provided [_dish_name="%", _restaurant_id="%"]', _dish_name, _restaurant_id;
     END IF;
     SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
     IF(ingredient_id IS NULL) THEN
-    		RETURN;
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
     END IF;
 	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish, cooked, optional)
 	    VALUES (ingredient_id, dish_id, _cooked, _optional);
@@ -358,7 +347,7 @@ DECLARE
 BEGIN
     SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
     IF(dish_id IS NULL) THEN
-            RETURN;
+            RAISE 'Invalid dish provided [_dish_name="%", _restaurant_id="%"]', _dish_name, _restaurant_id;
     END IF;
 	DELETE FROM "Dish_Ingredient" WHERE fk_dish = dish_id;
     DELETE FROM "Dish" WHERE id = dish_id;
@@ -373,7 +362,7 @@ DECLARE
 BEGIN
     SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
     IF(dish_id IS NULL) THEN
-        		RETURN;
+        	RAISE 'Invalid dish provided [_dish_name="%", _restaurant_id="%"]', _dish_name, _restaurant_id;
     END IF;
 	DELETE FROM "Dish_Ingredient" WHERE fk_dish = dish_id;
 END;
@@ -387,7 +376,7 @@ DECLARE
 BEGIN
     SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
     IF(dish_id IS NULL) THEN
-            RETURN;
+            RAISE 'Invalid dish provided [_dish_name="%", _restaurant_id="%"]', _dish_name, _restaurant_id;
     END IF;
     UPDATE "Dish" SET active = NOT active WHERE id = dish_id;
 END;
@@ -407,21 +396,23 @@ DECLARE
 BEGIN
     SELECT id INTO dish_id FROM "Dish" WHERE name = _dish_name::CITEXT AND fk_restaurant=_restaurant_id::uuid;
     IF(dish_id IS NULL) THEN
-            RETURN;
+            RAISE 'Invalid dish provided [_dish_name="%", _restaurant_id="%"]', _dish_name, _restaurant_id;
     END IF;
     SELECT id, description, type, active INTO _id, _description, _type, _active FROM "Dish" WHERE id = dish_id;
 END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE update_dish(
-    IN _id varchar(256),
-    IN _name varchar(256),
+    IN _old_name varchar,
+    IN _restaurant_id varchar,
+    IN _new_name varchar(256),
     IN _description varchar(4096),
     IN _type varchar(16))
 LANGUAGE plpgsql
 AS $BODY$
 BEGIN
-    UPDATE "Dish" SET name = _name, description = _description, type = _type WHERE id = _id::uuid;
+    UPDATE "Dish" SET name = _new_name, description = _description, type = _type
+        WHERE name = _old_name AND fk_restaurant=_restaurant_id::uuid;
 END;
 $BODY$;
 

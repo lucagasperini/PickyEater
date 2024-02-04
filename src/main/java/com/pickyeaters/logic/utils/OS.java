@@ -32,11 +32,32 @@ public enum OS {
     public static String getUserName() {
         return System.getProperty("user.name");
     }
-
     public static String getSeparator() {
         return System.getProperty("file.separator");
     }
+    public static String getConfigDatabaseHost() {
+        return System.getenv("PICKY_DATABASE_HOST");
+    }
 
+    public static String getConfigDatabaseName() {
+        return System.getenv("PICKY_DATABASE_NAME");
+    }
+
+    public static String getConfigDatabasePort() {
+        return System.getenv("PICKY_DATABASE_PORT");
+    }
+
+    public static String getConfigDatabaseUser() {
+        return System.getenv("PICKY_DATABASE_USER");
+    }
+
+    public static String getConfigDatabasePassword() {
+        return System.getenv("PICKY_DATABASE_PASS");
+    }
+
+    public static String getConfigLocale() {
+        return System.getenv("PICKY_DATABASE_LOCALE");
+    }
     public static OS getCurrentOS() {
         String osname = getNameOS().toLowerCase();
 

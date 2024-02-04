@@ -82,7 +82,11 @@ public class RestaurantDetailsView extends VirtualRequestView {
                     askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_PHONE", bean.getRestaurantPhone())
             );
 
-            controller.set(bean);
+            controller.set(
+                    bean,
+                    AppData.getInstance().getUserID(),
+                    AppData.getInstance().getRestaurantID()
+            );
         } catch (ControllerException e) {
             showError(e);
         }

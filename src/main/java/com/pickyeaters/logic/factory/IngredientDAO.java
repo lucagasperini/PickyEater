@@ -11,14 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class IngredientDAO {
-    private static final IngredientDAO instance = new IngredientDAO();
-
-    private IngredientDAO() {}
-
-    public static IngredientDAO getInstance() {
-        return instance;
-    }
-
     public IngredientForest getAll() throws DAOException{
         try {
             Deque<IngredientTuple> nodes = new LinkedList<>();

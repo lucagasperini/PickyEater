@@ -11,18 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DishDAO {
-    private static final DishDAO instance = new DishDAO();
-
-    private DishDAO() {}
-
-    public static DishDAO getInstance() {
-        return instance;
-    }
-
-    public void update(Dish dish) throws DAOException {
+    public void update(Dish dish, String dishName, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?)");
-            query.setString(dish.getID());
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?, ?)");
+            query.setString(dishName);
+            query.setString(restaurantID);
             query.setString(dish.getName());
             query.setString(dish.getDescription());
             query.setString(dish.getType());
@@ -53,7 +46,8 @@ public class DishDAO {
             query.close();
 
             Dish dish = rowToDish(id, name, description, type, active);
-            dish.addIngredientList(IngredientDAO.getInstance().getIngredientListOfDish(id));
+            final IngredientDAO ingredientDAO = new IngredientDAO();
+            dish.addIngredientList(ingredientDAO.getIngredientListOfDish(id));
             return dish;
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);

@@ -50,8 +50,30 @@ public class SettingsController {
         try {
             loadProperties(loadConfigFile(configFile));
         } catch (IOException ex) {
-            throw new SettingsControllerException("Cannot load config file: " + configFile);
+            try {
+                loadEnv();
+            } catch (SettingsControllerException ex2) {
+                throw new SettingsControllerException("Cannot load config file: " + configFile);
+            }
         }
+    }
+
+    private void loadEnv() throws SettingsControllerException {
+        SettingsBean settingsBean = new SettingsBean();
+        settingsBean.setDatabaseHost(OS.getConfigDatabaseHost());
+        settingsBean.setDatabaseName(OS.getConfigDatabaseName());
+        settingsBean.setDatabasePort(OS.getConfigDatabasePort());
+        settingsBean.setDatabaseUser(OS.getConfigDatabaseUser());
+        settingsBean.setDatabasePassword(OS.getConfigDatabasePassword());
+        settingsBean.setLocaleLang(OS.getConfigLocale());
+
+        databaseController.load(settingsBean);
+        localeController.load(settingsBean);
+
+        settings.setDatabase(databaseController.getSettings());
+        settings.setLocale(localeController.getSettings());
+
+        validate();
     }
 
     private Properties loadConfigFile(String configFile) throws IOException {

@@ -8,15 +8,6 @@ import com.pickyeaters.logic.model.Restaurant;
 import java.sql.Types;
 
 public class RestaurantDAO {
-
-    private static final RestaurantDAO instance = new RestaurantDAO();
-
-    private RestaurantDAO() {}
-
-    public static RestaurantDAO getInstance() {
-        return instance;
-    }
-
     public Restaurant get(String id) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?)");
