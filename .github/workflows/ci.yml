@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - name: Setup database
-      run: psql -u postgres -f src/main/resources/setup.sql
+      run: psql -U postgres -f src/main/resources/setup.sql
     - uses: actions/checkout@v3
     - name: Set up JDK 19
       uses: actions/setup-java@v3
