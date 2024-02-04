@@ -60,7 +60,7 @@ public class DishDAO {
         }
     }
 
-    public String addDish(String restaurantID, Dish dish) throws DAOException {
+    public String addDish(Dish dish, String restaurantID) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish(?, ?, ?, ?, ?)");
             query.setString(dish.getName());

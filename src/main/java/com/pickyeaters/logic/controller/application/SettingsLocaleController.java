@@ -23,7 +23,7 @@ public class SettingsLocaleController implements SettingsVirtualController {
         return settings;
     }
 
-    public void load(Properties prop) throws SettingsControllerException {
+    public void load(Properties prop) {
         String lang = prop.getProperty("locale.lang");
 
         settings.setLang(lang);

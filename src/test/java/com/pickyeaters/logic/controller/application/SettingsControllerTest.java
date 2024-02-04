@@ -7,21 +7,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SettingsControllerTest {
-
-    @BeforeEach
-    void setUp() {
-    }
-
     @Test
-    void init() throws SettingsControllerException {
+    void i18n() throws SettingsControllerException {
         SettingsController.getInstance().init();
-    }
-
-    @Test
-    void testInit() {
-    }
-
-    @Test
-    void i18n() {
+        assertEquals("OK", SettingsController.i18n("OK"));
     }
 }

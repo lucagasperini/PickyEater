@@ -2,6 +2,7 @@ package com.pickyeaters.logic.controller.application.restaurateur;
 
 import com.pickyeaters.logic.controller.application.VirtualController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.factory.DishDAO;
 import com.pickyeaters.logic.model.*;
@@ -15,15 +16,21 @@ public class AddDishController extends VirtualController {
                 throw new ControllerException("DISH_NO_INGREDIENT","Cannot add dish without ingredients");
             }
             Dish dish = dishBean.toDish();
-            DishDAO.getInstance().addDish(restaurantID, dish);
-            for(DishIngredientBean i : dishBean.getIngredientList())
-                DishDAO.getInstance().addDishIngredient(
-                        dishBean.getName(),
-                        restaurantID,
-                        i.getName(),
-                        i.isCooked(),
-                        i.isOptional()
-                );
+            DishDAO.getInstance().addDish(dish, restaurantID);
+            try {
+                for(DishIngredientBean i : dishBean.getIngredientList()) {
+                    DishDAO.getInstance().addDishIngredient(
+                            dishBean.getName(),
+                            restaurantID,
+                            i.getName(),
+                            i.isCooked(),
+                            i.isOptional()
+                    );
+                }
+            } catch (DAOException ex) {
+                DishDAO.getInstance().delete(dish.getName(), restaurantID);
+                throw new ControllerException("DISH_INVALID_INGREDIENT","Cannot add dish with invalid ingredient");
+            }
         } catch (LoginControllerException ex) {
             throw new ControllerException("Current user is not a restaurateur");
         }

@@ -302,6 +302,15 @@ BEGIN
 END;
 $BODY$;
 
+CREATE PROCEDURE test_database(IN _in character varying, OUT _out character varying)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT id INTO _out FROM (SELECT '1' AS id UNION SELECT '2' AS id) AS t WHERE id=_in;
+    RETURN;
+END;
+$BODY$;
+
 CREATE OR REPLACE PROCEDURE add_dish(
     IN _name varchar(256),
     IN _type varchar(16),
