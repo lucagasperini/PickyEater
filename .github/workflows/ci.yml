@@ -41,7 +41,9 @@ jobs:
     - name: Setup database
       env:
           PGPASSWORD: postgres
-      run: psql -h localhost -U postgres -f src/main/resources/setup.sql
+      run: |
+        ls ..
+        psql -h localhost -U postgres -f ../src/main/resources/setup.sql
     - uses: actions/checkout@v3
     - name: Set up JDK 19
       uses: actions/setup-java@v3
