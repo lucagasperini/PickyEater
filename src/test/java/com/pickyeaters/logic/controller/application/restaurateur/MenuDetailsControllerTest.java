@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MenuDetailsControllerTest {
     UserBean user;
+    AddDishController addDishController;
     @BeforeEach
     void setUp() throws ControllerException, BeanException {
         SettingsController.getInstance().init();
@@ -25,8 +26,11 @@ class MenuDetailsControllerTest {
 
         LoginController loginController = new LoginController();
         user = loginController.auth(new LoginBean("lucar", "luca"));
+        addDishController = new AddDishController();
+    }
 
-        AddDishController addDishController = new AddDishController();
+    @Test
+    void getMenu() throws ControllerException, BeanException {
 
         EditDishBean dish1 = new EditDishBean("First", "", "DRINK");
         dish1.getIngredientList().add(new DishIngredientBean("Pollo"));
@@ -37,21 +41,10 @@ class MenuDetailsControllerTest {
         EditDishBean dish3 = new EditDishBean("Third", "", "DRINK");
         dish3.getIngredientList().add(new DishIngredientBean("Pollo"));
 
-        EditDishBean dishRemove = new EditDishBean("To remove", "", "DRINK");
-        dishRemove.getIngredientList().add(new DishIngredientBean("Pollo"));
-
-        EditDishBean dishToggle = new EditDishBean("To toggle", "", "DRINK");
-        dishToggle.getIngredientList().add(new DishIngredientBean("Pollo"));
-
         addDishController.add(dish1, user.getRestaurant().getID());
         addDishController.add(dish2, user.getRestaurant().getID());
         addDishController.add(dish3, user.getRestaurant().getID());
-        addDishController.add(dishRemove, user.getRestaurant().getID());
-        addDishController.add(dishToggle, user.getRestaurant().getID());
-    }
 
-    @Test
-    void getMenu() throws ControllerException, BeanException {
         MenuDetailsController menuDetailsController = new MenuDetailsController();
         List<ShowDishBean> menu = menuDetailsController.getMenu(user.getRestaurant().getID());
         List<String> names = new ArrayList<>(List.of(new String[]{"First", "Second", "Third"}));
@@ -61,13 +54,23 @@ class MenuDetailsControllerTest {
     }
 
     @Test
-    void deleteDish() throws ControllerException {
+    void deleteDish() throws ControllerException, BeanException {
+        EditDishBean dishRemove = new EditDishBean("To remove", "", "DRINK");
+        dishRemove.getIngredientList().add(new DishIngredientBean("Pollo"));
+
+        addDishController.add(dishRemove, user.getRestaurant().getID());
+
         MenuDetailsController menuDetailsController = new MenuDetailsController();
         menuDetailsController.deleteDish("To remove", user.getRestaurant().getID());
     }
 
     @Test
     void toggleDish() throws ControllerException, BeanException {
+        EditDishBean dishToggle = new EditDishBean("To toggle", "", "DRINK");
+        dishToggle.getIngredientList().add(new DishIngredientBean("Pollo"));
+
+        addDishController.add(dishToggle, user.getRestaurant().getID());
+
         MenuDetailsController menuDetailsController = new MenuDetailsController();
         menuDetailsController.toggleDish("To toggle", user.getRestaurant().getID());
 
