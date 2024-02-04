@@ -11,10 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class DishDAO {
-    public void update(Dish dish) throws DAOException {
+    public void update(Dish dish, String dishName, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?)");
-            query.setString(dish.getID());
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?, ?)");
+            query.setString(dishName);
+            query.setString(restaurantID);
             query.setString(dish.getName());
             query.setString(dish.getDescription());
             query.setString(dish.getType());

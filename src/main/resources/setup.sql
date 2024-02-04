@@ -403,14 +403,16 @@ END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE update_dish(
-    IN _id varchar(256),
-    IN _name varchar(256),
+    IN _old_name varchar,
+    IN _restaurant_id varchar,
+    IN _new_name varchar(256),
     IN _description varchar(4096),
     IN _type varchar(16))
 LANGUAGE plpgsql
 AS $BODY$
 BEGIN
-    UPDATE "Dish" SET name = _name, description = _description, type = _type WHERE id = _id::uuid;
+    UPDATE "Dish" SET name = _new_name, description = _description, type = _type
+        WHERE name = _old_name AND fk_restaurant=_restaurant_id::uuid;
 END;
 $BODY$;
 

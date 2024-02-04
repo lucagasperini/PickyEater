@@ -126,7 +126,11 @@ public class RestaurantDetailsView extends VirtualPaneView {
                 inputRestaurantAddress.getText()
         );
         try {
-            controller.set(restaurateurBean);
+            controller.set(
+                    restaurateurBean,
+                    AppData.getInstance().getUserID(),
+                    AppData.getInstance().getRestaurantID()
+            );
             showParent();
         } catch (ControllerException ex) {
             showError(ex);

@@ -22,12 +22,12 @@ public class UpdateDishController extends VirtualController {
         return dishBean;
     }
 
-    public void update(EditDishBean dishBean, String restaurantID) throws ControllerException {
+    public void update(EditDishBean dishBean, String dishName, String restaurantID) throws ControllerException {
         if(dishBean.getIngredientList().isEmpty()) {
             throw new ControllerException("DISH_NO_INGREDIENT","Cannot update dish without ingredients");
         }
-        dishDAO.update(dishBean.toDish());
-        dishDAO.unlinkIngredient(dishBean.getName(), restaurantID);
+        dishDAO.unlinkIngredient(dishName, restaurantID);
+        dishDAO.update(dishBean.toDish(), dishName, restaurantID);
         for(DishIngredientBean i : dishBean.getIngredientList()) {
             dishDAO.addDishIngredient(
                     dishBean.getName(),

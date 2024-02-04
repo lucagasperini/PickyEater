@@ -25,7 +25,10 @@ public class RestaurantDetailsController extends VirtualController {
         );
     }
 
-    public void set(RestaurateurBean restaurateurBean) throws ControllerException {
-        userDAO.updateUser(restaurateurBean.toModel());
+    public void set(RestaurateurBean restaurateurBean, String restaurateurID, String restaurantID) throws ControllerException {
+        Restaurateur restaurateur = restaurateurBean.toModel();
+        restaurateur.setID(restaurateurID);
+        restaurateur.getRestaurant().setID(restaurantID);
+        userDAO.updateUser(restaurateur);
     }
 }
