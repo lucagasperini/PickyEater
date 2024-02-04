@@ -10,16 +10,17 @@ import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
 
 public class AddDishController extends VirtualController {
+    private final DishDAO dishDAO = new DishDAO();
     public void add(EditDishBean dishBean, String restaurantID) throws ControllerException {
         try {
             if(dishBean.getIngredientList().isEmpty()) {
                 throw new ControllerException("DISH_NO_INGREDIENT","Cannot add dish without ingredients");
             }
             Dish dish = dishBean.toDish();
-            DishDAO.getInstance().addDish(dish, restaurantID);
+            dishDAO.addDish(dish, restaurantID);
             try {
                 for(DishIngredientBean i : dishBean.getIngredientList()) {
-                    DishDAO.getInstance().addDishIngredient(
+                    dishDAO.addDishIngredient(
                             dishBean.getName(),
                             restaurantID,
                             i.getName(),
@@ -28,7 +29,7 @@ public class AddDishController extends VirtualController {
                     );
                 }
             } catch (DAOException ex) {
-                DishDAO.getInstance().delete(dish.getName(), restaurantID);
+                dishDAO.delete(dish.getName(), restaurantID);
                 throw new ControllerException("DISH_INVALID_INGREDIENT","Cannot add dish with invalid ingredient");
             }
         } catch (LoginControllerException ex) {

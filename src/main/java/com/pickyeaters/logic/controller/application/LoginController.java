@@ -13,14 +13,12 @@ import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
 public class LoginController extends VirtualController {
-
-
+    private final UserDAO userDAO = new UserDAO();
     public UserBean auth(LoginBean loginBean) throws ControllerException, BeanException {
-        String token = UserDAO.getInstance().login(loginBean.getEmail(), loginBean.getPassword());
-        if(token == null) {
+        if(!userDAO.login(loginBean.getEmail(), loginBean.getPassword())) {
             throw new ControllerException("BAD_AUTH", "Login failed");
         }
-        User user = UserDAO.getInstance().getUserInfo(loginBean.getEmail());
+        User user = userDAO.getUserInfo(loginBean.getEmail());
         return new UserBean(user);
     }
 
