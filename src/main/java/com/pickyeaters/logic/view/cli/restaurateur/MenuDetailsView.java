@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.ShowDishBean;
@@ -55,7 +56,7 @@ public class MenuDetailsView extends VirtualRequestView {
 
     private void showMenu() {
         try {
-            List<ShowDishBean> list = controller.getMenu(getMainView().getCurrentUser().getRestaurantID());
+            List<ShowDishBean> list = controller.getMenu(AppData.getInstance().getRestaurantID());
             for(ShowDishBean i : list) {
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_NAME",i.getName());
                 printField("RESTAURATEUR_MANAGEMENUDETAILS_DESCRIPTION",i.getDescription());

@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
 import com.pickyeaters.logic.view.gui.restaurateur.RestaurateurHomeView;
@@ -24,15 +25,6 @@ import javafx.stage.Stage;
 public class MainView extends VirtualViewGUI {
     private final Stage stage;
     private final StartView startView = new StartView();
-    private UserBean currentUser;
-
-    public UserBean getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(UserBean currentUser) {
-        this.currentUser = currentUser;
-    }
     private final Node nodeHeader;
     public MainView(Stage primaryStage) {
         super("/form/Background.fxml");
@@ -96,7 +88,7 @@ public class MainView extends VirtualViewGUI {
     }
 
     public void showNavbar() {
-        textNavbarUsername.setText(currentUser.getName());
+        textNavbarUsername.setText(AppData.getInstance().getUserName());
         menuItemNavbarProfile.setText(SettingsController.i18n("NAVBAR_UPDATEPROFILE"));
         menuItemNavbarLogout.setText(SettingsController.i18n("NAVBAR_LOGOFF"));
     }
@@ -120,7 +112,7 @@ public class MainView extends VirtualViewGUI {
     }
 
     public void showHomeView() {
-        switch (getCurrentUser().getType()) {
+        switch (AppData.getInstance().getUserType()) {
             case PICKIE -> showPickieHomeView();
             case RESTAURATEUR -> showRestaurateurHomeView();
             case ADMIN -> showAdministratorHomeView();
@@ -157,7 +149,7 @@ public class MainView extends VirtualViewGUI {
 
     @FXML
     private void clickMenuItemNavbarLogout(ActionEvent event) {
-        setCurrentUser(null);
+        AppData.getInstance().setUser(null);
         startView.show();
     }
 

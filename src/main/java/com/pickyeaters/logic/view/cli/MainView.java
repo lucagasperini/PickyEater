@@ -1,6 +1,7 @@
 package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.cli.administrator.AdministratorHomeView;
 import com.pickyeaters.logic.view.cli.pickie.PickieHomeView;
@@ -9,17 +10,8 @@ import com.pickyeaters.logic.view.cli.restaurateur.RestaurateurHomeView;
 import java.util.Map;
 
 public class MainView extends VirtualViewCLI {
-    private UserBean currentUser;
     public MainView() {
         setMainView(this);
-    }
-
-    public UserBean getCurrentUser() {
-        return currentUser;
-    }
-
-    public void setCurrentUser(UserBean currentUser) {
-        this.currentUser = currentUser;
     }
 
     @Override
@@ -37,7 +29,7 @@ public class MainView extends VirtualViewCLI {
 
 
     private void showHomeView() {
-        switch (currentUser.getType()) {
+        switch (AppData.getInstance().getUserType()) {
             case PICKIE -> showPickieHomeView();
             case RESTAURATEUR -> showRestaurateurHomeView();
             case ADMIN -> showAdministratorHomeView();

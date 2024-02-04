@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.AddDishController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
@@ -49,7 +50,7 @@ public class AddDishView extends EditDishView {
                 dishBean.getIngredientList().add(ingredientBean);
             }
 
-            controller.add(dishBean, getMainView().getCurrentUser().getRestaurantID());
+            controller.add(dishBean, AppData.getInstance().getRestaurantID());
             showParent();
         } catch (ControllerException | BeanException ex) {
             showError(ex);

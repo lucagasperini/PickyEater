@@ -2,10 +2,7 @@ package com.pickyeaters.logic.view.bean;
 
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
-import com.pickyeaters.logic.model.Administrator;
-import com.pickyeaters.logic.model.Pickie;
-import com.pickyeaters.logic.model.Restaurateur;
-import com.pickyeaters.logic.model.User;
+import com.pickyeaters.logic.model.*;
 
 public class UserBean {
     public enum UserType{
@@ -17,13 +14,20 @@ public class UserBean {
     private String name;
     private String email;
     private UserType type;
-    private String restaurantID;
+    private RestaurantBean restaurant;
 
     public UserBean(String ID, String email, String name, UserType type) {
         setID(ID);
         setName(name);
         setEmail(email);
         setType(type);
+    }
+
+    public  UserBean(String ID, String email, String name, RestaurantBean restaurant) {
+        setID(ID);
+        setName(name);
+        setEmail(email);
+        setType(UserType.RESTAURATEUR);
     }
     public UserBean(User user) throws BeanException {
         this(
@@ -33,7 +37,7 @@ public class UserBean {
                 typeFromUser(user)
         );
         if(type == UserType.RESTAURATEUR) {
-            restaurantID = ((Restaurateur) user).getRestaurant().getID();
+            restaurant = new RestaurantBean(((Restaurateur) user).getRestaurant());
         }
     }
     public UserBean(String ID, String email, String name, String type) throws BeanException {
@@ -60,8 +64,8 @@ public class UserBean {
         return type;
     }
 
-    public String getRestaurantID() {
-        return restaurantID;
+    public RestaurantBean getRestaurant() {
+        return restaurant;
     }
 
     public void setName(String name) {
@@ -80,8 +84,8 @@ public class UserBean {
         this.type = type;
     }
 
-    public void setRestaurantID(String restaurantID) {
-        this.restaurantID = restaurantID;
+    public void setRestaurant(RestaurantBean restaurant) {
+        this.restaurant = restaurant;
     }
 
     private static UserType typeFromUser(User user) throws BeanException {

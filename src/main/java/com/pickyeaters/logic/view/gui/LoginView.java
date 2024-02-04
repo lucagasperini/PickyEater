@@ -3,6 +3,7 @@ package com.pickyeaters.logic.view.gui;
 import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
@@ -56,7 +57,7 @@ public class LoginView extends VirtualPaneView {
         );
 
         try {
-            getMainView().setCurrentUser(controller.auth(loginBean));
+            AppData.getInstance().setUser(controller.auth(loginBean));
             Map<String, String> result = new HashMap<>();
             result.put("login", "true");
             showParent(result);

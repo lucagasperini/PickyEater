@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.LoginBean;
 
 import java.util.Map;
@@ -22,7 +23,7 @@ public class LoginView extends VirtualViewCLI {
         String password = userInput.nextLine();
         LoginBean loginBean = new LoginBean(email, password);
         try {
-            getMainView().setCurrentUser(controller.auth(loginBean));
+            AppData.getInstance().setUser(controller.auth(loginBean));
         } catch (ControllerException | BeanException ex) {
             showError(ex);
             show(arg);

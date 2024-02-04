@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetai
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
@@ -177,7 +178,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
         textMyPersonalDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYPERSONALDETAILS"));
         textMyRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYRESTAURANTDETAILS"));
         try {
-            RestaurateurBean restaurateur = controller.get(getMainView().getCurrentUser().getEmail());
+            RestaurateurBean restaurateur = controller.get(AppData.getInstance().getUserEmail());
             inputRestaurateurFirstname.setText(restaurateur.getFirstname());
             inputRestaurateurLastname.setText(restaurateur.getLastname());
             inputRestaurateurPhone.setText(restaurateur.getPhone());

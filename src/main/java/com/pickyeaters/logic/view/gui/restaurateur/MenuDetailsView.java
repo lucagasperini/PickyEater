@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsCont
 import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -47,7 +48,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupDishList() {
         vboxMenu.getChildren().clear();
         try {
-            List<ShowDishBean> dishBeanList = controller.getMenu(getMainView().getCurrentUser().getRestaurantID());
+            List<ShowDishBean> dishBeanList = controller.getMenu(AppData.getInstance().getRestaurantID());
             for(ShowDishBean i : dishBeanList) {
                 vboxMenu.getChildren().add(new DishListItemWidget(this, i).getRoot());
             }
@@ -59,7 +60,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupActiveDish(String name) {
         if(name != null) {
             try {
-                controller.toggleDish(name, getMainView().getCurrentUser().getRestaurantID());
+                controller.toggleDish(name, AppData.getInstance().getRestaurantID());
             } catch (ControllerException ex) {
                 showError(ex);
             }
@@ -68,7 +69,7 @@ public class MenuDetailsView extends VirtualPaneView {
     private void setupDeleteDish(String name) {
         if(name != null) {
             try {
-                controller.deleteDish(name, getMainView().getCurrentUser().getRestaurantID());
+                controller.deleteDish(name, AppData.getInstance().getRestaurantID());
             } catch (ControllerException ex) {
                 showError(ex);
             }

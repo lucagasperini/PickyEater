@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.restaurateur.RestaurantDetai
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
+import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 
@@ -43,7 +44,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
     private void showDetails() {
         try {
-            RestaurateurBean bean = controller.get(getMainView().getCurrentUser().getEmail());
+            RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME", bean.getFirstname());
             printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_LASTNAME", bean.getLastname());
@@ -58,7 +59,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
     private void editDetails() {
         try {
-            RestaurateurBean bean = controller.get(getMainView().getCurrentUser().getEmail());
+            RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
             bean.setEmail(
                     askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail())
             );
