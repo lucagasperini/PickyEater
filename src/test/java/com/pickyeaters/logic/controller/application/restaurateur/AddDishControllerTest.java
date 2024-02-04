@@ -5,15 +5,13 @@ import com.pickyeaters.logic.controller.application.LoginController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
-import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.controller.exception.SettingsControllerException;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
 import static org.junit.jupiter.api.Assertions.*;
-class AddDishControllerTest {
+class AddDishControllerTest  {
 
     UserBean user;
     @org.junit.jupiter.api.BeforeEach
@@ -22,8 +20,6 @@ class AddDishControllerTest {
         DatabaseController.getInstance().init();
         LoginController loginController = new LoginController();
         user = loginController.auth(new LoginBean("lucar", "luca"));
-        MenuDetailsController menuDetailsController = new MenuDetailsController();
-        menuDetailsController.deleteDish("test", user.getRestaurant().getID());
     }
 
     @org.junit.jupiter.api.Test

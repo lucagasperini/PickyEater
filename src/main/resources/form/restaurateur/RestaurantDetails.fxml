@@ -13,8 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox prefHeight="480.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="480.0" prefWidth="1280.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="435.0" prefWidth="1280.0">
          <children>
@@ -114,34 +113,6 @@
                                           </TextField>
                                        </children>
                                     </GridPane>
-                                    <AnchorPane prefHeight="0.0" prefWidth="500.0">
-                                       <children>
-                                          <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="0.0" prefWidth="500.0">
-                                       <children>
-                                          <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="0.0" prefWidth="500.0">
-                                       <children>
-                                          <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="0.0" prefWidth="500.0">
-                                       <children>
-                                          <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane prefHeight="0.0" prefWidth="500.0">
-                                       <children>
-                                          <HBox layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                       </children>
-                                    </AnchorPane>
                                  </children>
                               </VBox>
                            </children>

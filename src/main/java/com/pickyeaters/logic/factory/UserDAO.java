@@ -8,27 +8,20 @@ import com.pickyeaters.logic.model.*;
 import java.sql.Types;
 
 public class UserDAO {
-    private static final UserDAO instance = new UserDAO();
-    private UserDAO() {}
-
-    public static UserDAO getInstance() {
-        return instance;
-    }
-
-    public String login(String username, String password) throws DAOException {
+    public boolean login(String username, String password) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL login(?,?,?)");
 
             query.setString(username);
             query.setString(password);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.BIT);
 
             query.execute();
 
-            String token = query.getString();
+            boolean check = query.getBoolean();
             query.close();
 
-            return token;
+            return check;
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);
         }
@@ -97,7 +90,8 @@ public class UserDAO {
         String restID = query.getString();
         query.close();
 
-        Restaurant rest = RestaurantDAO.getInstance().get(restID);
+        final RestaurantDAO restaurantDAO = new RestaurantDAO();
+        Restaurant rest = restaurantDAO.get(restID);
 
         return new Restaurateur(id, email, firstname, lastname, phone, ssn, rest);
     }
@@ -157,7 +151,8 @@ public class UserDAO {
         query.close();
 
         if(restaurateur.getRestaurant() != null) {
-            RestaurantDAO.getInstance().update(restaurateur.getRestaurant());
+            final RestaurantDAO restaurantDAO = new RestaurantDAO();
+            restaurantDAO.update(restaurateur.getRestaurant());
         }
     }
 }

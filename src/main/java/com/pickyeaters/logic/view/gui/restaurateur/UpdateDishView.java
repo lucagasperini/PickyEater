@@ -18,8 +18,10 @@ import java.util.Map;
 public class UpdateDishView extends EditDishView {
     private final UpdateDishController controller = new UpdateDishController();
     private EditDishBean dishBean;
+    private final String dishName;
     public UpdateDishView(VirtualPaneView parent, String name) {
         super(parent);
+        dishName = name;
         try {
             dishBean = controller.get(name, AppData.getInstance().getRestaurantID());
             for(DishIngredientBean s : dishBean.getIngredientList()) {
@@ -63,7 +65,7 @@ public class UpdateDishView extends EditDishView {
                 tmp.getIngredientList().add(widget.getBean());
             }
 
-            controller.update(tmp, AppData.getInstance().getRestaurantID());
+            controller.update(tmp, dishName, AppData.getInstance().getRestaurantID());
             showParent();
         } catch (ControllerException | BeanException ex) {
             showError(ex);

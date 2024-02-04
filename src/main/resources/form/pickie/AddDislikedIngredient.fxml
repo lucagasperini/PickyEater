@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="435.0" prefWidth="1280.0">
+               <children>
+                  <HBox layoutX="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox prefHeight="435.0" prefWidth="982.0">
+                           <children>
+                              <Text fx:id="textSelect" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT" wrappingWidth="506.0">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Text>
+                              <TreeView fx:id="treeIngredient" prefHeight="346.0" prefWidth="640.0" showRoot="false" />
+                              <Text fx:id="textReportMissingIngredientQuestion" strokeType="OUTSIDE" strokeWidth="0.0" text="REPORTMISSINGINGREDIENT_QUESTION" wrappingWidth="540.0">
+                                 <font>
+                                    <Font name="Calibri" size="18.0" />
+                                 </font>
+                              </Text>
+                              <Button fx:id="buttonReport" mnemonicParsing="false" onAction="#clickButtonReport" styleClass="bt-stepAction3" text="REPORTMISSINGINGREDIENT" underline="true" />
+                           </children>
+                        </VBox>
+                        <VBox maxWidth="-Infinity" prefHeight="164.0" prefWidth="319.0">
+                           <children>
+                              <Text fx:id="textCookingMethod" fill="#f4b183" strokeType="OUTSIDE" strokeWidth="0.0" text="COOKINGMETHOD" wrappingWidth="317.4267578125">
+                                 <font>
+                                    <Font name="Calibri Bold" size="26.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                              </Text>
+                              <CheckBox fx:id="checkboxCookingMethodCooked" mnemonicParsing="false" text="COOKED">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="3.0" />
+                                 </VBox.margin>
+                              </CheckBox>
+                              <CheckBox fx:id="checkboxCookingMethodRaw" mnemonicParsing="false" text="RAW">
+                                 <font>
+                                    <Font name="Calibri" size="16.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets top="3.0" />
+                                 </VBox.margin>
+                              </CheckBox>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="30.0" right="30.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="1280.0">
+               <children>
+                  <Button fx:id="buttonSave" layoutX="492.0" layoutY="3.0" mnemonicParsing="false" onAction="#clickButtonSave" styleClass="bt-saveChanges" text="SAVECHANGES" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="491.5" AnchorPane.rightAnchor="491.5" AnchorPane.topAnchor="4.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../restaurateur/css/main.css" />
+      <URL value="@../../css/main.css" />
+   </stylesheets>
+</AnchorPane>
