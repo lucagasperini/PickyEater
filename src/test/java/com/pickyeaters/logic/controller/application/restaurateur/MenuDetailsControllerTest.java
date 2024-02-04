@@ -47,10 +47,18 @@ class MenuDetailsControllerTest {
 
         MenuDetailsController menuDetailsController = new MenuDetailsController();
         List<ShowDishBean> menu = menuDetailsController.getMenu(user.getRestaurant().getID());
-        List<String> names = new ArrayList<>(List.of(new String[]{"First", "Second", "Third"}));
+        List<String> names = new ArrayList<>();
+        names.add("First");
+        names.add("Second");
+        names.add("Third");
+
+        int counter = 0;
         for(ShowDishBean i : menu) {
-            assertTrue(names.contains(i.getName()));
+            if(names.contains(i.getName())) {
+                counter++;
+            }
         }
+        assertEquals(3, counter);
     }
 
     @Test
