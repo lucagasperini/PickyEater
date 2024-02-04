@@ -10,8 +10,9 @@ import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
 
 public class UpdateDishController extends VirtualController {
+    private final DishDAO dishDAO = new DishDAO();
     public EditDishBean get(String name, String restaurantID) throws ControllerException, BeanException {
-        Dish dish = DishDAO.getInstance().get(name, restaurantID);
+        Dish dish = dishDAO.get(name, restaurantID);
         EditDishBean dishBean = new EditDishBean(dish.getName(), dish.getDescription(), dish.getType());
         for(Ingredient i : dish.getIngredientList()) {
             dishBean.getIngredientList().add(
@@ -25,10 +26,10 @@ public class UpdateDishController extends VirtualController {
         if(dishBean.getIngredientList().isEmpty()) {
             throw new ControllerException("DISH_NO_INGREDIENT","Cannot update dish without ingredients");
         }
-        DishDAO.getInstance().update(dishBean.toDish());
-        DishDAO.getInstance().unlinkIngredient(dishBean.getName(), restaurantID);
+        dishDAO.update(dishBean.toDish());
+        dishDAO.unlinkIngredient(dishBean.getName(), restaurantID);
         for(DishIngredientBean i : dishBean.getIngredientList()) {
-            DishDAO.getInstance().addDishIngredient(
+            dishDAO.addDishIngredient(
                     dishBean.getName(),
                     restaurantID,
                     i.getName(),

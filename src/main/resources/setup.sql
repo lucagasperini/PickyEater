@@ -340,7 +340,7 @@ BEGIN
     END IF;
     SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
     IF(ingredient_id IS NULL) THEN
-    		RETURN;
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
     END IF;
 	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish, cooked, optional)
 	    VALUES (ingredient_id, dish_id, _cooked, _optional);
