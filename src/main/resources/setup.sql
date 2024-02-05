@@ -61,6 +61,61 @@ CREATE TABLE "Dish_Ingredient" (
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
 );
 
+CREATE TABLE "ExcludedGroup" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    name CITEXT NOT NULL,
+    unique(name)
+);
+
+CREATE TABLE "ExcludedGroup_Ingredient" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_ingredient UUID NOT NULL,
+    fk_excluded_group UUID NOT NULL,
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    FOREIGN KEY(fk_excluded_group) REFERENCES "ExcludedGroup"(id),
+    unique(fk_ingredient, fk_excluded_group)
+);
+
+CREATE TABLE "User_ExcludedIngredient" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_ingredient UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    unique(fk_ingredient, fk_user)
+);
+
+CREATE TABLE "User_ExcludedGroup" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_excluded_group UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_excluded_group) REFERENCES "ExcludedGroup"(id),
+    unique(fk_excluded_group, fk_user)
+);
+
+CREATE TABLE "Allergy" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    name CITEXT NOT NULL,
+    unique(name)
+);
+
+CREATE TABLE "User_Allergy" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_allergy UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_allergy) REFERENCES "Allergy"(id),
+    unique(fk_excluded_group, fk_user)
+);
+
+
 CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
 	OUT _name varchar,
@@ -416,6 +471,78 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE add_excluded_group(IN _name varchar, OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "ExcludedGroup" (name) VALUES (_name) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_excluded_group_ingredient(
+    IN _group_id varchar,
+    IN _ingredient_name varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+
+	INSERT INTO "ExcludedGroup_Ingredient" (fk_excluded_group, fk_ingredient) VALUES (_group_id::uuid, ingredient_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_excluded_ingredient(
+    IN _userid varchar,
+    IN _ingredient_name varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+
+	INSERT INTO "User_ExcludedIngredient" (fk_user, fk_ingredient) VALUES (_userid::UUID, ingredient_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_excluded_group(
+    IN _userid varchar,
+    IN _group_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User_ExcludedGroup" (fk_user, fk_excluded_group) VALUES (_userid::UUID, _group_id::UUID);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_allergy(
+    IN _name varchar,
+    OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "Allergy" (name) VALUES (_name) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_allergy(
+    IN _userid varchar,
+    IN _allergy_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User_Allergy" (fk_user, fk_allergy) VALUES (_userid::UUID, _allergy_id::UUID);
+END;
+$BODY$;
+
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
@@ -434,3 +561,13 @@ CALL add_child_ingredient('Tonno', 'Pesce', null);
 CALL add_root_ingredient('Pasta', null);
 CALL add_child_ingredient('Rigatoni', 'Pasta', null);
 CALL add_root_ingredient('Pane', null);
+CALL add_root_ingredient('Alcol', null);
+
+DO $$
+DECLARE
+	id varchar;
+BEGIN
+	CALL add_excluded_group('Incinta', id);
+	CALL add_excluded_group_ingredient(id, 'Alcol');
+END;
+$$;

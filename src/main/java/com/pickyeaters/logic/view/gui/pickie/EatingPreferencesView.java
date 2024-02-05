@@ -2,6 +2,7 @@ package com.pickyeaters.logic.view.gui.pickie;
 
 import com.pickyeaters.logic.controller.application.pickie.EatingPreferencesController;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
+import com.pickyeaters.logic.view.gui.virtual.VirtualShowIngredientView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,7 @@ import javafx.scene.text.Text;
 
 import java.util.Map;
 
-public class EatingPreferencesView extends VirtualPaneView {
+public class EatingPreferencesView extends VirtualShowIngredientView {
     private final EatingPreferencesController controller = new EatingPreferencesController();
     public EatingPreferencesView(VirtualPaneView parent) {
         super("/form/pickie/EatingPreferences.fxml", parent);
@@ -19,6 +20,14 @@ public class EatingPreferencesView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
+        if(arg != null) {
+            setupAddIngredient(
+                    arg.get("addIngredientName"),
+                    arg.get("addIngredientCooked"),
+                    arg.get("addIngredientOptional")
+            );
+            setupRemoveIngredient(arg.get("removeIngredient"));
+        }
         showTitle("PICKY_PERSONALIZEEATINGPREFERENCES");
     }
 
@@ -80,7 +89,7 @@ public class EatingPreferencesView extends VirtualPaneView {
     private VBox vboxIngredient;
 
     @FXML
-    void clickAddIngredient(ActionEvent event) {
+    protected void clickAddIngredient(ActionEvent event) {
         AddDislikedIngredientView view = new AddDislikedIngredientView(this);
         view.show();
     }

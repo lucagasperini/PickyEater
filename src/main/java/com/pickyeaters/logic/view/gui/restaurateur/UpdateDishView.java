@@ -5,11 +5,10 @@ import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishContr
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.AppData;
-import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
-import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
+import com.pickyeaters.logic.view.gui.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
