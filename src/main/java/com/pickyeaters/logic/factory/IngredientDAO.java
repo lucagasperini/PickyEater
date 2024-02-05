@@ -44,7 +44,7 @@ public class IngredientDAO {
         try {
             LinkedList<Ingredient> out = new LinkedList<>();
             DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
-                    "SELECT name, cooked, optional FROM \"Dish_Ingredient\" JOIN \"Ingredient\" AS I ON fk_ingredient=I.id WHERE fk_dish::varchar = ?"
+                    "SELECT name, cooked, optional FROM all_dish_ingredient WHERE dish_id = ?"
             );
             query.setString(dishID);
 

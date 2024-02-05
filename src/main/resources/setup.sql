@@ -73,6 +73,7 @@ CREATE TABLE "ExcludedGroup_Ingredient" (
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     fk_ingredient UUID NOT NULL,
     fk_excluded_group UUID NOT NULL,
+    cooked BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
     FOREIGN KEY(fk_excluded_group) REFERENCES "ExcludedGroup"(id),
     unique(fk_ingredient, fk_excluded_group)
@@ -83,6 +84,7 @@ CREATE TABLE "User_ExcludedIngredient" (
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     fk_user UUID NOT NULL,
     fk_ingredient UUID NOT NULL,
+    cooked BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY(fk_user) REFERENCES "User"(id),
     FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
     unique(fk_ingredient, fk_user)
@@ -546,6 +548,17 @@ $BODY$;
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
+
+CREATE OR REPLACE VIEW all_allergy AS
+SELECT id::varchar AS id, name FROM "Allergy";
+
+CREATE OR REPLACE VIEW all_dish_ingredient AS
+    SELECT fk_dish::varchar AS dish_id, name, cooked, optional FROM "Dish_Ingredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_excludedgroup_ingredient AS
+    SELECT fk_excluded_group::varchar AS group_id, name, cooked FROM "ExcludedGroup_Ingredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
 
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
