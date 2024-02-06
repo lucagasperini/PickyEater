@@ -3,14 +3,34 @@ package com.pickyeaters.logic.factory;
 import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
+import com.pickyeaters.logic.model.Allergy;
 import com.pickyeaters.logic.model.Ingredient;
+import com.pickyeaters.logic.model.User;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
 public class IngredientDAO {
+
+    public Ingredient get(String name) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query(
+                    "CALL get_allergy(?, ?)"
+            );
+            query.setString(name);
+            query.registerOutParameter(Types.VARCHAR);
+
+            query.execute();
+            Ingredient out = new Ingredient(query.getString(), name);
+            query.close();
+            return out;
+        } catch (DatabaseControllerException e) {
+            throw new DAOException(e);
+        }
+    }
     public IngredientForest getAll() throws DAOException{
         try {
             Deque<IngredientTuple> nodes = new LinkedList<>();
@@ -65,6 +85,45 @@ public class IngredientDAO {
         }
     }
 
+    public List<Ingredient> getExcludedIngredientList(String userID) throws DAOException {
+        try {
+            LinkedList<Ingredient> out = new LinkedList<>();
+            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+                    "SELECT name, cooked FROM all_user_excluded_ingredient WHERE userid = ?"
+            );
+            query.setString(userID);
+
+            query.execute();
+            while(query.next()) {
+                Ingredient i = new Ingredient(
+                        query.getString(),
+                        query.getBoolean(),
+                        false
+                );
+                out.add(i);
+            }
+            query.close();
+
+            return out;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+    public void addUserExcludedIngredient(Ingredient ingredient, User user) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+                    "CALL add_user_excluded_ingredient(?, ?)"
+            );
+            query.setString(user.getID());
+            query.setString(ingredient.getName());
+
+            query.execute();
+            query.close();
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
 
     private IngredientForest toForest(Deque<Ingredient> roots, Deque<IngredientTuple> nodes) {
         IngredientForest forest = new IngredientForest();

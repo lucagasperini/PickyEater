@@ -1,15 +1,23 @@
 package com.pickyeaters.logic.view.gui.pickie;
 
 import com.pickyeaters.logic.controller.application.pickie.EatingPreferencesController;
+import com.pickyeaters.logic.controller.exception.BeanException;
+import com.pickyeaters.logic.controller.exception.DAOException;
+import com.pickyeaters.logic.view.AppData;
+import com.pickyeaters.logic.view.bean.AllergyBean;
+import com.pickyeaters.logic.view.bean.EatingPreferenceBean;
+import com.pickyeaters.logic.view.bean.PreferenceIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.virtual.VirtualShowIngredientView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.List;
 import java.util.Map;
 
 public class EatingPreferencesView extends VirtualShowIngredientView {
@@ -29,6 +37,40 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
             setupRemoveIngredient(arg.get("removeIngredient"));
         }
         showTitle("PICKY_PERSONALIZEEATINGPREFERENCES");
+
+        try {
+            List<String> allergyList = controller.getAllergyList();
+
+            for(String allergy : allergyList) {
+                vboxAllergy.getChildren().add(new CheckBox(allergy));
+            }
+
+            EatingPreferenceBean bean = controller.getUserPreferences(AppData.getInstance().getUser());
+            checkboxHealthPregnant.setSelected(bean.isPregnant());
+            checkboxLifestyleCarnivore.setSelected(bean.isCarnivore());
+            checkboxLifestylePescatarian.setSelected(bean.isPescatarian());
+            checkboxLifestyleVegetarian.setSelected(bean.isPescatarian());
+            checkboxReligiousHalal.setSelected(bean.isHalal());
+            checkboxReligiousKosher.setSelected(bean.isKosher());
+            for(PreferenceIngredientBean ingredient : bean.getIngredientList()) {
+                setupAddIngredient(
+                        ingredient.getName(),
+                        ingredient.isCooked() ? "true" : "false",
+                        null
+                );
+            }
+
+            for(String allergy : bean.getAllergyList()) {
+                for(Node node : vboxAllergy.getChildren()) {
+                    CheckBox cb = (CheckBox) node;
+                    if(cb.getText().equals(allergy)) {
+                        cb.setSelected(true);
+                    }
+                }
+            }
+        } catch (DAOException | BeanException e) {
+            showError(e);
+        }
     }
 
     @FXML
@@ -87,6 +129,9 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
 
     @FXML
     private VBox vboxIngredient;
+
+    @FXML
+    private VBox vboxAllergy;
 
     @FXML
     protected void clickAddIngredient(ActionEvent event) {

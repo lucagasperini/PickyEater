@@ -12,6 +12,10 @@ public class AppData {
 
     private UserBean user;
 
+    public UserBean getUser() {
+        return user;
+    }
+
     public void setUser(UserBean user) {
         this.user = user;
     }

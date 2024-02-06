@@ -114,7 +114,7 @@ CREATE TABLE "User_Allergy" (
     fk_allergy UUID NOT NULL,
     FOREIGN KEY(fk_user) REFERENCES "User"(id),
     FOREIGN KEY(fk_allergy) REFERENCES "Allergy"(id),
-    unique(fk_excluded_group, fk_user)
+    unique(fk_user, fk_allergy)
 );
 
 
@@ -459,6 +459,18 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE get_ingredient(
+    IN _name varchar,
+	OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	dish_id UUID;
+BEGIN
+    SELECT id INTO _id FROM "Ingredient" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
 CREATE OR REPLACE PROCEDURE update_dish(
     IN _old_name varchar,
     IN _restaurant_id varchar,
@@ -546,6 +558,28 @@ END;
 $BODY$;
 
 
+CREATE OR REPLACE PROCEDURE get_excluded_group_id(
+    IN _name varchar,
+    OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	SELECT id INTO _id FROM "ExcludedGroup" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE clear_user_preference(IN _userid varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	dish_id UUID;
+BEGIN
+	DELETE FROM "User_ExcludedIngredient" WHERE fk_user = _userid::UUID;
+    DELETE FROM "User_ExcludedGroup" WHERE fk_user = _userid::UUID;
+    DELETE FROM "User_Allergy" WHERE fk_user = _userid::UUID;
+END;
+$BODY$;
+
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
@@ -559,6 +593,19 @@ CREATE OR REPLACE VIEW all_dish_ingredient AS
 CREATE OR REPLACE VIEW all_excludedgroup_ingredient AS
     SELECT fk_excluded_group::varchar AS group_id, name, cooked FROM "ExcludedGroup_Ingredient"
         JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_user_excluded_ingredient AS
+    SELECT fk_user::varchar AS userid, name, cooked FROM "User_ExcludedIngredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_user_excludedgroup AS
+    SELECT fk_user::varchar AS userid, fk_excluded_group::varchar AS groupid, name AS groupname FROM "User_ExcludedGroup"
+        JOIN "ExcludedGroup" AS EG ON fk_excluded_group=EG.id;
+
+CREATE OR REPLACE VIEW all_user_allergy AS
+    SELECT fk_user::varchar AS userid, fk_allergy::varchar AS allergy_id, name AS allergy_name FROM "User_Allergy"
+        JOIN "Allergy" AS A ON fk_allergy=A.id;
+
 
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);

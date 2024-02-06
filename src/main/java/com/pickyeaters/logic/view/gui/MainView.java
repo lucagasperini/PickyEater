@@ -2,9 +2,12 @@ package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.InitController;
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.factory.ExcludedGroupDAO;
+import com.pickyeaters.logic.model.ExcludedGroup;
 import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
@@ -72,7 +75,6 @@ public class MainView extends VirtualViewGUI {
             initView.show();
             return;
         }
-
 
         startView.show();
     }
