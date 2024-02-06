@@ -1,11 +1,12 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
-import com.pickyeaters.logic.controller.application.AddIngredientController;
+import com.pickyeaters.logic.controller.application.restaurateur.AddIngredientController;
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.bean.IngredientBean;
 import com.pickyeaters.logic.view.bean.IngredientTreeBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
+import com.pickyeaters.logic.view.gui.virtual.VirtualShowIngredientChildView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,7 +14,7 @@ import javafx.scene.text.Text;
 
 import java.util.*;
 
-public class AddIngredientView extends VirtualPaneView {
+public class AddIngredientView extends VirtualShowIngredientChildView {
     @FXML
     private Text textIngredient;
     @FXML
@@ -45,12 +46,7 @@ public class AddIngredientView extends VirtualPaneView {
     @FXML
     private Button buttonSave;
     @FXML
-    private CheckBox checkBoxCooked;
-    @FXML
     private CheckBox checkBoxOptional;
-
-    @FXML
-    private TreeView<String> treeIngredient;
 
     private final AddIngredientController controller = new AddIngredientController();
     public AddIngredientView(VirtualPaneView parent) {
@@ -84,31 +80,6 @@ public class AddIngredientView extends VirtualPaneView {
 
     }
 
-    private void setupTreeIngredient() throws ControllerException {
-        TreeItem<String> treeIngredientRoot = new TreeItem<>(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
-
-        List<IngredientTreeBean> treeBeanList = controller.getIngrendientTreeList();
-        for(IngredientTreeBean tree : treeBeanList) {
-            Deque<IngredientBean> beanStack = new LinkedList<>();
-            Deque<TreeItem<String>> treeItemStack = new LinkedList<>();
-            beanStack.push(tree.getRoot());
-            TreeItem<String> subRoot = new TreeItem<>(tree.getRoot().getName());
-            treeIngredientRoot.getChildren().add(subRoot);
-            treeItemStack.push(subRoot);
-            while(!beanStack.isEmpty()) {
-                IngredientBean bean = beanStack.pop();
-                TreeItem<String> item = treeItemStack.pop();
-                for(IngredientBean i : bean.getChildList()) {
-                    beanStack.push(i);
-                    TreeItem<String> childItem = new TreeItem<>(i.getName());
-                    treeItemStack.push(childItem);
-                    item.getChildren().add(childItem);
-                }
-            }
-        }
-
-        treeIngredient.setRoot(treeIngredientRoot);
-    }
     @FXML
     private void clickButtonBack(ActionEvent event) {
         showParent();
@@ -118,7 +89,7 @@ public class AddIngredientView extends VirtualPaneView {
         throw new UnsupportedOperationException();
     }
     @FXML
-    private void clickButtonSave(ActionEvent event) {
+    void clickButtonSave(ActionEvent event) {
         TreeItem<String> selectedItem = treeIngredient.getSelectionModel().getSelectedItem();
         if(selectedItem == null) {
             showParent();

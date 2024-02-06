@@ -2,9 +2,12 @@ package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.InitController;
 import com.pickyeaters.logic.controller.application.SettingsController;
+import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.factory.ExcludedGroupDAO;
+import com.pickyeaters.logic.model.ExcludedGroup;
 import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.UserBean;
 import com.pickyeaters.logic.view.gui.pickie.PickieHomeView;
@@ -16,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
@@ -33,11 +37,12 @@ public class MainView extends VirtualViewGUI {
         nodeHeader = mainLayout.getTop();
         VirtualPaneView.init(this);
     }
-
-    public BorderPane getMainLayout() {
-        return mainLayout;
+    public ScrollPane getMainPane() {
+        return mainPane;
     }
 
+    @FXML
+    private ScrollPane mainPane;
     @FXML
     private BorderPane mainLayout;
     @FXML
@@ -70,7 +75,6 @@ public class MainView extends VirtualViewGUI {
             initView.show();
             return;
         }
-
 
         startView.show();
     }

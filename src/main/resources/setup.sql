@@ -61,6 +61,63 @@ CREATE TABLE "Dish_Ingredient" (
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
 );
 
+CREATE TABLE "ExcludedGroup" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    name CITEXT NOT NULL,
+    unique(name)
+);
+
+CREATE TABLE "ExcludedGroup_Ingredient" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_ingredient UUID NOT NULL,
+    fk_excluded_group UUID NOT NULL,
+    cooked BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    FOREIGN KEY(fk_excluded_group) REFERENCES "ExcludedGroup"(id),
+    unique(fk_ingredient, fk_excluded_group)
+);
+
+CREATE TABLE "User_ExcludedIngredient" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_ingredient UUID NOT NULL,
+    cooked BOOLEAN NOT NULL DEFAULT false,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    unique(fk_ingredient, fk_user)
+);
+
+CREATE TABLE "User_ExcludedGroup" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_excluded_group UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_excluded_group) REFERENCES "ExcludedGroup"(id),
+    unique(fk_excluded_group, fk_user)
+);
+
+CREATE TABLE "Allergy" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    name CITEXT NOT NULL,
+    unique(name)
+);
+
+CREATE TABLE "User_Allergy" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_user UUID NOT NULL,
+    fk_allergy UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_allergy) REFERENCES "Allergy"(id),
+    unique(fk_user, fk_allergy)
+);
+
+
 CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
 	OUT _name varchar,
@@ -402,6 +459,18 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE get_ingredient(
+    IN _name varchar,
+	OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	dish_id UUID;
+BEGIN
+    SELECT id INTO _id FROM "Ingredient" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
 CREATE OR REPLACE PROCEDURE update_dish(
     IN _old_name varchar,
     IN _restaurant_id varchar,
@@ -416,9 +485,127 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE add_excluded_group(IN _name varchar, OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "ExcludedGroup" (name) VALUES (_name) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_excluded_group_ingredient(
+    IN _group_id varchar,
+    IN _ingredient_name varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+
+	INSERT INTO "ExcludedGroup_Ingredient" (fk_excluded_group, fk_ingredient) VALUES (_group_id::uuid, ingredient_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_excluded_ingredient(
+    IN _userid varchar,
+    IN _ingredient_name varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+
+	INSERT INTO "User_ExcludedIngredient" (fk_user, fk_ingredient) VALUES (_userid::UUID, ingredient_id);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_excluded_group(
+    IN _userid varchar,
+    IN _group_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User_ExcludedGroup" (fk_user, fk_excluded_group) VALUES (_userid::UUID, _group_id::UUID);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_allergy(
+    IN _name varchar,
+    OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "Allergy" (name) VALUES (_name) RETURNING id::varchar INTO _id;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_user_allergy(
+    IN _userid varchar,
+    IN _allergy_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	INSERT INTO "User_Allergy" (fk_user, fk_allergy) VALUES (_userid::UUID, _allergy_id::UUID);
+END;
+$BODY$;
+
+
+CREATE OR REPLACE PROCEDURE get_excluded_group_id(
+    IN _name varchar,
+    OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+	SELECT id INTO _id FROM "ExcludedGroup" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE clear_user_preference(IN _userid varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+	dish_id UUID;
+BEGIN
+	DELETE FROM "User_ExcludedIngredient" WHERE fk_user = _userid::UUID;
+    DELETE FROM "User_ExcludedGroup" WHERE fk_user = _userid::UUID;
+    DELETE FROM "User_Allergy" WHERE fk_user = _userid::UUID;
+END;
+$BODY$;
 
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
+
+CREATE OR REPLACE VIEW all_allergy AS
+SELECT id::varchar AS id, name FROM "Allergy";
+
+CREATE OR REPLACE VIEW all_dish_ingredient AS
+    SELECT fk_dish::varchar AS dish_id, name, cooked, optional FROM "Dish_Ingredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_excludedgroup_ingredient AS
+    SELECT fk_excluded_group::varchar AS group_id, name, cooked FROM "ExcludedGroup_Ingredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_user_excluded_ingredient AS
+    SELECT fk_user::varchar AS userid, name, cooked FROM "User_ExcludedIngredient"
+        JOIN "Ingredient" AS I ON fk_ingredient=I.id;
+
+CREATE OR REPLACE VIEW all_user_excludedgroup AS
+    SELECT fk_user::varchar AS userid, fk_excluded_group::varchar AS groupid, name AS groupname FROM "User_ExcludedGroup"
+        JOIN "ExcludedGroup" AS EG ON fk_excluded_group=EG.id;
+
+CREATE OR REPLACE VIEW all_user_allergy AS
+    SELECT fk_user::varchar AS userid, fk_allergy::varchar AS allergy_id, name AS allergy_name FROM "User_Allergy"
+        JOIN "Allergy" AS A ON fk_allergy=A.id;
+
 
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
@@ -434,3 +621,13 @@ CALL add_child_ingredient('Tonno', 'Pesce', null);
 CALL add_root_ingredient('Pasta', null);
 CALL add_child_ingredient('Rigatoni', 'Pasta', null);
 CALL add_root_ingredient('Pane', null);
+CALL add_root_ingredient('Alcol', null);
+
+DO $$
+DECLARE
+	id varchar;
+BEGIN
+	CALL add_excluded_group('Incinta', id);
+	CALL add_excluded_group_ingredient(id, 'Alcol');
+END;
+$$;

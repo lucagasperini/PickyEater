@@ -16,7 +16,7 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
         VirtualPaneView.mainView = mainView;
     }
     protected static void setActiveView(VirtualPaneView view) {
-        VirtualPaneView.mainView.getMainLayout().setCenter(view.getRoot());
+        VirtualPaneView.mainView.getMainPane().setContent(view.getRoot());
         activeView = view;
     }
 
