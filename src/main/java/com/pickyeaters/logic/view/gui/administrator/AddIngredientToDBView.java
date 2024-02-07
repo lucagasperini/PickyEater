@@ -54,11 +54,11 @@ public class AddIngredientToDBView extends VirtualPaneView {
         textSelectFatherExplanation.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTFATHER_EXPLANATION"));
         buttonSave.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SAVECHANGES"));
 
-        try {
+        //try {
             //setupTreeIngredient();
-        } catch (ControllerException e) {
-            showError(e);
-        }
+        //} catch (ControllerException e) {
+        //    showError(e);
+        //}
 
     }
     @FXML
