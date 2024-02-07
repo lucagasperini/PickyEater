@@ -1,12 +1,9 @@
 package com.pickyeaters.logic.view.gui;
 
-import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
-import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.controller.application.SettingsController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -30,6 +27,9 @@ public class StartView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
+        textWelcome.setText(SettingsController.i18n("START_WELCOME"));
+        buttonRegistration.setText(SettingsController.i18n("START_SIGNUP"));
+        buttonLogin.setText(SettingsController.i18n("START_SIGNIN"));
         if(arg != null) {
             setupLogin(arg.get("login"));
         }
