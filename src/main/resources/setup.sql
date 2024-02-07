@@ -61,6 +61,29 @@ CREATE TABLE "Dish_Ingredient" (
     FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
 );
 
+CREATE TABLE "Allergen" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    name CITEXT NOT NULL,
+    unique(name)
+);
+
+CREATE TABLE "Allergen_Ingredient" (
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_ingredient UUID NOT NULL,
+    fk_allergen UUID NOT NULL,
+    unique(fk_allergen, fk_ingredient),
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    FOREIGN KEY(fk_allergen) REFERENCES "Allergen"(id)
+);
+
+CREATE TABLE "Allergen_Description" (
+    id UUID PRIMARY KEY DEFAULT,
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    description CITEXT NOT NULL,
+    FOREIGN KEY(id) REFERENCES "Ingredient"(id),
+);
+
 CREATE TABLE "ExcludedGroup" (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     crtime TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -588,6 +611,17 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE get_allergenId(
+    IN _name varchar,
+	OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+SELECT id INTO _id FROM "Allergen" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
+
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
@@ -619,17 +653,359 @@ CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '12
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
 
-CALL add_root_ingredient('Carne', null);
-CALL add_child_ingredient('Manzo', 'Carne', null);
-CALL add_child_ingredient('Suino', 'Carne', null);
-CALL add_child_ingredient('Pollo', 'Carne', null);
-CALL add_child_ingredient('Petto di pollo', 'Pollo', null);
-CALL add_root_ingredient('Pesce', null);
-CALL add_child_ingredient('Tonno', 'Pesce', null);
-CALL add_root_ingredient('Pasta', null);
-CALL add_child_ingredient('Rigatoni', 'Pasta', null);
-CALL add_root_ingredient('Pane', null);
-CALL add_root_ingredient('Alcol', null);
+-------------- Ingredient table population -----------------
+CALL add_root_ingredient('Ingrediente di origine animale', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Volatile', null);
+CALL add_child_ingredient('Volatile', 'Pollo', null);
+CALL add_child_ingredient('Pollo', 'Petto di pollo', null);
+CALL add_child_ingredient('Pollo', 'Coscia di pollo', null);
+CALL add_child_ingredient('Volatile', 'Gallina', null);
+CALL add_child_ingredient('Gallina', 'Uovo di gallina', null);
+CALL add_child_ingredient('Gallina', 'Collo di gallina', null);
+CALL add_child_ingredient('Volatile', 'Gallo', null);
+CALL add_child_ingredient('Volatile', 'Tacchino', null);
+CALL add_child_ingredient('Volatile', 'Quaglia', null);
+CALL add_child_ingredient('Volatile', 'Oca', null);
+CALL add_child_ingredient('Volatile', 'Fagiano', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Suino', null);
+CALL add_child_ingredient('Suino', 'Maiale', null);
+CALL add_child_ingredient('Maiale', 'Coscia di maiale', null);
+CALL add_child_ingredient('Coscia di maiale', 'Prosciutto cotto', null);
+CALL add_child_ingredient('Coscia di maiale', 'Prosciutto crudo', null);
+CALL add_child_ingredient('Maiale', 'Collo di maiale', null);
+CALL add_child_ingredient('Suino', 'Cinghiale', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Bovino', null);
+CALL add_child_ingredient('Bovino', 'Vitella', null);
+CALL add_child_ingredient('Bovino', 'Vitellone', null);
+CALL add_child_ingredient('Bovino', 'Manzo', null);
+CALL add_child_ingredient('Bovino', 'Mucca', null);
+CALL add_child_ingredient('Mucca', 'Latte di mucca', null);
+CALL add_child_ingredient('Latte di mucca', 'Latte intero di mucca', null);
+CALL add_child_ingredient('Latte di mucca', 'Latte scremato di mucca', null);
+CALL add_child_ingredient('Latte di mucca', 'Parmigiano Reggiano', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Equino', null);
+CALL add_child_ingredient('Equino', 'Cavallo', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Roditore', null);
+CALL add_child_ingredient('Roditore', 'Lepre', null);
+CALL add_child_ingredient('Roditore', 'Coniglio', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Anfibio o rettile', null);
+CALL add_child_ingredient('Anfibio o rettile', 'Rana', null);
+CALL add_child_ingredient('Anfibio o rettile', 'Serpente', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Ovino', null);
+CALL add_child_ingredient('Ovino', 'Abbacchio', null);
+CALL add_child_ingredient('Ovino', 'Pecora', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Pesce', null);
+CALL add_child_ingredient('Pesce', 'Salmone', null);
+CALL add_child_ingredient('Pesce', 'Tonno', null);
+CALL add_child_ingredient('Pesce', 'Sogliola', null);
+CALL add_child_ingredient('Pesce', 'Orata', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Crostaceo', null);
+CALL add_child_ingredient('Crostaceo', 'Aragosta', null);
+CALL add_child_ingredient('Crostaceo', 'Gambero', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Mollusco', null);
+CALL add_child_ingredient('Mollusco', 'Polpo', null);
+CALL add_child_ingredient('Mollusco', 'Seppia', null);
+CALL add_child_ingredient('Mollusco', 'Vongola', null);
+CALL add_child_ingredient('Mollusco', 'Cozza', null);
+CALL add_child_ingredient('Mollusco', 'Lumaca', null);
+CALL add_child_ingredient('Ingrediente di origine animale', 'Insetto', null);
+CALL add_child_ingredient('Insetto', 'Miele', null);
+CALL add_root_ingredient('Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Cereale', null);
+CALL add_child_ingredient('Cereale', 'Frumento', null);
+CALL add_child_ingredient('Frumento', 'Grano tenero', null);
+CALL add_child_ingredient('Grano tenero', 'Farina di grano tenero', null);
+CALL add_child_ingredient('Frumento', 'Grano tenero', null);
+CALL add_child_ingredient('Frumento', 'Grano duro', null);
+CALL add_child_ingredient('Grano duro', 'Farina di grano duro', null);
+CALL add_child_ingredient('Grano duro', 'Semola di grano duro', null);
+CALL add_child_ingredient('Semola di grano duro', 'Cuscus', null);
+CALL add_child_ingredient('Semola di grano duro', 'Pasta di grano duro', null);
+CALL add_child_ingredient('Grano duro', 'Bulgur', null);
+CALL add_child_ingredient('Cereale', 'Grano saraceno', null);
+CALL add_child_ingredient('Cereale', 'Riso', null);
+CALL add_child_ingredient('Riso', 'Riso venere', null);
+CALL add_child_ingredient('Riso', 'Riso basmati', null);
+CALL add_child_ingredient('Cereale', 'Farro', null);
+CALL add_child_ingredient('Cereale', 'Avena', null);
+CALL add_child_ingredient('Cereale', 'Soia', null);
+CALL add_child_ingredient('Soia', 'Salsa di soia', null);
+CALL add_child_ingredient('Soia', 'Olio di semi di soia', null);
+CALL add_child_ingredient('Olio di semi di soia', 'Olio di semi di soia raffinato', null);
+CALL add_child_ingredient('Soia', 'Germogli di soia', null);
+CALL add_child_ingredient('Soia', 'Tofu', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Legume', null);
+CALL add_child_ingredient('Legume', 'Lenticchia', null);
+CALL add_child_ingredient('Legume', 'Fagiolo', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Frutto', null);
+CALL add_child_ingredient('Frutto', 'Mela', null);
+CALL add_child_ingredient('Frutto', 'Cocomero', null);
+CALL add_child_ingredient('Frutto', 'Pesca', null);
+CALL add_child_ingredient('Frutto', 'Mango', null);
+CALL add_child_ingredient('Frutto', 'Avocado', null);
+CALL add_child_ingredient('Frutto', 'Banana', null);
+CALL add_child_ingredient('Frutto', 'Fragola', null);
+CALL add_child_ingredient('Frutto', 'Oliva', null);
+CALL add_child_ingredient('Oliva', 'Olio di oliva', null);
+CALL add_child_ingredient('Olio di oliva', 'Olio extravergine di oliva', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Verdura', null);
+CALL add_child_ingredient('Verdura', 'Insalata', null);
+CALL add_child_ingredient('Verdura', 'Cipolla', null);
+CALL add_child_ingredient('Verdura', 'Melanzana', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Tubero', null);
+CALL add_child_ingredient('Tubero', 'Patata', null);
+CALL add_child_ingredient('Tubero', 'Carota', null);
+CALL add_child_ingredient('Tubero', 'Topinambur', null);
+CALL add_child_ingredient('Ingrediente di origine vegetale', 'Frutta secca o semi', null);
+CALL add_child_ingredient('Frutta secca o semi', 'Mandorla', null);
+CALL add_child_ingredient('Frutta secca o semi', 'Arachide', null);
+CALL add_child_ingredient('Frutta secca o semi', 'Noce', null);
+CALL add_child_ingredient('Frutta secca o semi', 'Pepe', null);
+CALL add_child_ingredient('Pepe', 'Pepe rosa', null);
+CALL add_child_ingredient('Pepe', 'Pepe nero', null);
+CALL add_child_ingredient('Pepe', 'Pepe di Sichuan', null);
+CALL add_root_ingredient('Ingrediente non di origine animale o vegetale', null);
+CALL add_child_ingredient('Ingrediente non di origine animale o vegetale', 'Acqua', null);
+CALL add_child_ingredient('Ingrediente non di origine animale o vegetale', 'Sale', null);
+CALL add_child_ingredient('Ingrediente non di origine animale o vegetale', 'Fungo', null);
+CALL add_child_ingredient('Fungo', 'Fungo porcino', null);
+CALL add_child_ingredient('Fungo', 'Fungo champignon', null);
+CALL add_child_ingredient('Fungo', 'Tartufo', null);
+CALL add_child_ingredient('Tartufo', 'Tartufo bianco', null);
+CALL add_child_ingredient('Tartufo bianco pregiato', 'Tartufo bianco di Alba', null);
+CALL add_child_ingredient('Tartufo', 'Tartufo nero', null);
+CALL add_child_ingredient('Tartufo nero', 'Tartufo nero pregiato', null);
+CALL add_child_ingredient('Tartufo nero', 'Tartufo nero estivo', null);
+CALL add_child_ingredient('Tartufo nero', 'Tartufo nero invernale', null);
+CALL add_child_ingredient('Tartufo nero', 'Tartufo nero liscio', null);
+
+-------------- Allergen table population -----------------
+INSERT INTO "Allergen" (name) VALUES ('Glutine');
+INSERT INTO "Allergen" (name) VALUES ('Crostacei');
+INSERT INTO "Allergen" (name) VALUES ('Uova');
+INSERT INTO "Allergen" (name) VALUES ('Pesce');
+INSERT INTO "Allergen" (name) VALUES ('Arachidi');
+INSERT INTO "Allergen" (name) VALUES ('Soia');
+INSERT INTO "Allergen" (name) VALUES ('Latte');
+INSERT INTO "Allergen" (name) VALUES ('Frutta a guscio');
+INSERT INTO "Allergen" (name) VALUES ('Sedano');
+INSERT INTO "Allergen" (name) VALUES ('Senape');
+INSERT INTO "Allergen" (name) VALUES ('Semi di sesamo');
+INSERT INTO "Allergen" (name) VALUES ('Solfiti');
+INSERT INTO "Allergen" (name) VALUES ('Lupini');
+INSERT INTO "Allergen" (name) VALUES ('Molluschi');
+INSERT INTO "Allergen" (name) VALUES ('Grano saraceno');
+INSERT INTO "Allergen" (name) VALUES ('Propoli');
+INSERT INTO "Allergen" (name) VALUES ('Pappa reale');
+INSERT INTO "Allergen" (name) VALUES ('Mango');
+INSERT INTO "Allergen" (name) VALUES ('Pesca');
+INSERT INTO "Allergen" (name) VALUES ('Maiale');
+INSERT INTO "Allergen" (name) VALUES ('Pomodoro');
+INSERT INTO "Allergen" (name) VALUES ('Lattice');
+
+-------------- Allergen_Description and Allergen_Ingredient table population -----------------
+DO $$
+DECLARE
+_allergenId varchar;
+_ingredientId varchar;
+BEGIN
+-- Glutine
+CALL get_allergenId('Glutine', _allergenId);
+INSERT INTO "Allergen_Description"(allergenId, description) VALUES (_allergenId, 'Cereali contenenti glutine, vale a dire: grano (tra cui farro e grano khorasan), segale, orzo, avena o i loro ceppi ibridati e prodotti derivati:
+a.	sciroppi di glucosio a base di grano, incluso destrosio;
+b.	maltodestrine a base di grano;
+c.	sciroppi di glucosio a base di orzo;
+d.	cereali utilizzati per la fabbricazione di distillati alcolici, incluso l’alcol etilico di origine agricola.');
+CALL  get_ingredient('Frumento', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Grano tenero', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Grano duro', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Farina di grano duro', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Semola di grano duro', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Cuscus', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Pasta di grano duro', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Bulgur', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Farro', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Avena', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Crostacei
+CALL get_allergenId('Crostacei', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Crostacei e prodotti a base di crostacei.');
+CALL  get_ingredient('Crostaceo', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Aragosta', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Gambero', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Uova
+CALL get_allergenId('Uova', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Uova e prodotti a base di uova.');
+CALL  get_ingredient('Uovo di gallina', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Uova
+CALL get_allergenId('Pesce', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Pesce e prodotti della pesca, tranne:
+a.	gelatina di pesce utilizzata come supporto per preparati di vitamine o carotenoidi;
+b.	gelatina o colla di pesce utilizzata come chiarificante nella birra e nel vino.');
+CALL  get_ingredient('Salmone', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Tonno', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Sogliola', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Orata', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Arachidi
+CALL get_allergenId('Arachidi', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Arachidi e prodotti a base di arachidi.');
+CALL  get_ingredient('Arachide', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Soia
+CALL get_allergenId('Soia', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Soia e prodotti a base di soia, tranne:
+a.	olio e grasso di soia raffinato;
+b.	tocoferoli misti naturali (E306), tocoferolo D-alfa naturale, tocoferolo acetato D-alfa naturale, tocoferolo succinato D-alfa naturale a base di soia;
+c.	oli vegetali derivati da fitosteroli e fitosteroli esteri a base di soia;
+d.	estere di stanolo vegetale prodotto da steroli di olio vegetale a base di soia.');
+CALL  get_ingredient('Soia', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Salsa di soia', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Germogli di soglia', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Olio di semi di soia', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Tofu', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Latte
+CALL get_allergenId('Latte', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Latte e prodotti a base di latte (incluso lattosio), tranne:
+a.	siero di latte utilizzato per la fabbricazione di distillati alcolici, incluso l’alcol etilico di origine agricola;
+b.	lattitolo.');
+CALL  get_ingredient('Latte di mucca', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Latte intero di mucca', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Latte scremato di mucca', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Parmigiano Reggiano', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Frutta a guscio
+CALL get_allergenId('Frutta a guscio', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Frutta a guscio, vale a dire: mandorle (Amygdalus communis L.), nocciole (Corylus avellana), noci (Juglans regia), noci di acagiù (Anacardium occidentale), noci di pecan [Carya illinoinensis (Wangenh.) K. Koch], noci del Brasile (Bertholletia excelsa), pistacchi (Pistacia vera), noci macadamia o noci del Queensland (Macadamia ternifolia), e i loro prodotti, tranne:
+a.	frutta a guscio utilizzata per la fabbricazione di distillati alcolici, incluso l’alcol etilico di origine agricola.');
+CALL  get_ingredient('Frutta secca o semi', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Mandorla', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Noce', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Sedano
+CALL get_allergenId('Sedano', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Sedano e prodotti a base di sedano.');
+
+-- Senape
+CALL get_allergenId('Senape', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Senape e prodotti a base di senape');
+
+-- Semi di sesamo
+CALL get_allergenId('Semi di sesamo', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Semi di sesamo e prodotti a base di semi di sesamo');
+
+-- Solfiti
+CALL get_allergenId('Solfiti', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Anidride solforosa e solfiti in concentrazioni superiori a 10 mg/kg o 10 mg/litro in termini di SO2 totale da calcolarsi per i prodotti così come proposti pronti al consumo o ricostituiti conformemente alle istruzioni dei fabbricanti.');
+
+-- Lupini
+CALL get_allergenId('Lupini', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Lupini e prodotti a base di lupini');
+
+-- Molluschi
+CALL get_allergenId('Molluschi', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Molluschi e prodotti a base di molluschi.');
+CALL  get_ingredient('Mollusco', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Polpo', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Seppia', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Vongola', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Cozza', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Lumaca', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Sedano
+CALL get_allergenId('Grano saraceno', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Grano saraceno e prodotti a base di grano saraceno.');
+CALL  get_ingredient('Grano saraceno', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+CALL get_allergenId('Propoli', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Propoli e prodotti a base di propoli.');
+CALL  get_ingredient('Miele', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Pappa reale
+CALL get_allergenId('Pappa reale', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Pappa reale e prodotti a base di pappa reale.');
+CALL  get_ingredient('Miele', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Mango
+CALL get_allergenId('Mango', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Mango e prodotti a base di mango.');
+CALL  get_ingredient('Mango', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Pesca
+CALL get_allergenId('Pesca', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Pesca e prodotti a base di pesca.');
+CALL  get_ingredient('Pesca', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Maiale
+CALL get_allergenId('Maiale', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Maiale e prodotti a base di maiale.');
+CALL  get_ingredient('Maiale', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Coscia di maiale', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Prosciutto cotto', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Prosciutto crudo', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+CALL  get_ingredient('Collo di maiale', _ingredientId);
+INSERT INTO "Allergen_Ingredient"(fk_ingredient, fk_allergen) VALUES (_ingredientId, _allergenId);
+
+-- Pomodoro
+CALL get_allergenId('Pomodoro', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Pomodoro e prodotti a base di pomodoro.');
+
+-- Lattice
+CALL get_allergenId('Lattice', _allergenId);
+INSERT INTO "Allergen_Description"() VALUES('Lattice e prodotti a base di lattice');
+
+END;
+$$;
+
 
 CALL add_excluded_group('HALAL', null);
 CALL add_excluded_group('CARNIVORE', null);
