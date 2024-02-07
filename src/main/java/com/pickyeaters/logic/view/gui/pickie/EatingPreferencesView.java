@@ -27,6 +27,23 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
     public EatingPreferencesView(VirtualPaneView parent) {
         super("/form/pickie/EatingPreferences.fxml", "PICKY_PERSONALIZEEATINGPREFERENCES", parent);
 
+        textTaste.setText(i18n("taste"));
+        textTasteMyDislikedIngredients.setText(i18n("taste_my_disliked_ingredients"));
+        textTasteExplanation.setText(i18n("taste_explanation"));
+        buttonAddIngredient.setText(i18n("add_disliked_ingredient"));
+        textReligiousNeeds.setText(i18n("religious_needs"));
+        checkboxReligiousHalal.setText(i18n("religious_needs_halal"));
+        checkboxReligiousKosher.setText(i18n("religious_needs_kosher"));
+        textHealthNeeds.setText(i18n("health_needs"));
+        textHealthAllergies.setText(i18n("health_needs_allergies"));
+        textHealthOthers.setText(i18n("health_needs_others"));
+        checkboxHealthPregnant.setText(i18n("health_needs_others_pregnant"));
+        textLifeStyleNeeds.setText(i18n("lifestyle_needs"));
+        checkboxLifestyleVegan.setText(i18n("lifestyle_needs_vegan"));
+        checkboxLifestyleVegetarian.setText(i18n("lifestyle_needs_vegetarian"));
+        checkboxLifestylePescatarian.setText(i18n("lifestyle_needs_pescatarian"));
+        checkboxLifestyleCarnivore.setText(i18n("lifestyle_needs_carnivore"));
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
         try {
             List<String> allergyList = controller.getAllergyList();
 
