@@ -56,12 +56,6 @@ public class AddIngredientToDBView extends VirtualPaneView {
         textSelectFatherExplanation.setText(i18n("SELECTFATHER_EXPLANATION"));
         buttonSave.setText(i18nGlobal("SAVECHANGES"));
 
-        //try {
-            //setupTreeIngredient();
-        //} catch (ControllerException e) {
-        //    showError(e);
-        //}
-
     }
     @FXML
     private void clickButtonBack(ActionEvent event) {
@@ -69,5 +63,6 @@ public class AddIngredientToDBView extends VirtualPaneView {
     }
     @FXML
     private void clickButtonSave(ActionEvent event) {
+        throw new UnsupportedOperationException();
     }
 }

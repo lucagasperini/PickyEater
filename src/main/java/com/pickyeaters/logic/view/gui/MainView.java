@@ -124,19 +124,16 @@ public class MainView extends VirtualViewGUI {
     }
 
     private void showPickieHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
         PickieHomeView pickieHomeView = new PickieHomeView(startView);
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_NAVBAR_HELLO"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(startView);
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_NAVBAR_HELLO"));
         AdministratorHomeView administratorHomeView = new AdministratorHomeView(startView);
         administratorHomeView.show();
     }
