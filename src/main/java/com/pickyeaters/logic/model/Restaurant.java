@@ -5,17 +5,15 @@ public class Restaurant {
     private String name;
     private String phone;
     private String address;
+    private String city;
     private BusinessHours businessHours;
 
-    public Restaurant(String id, String name, String phone, String address) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.address = address;
-    }
-
-    public Restaurant(String name, String phone, String address) {
-        this("", name, phone, address);
+    public Restaurant(String id, String name, String phone, String address, String city) {
+        setID(id);
+        setName(name);
+        setPhone(phone);
+        setAddress(address);
+        setCity(city);
     }
 
     public String getID() {
@@ -34,6 +32,10 @@ public class Restaurant {
         return phone;
     }
 
+    public String getCity() {
+        return city;
+    }
+
     public void setID(String id) {
         this.id = id;
     }
@@ -48,5 +50,9 @@ public class Restaurant {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
