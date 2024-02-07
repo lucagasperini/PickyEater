@@ -26,7 +26,7 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+                                    <Text fx:id="dishName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
@@ -47,7 +47,7 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                                    <Text fx:id="dishDescription" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
@@ -68,7 +68,7 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+                                    <Text fx:id="dishCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
