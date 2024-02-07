@@ -1,12 +1,9 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
-import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
-import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.AppData;
-import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.DishListItemWidget;
