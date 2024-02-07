@@ -51,6 +51,6 @@ class RestaurantDetailsControllerTest {
         assertEquals("My test", beanGet.getRestaurantName());
         assertEquals("11111", beanGet.getRestaurantPhone());
         assertEquals("0", beanGet.getRestaurantAddress());
-        assertEquals("Roma", beanGet.getRestaurantCity());
+        assertEquals("Roma", beanGet.getRestaurantCity().getName());
     }
 }

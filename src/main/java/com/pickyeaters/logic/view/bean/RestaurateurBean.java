@@ -1,9 +1,5 @@
 package com.pickyeaters.logic.view.bean;
 
-import com.pickyeaters.logic.model.City;
-import com.pickyeaters.logic.model.Restaurant;
-import com.pickyeaters.logic.model.Restaurateur;
-
 public class RestaurateurBean {
     private String firstname;
     private String lastname;

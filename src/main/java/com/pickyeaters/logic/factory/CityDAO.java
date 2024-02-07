@@ -4,11 +4,8 @@ import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.City;
-import com.pickyeaters.logic.model.Ingredient;
 
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CityDAO {
