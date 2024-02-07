@@ -1,4 +1,6 @@
 package com.pickyeaters.logic.controller.application.administrator;
 
-public class UpdateDishController {
+import com.pickyeaters.logic.controller.application.VirtualController;
+
+public class UpdateDishController extends VirtualController {
 }

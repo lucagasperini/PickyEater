@@ -1,6 +1,5 @@
 package com.pickyeaters.logic.view.cli;
 
-import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.VirtualException;
 import com.pickyeaters.logic.view.VirtualView;
 

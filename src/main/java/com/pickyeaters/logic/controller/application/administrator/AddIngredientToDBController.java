@@ -1,4 +1,6 @@
 package com.pickyeaters.logic.controller.application.administrator;
 
-public class AddIngredientToDBController {
+import com.pickyeaters.logic.controller.application.VirtualController;
+
+public class AddIngredientToDBController extends VirtualController {
 }
