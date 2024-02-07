@@ -8,33 +8,33 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="35.0" prefWidth="372.0" stylesheets="@../../../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="35.0" prefWidth="372.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane>
          <children>
             <TextFlow prefHeight="35.0" prefWidth="237.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Text fx:id="textIngredient" strokeType="OUTSIDE" strokeWidth="0.0" text="INGREDIENT1">
+                  <Text fx:id="textIngredientName" strokeType="OUTSIDE" strokeWidth="0.0" text="INGREDIENT1">
                      <font>
                         <Font name="Calibri" size="16.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textIngredient1" strokeType="OUTSIDE" strokeWidth="0.0" text=", ">
+                  <Text fx:id="textSeparator1" strokeType="OUTSIDE" strokeWidth="0.0" text=", ">
                      <font>
                         <Font name="Calibri" size="16.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textIngredient2" strokeType="OUTSIDE" strokeWidth="0.0" text="COOKINGMETHOD">
+                  <Text fx:id="textIngredientCooked" strokeType="OUTSIDE" strokeWidth="0.0" text="COOKINGMETHOD">
                      <font>
                         <Font name="Calibri" size="16.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textIngredient3" strokeType="OUTSIDE" strokeWidth="0.0" text=", ">
+                  <Text fx:id="textSeparator2" strokeType="OUTSIDE" strokeWidth="0.0" text=", ">
                      <font>
                         <Font name="Calibri" size="16.0" />
                      </font>
                   </Text>
-                  <Text fx:id="textIngredient4" strokeType="OUTSIDE" strokeWidth="0.0" text="OPTIONALITY">
+                  <Text fx:id="textIngredientOptional" strokeType="OUTSIDE" strokeWidth="0.0" text="OPTIONALITY">
                      <font>
                         <Font name="Calibri" size="16.0" />
                      </font>
