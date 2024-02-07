@@ -7,6 +7,7 @@ import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.view.bean.CityBean;
 import com.pickyeaters.logic.view.bean.LoginBean;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.bean.UserBean;
@@ -38,7 +39,7 @@ class RestaurantDetailsControllerTest {
                 "My test",
                 "11111",
                 "0",
-                "Roma"
+                new CityBean("Roma")
                 );
         restaurantDetailsController.set(beanSet, user);
 
@@ -50,6 +51,6 @@ class RestaurantDetailsControllerTest {
         assertEquals("My test", beanGet.getRestaurantName());
         assertEquals("11111", beanGet.getRestaurantPhone());
         assertEquals("0", beanGet.getRestaurantAddress());
-        assertEquals("Roma", beanGet.getRestaurantCity());
+        assertEquals("Roma", beanGet.getRestaurantCity().getName());
     }
 }

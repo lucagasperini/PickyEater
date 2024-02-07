@@ -5,10 +5,10 @@ public class Restaurant {
     private String name;
     private String phone;
     private String address;
-    private String city;
+    private City city;
     private BusinessHours businessHours;
 
-    public Restaurant(String id, String name, String phone, String address, String city) {
+    public Restaurant(String id, String name, String phone, String address, City city) {
         setID(id);
         setName(name);
         setPhone(phone);
@@ -32,7 +32,7 @@ public class Restaurant {
         return phone;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
@@ -52,7 +52,7 @@ public class Restaurant {
         this.phone = phone;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 }
