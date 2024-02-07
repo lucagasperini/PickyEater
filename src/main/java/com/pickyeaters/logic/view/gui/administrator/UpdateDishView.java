@@ -9,7 +9,7 @@ import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EditDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.AddIngredientView;
-import com.pickyeaters.logic.view.gui.restaurateur.widget.IngredientListItemWidget;
+import com.pickyeaters.logic.view.gui.widget.IngredientListItemWidget;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -97,7 +97,7 @@ public abstract class UpdateDishView extends VirtualPaneView {
     }
     @FXML
     protected void clickSaveChanges(ActionEvent event) {
-        try {
+        /*try {
             EditDishBean tmp = new EditDishBean(
                     dishName.getText(),
                     dishDescription.getText(),
@@ -108,10 +108,10 @@ public abstract class UpdateDishView extends VirtualPaneView {
                 tmp.getIngredientList().add(widget.getBean());
             }
 
-            controller.update(tmp, dishName, AppData.getInstance().getRestaurantID());
+            //controller.update(tmp, dishName, AppData.getInstance().getRestaurantID());
             showParent();
         } catch (ControllerException | BeanException ex) {
             showError(ex);
-        }
+        }*/
     }
 }
