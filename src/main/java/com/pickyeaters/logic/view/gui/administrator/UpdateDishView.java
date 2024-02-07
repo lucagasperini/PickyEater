@@ -22,9 +22,6 @@ import java.util.List;
 
 public abstract class UpdateDishView extends VirtualPaneView {
     private final UpdateDishController controller = new UpdateDishController();
-    protected UpdateDishView(String fxml, VirtualPaneView parent) {
-        super(fxml, parent);
-    }
 
     @FXML
     protected Text textName;
@@ -52,15 +49,15 @@ public abstract class UpdateDishView extends VirtualPaneView {
     protected LinkedList<IngredientListItemWidget> ingredientListItemWidgets = new LinkedList<>();
     protected List<DishIngredientBean> ingredientBeanList = new ArrayList<>();
     protected UpdateDishView(VirtualPaneView parent) {
-        super("/form/administrator/EditDish.fxml", parent);
-        showTitle("ADMINISTRATOR_UPDATEDISH");
-        textName.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_NAME"));
-        textIngredients.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_INGREDIENTS"));
-        textAllergens.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_ALLERGENS"));
-        textDescription.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_DESCRIPTION"));
-        textCategory.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_CATEGORY"));
-        buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
-        buttonAddIngredient.setText(SettingsController.i18n("ADMINISTRATOR_UPDATEDISH_ADDINGREDIENT"));
+        super("/form/administrator/EditDish.fxml", "ADMINISTRATOR_UPDATEDISH", parent);
+        showTitle();
+        textName.setText(i18n("NAME"));
+        textIngredients.setText(i18n("INGREDIENTS"));
+        textAllergens.setText(i18n("ALLERGENS"));
+        textDescription.setText(i18n("DESCRIPTION"));
+        textCategory.setText(i18n("CATEGORY"));
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
+        buttonAddIngredient.setText(i18n("ADDINGREDIENT"));
     }
     protected void setupAddIngredient(DishIngredientBean bean) {
         ingredientBeanList.add(bean);

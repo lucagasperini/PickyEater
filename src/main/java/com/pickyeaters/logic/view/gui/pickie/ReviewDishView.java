@@ -8,7 +8,7 @@ import java.util.Map;
 public class ReviewDishView extends VirtualPaneView {
     private final ReviewDishController controller = new ReviewDishController();
     public ReviewDishView(VirtualPaneView parent) {
-        super("/form/pickie/ReviewDish.fxml",parent);
+        super("/form/pickie/ReviewDish.fxml", "", parent);
     }
 
     @Override

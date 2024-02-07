@@ -13,6 +13,10 @@ import java.util.Scanner;
 public class LoginView extends VirtualViewCLI {
     private final LoginController controller = new LoginController();
 
+    protected LoginView() {
+        super("");
+    }
+
     @Override
     public void show(Map<String, String> arg) {
         Scanner userInput = new Scanner(System.in);

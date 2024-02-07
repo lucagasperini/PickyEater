@@ -13,7 +13,9 @@ import java.util.Map;
 
 public class AddIngredientToDBView extends VirtualPaneView {
     private final AddIngredientToDBController controller = new AddIngredientToDBController();
-    public AddIngredientToDBView(VirtualPaneView parent) { super("/form/administrator/AddIngredientToDB.fxml", parent); }
+    public AddIngredientToDBView(VirtualPaneView parent) {
+        super("/form/administrator/AddIngredientToDB.fxml", "ADMINISTRATOR_ADDINGREDIENTTODB", parent);
+    }
 
     @FXML
     private Text textIngredient;
@@ -44,15 +46,15 @@ public class AddIngredientToDBView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("ADMINISTRATOR_ADDINGREDIENTTODB");
-        textIngredient.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_INGREDIENT"));
-        textSelectChildren.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTCHILDREN"));
-        textSelectChildrenExplanation.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTCHILDREN_EXPLANATION"));
-        textSelectedChildren.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTEDCHILDREN"));
-        textSelectedFather.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTEDFATHER"));
-        textSelectFather.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTFATHER"));
-        textSelectFatherExplanation.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SELECTFATHER_EXPLANATION"));
-        buttonSave.setText(SettingsController.i18n("ADMINISTRATOR_ADDINGREDIENTTODB_SAVECHANGES"));
+        showTitle();
+        textIngredient.setText(i18n("INGREDIENT"));
+        textSelectChildren.setText(i18n("SELECTCHILDREN"));
+        textSelectChildrenExplanation.setText(i18n("SELECTCHILDREN_EXPLANATION"));
+        textSelectedChildren.setText(i18n("SELECTEDCHILDREN"));
+        textSelectedFather.setText(i18n("SELECTEDFATHER"));
+        textSelectFather.setText(i18n("SELECTFATHER"));
+        textSelectFatherExplanation.setText(i18n("SELECTFATHER_EXPLANATION"));
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
 
         //try {
             //setupTreeIngredient();

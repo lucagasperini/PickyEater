@@ -20,12 +20,12 @@ public abstract class VirtualShowIngredientChildView extends VirtualPaneView {
 
     final IngredientController controller = new IngredientController();
 
-    protected VirtualShowIngredientChildView(String fxml, VirtualPaneView parent) {
-        super(fxml, parent);
+    protected VirtualShowIngredientChildView(String fxml, String resource, VirtualPaneView parent) {
+        super(fxml,resource, parent);
     }
 
     protected void setupTreeIngredient() throws ControllerException {
-        TreeItem<String> treeIngredientRoot = new TreeItem<>(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
+        TreeItem<String> treeIngredientRoot = new TreeItem<>(i18nGlobal("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
 
         List<IngredientTreeBean> treeBeanList = controller.getIngrendientTreeList();
         for(IngredientTreeBean tree : treeBeanList) {

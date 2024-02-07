@@ -43,12 +43,12 @@ public class UpdateDishView extends EditDishView {
         }
 
 
-        showTitle("RESTAURATEUR_UPDATEDISH");
-        buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
+        //showTitle("RESTAURATEUR_UPDATEDISH");
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
 
         inputName.setText(dishBean.getName());
         inputDescription.setText(dishBean.getDescription());
-        comboBoxCategory.setValue(SettingsController.i18n("DISH_TYPE_" + dishBean.getCategory()));
+        comboBoxCategory.setValue(i18nGlobal("DISH_TYPE_" + dishBean.getCategory()));
     }
 
     @FXML

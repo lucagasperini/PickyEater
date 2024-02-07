@@ -18,8 +18,8 @@ public abstract class VirtualShowIngredientView extends VirtualPaneView {
     protected LinkedList<IngredientListItemWidget> ingredientListItemWidgets = new LinkedList<>();
     protected List<DishIngredientBean> ingredientBeanList = new ArrayList<>();
 
-    protected VirtualShowIngredientView(String fxml, VirtualPaneView parent) {
-        super(fxml, parent);
+    protected VirtualShowIngredientView(String fxml, String resource, VirtualPaneView parent) {
+        super(fxml, resource, parent);
     }
 
     protected void setupAddIngredient(DishIngredientBean bean) {

@@ -2,14 +2,18 @@ package com.pickyeaters.logic.view.cli;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.VirtualException;
-import com.pickyeaters.logic.view.ViewInterface;
+import com.pickyeaters.logic.view.VirtualView;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public abstract class VirtualViewCLI implements ViewInterface {
+public abstract class VirtualViewCLI extends VirtualView {
     private static MainView mainView;
+
+    protected VirtualViewCLI(String resource) {
+        super(resource);
+    }
 
     public static MainView getMainView() {
         return mainView;
@@ -23,9 +27,9 @@ public abstract class VirtualViewCLI implements ViewInterface {
         if(key.isEmpty()) {
             key = "DEFAULT";
         }
-        String title = SettingsController.i18n(key + "_ALERT_ERROR_TITLE");
-        String header = SettingsController.i18n(key + "_ALERT_ERROR_HEADER");
-        String content = SettingsController.i18n(key + "_ALERT_ERROR_CONTENT");
+        String title = i18nGlobal(key + "_ALERT_ERROR_TITLE");
+        String header = i18nGlobal(key + "_ALERT_ERROR_HEADER");
+        String content = i18nGlobal(key + "_ALERT_ERROR_CONTENT");
         if(!title.isEmpty()) {
             print(title);
         }
@@ -51,7 +55,7 @@ public abstract class VirtualViewCLI implements ViewInterface {
     }
 
     public void printField(String key, String value) {
-        System.out.println(SettingsController.i18n(key) + ": " + value);
+        System.out.println(i18n(key) + ": " + value);
     }
 
     public void printFieldList(String key, List<String> value) {
@@ -61,18 +65,18 @@ public abstract class VirtualViewCLI implements ViewInterface {
             builder.append(",");
         }
         builder.deleteCharAt(builder.length() - 1);
-        System.out.println(SettingsController.i18n(key) + ": " + builder);
+        System.out.println(i18n(key) + ": " + builder);
     }
 
     public void printFieldBoolean(String key, boolean value) {
-        String yes = SettingsController.i18n("YES");
-        String no = SettingsController.i18n("NO");
-        System.out.println(SettingsController.i18n(key) + ": " + (value ? yes : no));
+        String yes = i18nGlobal("YES");
+        String no = i18nGlobal("NO");
+        System.out.println(i18n(key) + ": " + (value ? yes : no));
     }
 
     public String askField(String key, String value) {
         Scanner userInput = new Scanner(System.in);
-        System.out.print(SettingsController.i18n(key) + " [" + value + "]: ");
+        System.out.print(i18n(key) + " [" + value + "]: ");
         String out = userInput.nextLine();
         if(out.isEmpty()) {
             return value;

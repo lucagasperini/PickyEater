@@ -13,7 +13,7 @@ import java.util.Map;
 public class RestaurantDetailsView extends VirtualRequestView {
     private final RestaurantDetailsController controller = new RestaurantDetailsController();
     public RestaurantDetailsView() {
-        super("RestaurantDetails");
+        super("RestaurantDetails", "RESTAURATEUR_MANAGERESTAURANTDETAILS");
     }
 
     @Override
@@ -45,13 +45,13 @@ public class RestaurantDetailsView extends VirtualRequestView {
     private void showDetails() {
         try {
             RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME", bean.getFirstname());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_LASTNAME", bean.getLastname());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_SSN", bean.getSsn());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_NAME", bean.getRestaurantName());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_ADDRESS", bean.getRestaurantAddress());
-            printField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_PHONE", bean.getRestaurantPhone());
+            printField("RESTAURATEUR_EMAIL", bean.getEmail());
+            printField("RESTAURATEUR_FIRSTNAME", bean.getFirstname());
+            printField("RESTAURATEUR_LASTNAME", bean.getLastname());
+            printField("RESTAURATEUR_SSN", bean.getSsn());
+            printField("RESTAURANT_NAME", bean.getRestaurantName());
+            printField("RESTAURANT_ADDRESS", bean.getRestaurantAddress());
+            printField("RESTAURANT_PHONE", bean.getRestaurantPhone());
         } catch (DAOException e) {
             showError(e);
         }
@@ -61,25 +61,25 @@ public class RestaurantDetailsView extends VirtualRequestView {
         try {
             RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
             bean.setEmail(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL", bean.getEmail())
+                    askField("RESTAURATEUR_EMAIL", bean.getEmail())
             );
             bean.setFirstname(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME", bean.getFirstname())
+                    askField("RESTAURATEUR_FIRSTNAME", bean.getFirstname())
             );
             bean.setLastname(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_LASTNAME", bean.getLastname())
+                    askField("RESTAURATEUR_LASTNAME", bean.getLastname())
             );
             bean.setSsn(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_SSN", bean.getSsn())
+                    askField("RESTAURATEUR_SSN", bean.getSsn())
             );
             bean.setRestaurantName(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_NAME", bean.getRestaurantName())
+                    askField("RESTAURANT_NAME", bean.getRestaurantName())
             );
             bean.setRestaurantAddress(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_ADDRESS", bean.getRestaurantAddress())
+                    askField("RESTAURANT_ADDRESS", bean.getRestaurantAddress())
             );
             bean.setRestaurantPhone(
-                    askField("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_PHONE", bean.getRestaurantPhone())
+                    askField("RESTAURANT_PHONE", bean.getRestaurantPhone())
             );
 
             controller.set(

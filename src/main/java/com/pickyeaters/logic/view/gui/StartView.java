@@ -22,14 +22,14 @@ public class StartView extends VirtualPaneView {
     private Stage stage;
 
     public StartView() {
-        super("/form/Start.fxml", null);
+        super("/form/Start.fxml", "START", null);
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textWelcome.setText(SettingsController.i18n("START_WELCOME"));
-        buttonRegistration.setText(SettingsController.i18n("START_SIGNUP"));
-        buttonLogin.setText(SettingsController.i18n("START_SIGNIN"));
+        textWelcome.setText(i18n("WELCOME"));
+        buttonRegistration.setText(i18n("SIGNUP"));
+        buttonLogin.setText(i18n("SIGNIN"));
         if(arg != null) {
             setupLogin(arg.get("login"));
         }

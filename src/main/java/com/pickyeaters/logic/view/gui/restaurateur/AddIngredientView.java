@@ -50,27 +50,27 @@ public class AddIngredientView extends VirtualShowIngredientChildView {
 
     private final AddIngredientController controller = new AddIngredientController();
     public AddIngredientView(VirtualPaneView parent) {
-        super("/form/restaurateur/AddIngredient.fxml", parent);
+        super("/form/restaurateur/AddIngredient.fxml","RESTAURATEUR_ADDINGREDIENT", parent);
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("RESTAURATEUR_ADDINGREDIENT");
-        textIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT"));
-        textIngredientSelect.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT_SELECT"));
-        textIngredientSelectExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_INGREDIENT_SELECTEXPLANATION"));
-        textAllergens.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_ALLERGENS"));
-        textAllergensExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_ALLERGENS_EXPLANATION"));
-        textAllergensSelectExplanation.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_ALLERGENS_SELECTEXPLANATION"));
-        textCookingMethod.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_COOKINGMETHOD"));
-        textReligiousNeeds.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS"));
-        textReligiousNeedsIngredientIs.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_INGREDIENTIS"));
-        checkboxReligiousNeedsHalal.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_HALAL"));
-        checkboxReligiousNeedsKosher.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_RELIGIOUSNEEDS_KOSHER"));
-        textOptionality.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_OPTIONALITY"));
-        textReportMissingIngredientQuestion.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_REPORTMISSINGINGREDIENT_QUESTION"));
-        buttonReport.setText(SettingsController.i18n("RESTAURATEUR_ADDINGREDIENT_REPORTMISSINGINGREDIENT"));
-        buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
+        showTitle();
+        textIngredient.setText(i18n("INGREDIENT"));
+        textIngredientSelect.setText(i18n("INGREDIENT_SELECT"));
+        textIngredientSelectExplanation.setText(i18n("INGREDIENT_SELECTEXPLANATION"));
+        textAllergens.setText(i18n("ALLERGENS"));
+        textAllergensExplanation.setText(i18n("ALLERGENS_EXPLANATION"));
+        textAllergensSelectExplanation.setText(i18n("ALLERGENS_SELECTEXPLANATION"));
+        textCookingMethod.setText(i18n("COOKINGMETHOD"));
+        textReligiousNeeds.setText(i18n("RELIGIOUSNEEDS"));
+        textReligiousNeedsIngredientIs.setText(i18n("RELIGIOUSNEEDS_INGREDIENTIS"));
+        checkboxReligiousNeedsHalal.setText(i18n("RELIGIOUSNEEDS_HALAL"));
+        checkboxReligiousNeedsKosher.setText(i18n("RELIGIOUSNEEDS_KOSHER"));
+        textOptionality.setText(i18n("OPTIONALITY"));
+        textReportMissingIngredientQuestion.setText(i18n("REPORTMISSINGINGREDIENT_QUESTION"));
+        buttonReport.setText(i18n("REPORTMISSINGINGREDIENT"));
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
 
         try {
             setupTreeIngredient();

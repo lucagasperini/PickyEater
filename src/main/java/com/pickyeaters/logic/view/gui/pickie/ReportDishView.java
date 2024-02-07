@@ -8,7 +8,7 @@ import java.util.Map;
 public class ReportDishView extends VirtualPaneView {
     ReportDishController controller;
     public ReportDishView(ReportDishController controller, VirtualPaneView parent) {
-        super("/form/pickie/ReportDish.fxml", parent);
+        super("/form/pickie/ReportDish.fxml", "", parent);
         this.controller = controller;
     }
 

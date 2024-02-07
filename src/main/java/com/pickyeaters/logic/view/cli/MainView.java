@@ -11,6 +11,7 @@ import java.util.Map;
 
 public class MainView extends VirtualViewCLI {
     public MainView() {
+        super("");
         setMainView(this);
     }
 

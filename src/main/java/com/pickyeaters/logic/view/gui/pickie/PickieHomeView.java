@@ -17,7 +17,7 @@ public class PickieHomeView extends VirtualPaneView {
     @FXML
     private Button buttonEatingPreferences;
     public PickieHomeView(VirtualPaneView parent) {
-        super("/form/pickie/Home.fxml", parent);
+        super("/form/pickie/Home.fxml", "PICKY_HOME", parent);
     }
 
     @FXML
@@ -42,9 +42,9 @@ public class PickieHomeView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("PICKY_HOME");
-        buttonFindRestaurant.setText(SettingsController.i18n("PICKY_HOME_FINDRESTAURANT"));
-        buttonReviewDish.setText(SettingsController.i18n("PICKY_HOME_REVIEWADISH"));
-        buttonEatingPreferences.setText(SettingsController.i18n("PICKY_HOME_PERSONALIZEEATINGPREFERENCES"));
+        showTitle();
+        buttonFindRestaurant.setText(i18n("FINDRESTAURANT"));
+        buttonReviewDish.setText(i18n("REVIEWADISH"));
+        buttonEatingPreferences.setText(i18n("PERSONALIZEEATINGPREFERENCES"));
     }
 }

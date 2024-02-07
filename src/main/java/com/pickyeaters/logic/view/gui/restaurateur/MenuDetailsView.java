@@ -22,7 +22,7 @@ import java.util.Map;
 public class MenuDetailsView extends VirtualPaneView {
     private final MenuDetailsController controller = new MenuDetailsController();
     public MenuDetailsView(VirtualPaneView parent) {
-        super("/form/restaurateur/MenuDetails.fxml", parent);
+        super("/form/restaurateur/MenuDetails.fxml", "RESTAURATEUR_MANAGEMENUDETAILS", parent);
     }
     @FXML
     private VBox vboxMenu;
@@ -38,9 +38,9 @@ public class MenuDetailsView extends VirtualPaneView {
             setupUpdateDish(arg.get("updateDish"));
             setupActiveDish(arg.get("activeDish"));
         }
-        showTitle("RESTAURATEUR_MANAGEMENUDETAILS");
-        buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
-        textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
+        showTitle();
+        buttonAddDish.setText(i18n("ADDDISH"));
+        textShowinMenu.setText(i18n("SHOWINMENU"));
 
         setupDishList();
     }

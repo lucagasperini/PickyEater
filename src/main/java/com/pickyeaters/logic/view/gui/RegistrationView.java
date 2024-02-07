@@ -7,7 +7,7 @@ import java.util.Map;
 public class RegistrationView extends VirtualPaneView {
     private final LoginController controller = new LoginController();
     public RegistrationView(VirtualPaneView parent) {
-        super("/form/Registration.fxml", parent);
+        super("/form/Registration.fxml", "", parent);
     }
 
     @Override

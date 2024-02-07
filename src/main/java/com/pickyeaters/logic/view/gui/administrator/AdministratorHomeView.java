@@ -12,13 +12,13 @@ public class AdministratorHomeView extends VirtualPaneView {
     @FXML
     private Button buttonManageReport;
     public AdministratorHomeView(VirtualPaneView parent) {
-        super("/form/administrator/Home.fxml", parent);
+        super("/form/administrator/Home.fxml", "ADMINISTRATOR_HOME", parent);
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("ADMINISTRATOR_HOME");
+        showTitle();
 
-        buttonManageReport.setText(SettingsController.i18n("ADMINISTRATOR_GUI_HOME_VIEW_MANAGE_REPORT"));
+        buttonManageReport.setText(i18n("MANAGE_REPORT"));
     }
 }
