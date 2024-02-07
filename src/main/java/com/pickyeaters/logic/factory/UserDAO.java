@@ -27,6 +27,89 @@ public class UserDAO {
         }
 
     }
+    public User getUser(String id) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_user(?, ?, ?, ?, ?)");
+            query.setString(id);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+
+            query.execute();
+
+            String email = query.getString();
+            String type = query.getString();
+            String firstname = query.getString();
+            String lastname = query.getString();
+            query.close();
+            if(type.equals("PICKIE")) {
+                return getPickie(id);
+            }
+            if(type.equals("ADMIN")) {
+                return new Administrator(id, email, firstname, lastname);
+            }
+            if(type.equals("REST")) {
+                return getRestaurateur(id);
+            }
+
+            throw new DAOException("Cannot identify this kind of user: " + type);
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+
+    public Pickie getPickie(String id) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_pickie(?, ?, ?, ?, ?)");
+            query.setString(id);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+
+            query.execute();
+
+            String email = query.getString();
+            String firstname = query.getString();
+            String lastname = query.getString();
+            String username = query.getString();
+            query.close();
+            return new Pickie(id, email, username, firstname, lastname);
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+    public Restaurateur getRestaurateur(String id) throws DAOException {
+        try {
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_restaurateur(?, ?, ?, ?, ?, ?, ?)");
+            query.setString(id);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutParameter(Types.VARCHAR);
+
+            query.execute();
+
+            String email = query.getString();
+            String firstname = query.getString();
+            String lastname = query.getString();
+            String phone = query.getString();
+            String ssn = query.getString();
+            String restID = query.getString();
+            query.close();
+
+            final RestaurantDAO restaurantDAO = new RestaurantDAO();
+            Restaurant rest = restaurantDAO.get(restID);
+
+            return new Restaurateur(id, email, firstname, lastname, phone, ssn, rest);
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
 
     public User getUserInfo(String email) throws DAOException {
         try {
@@ -112,7 +195,7 @@ public class UserDAO {
         }
     }
 
-    private void updateUserPickie(Pickie pickie) throws DatabaseControllerException {
+    public void updateUserPickie(Pickie pickie) throws DatabaseControllerException {
         DatabaseController.Query query =
                 DatabaseController.getInstance().query("CALL update_pickie(?, ?, ?, ?, ?)");
         query.setString(pickie.getID());
@@ -125,7 +208,7 @@ public class UserDAO {
         query.close();
     }
 
-    private void updateUserAdministrator(Administrator administrator) throws DatabaseControllerException {
+    public void updateUserAdministrator(Administrator administrator) throws DatabaseControllerException {
         DatabaseController.Query query =
                 DatabaseController.getInstance().query("CALL update_administrator(?, ?, ?, ?)");
         query.setString(administrator.getID());
@@ -137,7 +220,7 @@ public class UserDAO {
         query.close();
     }
 
-    private void updateUserRestaurateur(Restaurateur restaurateur) throws DatabaseControllerException {
+    public void updateUserRestaurateur(Restaurateur restaurateur) throws DatabaseControllerException {
         DatabaseController.Query query =
                 DatabaseController.getInstance().query("CALL update_restaurateur(?, ?, ?, ?, ?, ?)");
         query.setString(restaurateur.getID());

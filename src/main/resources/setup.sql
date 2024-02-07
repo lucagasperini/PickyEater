@@ -7,6 +7,7 @@ CREATE TABLE "Restaurant" (
     name varchar(256) NOT NULL,
     phone varchar(16) NOT NULL,
     address varchar(256) NOT NULL,
+    city CITEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -122,12 +123,13 @@ CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
 	OUT _name varchar,
 	OUT _phone varchar,
-	OUT _address varchar)
+	OUT _address varchar,
+	OUT _city varchar)
 LANGUAGE 'plpgsql'
 AS $BODY$
 BEGIN
-    SELECT name, phone, address
-		INTO _name, _phone, _address
+    SELECT name, phone, address, city
+		INTO _name, _phone, _address, _city
 		FROM "Restaurant" WHERE id = _id::uuid;
 END;
 $BODY$;
@@ -146,6 +148,54 @@ BEGIN
 		FROM "User" WHERE email = _email::CITEXT;
 END;
 $BODY$;
+
+CREATE OR REPLACE PROCEDURE get_user(
+	IN _id varchar,
+	OUT _email varchar,
+	OUT _type varchar,
+	OUT _firstname varchar,
+	OUT _lastname varchar)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT email, type, firstname, lastname
+		INTO _email, _type, _firstname, _lastname
+		FROM "User" WHERE id = _id::UUID;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE get_pickie(
+	IN _id varchar,
+	OUT _email varchar,
+	OUT _firstname varchar,
+	OUT _lastname varchar,
+	OUT _username varchar)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT email, firstname, lastname, username
+		INTO _email, _firstname, _lastname, _username
+		FROM "User" WHERE id = _id::UUID;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE get_restaurateur(
+	IN _id varchar,
+	OUT _email varchar,
+	OUT _firstname varchar,
+	OUT _lastname varchar,
+	OUT _phone varchar,
+	OUT _ssn varchar,
+	OUT _restaurant varchar)
+LANGUAGE 'plpgsql'
+AS $BODY$
+BEGIN
+    SELECT email, firstname, lastname, phone, ssn, fk_restaurant
+		INTO _email, _firstname, _lastname, _phone, _ssn, _restaurant
+		FROM "User" WHERE id = _id::UUID;
+END;
+$BODY$;
+
 
 CREATE OR REPLACE PROCEDURE userinfo_pickie(
 	IN _email varchar,
@@ -188,12 +238,13 @@ CREATE OR REPLACE PROCEDURE add_restaurant(
     IN _name varchar(256),
     IN _phone varchar(16),
     IN _address varchar(256),
+    IN _city varchar(256),
     OUT _id varchar(256))
 LANGUAGE plpgsql
 AS $BODY$
 BEGIN
-	INSERT INTO "Restaurant" (name, phone, address)
-	    VALUES (_name, _phone, _address) RETURNING id::varchar INTO _id;
+	INSERT INTO "Restaurant" (name, phone, address, city)
+	    VALUES (_name, _phone, _address, _city) RETURNING id::varchar INTO _id;
 END;
 $BODY$;
 
@@ -236,14 +287,15 @@ CREATE OR REPLACE PROCEDURE add_restaurateur(
     IN _rest_name varchar(256),
     IN _rest_phone varchar(16),
     IN _rest_address varchar(256),
+    IN _rest_city varchar(256),
     OUT _id varchar(256))
 LANGUAGE plpgsql
 AS $BODY$
 DECLARE
 	restid UUID;
 BEGIN
-    INSERT INTO "Restaurant" (name, phone, address) VALUES
-        	(_rest_name, _rest_phone, _rest_address) RETURNING id::varchar INTO restid;
+    INSERT INTO "Restaurant" (name, phone, address, city) VALUES
+        	(_rest_name, _rest_phone, _rest_address, _rest_city) RETURNING id::varchar INTO restid;
 
     INSERT INTO "User" (email, password, type, firstname, lastname, phone, ssn, fk_restaurant)
         VALUES (_email, _password, 'REST', _firstname, _lastname, _phone, _ssn, restid) RETURNING id::varchar INTO _id;
@@ -308,14 +360,16 @@ CREATE PROCEDURE update_restaurant(
     IN _id varchar,
     IN _name varchar,
     IN _phone varchar,
-    IN _address varchar)
+    IN _address varchar,
+    IN _city varchar)
 LANGUAGE 'plpgsql'
 AS $BODY$
 BEGIN
     UPDATE "Restaurant" SET
 		name=_name,
 		phone=_phone,
-		address=_address
+		address=_address,
+		city=_city
 		WHERE id=_id::uuid;
 END;
 $BODY$;
@@ -615,7 +669,7 @@ CREATE OR REPLACE VIEW all_user_allergy AS
         JOIN "Allergy" AS A ON fk_allergy=A.id;
 
 
-CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', null);
+CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
 

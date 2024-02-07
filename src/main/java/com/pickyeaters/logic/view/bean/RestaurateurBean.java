@@ -12,6 +12,7 @@ public class RestaurateurBean {
     private String email;
     private String restaurantName;
     private String restaurantAddress;
+    private String restaurantCity;
 
     public RestaurateurBean(
             String email,
@@ -21,15 +22,17 @@ public class RestaurateurBean {
             String ssn,
             String restaurantName,
             String restaurantPhone,
-            String restaurantAddress) {
-        this.email = email;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.ssn = ssn;
-        this.restaurantName = restaurantName;
-        this.restaurantPhone = restaurantPhone;
-        this.restaurantAddress = restaurantAddress;
+            String restaurantAddress,
+            String restaurantCity) {
+        setEmail(email);
+        setFirstname(firstname);
+        setLastname(lastname);
+        setPhone(phone);
+        setSsn(ssn);
+        setRestaurantName(restaurantName);
+        setRestaurantPhone(restaurantPhone);
+        setRestaurantAddress(restaurantAddress);
+        setRestaurantCity(restaurantCity);
     }
     public String getFirstname(){ return firstname; }
     public String getLastname(){ return lastname; }
@@ -47,6 +50,10 @@ public class RestaurateurBean {
     }
     public String getRestaurantAddress() {
         return restaurantAddress;
+    }
+
+    public String getRestaurantCity() {
+        return restaurantCity;
     }
 
     public void setLastname(String lastname) {
@@ -81,19 +88,7 @@ public class RestaurateurBean {
         this.restaurantPhone = restaurantPhone;
     }
 
-    public Restaurateur toModel() {
-        Restaurant restaurant = new Restaurant(
-                restaurantName,
-                restaurantPhone,
-                restaurantAddress
-        );
-        return new Restaurateur(
-                email,
-                firstname,
-                lastname,
-                phone,
-                ssn,
-                restaurant
-        );
+    public void setRestaurantCity(String restaurantCity) {
+        this.restaurantCity = restaurantCity;
     }
 }

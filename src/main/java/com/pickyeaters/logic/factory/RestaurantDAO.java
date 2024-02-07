@@ -10,8 +10,9 @@ import java.sql.Types;
 public class RestaurantDAO {
     public Restaurant get(String id) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?)");
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?, ?)");
             query.setString(id);
+            query.registerOutParameter(Types.VARCHAR);
             query.registerOutParameter(Types.VARCHAR);
             query.registerOutParameter(Types.VARCHAR);
             query.registerOutParameter(Types.VARCHAR);
@@ -21,9 +22,10 @@ public class RestaurantDAO {
             String name = query.getString();
             String phone = query.getString();
             String address = query.getString();
+            String city = query.getString();
             query.close();
 
-            return new Restaurant(id, name, phone, address);
+            return new Restaurant(id, name, phone, address, city);
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);
         }
@@ -31,11 +33,12 @@ public class RestaurantDAO {
 
     public void update(Restaurant restaurant) throws DAOException {
         try{
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_restaurant(?, ?, ?, ?)");
+            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_restaurant(?, ?, ?, ?, ?)");
             query.setString(restaurant.getID());
             query.setString(restaurant.getName());
             query.setString(restaurant.getPhone());
             query.setString(restaurant.getAddress());
+            query.setString(restaurant.getCity());
 
             query.execute();
             query.close();

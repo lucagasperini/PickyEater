@@ -37,11 +37,12 @@ class RestaurantDetailsControllerTest {
                 "98765",
                 "My test",
                 "11111",
-                "0"
+                "0",
+                "Roma"
                 );
-        restaurantDetailsController.set(beanSet, user.getID(), user.getRestaurant().getID());
+        restaurantDetailsController.set(beanSet, user);
 
-        RestaurateurBean beanGet = restaurantDetailsController.get("lucar");
+        RestaurateurBean beanGet = restaurantDetailsController.get(user);
         assertEquals("Luke", beanGet.getFirstname());
         assertEquals("Test", beanGet.getLastname());
         assertEquals("012345", beanGet.getPhone());
@@ -49,5 +50,6 @@ class RestaurantDetailsControllerTest {
         assertEquals("My test", beanGet.getRestaurantName());
         assertEquals("11111", beanGet.getRestaurantPhone());
         assertEquals("0", beanGet.getRestaurantAddress());
+        assertEquals("Roma", beanGet.getRestaurantCity());
     }
 }

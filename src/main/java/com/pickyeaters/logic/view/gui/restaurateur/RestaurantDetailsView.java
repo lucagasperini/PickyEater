@@ -21,6 +21,64 @@ public class RestaurantDetailsView extends VirtualPaneView {
 
     public RestaurantDetailsView(VirtualPaneView parent) {
         super("/form/restaurateur/RestaurantDetails.fxml", "RESTAURATEUR_MANAGERESTAURANTDETAILS", parent);
+
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
+        textRestaurateurFirstname.setText(i18n("RESTAURATEUR_FIRSTNAME"));
+        textRestaurateurLastname.setText(i18n("RESTAURATEUR_LASTNAME"));
+        textRestaurateurSsn.setText(i18n("RESTAURATEUR_SSN"));
+        textRestaurateurPhone.setText(i18n("RESTAURATEUR_PHONE"));
+        textRestaurateurEmail.setText(i18n("RESTAURATEUR_EMAIL"));
+        textRestaurantName.setText(i18n("RESTAURANT_NAME"));
+        textRestaurantAddress.setText(i18n("RESTAURANT_ADDRESS"));
+        textRestaurantPhone.setText(i18n("RESTAURANT_PHONE"));
+        textOpeningHours.setText(i18n("OPENINGHOURS"));
+
+        textMonday.setText(i18n("MONDAY"));
+        textThursday.setText(i18n("TUESDAY"));
+        textWednesday.setText(i18n("WEDNESDAY"));
+        textThursday.setText(i18n("THURSDAY"));
+        textFriday.setText(i18n("FRIDAY"));
+        textSaturday.setText(i18n("SATURDAY"));
+        textSunday.setText(i18n("SUNDAY"));
+
+        String from = i18n("FROM");
+
+        textFrom1.setText(from);
+        textFrom2.setText(from);
+        textFrom3.setText(from);
+        textFrom4.setText(from);
+        textFrom5.setText(from);
+        textFrom6.setText(from);
+        textFrom7.setText(from);
+
+        String to = i18n("TO");
+
+        textTo1.setText(to);
+        textTo2.setText(to);
+        textTo3.setText(to);
+        textTo4.setText(to);
+        textTo5.setText(to);
+        textTo6.setText(to);
+        textTo7.setText(to);
+
+        textMyPersonalDetails.setText(i18n("MYPERSONALDETAILS"));
+        textMyRestaurantDetails.setText(i18n("MYRESTAURANTDETAILS"));
+        try {
+            RestaurateurBean restaurateur = controller.get(AppData.getInstance().getUser());
+            inputRestaurateurFirstname.setText(restaurateur.getFirstname());
+            inputRestaurateurLastname.setText(restaurateur.getLastname());
+            inputRestaurateurPhone.setText(restaurateur.getPhone());
+            inputRestaurateurSsn.setText(restaurateur.getSsn());
+            inputRestaurateurEmail.setText(restaurateur.getEmail());
+            inputRestaurantName.setText(restaurateur.getRestaurantName());
+            inputRestaurantAddress.setText(restaurateur.getRestaurantAddress());
+            inputRestaurantPhone.setText(restaurateur.getRestaurantPhone());
+            inputRestaurantCity.setText(restaurateur.getRestaurantCity());
+        } catch (DAOException ex) {
+            //TODO: Add error
+            showError(ex);
+        }
+
     }
 
     @FXML
@@ -39,6 +97,8 @@ public class RestaurantDetailsView extends VirtualPaneView {
     private TextField inputRestaurantAddress;
     @FXML
     private TextField inputRestaurantPhone;
+    @FXML
+    private TextField inputRestaurantCity;
     @FXML
     private Button buttonSave;
     @FXML
@@ -61,6 +121,8 @@ public class RestaurantDetailsView extends VirtualPaneView {
     private Text textRestaurantAddress;
     @FXML
     private Text textRestaurantPhone;
+    @FXML
+    private Text textRestaurantCity;
     @FXML
     private Text textOpeningHours;
 
@@ -123,13 +185,13 @@ public class RestaurantDetailsView extends VirtualPaneView {
                 inputRestaurateurSsn.getText(),
                 inputRestaurantName.getText(),
                 inputRestaurantPhone.getText(),
-                inputRestaurantAddress.getText()
+                inputRestaurantAddress.getText(),
+                inputRestaurantCity.getText()
         );
         try {
             controller.set(
                     restaurateurBean,
-                    AppData.getInstance().getUserID(),
-                    AppData.getInstance().getRestaurantID()
+                    AppData.getInstance().getUser()
             );
             showParent();
         } catch (ControllerException ex) {
@@ -140,60 +202,5 @@ public class RestaurantDetailsView extends VirtualPaneView {
     @Override
     protected void setup(Map<String, String> arg) {
         showTitle();
-        buttonSave.setText(i18nGlobal("SAVECHANGES"));
-        textRestaurateurFirstname.setText(i18n("RESTAURATEUR_FIRSTNAME"));
-        textRestaurateurLastname.setText(i18n("RESTAURATEUR_LASTNAME"));
-        textRestaurateurSsn.setText(i18n("RESTAURATEUR_SSN"));
-        textRestaurateurPhone.setText(i18n("RESTAURATEUR_PHONE"));
-        textRestaurateurEmail.setText(i18n("RESTAURATEUR_EMAIL"));
-        textRestaurantName.setText(i18n("RESTAURANT_NAME"));
-        textRestaurantAddress.setText(i18n("RESTAURANT_ADDRESS"));
-        textRestaurantPhone.setText(i18n("RESTAURANT_PHONE"));
-        textOpeningHours.setText(i18n("OPENINGHOURS"));
-
-        textMonday.setText(i18n("MONDAY"));
-        textThursday.setText(i18n("TUESDAY"));
-        textWednesday.setText(i18n("WEDNESDAY"));
-        textThursday.setText(i18n("THURSDAY"));
-        textFriday.setText(i18n("FRIDAY"));
-        textSaturday.setText(i18n("SATURDAY"));
-        textSunday.setText(i18n("SUNDAY"));
-
-        String from = i18n("FROM");
-
-        textFrom1.setText(from);
-        textFrom2.setText(from);
-        textFrom3.setText(from);
-        textFrom4.setText(from);
-        textFrom5.setText(from);
-        textFrom6.setText(from);
-        textFrom7.setText(from);
-
-        String to = i18n("TO");
-
-        textTo1.setText(to);
-        textTo2.setText(to);
-        textTo3.setText(to);
-        textTo4.setText(to);
-        textTo5.setText(to);
-        textTo6.setText(to);
-        textTo7.setText(to);
-
-        textMyPersonalDetails.setText(i18n("MYPERSONALDETAILS"));
-        textMyRestaurantDetails.setText(i18n("MYRESTAURANTDETAILS"));
-        try {
-            RestaurateurBean restaurateur = controller.get(AppData.getInstance().getUserEmail());
-            inputRestaurateurFirstname.setText(restaurateur.getFirstname());
-            inputRestaurateurLastname.setText(restaurateur.getLastname());
-            inputRestaurateurPhone.setText(restaurateur.getPhone());
-            inputRestaurateurSsn.setText(restaurateur.getSsn());
-            inputRestaurateurEmail.setText(restaurateur.getEmail());
-            inputRestaurantName.setText(restaurateur.getRestaurantName());
-            inputRestaurantAddress.setText(restaurateur.getRestaurantAddress());
-            inputRestaurantPhone.setText(restaurateur.getRestaurantPhone());
-        } catch (DAOException ex) {
-            //TODO: Add error
-            showError(ex);
-        }
     }
 }

@@ -44,7 +44,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
     private void showDetails() {
         try {
-            RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
+            RestaurateurBean bean = controller.get(AppData.getInstance().getUser());
             printField("RESTAURATEUR_EMAIL", bean.getEmail());
             printField("RESTAURATEUR_FIRSTNAME", bean.getFirstname());
             printField("RESTAURATEUR_LASTNAME", bean.getLastname());
@@ -59,7 +59,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
     private void editDetails() {
         try {
-            RestaurateurBean bean = controller.get(AppData.getInstance().getUserEmail());
+            RestaurateurBean bean = controller.get(AppData.getInstance().getUser());
             bean.setEmail(
                     askField("RESTAURATEUR_EMAIL", bean.getEmail())
             );
@@ -84,8 +84,7 @@ public class RestaurantDetailsView extends VirtualRequestView {
 
             controller.set(
                     bean,
-                    AppData.getInstance().getUserID(),
-                    AppData.getInstance().getRestaurantID()
+                    AppData.getInstance().getUser()
             );
         } catch (ControllerException e) {
             showError(e);
