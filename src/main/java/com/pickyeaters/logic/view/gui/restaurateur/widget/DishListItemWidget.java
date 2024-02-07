@@ -28,7 +28,7 @@ public class DishListItemWidget extends VirtualWidget {
     private CheckBox checkBoxActive;
 
     public DishListItemWidget(VirtualPaneView parent, ShowDishBean dishBean) {
-        super("/form/restaurateur/widget/DishListItemWidget.fxml", parent);
+        super("/form/restaurateur/widget/DishListItemWidget.fxml", "", parent);
         checkBoxActive.setSelected(dishBean.isActive());
         textName.setText(dishBean.getName());
         textDescription.setText(dishBean.getDescription());

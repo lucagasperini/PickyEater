@@ -40,7 +40,7 @@ public class InitView extends VirtualPaneView {
     private Button buttonSave;
     private final InitController controller = new InitController();
     public InitView(VirtualPaneView parent) {
-        super("/form/Init.fxml", parent);
+        super("/form/Init.fxml", "", parent);
     }
 
     @Override

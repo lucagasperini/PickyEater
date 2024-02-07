@@ -20,12 +20,12 @@ import java.util.*;
 public class AddDislikedIngredientView extends VirtualShowIngredientChildView {
     private final AddDislikedIngredientController controller = new AddDislikedIngredientController();
     protected AddDislikedIngredientView(VirtualPaneView parent) {
-        super("/form/pickie/AddDislikedIngredient.fxml", parent);
+        super("/form/pickie/AddDislikedIngredient.fxml", "PICKY_ADDDISLIKEDINGREDIENT", parent);
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("PICKY_ADDDISLIKEDINGREDIENT");
+        showTitle();
         try {
             setupTreeIngredient();
         } catch (ControllerException e) {

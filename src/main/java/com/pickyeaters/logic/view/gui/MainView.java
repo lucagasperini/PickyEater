@@ -31,7 +31,7 @@ public class MainView extends VirtualViewGUI {
     private final StartView startView = new StartView();
     private final Node nodeHeader;
     public MainView(Stage primaryStage) {
-        super("/form/Background.fxml");
+        super("/form/Background.fxml", "");
         this.stage = primaryStage;
         stage.setScene(new Scene(getRoot(), 1280, 720));
         nodeHeader = mainLayout.getTop();
@@ -88,13 +88,13 @@ public class MainView extends VirtualViewGUI {
         textTitle.setVisible(true);
         textSubtitle.setVisible(true);
 
-        buttonBack.setText(SettingsController.i18n("BACK"));
+        buttonBack.setText(i18nGlobal("BACK"));
     }
 
     public void showNavbar() {
         textNavbarUsername.setText(AppData.getInstance().getUserName());
-        menuItemNavbarProfile.setText(SettingsController.i18n("NAVBAR_UPDATEPROFILE"));
-        menuItemNavbarLogout.setText(SettingsController.i18n("NAVBAR_LOGOFF"));
+        menuItemNavbarProfile.setText(i18nGlobal("NAVBAR_UPDATEPROFILE"));
+        menuItemNavbarLogout.setText(i18nGlobal("NAVBAR_LOGOFF"));
     }
 
     public void showTitle(String title, String subtitle) {
@@ -124,19 +124,16 @@ public class MainView extends VirtualViewGUI {
     }
 
     private void showPickieHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("PICKY_NAVBAR_HELLO"));
         PickieHomeView pickieHomeView = new PickieHomeView(startView);
         pickieHomeView.show();
     }
 
     private void showRestaurateurHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("RESTAURATEUR_NAVBAR_HELLO"));
         RestaurateurHomeView restaurateurHomeView = new RestaurateurHomeView(startView);
         restaurateurHomeView.show();
     }
 
     private void showAdministratorHomeView() {
-        //textNavbarWelcome.setText(SettingsController.i18n("ADMINISTRATOR_NAVBAR_HELLO"));
         AdministratorHomeView administratorHomeView = new AdministratorHomeView(startView);
         administratorHomeView.show();
     }

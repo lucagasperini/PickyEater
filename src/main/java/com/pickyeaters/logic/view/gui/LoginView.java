@@ -36,17 +36,17 @@ public class LoginView extends VirtualPaneView {
     private final LoginController controller = new LoginController();
 
     public LoginView(VirtualPaneView parent) {
-        super("/form/Login.fxml", parent);
+        super("/form/Login.fxml", "LOGIN", parent);
     }
 
     @Override
     protected void setup(Map<String, String> arg) {
-        textEmail.setText(SettingsController.i18n("LOGIN_EMAIL"));
-        textPassword.setText(SettingsController.i18n("LOGIN_PASSWORD"));
-        buttonLogin.setText(SettingsController.i18n("LOGIN_LOGIN"));
-        textTitle.setText(SettingsController.i18n("LOGIN_TITLE"));
-        textSubtitle.setText(SettingsController.i18n("LOGIN_SUBTITLE"));
-        buttonBackLogin.setText(SettingsController.i18n("BACK"));
+        textEmail.setText(i18n("EMAIL"));
+        textPassword.setText(i18n("PASSWORD"));
+        buttonLogin.setText(i18n("LOGIN"));
+        textTitle.setText(i18n("TITLE"));
+        textSubtitle.setText(i18n("SUBTITLE"));
+        buttonBackLogin.setText(i18nGlobal("BACK"));
     }
     @FXML
     private void clickButtonLogin(ActionEvent event) {

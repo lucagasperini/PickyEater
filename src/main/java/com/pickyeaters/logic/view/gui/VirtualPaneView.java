@@ -8,8 +8,8 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
     private final VirtualPaneView parent;
     private static MainView mainView;
     private static VirtualPaneView activeView;
-    protected VirtualPaneView(String fxml, VirtualPaneView parent) {
-        super(fxml);
+    protected VirtualPaneView(String fxml, String resource, VirtualPaneView parent) {
+        super(fxml, resource);
         this.parent = parent;
     }
     protected static void init(MainView mainView) {
@@ -52,14 +52,11 @@ public abstract class VirtualPaneView extends VirtualViewGUI {
         }
     }
 
-    public void showTitle(String key) {
-        if(key.isEmpty()) {
-            key = "DEFAULT";
-        }
+    public void showTitle() {
 
         mainView.showTitle(
-                SettingsController.i18n(key + "_TITLE"),
-                SettingsController.i18n(key + "_SUBTITLE")
+                i18n("TITLE"),
+                i18n("SUBTITLE")
         );
     }
 

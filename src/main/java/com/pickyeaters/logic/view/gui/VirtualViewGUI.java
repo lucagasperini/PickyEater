@@ -2,16 +2,18 @@ package com.pickyeaters.logic.view.gui;
 
 import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.exception.VirtualException;
-import com.pickyeaters.logic.view.ViewInterface;
+import com.pickyeaters.logic.view.VirtualView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
 
-public abstract class VirtualViewGUI implements ViewInterface {
+public abstract class VirtualViewGUI extends VirtualView {
     private Parent root = null;
-    protected VirtualViewGUI(String fxml) {
+
+    protected VirtualViewGUI(String fxml, String resource) {
+        super(resource);
         loadFXML(fxml);
     }
 
@@ -26,7 +28,7 @@ public abstract class VirtualViewGUI implements ViewInterface {
         }
     }
 
-    public void showError(String title, String header, String content) {
+    protected void showError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
         alert.setTitle(title);
@@ -35,7 +37,7 @@ public abstract class VirtualViewGUI implements ViewInterface {
 
         alert.showAndWait();
     }
-    public void showError(String key) {
+    protected void showError(String key) {
         if(key.isEmpty()) {
             showError(
                     "DEFAULT_ALERT_ERROR_TITLE",
@@ -44,18 +46,19 @@ public abstract class VirtualViewGUI implements ViewInterface {
             );
         } else {
             showError(
-                SettingsController.i18n(key + "_ALERT_ERROR_TITLE"),
-                SettingsController.i18n(key + "_ALERT_ERROR_HEADER"),
-                SettingsController.i18n(key + "_ALERT_ERROR_CONTENT")
+                    i18nGlobal(key + "_ALERT_ERROR_TITLE"),
+                    i18nGlobal(key + "_ALERT_ERROR_HEADER"),
+                    i18nGlobal(key + "_ALERT_ERROR_CONTENT")
             );
         }
     }
 
-    public void showError(VirtualException ex) {
+    protected void showError(VirtualException ex) {
         showError(ex.getKey());
     }
 
     public Parent getRoot() {
         return root;
     }
+
 }

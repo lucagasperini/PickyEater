@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class AdministratorHomeView extends VirtualRequestView {
     public AdministratorHomeView() {
-        super("Home");
+        super("Home", "");
     }
 
     @Override

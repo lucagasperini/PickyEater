@@ -2,10 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -29,14 +26,11 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <TextField fx:id="inputName" prefHeight="27.0" prefWidth="310.0">
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
+                                    <Text fx:id="dishName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
                                        <font>
                                           <Font name="Calibri" size="14.0" />
                                        </font>
-                                    </TextField>
+                                    </Text>
                                  </children>
                                  <padding>
                                     <Insets bottom="30.0" />
@@ -53,7 +47,11 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <TextArea fx:id="inputDescription" prefHeight="271.0" prefWidth="423.0" />
+                                    <Text fx:id="dishDescription" strokeType="OUTSIDE" strokeWidth="0.0" text="Description">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                                  <padding>
                                     <Insets bottom="30.0" />
@@ -70,7 +68,11 @@
                                           <Font name="Calibri Bold" size="26.0" />
                                        </font>
                                     </Text>
-                                    <ComboBox fx:id="comboBoxCategory" prefWidth="150.0" />
+                                    <Text fx:id="dishCategory" strokeType="OUTSIDE" strokeWidth="0.0" text="Category">
+                                       <font>
+                                          <Font name="Calibri" size="14.0" />
+                                       </font>
+                                    </Text>
                                  </children>
                               </VBox>
                            </children>

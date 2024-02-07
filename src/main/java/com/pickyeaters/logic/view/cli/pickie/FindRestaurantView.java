@@ -8,7 +8,7 @@ import java.util.Map;
 public class FindRestaurantView extends VirtualRequestView {
     private final FindRestaurantController controller = new FindRestaurantController();
     public FindRestaurantView() {
-        super("FindRestaurant");
+        super("FindRestaurant", "");
     }
 
     @Override

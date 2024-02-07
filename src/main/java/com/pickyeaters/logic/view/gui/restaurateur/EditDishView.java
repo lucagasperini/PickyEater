@@ -43,20 +43,20 @@ public abstract class EditDishView extends VirtualShowIngredientView {
     protected final String comboBoxItemContour;
     protected final String comboBoxItemDessert;
     protected EditDishView(VirtualPaneView parent) {
-        super("/form/restaurateur/EditDish.fxml", parent);
-        comboBoxItemDrink = SettingsController.i18n("DISH_TYPE_DRINK");
-        comboBoxItemFirst = SettingsController.i18n("DISH_TYPE_FIRST");
-        comboBoxItemAppetizer = SettingsController.i18n("DISH_TYPE_APPETIZER");
-        comboBoxItemSecond = SettingsController.i18n("DISH_TYPE_SECOND");
-        comboBoxItemContour = SettingsController.i18n("DISH_TYPE_CONTOUR");
-        comboBoxItemDessert = SettingsController.i18n("DISH_TYPE_DESSERT");
+        super("/form/restaurateur/EditDish.fxml", "RESTAURATEUR_ADDDISH", parent);
+        comboBoxItemDrink = i18nGlobal("DISH_TYPE_DRINK");
+        comboBoxItemFirst = i18nGlobal("DISH_TYPE_FIRST");
+        comboBoxItemAppetizer = i18nGlobal("DISH_TYPE_APPETIZER");
+        comboBoxItemSecond = i18nGlobal("DISH_TYPE_SECOND");
+        comboBoxItemContour = i18nGlobal("DISH_TYPE_CONTOUR");
+        comboBoxItemDessert = i18nGlobal("DISH_TYPE_DESSERT");
 
-        textCategory.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_CATEGORY"));
-        textDescription.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_DESCRIPTION"));
-        textAllergens.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_ALLERGENS"));
-        textIngredients.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_INGREDIENTS"));
-        textName.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_NAME"));
-        buttonAddIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_ADDINGREDIENT"));
+        textCategory.setText(i18n("CATEGORY"));
+        textDescription.setText(i18n("DESCRIPTION"));
+        textAllergens.setText(i18n("ALLERGENS"));
+        textIngredients.setText(i18n("INGREDIENTS"));
+        textName.setText(i18n("NAME"));
+        buttonAddIngredient.setText(i18n("ADDINGREDIENT"));
 
         comboBoxCategory.getItems().addAll(
                 comboBoxItemDrink,

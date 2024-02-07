@@ -34,23 +34,23 @@ public class IngredientListItemWidget extends VirtualWidget {
 
     private DishIngredientBean bean;
     public IngredientListItemWidget(VirtualPaneView parent, DishIngredientBean bean) {
-        super("/form/widget/IngredientListItemWidget.fxml", parent);
+        super("/form/widget/IngredientListItemWidget.fxml", "", parent);
         this.bean = bean;
         textIngredientName.setText(bean.getName());
         textIngredientCooked.setText(
                 bean.isCooked() ?
-                        SettingsController.i18n("PICKY_ADDDISLIKEDINGREDIENT_COOKINGMETHOD_COOKED") :
-                        SettingsController.i18n("PICKY_ADDDISLIKEDINGREDIENT_COOKINGMETHOD_RAW")
+                        i18nGlobal("PICKY_ADDDISLIKEDINGREDIENT_COOKINGMETHOD_COOKED") :
+                        i18nGlobal("PICKY_ADDDISLIKEDINGREDIENT_COOKINGMETHOD_RAW")
         );
         if(bean.isOptional()) {
             textIngredientOptional.setText(
-                            SettingsController.i18n("PICKY_ADDDISLIKEDINGREDIENT_OPTIONAL")
+                    i18nGlobal("PICKY_ADDDISLIKEDINGREDIENT_OPTIONAL")
             );
         } else {
             textSeparator2.setVisible(false);
             textIngredientOptional.setVisible(false);
         }
-        buttonDeleteIngredient.setText(SettingsController.i18n("RESTAURATEUR_ADDDISH_REMOVEINGREDIENT"));
+        buttonDeleteIngredient.setText(i18nGlobal("RESTAURATEUR_ADDDISH_REMOVEINGREDIENT"));
     }
 
     @FXML

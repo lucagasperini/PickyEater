@@ -1,12 +1,9 @@
 package com.pickyeaters.logic.view.cli.restaurateur;
 
-import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.AppData;
-import com.pickyeaters.logic.view.bean.DishBean;
-import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.cli.VirtualRequestView;
 
@@ -17,7 +14,7 @@ import java.util.Map;
 public class MenuDetailsView extends VirtualRequestView {
     private final MenuDetailsController controller = new MenuDetailsController();
     public MenuDetailsView() {
-        super("MenuDetails");
+        super("MenuDetails", "RESTAURATEUR_MANAGEMENUDETAILS");
     }
 
     @Override
@@ -58,18 +55,18 @@ public class MenuDetailsView extends VirtualRequestView {
         try {
             List<ShowDishBean> list = controller.getMenu(AppData.getInstance().getRestaurantID());
             for(ShowDishBean i : list) {
-                printField("RESTAURATEUR_MANAGEMENUDETAILS_NAME",i.getName());
-                printField("RESTAURATEUR_MANAGEMENUDETAILS_DESCRIPTION",i.getDescription());
+                printField("NAME",i.getName());
+                printField("DESCRIPTION",i.getDescription());
                 printField(
-                        "RESTAURATEUR_MANAGEMENUDETAILS_CATEGORY",
-                        SettingsController.i18n("DISH_TYPE_" + i.getCategory())
+                        "CATEGORY",
+                        i18nGlobal("DISH_TYPE_" + i.getCategory())
                 );
                 List<String> dishIngredients = new ArrayList<>();
                 for(String ingredient : i.getIngredientList()) {
                     dishIngredients.add(ingredient);
                 }
-                printFieldList("RESTAURATEUR_MANAGEMENUDETAILS_INGREDIENTS",dishIngredients);
-                printFieldBoolean("RESTAURATEUR_MANAGEMENUDETAILS_ACTIVE",i.isActive());
+                printFieldList("INGREDIENTS",dishIngredients);
+                printFieldBoolean("ACTIVE",i.isActive());
                 print("##################################");
             }
         } catch (ControllerException | BeanException e) {

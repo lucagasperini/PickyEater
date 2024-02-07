@@ -14,7 +14,7 @@ public class RestaurateurHomeView extends VirtualPaneView {
     @FXML
     private Button buttonMenuDetails;
     public RestaurateurHomeView(VirtualPaneView parent) {
-        super("/form/restaurateur/Home.fxml", parent);
+        super("/form/restaurateur/Home.fxml", "RESTAURATEUR_HOME", parent);
     }
 
     @FXML
@@ -31,9 +31,9 @@ public class RestaurateurHomeView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        showTitle("RESTAURATEUR_HOME");
+        showTitle();
         hideBack();
-        buttonMenuDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGEMENUDETAILS"));
-        buttonRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_HOME_MANAGERESTAURANTDETAILS"));
+        buttonMenuDetails.setText(i18n("MANAGEMENUDETAILS"));
+        buttonRestaurantDetails.setText(i18n("MANAGERESTAURANTDETAILS"));
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class RestaurateurHomeView extends VirtualRequestView {
     public RestaurateurHomeView() {
-        super("Home");
+        super("Home", "");
     }
 
     @Override

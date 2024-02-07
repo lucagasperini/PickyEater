@@ -25,7 +25,7 @@ import java.util.Map;
 public class EatingPreferencesView extends VirtualShowIngredientView {
     private final EatingPreferencesController controller = new EatingPreferencesController();
     public EatingPreferencesView(VirtualPaneView parent) {
-        super("/form/pickie/EatingPreferences.fxml", parent);
+        super("/form/pickie/EatingPreferences.fxml", "PICKY_PERSONALIZEEATINGPREFERENCES", parent);
 
         try {
             List<String> allergyList = controller.getAllergyList();
@@ -73,7 +73,8 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
             );
             setupRemoveIngredient(arg.get("removeIngredient"));
         }
-        showTitle("PICKY_PERSONALIZEEATINGPREFERENCES");
+        showTitle();
+
     }
 
     @FXML

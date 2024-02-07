@@ -11,6 +11,10 @@ import java.util.Scanner;
 public class InitView extends VirtualViewCLI {
     private final InitController controller = new InitController();
 
+    protected InitView() {
+        super("");
+    }
+
     private void askConfig() {
         Scanner userInput = new Scanner(System.in);
         SettingsBean settings = new SettingsBean();

@@ -4,8 +4,8 @@ import com.pickyeaters.logic.view.gui.VirtualPaneView;
 
 import java.util.Map;
 
-public class SearchIngredientView extends VirtualPaneView{
-    protected SearchIngredientView(VirtualPaneView parent) {
+public class ReportView extends VirtualPaneView{
+    protected ReportView(VirtualPaneView parent) {
         super("/form/pickie/ReportView.fxml", "", parent);
     }
 

@@ -30,9 +30,10 @@ public class AddDishView extends EditDishView {
             );
             setupRemoveIngredient(arg.get("removeIngredient"));
         }
-        showTitle("RESTAURATEUR_ADDDISH");
 
-        buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
+        showTitle();
+
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
     }
 
     @FXML

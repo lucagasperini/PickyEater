@@ -20,7 +20,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
     private final RestaurantDetailsController controller = new RestaurantDetailsController();
 
     public RestaurantDetailsView(VirtualPaneView parent) {
-        super("/form/restaurateur/RestaurantDetails.fxml", parent);
+        super("/form/restaurateur/RestaurantDetails.fxml", "RESTAURATEUR_MANAGERESTAURANTDETAILS", parent);
     }
 
     @FXML
@@ -139,27 +139,27 @@ public class RestaurantDetailsView extends VirtualPaneView {
 
     @Override
     protected void setup(Map<String, String> arg) {
-        buttonSave.setText(SettingsController.i18n("SAVECHANGES"));
-        showTitle("RESTAURATEUR_MANAGERESTAURANTDETAILS");
-        textRestaurateurFirstname.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_FIRSTNAME"));
-        textRestaurateurLastname.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_LASTNAME"));
-        textRestaurateurSsn.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_SSN"));
-        textRestaurateurPhone.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_PHONE"));
-        textRestaurateurEmail.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURATEUR_EMAIL"));
-        textRestaurantName.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_NAME"));
-        textRestaurantAddress.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_ADDRESS"));
-        textRestaurantPhone.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_RESTAURANT_PHONE"));
-        textOpeningHours.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_OPENINGHOURS"));
+        showTitle();
+        buttonSave.setText(i18nGlobal("SAVECHANGES"));
+        textRestaurateurFirstname.setText(i18n("RESTAURATEUR_FIRSTNAME"));
+        textRestaurateurLastname.setText(i18n("RESTAURATEUR_LASTNAME"));
+        textRestaurateurSsn.setText(i18n("RESTAURATEUR_SSN"));
+        textRestaurateurPhone.setText(i18n("RESTAURATEUR_PHONE"));
+        textRestaurateurEmail.setText(i18n("RESTAURATEUR_EMAIL"));
+        textRestaurantName.setText(i18n("RESTAURANT_NAME"));
+        textRestaurantAddress.setText(i18n("RESTAURANT_ADDRESS"));
+        textRestaurantPhone.setText(i18n("RESTAURANT_PHONE"));
+        textOpeningHours.setText(i18n("OPENINGHOURS"));
 
-        textMonday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MONDAY"));
-        textThursday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TUESDAY"));
-        textWednesday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_WEDNESDAY"));
-        textThursday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_THURSDAY"));
-        textFriday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FRIDAY"));
-        textSaturday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_SATURDAY"));
-        textSunday.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_SUNDAY"));
+        textMonday.setText(i18n("MONDAY"));
+        textThursday.setText(i18n("TUESDAY"));
+        textWednesday.setText(i18n("WEDNESDAY"));
+        textThursday.setText(i18n("THURSDAY"));
+        textFriday.setText(i18n("FRIDAY"));
+        textSaturday.setText(i18n("SATURDAY"));
+        textSunday.setText(i18n("SUNDAY"));
 
-        String from = SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_FROM");
+        String from = i18n("FROM");
 
         textFrom1.setText(from);
         textFrom2.setText(from);
@@ -169,7 +169,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
         textFrom6.setText(from);
         textFrom7.setText(from);
 
-        String to = SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_TO");
+        String to = i18n("TO");
 
         textTo1.setText(to);
         textTo2.setText(to);
@@ -179,8 +179,8 @@ public class RestaurantDetailsView extends VirtualPaneView {
         textTo6.setText(to);
         textTo7.setText(to);
 
-        textMyPersonalDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYPERSONALDETAILS"));
-        textMyRestaurantDetails.setText(SettingsController.i18n("RESTAURATEUR_MANAGERESTAURANTDETAILS_MYRESTAURANTDETAILS"));
+        textMyPersonalDetails.setText(i18n("MYPERSONALDETAILS"));
+        textMyRestaurantDetails.setText(i18n("MYRESTAURANTDETAILS"));
         try {
             RestaurateurBean restaurateur = controller.get(AppData.getInstance().getUserEmail());
             inputRestaurateurFirstname.setText(restaurateur.getFirstname());

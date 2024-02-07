@@ -1,12 +1,9 @@
 package com.pickyeaters.logic.view.gui.restaurateur;
 
-import com.pickyeaters.logic.controller.application.SettingsController;
 import com.pickyeaters.logic.controller.application.restaurateur.MenuDetailsController;
-import com.pickyeaters.logic.controller.application.restaurateur.UpdateDishController;
 import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.view.AppData;
-import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.bean.ShowDishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import com.pickyeaters.logic.view.gui.restaurateur.widget.DishListItemWidget;
@@ -22,7 +19,7 @@ import java.util.Map;
 public class MenuDetailsView extends VirtualPaneView {
     private final MenuDetailsController controller = new MenuDetailsController();
     public MenuDetailsView(VirtualPaneView parent) {
-        super("/form/restaurateur/MenuDetails.fxml", parent);
+        super("/form/restaurateur/MenuDetails.fxml", "RESTAURATEUR_MANAGEMENUDETAILS", parent);
     }
     @FXML
     private VBox vboxMenu;
@@ -38,9 +35,9 @@ public class MenuDetailsView extends VirtualPaneView {
             setupUpdateDish(arg.get("updateDish"));
             setupActiveDish(arg.get("activeDish"));
         }
-        showTitle("RESTAURATEUR_MANAGEMENUDETAILS");
-        buttonAddDish.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_ADDDISH"));
-        textShowinMenu.setText(SettingsController.i18n("RESTAURATEUR_MANAGEMENUDETAILS_SHOWINMENU"));
+        showTitle();
+        buttonAddDish.setText(i18n("ADDDISH"));
+        textShowinMenu.setText(i18n("SHOWINMENU"));
 
         setupDishList();
     }

@@ -5,7 +5,8 @@ import java.util.Scanner;
 public abstract class VirtualRequestView extends VirtualViewCLI {
 
     private final String viewName;
-    protected VirtualRequestView(String viewName) {
+    protected VirtualRequestView(String viewName, String resource) {
+        super(resource);
         this.viewName = viewName;
     }
 

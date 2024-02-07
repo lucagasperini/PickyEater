@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class PickieHomeView extends VirtualRequestView {
     public PickieHomeView() {
-        super("Home");
+        super("Home", "");
     }
 
     @Override
