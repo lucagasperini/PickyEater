@@ -82,7 +82,7 @@ public class ExcludedGroupDAO {
     public void addUserExcludedGroup(ExcludedGroup group, User user) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
-                    "CALL add_user_excluded_ingredient(?, ?)"
+                    "CALL add_user_excluded_group(?, ?)"
             );
             query.setString(user.getID());
             query.setString(group.getID());

@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.view.AppData;
 import com.pickyeaters.logic.view.bean.AllergyBean;
+import com.pickyeaters.logic.view.bean.DishIngredientBean;
 import com.pickyeaters.logic.view.bean.EatingPreferenceBean;
 import com.pickyeaters.logic.view.bean.PreferenceIngredientBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
@@ -17,6 +18,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -24,19 +26,6 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
     private final EatingPreferencesController controller = new EatingPreferencesController();
     public EatingPreferencesView(VirtualPaneView parent) {
         super("/form/pickie/EatingPreferences.fxml", parent);
-    }
-
-    @Override
-    protected void setup(Map<String, String> arg) {
-        if(arg != null) {
-            setupAddIngredient(
-                    arg.get("addIngredientName"),
-                    arg.get("addIngredientCooked"),
-                    arg.get("addIngredientOptional")
-            );
-            setupRemoveIngredient(arg.get("removeIngredient"));
-        }
-        showTitle("PICKY_PERSONALIZEEATINGPREFERENCES");
 
         try {
             List<String> allergyList = controller.getAllergyList();
@@ -52,6 +41,7 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
             checkboxLifestyleVegetarian.setSelected(bean.isPescatarian());
             checkboxReligiousHalal.setSelected(bean.isHalal());
             checkboxReligiousKosher.setSelected(bean.isKosher());
+            checkboxLifestyleVegan.setSelected(bean.isVegan());
             for(PreferenceIngredientBean ingredient : bean.getIngredientList()) {
                 setupAddIngredient(
                         ingredient.getName(),
@@ -71,6 +61,19 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
         } catch (DAOException | BeanException e) {
             showError(e);
         }
+    }
+
+    @Override
+    protected void setup(Map<String, String> arg) {
+        if(arg != null) {
+            setupAddIngredient(
+                    arg.get("addIngredientName"),
+                    arg.get("addIngredientCooked"),
+                    arg.get("addIngredientOptional")
+            );
+            setupRemoveIngredient(arg.get("removeIngredient"));
+        }
+        showTitle("PICKY_PERSONALIZEEATINGPREFERENCES");
     }
 
     @FXML
@@ -141,7 +144,38 @@ public class EatingPreferencesView extends VirtualShowIngredientView {
 
     @FXML
     void clickSaveChanges(ActionEvent event) {
+        try {
+            EatingPreferenceBean bean = new EatingPreferenceBean();
+            bean.setCarnivore(checkboxLifestyleCarnivore.isSelected());
+            bean.setHalal(checkboxReligiousHalal.isSelected());
+            bean.setVegan(checkboxLifestyleVegan.isSelected());
+            bean.setKosher(checkboxReligiousKosher.isSelected());
+            bean.setPescatarian(checkboxLifestylePescatarian.isSelected());
+            bean.setPregnant(checkboxHealthPregnant.isSelected());
+            bean.setVegetarian(checkboxLifestyleVegetarian.isSelected());
 
+            List<String> allergyList = new ArrayList<>();
+            for(Node node : vboxAllergy.getChildren()) {
+                CheckBox cb = (CheckBox) node;
+                if(cb.isSelected()) {
+                    allergyList.add(cb.getText());
+                }
+            }
+            List<PreferenceIngredientBean> ingredientList = new ArrayList<>();
+            for(DishIngredientBean ingredientBean : ingredientBeanList) {
+                ingredientList.add(new PreferenceIngredientBean(
+                        ingredientBean.getName(),
+                        ingredientBean.isCooked()
+                ));
+            }
+
+            bean.setAllergyList(allergyList);
+            bean.setIngredientList(ingredientList);
+
+            controller.setUserPreferences(bean, AppData.getInstance().getUser());
+        } catch (BeanException | DAOException e) {
+            showError(e);
+        }
     }
 
 }

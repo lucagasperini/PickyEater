@@ -18,7 +18,7 @@ public class IngredientDAO {
     public Ingredient get(String name) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query(
-                    "CALL get_allergy(?, ?)"
+                    "CALL get_ingredient(?, ?)"
             );
             query.setString(name);
             query.registerOutParameter(Types.VARCHAR);

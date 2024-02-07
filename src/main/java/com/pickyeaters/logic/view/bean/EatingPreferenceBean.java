@@ -20,6 +20,10 @@ public class EatingPreferenceBean {
     private List<String> allergyList;
     private List<PreferenceIngredientBean> ingredientList;
 
+    public EatingPreferenceBean() {
+
+    }
+
     public EatingPreferenceBean(EatingPreferences eatingPreferences) throws BeanException {
         allergyList = new ArrayList<>();
         ingredientList = new ArrayList<>();

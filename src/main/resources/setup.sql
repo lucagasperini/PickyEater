@@ -464,8 +464,6 @@ CREATE OR REPLACE PROCEDURE get_ingredient(
 	OUT _id varchar)
 LANGUAGE plpgsql
 AS $BODY$
-DECLARE
-	dish_id UUID;
 BEGIN
     SELECT id INTO _id FROM "Ingredient" WHERE name = _name::CITEXT;
 END;
@@ -580,6 +578,16 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE get_allergy(
+    IN _name varchar,
+	OUT _id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+    SELECT id INTO _id FROM "Allergy" WHERE name = _name::CITEXT;
+END;
+$BODY$;
+
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
@@ -622,6 +630,18 @@ CALL add_root_ingredient('Pasta', null);
 CALL add_child_ingredient('Rigatoni', 'Pasta', null);
 CALL add_root_ingredient('Pane', null);
 CALL add_root_ingredient('Alcol', null);
+
+CALL add_excluded_group('HALAL', null);
+CALL add_excluded_group('CARNIVORE', null);
+CALL add_excluded_group('KOSHER', null);
+CALL add_excluded_group('PESCATARIAN', null);
+CALL add_excluded_group('VEGAN', null);
+CALL add_excluded_group('VEGETARIAN', null);
+CALL add_excluded_group('PREGNANT', null);
+
+CALL add_allergy('aaaa', null);
+CALL add_allergy('bbbb', null);
+CALL add_allergy('cccc', null);
 
 DO $$
 DECLARE
