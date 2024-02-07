@@ -3,11 +3,43 @@ package com.pickyeaters.logic.factory;
 import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
+import com.pickyeaters.logic.model.City;
 import com.pickyeaters.logic.model.Restaurant;
+import com.pickyeaters.logic.model.User;
 
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RestaurantDAO {
+    public List<Restaurant> findRestaurant(User user, City city) throws DAOException {
+        try {
+            List<Restaurant> out = new ArrayList<>();
+            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+                    "SELECT restaurant_id, restaurant_name, restaurant_phone, restaurant_address FROM find_restaurant WHERE user_id = ? AND restaurant_city = ?"
+            );
+            query.setString(user.getID());
+            query.setString(city.getName());
+
+            query.execute();
+
+            while (query.next()) {
+                out.add(new Restaurant(
+                        query.getString(),
+                        query.getString(),
+                        query.getString(),
+                        query.getString(),
+                        city
+                ));
+            }
+
+            query.close();
+
+            return out;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
     public Restaurant get(String id) throws DAOException {
         try {
             DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?, ?)");
@@ -25,7 +57,7 @@ public class RestaurantDAO {
             String city = query.getString();
             query.close();
 
-            return new Restaurant(id, name, phone, address, city);
+            return new Restaurant(id, name, phone, address, new City(city));
         } catch (DatabaseControllerException ex) {
             throw new DAOException(ex);
         }
@@ -38,7 +70,7 @@ public class RestaurantDAO {
             query.setString(restaurant.getName());
             query.setString(restaurant.getPhone());
             query.setString(restaurant.getAddress());
-            query.setString(restaurant.getCity());
+            query.setString(restaurant.getCity().getName());
 
             query.execute();
             query.close();

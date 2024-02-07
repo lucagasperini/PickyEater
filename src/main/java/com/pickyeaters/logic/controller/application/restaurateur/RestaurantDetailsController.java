@@ -5,7 +5,9 @@ import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.factory.DishDAO;
 import com.pickyeaters.logic.factory.UserDAO;
+import com.pickyeaters.logic.model.City;
 import com.pickyeaters.logic.model.Restaurateur;
+import com.pickyeaters.logic.view.bean.CityBean;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.bean.UserBean;
 
@@ -23,7 +25,7 @@ public class RestaurantDetailsController extends VirtualController {
                 restaurateur.getRestaurant().getName(),
                 restaurateur.getRestaurant().getPhone(),
                 restaurateur.getRestaurant().getAddress(),
-                restaurateur.getRestaurant().getCity()
+                new CityBean(restaurateur.getRestaurant().getCity().getName())
         );
     }
 
@@ -37,7 +39,7 @@ public class RestaurantDetailsController extends VirtualController {
         restaurateur.getRestaurant().setName(restaurateurBean.getRestaurantName());
         restaurateur.getRestaurant().setAddress(restaurateurBean.getRestaurantAddress());
         restaurateur.getRestaurant().setPhone(restaurateurBean.getRestaurantPhone());
-        restaurateur.getRestaurant().setCity(restaurateurBean.getRestaurantCity());
+        restaurateur.getRestaurant().setCity(new City(restaurateurBean.getRestaurantCity().getName()));
         userDAO.updateUser(restaurateur);
     }
 }

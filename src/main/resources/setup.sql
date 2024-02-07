@@ -668,6 +668,57 @@ CREATE OR REPLACE VIEW all_user_allergy AS
     SELECT fk_user::varchar AS userid, fk_allergy::varchar AS allergy_id, name AS allergy_name FROM "User_Allergy"
         JOIN "Allergy" AS A ON fk_allergy=A.id;
 
+CREATE OR REPLACE VIEW all_city AS
+    SELECT DISTINCT city AS name FROM "Restaurant" ORDER BY city;
+
+CREATE OR REPLACE VIEW find_restaurant AS
+    SELECT R0.id::varchar AS restaurant_id,
+           R0.name AS restaurant_name,
+           R0.city::varchar AS restaurant_city,
+           R0.phone AS restaurant_phone,
+           R0.address AS restaurant_address,
+           U0.id::varchar AS user_id
+    FROM "Restaurant" AS R0 JOIN
+         "Dish" AS D0 ON D0.fk_restaurant = R0.id JOIN
+         "Dish_Ingredient" AS DI0 ON DI0.fk_dish = D0.id JOIN
+         "Ingredient" AS I0 ON DI0.fk_ingredient = I0.id CROSS JOIN
+         "User" AS U0
+    WHERE U0.type = 'PICKIE' AND (R0.name, D0.name, D0.type, I0.name, U0.id) NOT IN (
+        SELECT
+            R.name AS restaurant_name,
+            D.name AS dish_name,
+            D.type AS dish_type,
+            I.name AS ingredient_name,
+            U.id AS user_id
+        FROM "Restaurant" AS R JOIN
+            "Dish" AS D ON D.fk_restaurant = R.id JOIN
+            "Dish_Ingredient" AS DI ON DI.fk_dish = D.id JOIN
+            "Ingredient" AS I ON DI.fk_ingredient = I.id CROSS JOIN
+            "User" AS U JOIN
+            "User_ExcludedIngredient" AS UEI ON U.id = UEI.fk_user
+        WHERE
+            U.type = 'PICKIE' AND
+            UEI.fk_ingredient = I.id
+    UNION
+        SELECT
+            R.name AS restaurant_name,
+            D.name AS dish_name,
+            D.type AS dish_type,
+            I.name AS ingredient_name,
+            U.id AS user_id
+        FROM "Restaurant" AS R JOIN
+            "Dish" AS D ON D.fk_restaurant = R.id JOIN
+            "Dish_Ingredient" AS DI ON DI.fk_dish = D.id JOIN
+            "Ingredient" AS I ON DI.fk_ingredient = I.id CROSS JOIN
+            "User" AS U JOIN
+            "User_ExcludedGroup" AS UEG ON U.id = UEG.fk_user JOIN
+            "ExcludedGroup_Ingredient" AS EGI ON UEG.fk_excluded_group = EGI.fk_excluded_group
+        WHERE
+            U.type = 'PICKIE' AND
+            EGI.fk_ingredient = I.id)
+    AND D0.type IN ('DRINK', 'APPETIZER', 'FIRST', 'CONTOUR', 'SECOND', 'DESSERT')
+    GROUP BY R0.id, R0.name, R0.city, R0.phone, R0.address, U0.id
+    HAVING COUNT(DISTINCT D0.type) = 6;
 
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
 CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
@@ -702,6 +753,15 @@ DECLARE
 	id varchar;
 BEGIN
 	CALL add_excluded_group('Incinta', id);
+	CALL add_excluded_group_ingredient(id, 'Alcol');
+END;
+$$;
+
+DO $$
+DECLARE
+	id varchar;
+BEGIN
+	CALL add_excluded_group('Halal', id);
 	CALL add_excluded_group_ingredient(id, 'Alcol');
 END;
 $$;

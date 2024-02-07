@@ -6,6 +6,7 @@ import com.pickyeaters.logic.controller.exception.ControllerException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.LoginControllerException;
 import com.pickyeaters.logic.view.AppData;
+import com.pickyeaters.logic.view.bean.CityBean;
 import com.pickyeaters.logic.view.bean.RestaurateurBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
@@ -73,7 +74,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
             inputRestaurantName.setText(restaurateur.getRestaurantName());
             inputRestaurantAddress.setText(restaurateur.getRestaurantAddress());
             inputRestaurantPhone.setText(restaurateur.getRestaurantPhone());
-            inputRestaurantCity.setText(restaurateur.getRestaurantCity());
+            inputRestaurantCity.setText(restaurateur.getRestaurantCity().getName());
         } catch (DAOException ex) {
             //TODO: Add error
             showError(ex);
@@ -186,7 +187,7 @@ public class RestaurantDetailsView extends VirtualPaneView {
                 inputRestaurantName.getText(),
                 inputRestaurantPhone.getText(),
                 inputRestaurantAddress.getText(),
-                inputRestaurantCity.getText()
+                new CityBean(inputRestaurantCity.getText())
         );
         try {
             controller.set(
