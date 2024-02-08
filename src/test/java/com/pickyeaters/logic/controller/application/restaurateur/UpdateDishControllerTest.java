@@ -25,14 +25,14 @@ class UpdateDishControllerTest {
 
         AddDishController addDishController = new AddDishController();
         EditDishBean dishBean = new EditDishBean("UpdateDishTest2", "TEST", "DRINK");
-        dishBean.getIngredientList().add(new DishIngredientBean("Carne"));
+        dishBean.getIngredientList().add(new DishIngredientBean("Maiale"));
         addDishController.add(dishBean, user.getRestaurant().getID());
     }
     @Test
     void test() throws BeanException, ControllerException {
         UpdateDishController controller = new UpdateDishController();
         EditDishBean dishBean = new EditDishBean("othername", "OTHER DESCRIPTION", "APPETIZER");
-        dishBean.getIngredientList().add(new DishIngredientBean("Pane", true, true));
+        dishBean.getIngredientList().add(new DishIngredientBean("Pollo", true, true));
 
         controller.update(dishBean, "UpdateDishTest2", user.getRestaurant().getID());
 
@@ -41,7 +41,7 @@ class UpdateDishControllerTest {
         assertEquals("OTHER DESCRIPTION", fetch.getDescription());
         assertEquals("APPETIZER", fetch.getCategory());
         DishIngredientBean ingredientBean = fetch.getIngredientList().get(0);
-        assertEquals("Pane", ingredientBean.getName());
+        assertEquals("Pollo", ingredientBean.getName());
         assertTrue(ingredientBean.isCooked());
         assertTrue(ingredientBean.isOptional());
     }
