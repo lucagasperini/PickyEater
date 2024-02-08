@@ -39,7 +39,7 @@ public class ReviewDishController extends VirtualController {
         List<DishBean> out = new ArrayList<>();
         List<Dish> dishList = dishDAO.getRestaurantDishList(restaurantBean.getID());
         for(Dish dish : dishList) {
-            out.add(new DishBean(dish.getName()));
+            out.add(new DishBean(dish.getID(), dish.getName()));
         }
         return out;
     }
@@ -47,7 +47,7 @@ public class ReviewDishController extends VirtualController {
 
     public void addReview(ReviewBean bean, UserBean user) throws DAOException {
         Pickie pickie = userDAO.getPickie(user.getID());
-        Dish dish = dishDAO.get(bean.getDishName(), bean.getRestaurantID());
+        Dish dish = dishDAO.get(bean.getDishID());
         Review review = new Review(pickie, dish, bean.getGrade());
         reviewDAO.add(review);
     }

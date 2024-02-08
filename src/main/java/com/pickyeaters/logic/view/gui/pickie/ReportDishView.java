@@ -1,20 +1,26 @@
 package com.pickyeaters.logic.view.gui.pickie;
 
 import com.pickyeaters.logic.controller.application.pickie.ReportDishController;
+import com.pickyeaters.logic.controller.exception.DAOException;
+import com.pickyeaters.logic.view.AppData;
+import com.pickyeaters.logic.view.bean.DishBean;
 import com.pickyeaters.logic.view.gui.VirtualPaneView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.util.Map;
 
 public class ReportDishView extends VirtualPaneView {
     private final ReportDishController controller = new ReportDishController();
-    public ReportDishView(VirtualPaneView parent) {
+    private final DishBean dish;
+    public ReportDishView(VirtualPaneView parent, DishBean dish) {
         super("/form/pickie/ReportDish.fxml", "REPORTDISH", parent);
+        this.dish = dish;
+        ToggleGroup toggleGroup = new ToggleGroup();
+        radioListedNotUsedIngredient.setToggleGroup(toggleGroup);
+        radioNotListedUsedIngredient.setToggleGroup(toggleGroup);
     }
 
     @Override
@@ -27,10 +33,10 @@ public class ReportDishView extends VirtualPaneView {
     private Button buttonSave;
 
     @FXML
-    private CheckBox checkboxListedNotUsedIngredient;
+    private RadioButton radioListedNotUsedIngredient;
 
     @FXML
-    private CheckBox checkboxNotListedUsedIngredient;
+    private RadioButton radioNotListedUsedIngredient;
 
     @FXML
     private TextField inputIngredient;
@@ -43,7 +49,27 @@ public class ReportDishView extends VirtualPaneView {
 
     @FXML
     void clickButtonSave(ActionEvent event) {
-        throw new UnsupportedOperationException();
+        try {
+            if(radioListedNotUsedIngredient.isSelected()) {
+                controller.addReportUnusedIngredient(
+                        AppData.getInstance().getUser(),
+                        dish,
+                        inputIngredient.getText()
+                );
+            } else if(radioNotListedUsedIngredient.isSelected()) {
+                controller.addReportMissingIngredient(
+                        AppData.getInstance().getUser(),
+                        dish,
+                        inputIngredient.getText()
+                );
+            } else {
+                showError("REPORT_DISH_NO_TYPE");
+            }
+
+            showParent();
+        } catch (DAOException e) {
+            showError(e);
+        }
     }
 
 }

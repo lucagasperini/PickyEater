@@ -553,6 +553,21 @@ END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE get_dish(
+    IN _dish_id varchar,
+    OUT _restaurant_id varchar,
+	OUT _name varchar,
+    OUT _description varchar(4096),
+    OUT _type varchar(16),
+    OUT _active boolean)
+LANGUAGE plpgsql
+AS $BODY$
+BEGIN
+    SELECT name, description, type, active, fk_restaurant INTO _name, _description, _type, _active, _restaurant_id
+        FROM "Dish" WHERE id = _dish_id::UUID;
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE get_dish_by_name(
     IN _dish_name varchar,
     IN _restaurant_id varchar,
 	OUT _id varchar,

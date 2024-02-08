@@ -28,9 +28,39 @@ public class DishDAO {
         }
     }
 
-    public Dish get(String name, String restaurantID) throws DAOException {
+    public Dish get(String dishID) throws DAOException {
         try {
             QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_dish(?, ?, ?, ?, ?, ?)");
+            query.setString(dishID);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutBoolean();
+
+            query.execute();
+
+            String restaurantID = query.getString();
+            String name = query.getString();
+            String description = query.getString();
+            String type = query.getString();
+            boolean active = query.getBoolean();
+
+            query.close();
+
+            Dish dish = rowToDish(dishID, name, description, type, active);
+            final IngredientDAO ingredientDAO = new IngredientDAO();
+            dish.addIngredientList(ingredientDAO.getIngredientListOfDish(dishID));
+            return dish;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
+
+    public Dish get(String name, String restaurantID) throws DAOException {
+        try {
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_dish_by_name(?, ?, ?, ?, ?, ?)");
             query.setString(name);
             query.setString(restaurantID);
             query.registerOutString();

@@ -29,7 +29,7 @@ public class ReviewDishView extends VirtualPaneView {
         try {
             List<CityBean> cityBeanList = controller.getCityList();
             for(CityBean city : cityBeanList) {
-                comboboxCity.getItems().add(city.getName());
+                comboboxCity.getItems().add(city);
             }
         } catch (DAOException e) {
             showError(e);
@@ -62,10 +62,10 @@ public class ReviewDishView extends VirtualPaneView {
     private Button buttonSave;
 
     @FXML
-    private ComboBox<String> comboboxCity;
+    private ComboBox<CityBean> comboboxCity;
 
     @FXML
-    private ComboBox<String> comboboxDish;
+    private ComboBox<DishBean> comboboxDish;
 
     @FXML
     private ComboBox<RestaurantBean> comboboxRestaurant;
@@ -109,7 +109,7 @@ public class ReviewDishView extends VirtualPaneView {
     void changeComboBoxCity(ActionEvent event) {
         try {
             List<RestaurantBean> restaurantBeanList = controller.getRestaurantList(
-                    new CityBean(comboboxCity.getValue())
+                    comboboxCity.getValue()
             );
             for(RestaurantBean restaurant : restaurantBeanList) {
                 comboboxRestaurant.getItems().add(restaurant);
@@ -126,7 +126,7 @@ public class ReviewDishView extends VirtualPaneView {
                     comboboxRestaurant.getValue()
             );
             for(DishBean dish : dishBeanList) {
-                comboboxDish.getItems().add(dish.getName());
+                comboboxDish.getItems().add(dish);
             }
         } catch (DAOException | BeanException e) {
             showError(e);
@@ -134,17 +134,19 @@ public class ReviewDishView extends VirtualPaneView {
     }
     @FXML
     void clickButtonReport(ActionEvent event) {
-        ReportDishView view = new ReportDishView(this);
-        view.show();
+        if(comboboxDish.getValue() == null) {
+            showError("NO_DISH_PROVIDED");
+        } else {
+            ReportDishView view = new ReportDishView(this, comboboxDish.getValue());
+            view.show();
+        }
     }
 
     @FXML
     void clickButtonSave(ActionEvent event) {
         try {
-            controller.addReview(new ReviewBean(
-                    comboboxDish.getValue(),
-                    comboboxRestaurant.getValue().getID(),
-                    grade),
+            controller.addReview(
+                    new ReviewBean(comboboxDish.getValue().getID(), grade),
                     AppData.getInstance().getUser()
             );
         } catch (DAOException e) {
