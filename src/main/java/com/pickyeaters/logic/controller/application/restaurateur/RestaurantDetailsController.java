@@ -14,7 +14,6 @@ import com.pickyeaters.logic.view.bean.UserBean;
 public class RestaurantDetailsController extends VirtualController {
     private final UserDAO userDAO = new UserDAO();
     public RestaurateurBean get(UserBean user) throws DAOException {
-        // TODO: Handle this cast safely
         Restaurateur restaurateur = userDAO.getRestaurateur(user.getID());
         return new RestaurateurBean(
                 restaurateur.getEmail(),

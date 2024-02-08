@@ -1,17 +1,15 @@
 package com.pickyeaters.logic.view.bean;
 
 import com.pickyeaters.logic.controller.exception.BeanException;
-import com.pickyeaters.logic.model.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public abstract class DishBean {
+public class DishBean {
     private String name;
     private String description;
     private String category;
-    protected DishBean() {}
-    protected DishBean(String name, String description, String category) throws BeanException {
+    public DishBean(String name) throws BeanException {
+        setName(name);
+    }
+    public DishBean(String name, String description, String category) throws BeanException {
         setName(name);
         setDescription(description);
         setCategory(category);

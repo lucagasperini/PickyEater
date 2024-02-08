@@ -3,7 +3,7 @@ CREATE EXTENSION IF NOT EXISTS citext;
 
 CREATE TABLE "Restaurant" (
     id uuid NOT NULL DEFAULT uuid_generate_v4(),
-    crtime timestamp without time zone NOT NULL DEFAULT now(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
     name varchar(256) NOT NULL,
     phone varchar(16) NOT NULL,
     address varchar(256) NOT NULL,
@@ -128,6 +128,35 @@ CREATE TABLE "Allergy_Ingredient" (
     FOREIGN KEY(fk_allergy) REFERENCES "Allergy"(id)
 );
 
+CREATE TABLE "Review" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_dish UUID NOT NULL,
+    fk_user UUID NOT NULL,
+    grade INT NOT NULL,
+    unique(fk_dish, fk_user),
+    FOREIGN KEY(fk_user) REFERENCES "User"(id),
+    FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
+);
+
+CREATE TABLE "Report" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    description varchar(1024),
+    fk_user UUID NOT NULL,
+    FOREIGN KEY(fk_user) REFERENCES "User"(id)
+);
+
+CREATE TABLE "Report_Dish" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_report UUID NOT NULL,
+    fk_dish UUID NOT NULL,
+    type INT NOT NULL,
+    unique(fk_report, fk_dish),
+    FOREIGN KEY(fk_report) REFERENCES "Report"(id),
+    FOREIGN KEY(fk_dish) REFERENCES "Dish"(id)
+);
 
 CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
@@ -706,6 +735,95 @@ BEGIN
 END;
 $BODY$;
 
+
+CREATE OR REPLACE PROCEDURE add_report_dish_missing_ingredient(
+    IN _user_id varchar,
+    IN _dish_id varchar,
+    IN _description varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Report" (fk_user, description) VALUES (_user_id::UUID, _description) RETURNING id::varchar INTO report_id;
+	INSERT INTO "Report_Dish" (fk_report, fk_dish, type) VALUES (report_id, _dish_id::UUID, 1);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_report_dish_unused_ingredient(
+    IN _user_id varchar,
+    IN _dish_id varchar,
+    IN _description varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Report" (fk_user, description) VALUES (_user_id::UUID, _description) RETURNING id::varchar INTO report_id;
+	INSERT INTO "Report_Dish" (fk_report, fk_dish, type) VALUES (report_id, _dish_id::UUID, 0);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_review_poor(
+    IN _user_id varchar,
+    IN _dish_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Review" (fk_user, fk_dish, grade) VALUES (_user_id::UUID, _dish_id::UUID, 0);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_review_fair(
+    IN _user_id varchar,
+    IN _dish_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Review" (fk_user, fk_dish, grade) VALUES (_user_id::UUID, _dish_id::UUID, 1);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_review_average(
+    IN _user_id varchar,
+    IN _dish_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Review" (fk_user, fk_dish, grade) VALUES (_user_id::UUID, _dish_id::UUID, 2);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_review_good(
+    IN _user_id varchar,
+    IN _dish_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Review" (fk_user, fk_dish, grade) VALUES (_user_id::UUID, _dish_id::UUID, 3);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_review_excellent(
+    IN _user_id varchar,
+    IN _dish_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    report_id UUID;
+BEGIN
+    INSERT INTO "Review" (fk_user, fk_dish, grade) VALUES (_user_id::UUID, _dish_id::UUID, 4);
+END;
+$BODY$;
+
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
@@ -734,6 +852,13 @@ CREATE OR REPLACE VIEW all_user_allergy AS
 
 CREATE OR REPLACE VIEW all_city AS
     SELECT DISTINCT city AS name FROM "Restaurant" ORDER BY city;
+
+CREATE OR REPLACE VIEW all_restaurant AS
+    SELECT id AS restaurant_id,
+		name AS restaurant_name,
+		phone AS restaurant_phone,
+		address AS restaurant_address,
+		city AS restaurant_city FROM "Restaurant";
 
 CREATE OR REPLACE VIEW find_restaurant AS
     SELECT R0.id::varchar AS restaurant_id,
