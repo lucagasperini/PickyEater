@@ -236,8 +236,7 @@ public class IngredientDAO {
         private final LinkedList<IngredientNode> child;
 
         public IngredientNode(Ingredient value) {
-            // TODO: CC?
-            this.value = new Ingredient(value);
+            this.value = value;
             this.child = new LinkedList<>();
         }
 

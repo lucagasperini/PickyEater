@@ -43,6 +43,7 @@ public class ExcludedGroupDAO {
             );
             query.setString(groupID);
             query.execute();
+
             while(query.next()) {
                 out.add(new Ingredient(
                         query.getString(),

@@ -23,12 +23,6 @@ public class UserBean {
         setType(type);
     }
 
-    public  UserBean(String ID, String email, String name, RestaurantBean restaurant) {
-        setID(ID);
-        setName(name);
-        setEmail(email);
-        setType(UserType.RESTAURATEUR);
-    }
     public UserBean(User user) throws BeanException {
         this(
                 user.getID(),
