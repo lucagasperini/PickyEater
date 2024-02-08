@@ -7,24 +7,12 @@ public abstract class User {
     private String email;
     private String firstname;
     private String lastname;
-    private Date birthdate;
 
-
-    protected User(String id, String email) {
-        this(id, email, null, null);
-    }
     protected User(String id, String email, String firstname, String lastname) {
         this.id = id;
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
-    }
-
-    protected User(User user) {
-        this.id = user.id;
-        this.email = user.email;
-        this.firstname = user.firstname;
-        this.lastname = user.lastname;
     }
 
     public String getID() {

@@ -5,9 +5,6 @@ public class Ingredient {
     private String name;
     private boolean cooked;
     private boolean optional;
-    public Ingredient(String name) {
-        this("", name, false, false);
-    }
     public Ingredient(String name, boolean cooked, boolean optional) {
         this("", name, cooked, optional);
     }
@@ -21,10 +18,6 @@ public class Ingredient {
         setOptional(optional);
     }
 
-    public Ingredient(Ingredient ingredient) {
-        this.id = ingredient.id;
-        this.name = ingredient.name;
-    }
 
     public String getName() {
         return name;
