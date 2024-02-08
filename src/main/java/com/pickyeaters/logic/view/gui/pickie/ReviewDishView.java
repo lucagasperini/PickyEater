@@ -134,7 +134,8 @@ public class ReviewDishView extends VirtualPaneView {
     }
     @FXML
     void clickButtonReport(ActionEvent event) {
-
+        ReportDishView view = new ReportDishView(this);
+        view.show();
     }
 
     @FXML
