@@ -1,22 +1,30 @@
 package com.pickyeaters.logic.view.bean;
 
 import com.pickyeaters.logic.controller.exception.BeanException;
-import com.pickyeaters.logic.model.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public abstract class DishBean {
+public class DishBean {
+    private String id;
     private String name;
     private String description;
     private String category;
-    protected DishBean() {}
-    protected DishBean(String name, String description, String category) throws BeanException {
+    public DishBean(String id, String name) throws BeanException {
+        setID(id);
+        setName(name);
+    }
+    public DishBean(String id, String name, String description, String category) throws BeanException {
+        setID(id);
         setName(name);
         setDescription(description);
         setCategory(category);
     }
 
+    public DishBean(String name, String description, String category) throws BeanException {
+        this("", name, description, category);
+    }
+
+    public String getID() {
+        return id;
+    }
 
     public String getDescription() {
         return description;
@@ -37,6 +45,10 @@ public abstract class DishBean {
         this.name = name;
     }
 
+    public void setID(String id) {
+        this.id = id;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -45,4 +57,8 @@ public abstract class DishBean {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

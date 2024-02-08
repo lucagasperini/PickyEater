@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindRestaurantController extends VirtualController {
-
     private final CityDAO cityDAO = new CityDAO();
     private final RestaurantDAO restaurantDAO = new RestaurantDAO();
     private final UserDAO userDAO = new UserDAO();

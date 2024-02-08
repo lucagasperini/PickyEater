@@ -65,6 +65,35 @@ public class RestaurantDAO {
         }
     }
 
+    public List<Restaurant> getAll(City city) throws DAOException {
+        try {
+            List<Restaurant> out = new ArrayList<>();
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
+                    "SELECT restaurant_id, restaurant_name, restaurant_phone, restaurant_address FROM all_restaurant WHERE restaurant_city = ?"
+            );
+
+            query.setString(city.getName());
+
+            query.execute();
+
+            while (query.next()) {
+                out.add(new Restaurant(
+                        query.getString(),
+                        query.getString(),
+                        query.getString(),
+                        query.getString(),
+                        city
+                ));
+            }
+
+            query.close();
+
+            return out;
+        } catch (DatabaseControllerException ex) {
+            throw new DAOException(ex);
+        }
+    }
+
     public void update(Restaurant restaurant) throws DAOException {
         try{
             QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_restaurant(?, ?, ?, ?, ?)");

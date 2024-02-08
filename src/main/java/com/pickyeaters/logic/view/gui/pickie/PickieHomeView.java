@@ -43,6 +43,7 @@ public class PickieHomeView extends VirtualPaneView {
     @Override
     protected void setup(Map<String, String> arg) {
         showTitle();
+        hideBack();
         buttonFindRestaurant.setText(i18n("FINDRESTAURANT"));
         buttonReviewDish.setText(i18n("REVIEWADISH"));
         buttonEatingPreferences.setText(i18n("PERSONALIZEEATINGPREFERENCES"));
