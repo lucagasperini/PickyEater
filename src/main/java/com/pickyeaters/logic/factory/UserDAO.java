@@ -4,17 +4,18 @@ import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
+import com.pickyeaters.logic.utils.QueryProcedure;
 
 import java.sql.Types;
 
 public class UserDAO {
     public boolean login(String username, String password) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL login(?,?,?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL login(?,?,?)");
 
             query.setString(username);
             query.setString(password);
-            query.registerOutParameter(Types.BIT);
+            query.registerOutBoolean();
 
             query.execute();
 
@@ -29,12 +30,12 @@ public class UserDAO {
     }
     public User getUser(String id) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_user(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_user(?, ?, ?, ?, ?)");
             query.setString(id);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
 
             query.execute();
 
@@ -62,12 +63,12 @@ public class UserDAO {
 
     public Pickie getPickie(String id) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_pickie(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_pickie(?, ?, ?, ?, ?)");
             query.setString(id);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
 
             query.execute();
 
@@ -83,14 +84,14 @@ public class UserDAO {
     }
     public Restaurateur getRestaurateur(String id) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_restaurateur(?, ?, ?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_restaurateur(?, ?, ?, ?, ?, ?, ?)");
             query.setString(id);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
 
             query.execute();
 
@@ -113,12 +114,12 @@ public class UserDAO {
 
     public User getUserInfo(String email) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL userinfo(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL userinfo(?, ?, ?, ?, ?)");
             query.setString(email);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
 
             query.execute();
 
@@ -148,9 +149,9 @@ public class UserDAO {
             String email,
             String firstname,
             String lastname) throws DatabaseControllerException {
-        DatabaseController.Query query = DatabaseController.getInstance().query("CALL userinfo_pickie(?, ?)");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL userinfo_pickie(?, ?)");
         query.setString(email);
-        query.registerOutParameter(Types.VARCHAR);
+        query.registerOutString();
         query.execute();
         String username = query.getString();
         query.close();
@@ -161,11 +162,11 @@ public class UserDAO {
             String email,
             String firstname,
             String lastname) throws DatabaseControllerException {
-        DatabaseController.Query query = DatabaseController.getInstance().query("CALL userinfo_rest(?, ?, ?, ?)");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL userinfo_rest(?, ?, ?, ?)");
         query.setString(email);
-        query.registerOutParameter(Types.VARCHAR);
-        query.registerOutParameter(Types.VARCHAR);
-        query.registerOutParameter(Types.VARCHAR);
+        query.registerOutString();
+        query.registerOutString();
+        query.registerOutString();
         query.execute();
 
         String phone = query.getString();
@@ -196,8 +197,7 @@ public class UserDAO {
     }
 
     public void updateUserPickie(Pickie pickie) throws DatabaseControllerException {
-        DatabaseController.Query query =
-                DatabaseController.getInstance().query("CALL update_pickie(?, ?, ?, ?, ?)");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_pickie(?, ?, ?, ?, ?)");
         query.setString(pickie.getID());
         query.setString(pickie.getEmail());
         query.setString(pickie.getFirstname());
@@ -209,8 +209,7 @@ public class UserDAO {
     }
 
     public void updateUserAdministrator(Administrator administrator) throws DatabaseControllerException {
-        DatabaseController.Query query =
-                DatabaseController.getInstance().query("CALL update_administrator(?, ?, ?, ?)");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_administrator(?, ?, ?, ?)");
         query.setString(administrator.getID());
         query.setString(administrator.getEmail());
         query.setString(administrator.getFirstname());
@@ -221,8 +220,7 @@ public class UserDAO {
     }
 
     public void updateUserRestaurateur(Restaurateur restaurateur) throws DatabaseControllerException {
-        DatabaseController.Query query =
-                DatabaseController.getInstance().query("CALL update_restaurateur(?, ?, ?, ?, ?, ?)");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_restaurateur(?, ?, ?, ?, ?, ?)");
         query.setString(restaurateur.getID());
         query.setString(restaurateur.getEmail());
         query.setString(restaurateur.getFirstname());

@@ -4,6 +4,8 @@ import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
+import com.pickyeaters.logic.utils.QueryProcedure;
+import com.pickyeaters.logic.utils.QueryResultSet;
 import com.pickyeaters.logic.view.bean.DishIngredientBean;
 
 import java.sql.Types;
@@ -13,7 +15,7 @@ import java.util.List;
 public class DishDAO {
     public void update(Dish dish, String dishName, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_dish(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_dish(?, ?, ?, ?, ?)");
             query.setString(dishName);
             query.setString(restaurantID);
             query.setString(dish.getName());
@@ -28,13 +30,13 @@ public class DishDAO {
 
     public Dish get(String name, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL get_dish(?, ?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL get_dish(?, ?, ?, ?, ?, ?)");
             query.setString(name);
             query.setString(restaurantID);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.BIT);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutBoolean();
 
             query.execute();
 
@@ -56,12 +58,12 @@ public class DishDAO {
 
     public String addDish(Dish dish, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL add_dish(?, ?, ?, ?, ?)");
             query.setString(dish.getName());
             query.setString(dish.getType());
             query.setString(dish.getDescription());
             query.setString(restaurantID);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
 
             query.execute();
 
@@ -80,7 +82,7 @@ public class DishDAO {
             boolean ingredientCooked,
             boolean ingredientOptional) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL add_dish_ingredient(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL add_dish_ingredient(?, ?, ?, ?, ?)");
             query.setString(name);
             query.setString(restaurantID);
             query.setString(ingredientName);
@@ -97,7 +99,7 @@ public class DishDAO {
     public List<Dish> getRestaurantDishList(String restaurantID) throws DAOException {
         try {
             LinkedList<Dish> out = new LinkedList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT id, name, description, type, active FROM \"Dish\" WHERE fk_restaurant::varchar = ? ORDER BY name"
             );
             query.setString(restaurantID);
@@ -135,7 +137,7 @@ public class DishDAO {
 
     public void delete(String name, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL delete_dish(?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL delete_dish(?, ?)");
             query.setString(name);
             query.setString(restaurantID);
             query.execute();
@@ -147,7 +149,7 @@ public class DishDAO {
 
     public void toggle(String name, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL toggle_dish(?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL toggle_dish(?, ?)");
             query.setString(name);
             query.setString(restaurantID);
             query.execute();
@@ -159,7 +161,7 @@ public class DishDAO {
 
     public void unlinkIngredient(String name, String restaurantID) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL unlink_dish_ingredient(?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL unlink_dish_ingredient(?, ?)");
             query.setString(name);
             query.setString(restaurantID);
             query.execute();

@@ -2,6 +2,8 @@ package com.pickyeaters.logic.controller.application;
 
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.controller.exception.SettingsControllerException;
+import com.pickyeaters.logic.utils.QueryProcedure;
+import com.pickyeaters.logic.utils.QueryResultSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +23,9 @@ class DatabaseControllerTest {
 
     @Test
     void query() throws DatabaseControllerException {
-        DatabaseController.Query query = DatabaseController.getInstance().query("CALL test_database(?, ?);");
+        QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL test_database(?, ?);");
         query.setString("2");
-        query.registerOutParameter(Types.VARCHAR);
+        query.registerOutString();
         query.execute();
         String value = query.getString();
         query.close();
@@ -31,7 +33,7 @@ class DatabaseControllerTest {
     }
     @Test
     void queryResultSet() throws DatabaseControllerException {
-        DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+        QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                 "SELECT '1' AS ID WHERE 1=1 UNION SELECT '2' WHERE 1=1;"
         );
         query.execute();

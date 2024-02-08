@@ -6,6 +6,8 @@ import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.Allergy;
 import com.pickyeaters.logic.model.Ingredient;
 import com.pickyeaters.logic.model.User;
+import com.pickyeaters.logic.utils.QueryProcedure;
+import com.pickyeaters.logic.utils.QueryResultSet;
 
 import java.sql.Types;
 import java.util.ArrayList;
@@ -17,11 +19,11 @@ public class IngredientDAO {
 
     public Ingredient get(String name) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query(
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure(
                     "CALL get_ingredient(?, ?)"
             );
             query.setString(name);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
 
             query.execute();
             Ingredient out = new Ingredient(query.getString(), name);
@@ -35,7 +37,7 @@ public class IngredientDAO {
         try {
             Deque<IngredientTuple> nodes = new LinkedList<>();
             Deque<Ingredient> roots = new LinkedList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet("SELECT * FROM all_ingredient");
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet("SELECT * FROM all_ingredient");
 
             query.execute();
             while(query.next()) {
@@ -63,7 +65,7 @@ public class IngredientDAO {
     public List<Ingredient> getIngredientListOfDish(String dishID) throws DAOException {
         try {
             LinkedList<Ingredient> out = new LinkedList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT name, cooked, optional FROM all_dish_ingredient WHERE dish_id = ?"
             );
             query.setString(dishID);
@@ -88,7 +90,7 @@ public class IngredientDAO {
     public List<Ingredient> getExcludedIngredientList(String userID) throws DAOException {
         try {
             LinkedList<Ingredient> out = new LinkedList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT name, cooked FROM all_user_excluded_ingredient WHERE userid = ?"
             );
             query.setString(userID);
@@ -112,7 +114,7 @@ public class IngredientDAO {
 
     public void addUserExcludedIngredient(Ingredient ingredient, User user) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "CALL add_user_excluded_ingredient(?, ?)"
             );
             query.setString(user.getID());
