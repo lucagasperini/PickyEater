@@ -7,6 +7,8 @@ import com.pickyeaters.logic.model.Allergy;
 import com.pickyeaters.logic.model.ExcludedGroup;
 import com.pickyeaters.logic.model.Ingredient;
 import com.pickyeaters.logic.model.User;
+import com.pickyeaters.logic.utils.QueryProcedure;
+import com.pickyeaters.logic.utils.QueryResultSet;
 
 import java.sql.Types;
 import java.util.ArrayList;
@@ -20,11 +22,11 @@ public class ExcludedGroupDAO {
     }
     private String getID(String name) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query(
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure(
                     "CALL get_excluded_group_id(?,?)"
             );
             query.setString(name);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
             query.execute();
             String id = query.getString();
             query.close();
@@ -36,7 +38,7 @@ public class ExcludedGroupDAO {
     private List<Ingredient> getIngredientList(String groupID) throws DAOException {
         try {
             List<Ingredient> out = new ArrayList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT name, cooked FROM all_excludedgroup_ingredient WHERE group_id = ?"
             );
             query.setString(groupID);
@@ -58,7 +60,7 @@ public class ExcludedGroupDAO {
     public List<ExcludedGroup> getExcludedGroupOfUser(String userID) throws DAOException {
         try {
             List<ExcludedGroup> groupList = new ArrayList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT groupid, groupname FROM all_user_excludedgroup WHERE userid = ?"
             );
             query.setString(userID);
@@ -81,7 +83,7 @@ public class ExcludedGroupDAO {
 
     public void addUserExcludedGroup(ExcludedGroup group, User user) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "CALL add_user_excluded_group(?, ?)"
             );
             query.setString(user.getID());

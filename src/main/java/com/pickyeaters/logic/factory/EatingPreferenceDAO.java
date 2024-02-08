@@ -5,6 +5,7 @@ import com.pickyeaters.logic.controller.exception.BeanException;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.*;
+import com.pickyeaters.logic.utils.QueryProcedure;
 import com.pickyeaters.logic.view.bean.EatingPreferenceBean;
 import com.pickyeaters.logic.view.bean.PreferenceIngredientBean;
 
@@ -31,7 +32,7 @@ public class EatingPreferenceDAO {
     }
     public void clearUserPreference(User user) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query(
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure(
                     "CALL clear_user_preference(?)"
             );
             query.setString(user.getID());

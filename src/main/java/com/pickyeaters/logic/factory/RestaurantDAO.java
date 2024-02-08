@@ -6,6 +6,8 @@ import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.City;
 import com.pickyeaters.logic.model.Restaurant;
 import com.pickyeaters.logic.model.User;
+import com.pickyeaters.logic.utils.QueryProcedure;
+import com.pickyeaters.logic.utils.QueryResultSet;
 
 import java.sql.Types;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class RestaurantDAO {
     public List<Restaurant> findRestaurant(User user, City city) throws DAOException {
         try {
             List<Restaurant> out = new ArrayList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet(
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet(
                     "SELECT restaurant_id, restaurant_name, restaurant_phone, restaurant_address FROM find_restaurant WHERE user_id = ? AND restaurant_city = ?"
             );
             query.setString(user.getID());
@@ -42,12 +44,12 @@ public class RestaurantDAO {
     }
     public Restaurant get(String id) throws DAOException {
         try {
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL restinfo(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL restinfo(?, ?, ?, ?, ?)");
             query.setString(id);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
-            query.registerOutParameter(Types.VARCHAR);
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
+            query.registerOutString();
 
             query.execute();
 
@@ -65,7 +67,7 @@ public class RestaurantDAO {
 
     public void update(Restaurant restaurant) throws DAOException {
         try{
-            DatabaseController.Query query = DatabaseController.getInstance().query("CALL update_restaurant(?, ?, ?, ?, ?)");
+            QueryProcedure query = DatabaseController.getInstance().queryProcedure("CALL update_restaurant(?, ?, ?, ?, ?)");
             query.setString(restaurant.getID());
             query.setString(restaurant.getName());
             query.setString(restaurant.getPhone());

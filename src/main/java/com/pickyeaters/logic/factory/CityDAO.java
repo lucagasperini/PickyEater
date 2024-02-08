@@ -4,6 +4,7 @@ import com.pickyeaters.logic.controller.application.DatabaseController;
 import com.pickyeaters.logic.controller.exception.DAOException;
 import com.pickyeaters.logic.controller.exception.DatabaseControllerException;
 import com.pickyeaters.logic.model.City;
+import com.pickyeaters.logic.utils.QueryResultSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class CityDAO {
     public List<City> getAll() throws DAOException {
         try {
             List<City> out = new ArrayList<>();
-            DatabaseController.Query query = DatabaseController.getInstance().queryResultSet("SELECT name FROM all_city");
+            QueryResultSet query = DatabaseController.getInstance().queryResultSet("SELECT name FROM all_city");
 
             query.execute();
             while(query.next()) {
