@@ -26,7 +26,7 @@ class AddDishControllerTest  {
     void add() throws BeanException, ControllerException {
         AddDishController controller = new AddDishController();
         EditDishBean dishBean = new EditDishBean("test", "TEST", "DRINK");
-        dishBean.getIngredientList().add(new DishIngredientBean("Carne"));
+        dishBean.getIngredientList().add(new DishIngredientBean("Pollo"));
         controller.add(dishBean, user.getRestaurant().getID());
     }
 }
