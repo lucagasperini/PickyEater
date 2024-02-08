@@ -118,6 +118,16 @@ CREATE TABLE "User_Allergy" (
     unique(fk_user, fk_allergy)
 );
 
+CREATE TABLE "Allergy_Ingredient" (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    crtime TIMESTAMP NOT NULL DEFAULT NOW(),
+    fk_ingredient UUID NOT NULL,
+    fk_allergy UUID NOT NULL,
+    unique(fk_allergy, fk_ingredient),
+    FOREIGN KEY(fk_ingredient) REFERENCES "Ingredient"(id),
+    FOREIGN KEY(fk_allergy) REFERENCES "Allergy"(id)
+);
+
 
 CREATE OR REPLACE PROCEDURE restinfo(
 	IN _id varchar,
@@ -426,6 +436,26 @@ END;
 $BODY$;
 
 CREATE OR REPLACE PROCEDURE add_dish_ingredient(
+    IN _dish_id varchar,
+    IN _ingredient_name varchar,
+    IN _cooked boolean,
+    IN _optional boolean)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+	INSERT INTO "Dish_Ingredient" (fk_ingredient, fk_dish, cooked, optional)
+	    VALUES (ingredient_id, _dish_id::UUID, _cooked, _optional);
+END;
+$BODY$;
+
+
+CREATE OR REPLACE PROCEDURE add_dish_ingredient(
     IN _dish_name varchar,
     IN _restaurant_id varchar,
     IN _ingredient_name varchar,
@@ -642,6 +672,40 @@ BEGIN
 END;
 $BODY$;
 
+CREATE OR REPLACE PROCEDURE add_allergy_ingredient(
+    IN _allergy_id varchar,
+    IN _ingredient_id varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+BEGIN
+	INSERT INTO "Allergy_Ingredient" (fk_allergy, fk_ingredient) VALUES (_allergy_id::UUID, _ingredient_id::UUID);
+END;
+$BODY$;
+
+CREATE OR REPLACE PROCEDURE add_allergy_ingredient_name(
+    IN _allergy_name varchar,
+    IN _ingredient_name varchar)
+LANGUAGE plpgsql
+AS $BODY$
+DECLARE
+    ingredient_id UUID;
+    allergy_id UUID;
+BEGIN
+    SELECT id INTO ingredient_id FROM "Ingredient" WHERE name = _ingredient_name::CITEXT;
+    IF(ingredient_id IS NULL) THEN
+    		RAISE 'Invalid ingredient provided [_ingredient_name="%"]', _ingredient_name;
+    END IF;
+    SELECT id INTO allergy_id FROM "Allergy" WHERE name = _allergy_name::CITEXT;
+    IF(allergy_id IS NULL) THEN
+            RAISE 'Invalid ingredient provided [_allergy_name="%"]', _allergy_name;
+    END IF;
+
+	INSERT INTO "Allergy_Ingredient" (fk_allergy, fk_ingredient) VALUES (allergy_id, ingredient_id);
+END;
+$BODY$;
+
 CREATE OR REPLACE VIEW all_ingredient AS
 SELECT id::varchar AS id, name, fk_parent FROM "Ingredient";
 
@@ -679,16 +743,13 @@ CREATE OR REPLACE VIEW find_restaurant AS
            R0.address AS restaurant_address,
            U0.id::varchar AS user_id
     FROM "Restaurant" AS R0 JOIN
-         "Dish" AS D0 ON D0.fk_restaurant = R0.id JOIN
-         "Dish_Ingredient" AS DI0 ON DI0.fk_dish = D0.id JOIN
-         "Ingredient" AS I0 ON DI0.fk_ingredient = I0.id CROSS JOIN
+         "Dish" AS D0 ON D0.fk_restaurant = R0.id CROSS JOIN
          "User" AS U0
-    WHERE U0.type = 'PICKIE' AND (R0.name, D0.name, D0.type, I0.name, U0.id) NOT IN (
+    WHERE U0.type = 'PICKIE' AND (R0.name, D0.name, D0.type, U0.id) NOT IN (
         SELECT
             R.name AS restaurant_name,
             D.name AS dish_name,
             D.type AS dish_type,
-            I.name AS ingredient_name,
             U.id AS user_id
         FROM "Restaurant" AS R JOIN
             "Dish" AS D ON D.fk_restaurant = R.id JOIN
@@ -704,7 +765,6 @@ CREATE OR REPLACE VIEW find_restaurant AS
             R.name AS restaurant_name,
             D.name AS dish_name,
             D.type AS dish_type,
-            I.name AS ingredient_name,
             U.id AS user_id
         FROM "Restaurant" AS R JOIN
             "Dish" AS D ON D.fk_restaurant = R.id JOIN
@@ -715,53 +775,401 @@ CREATE OR REPLACE VIEW find_restaurant AS
             "ExcludedGroup_Ingredient" AS EGI ON UEG.fk_excluded_group = EGI.fk_excluded_group
         WHERE
             U.type = 'PICKIE' AND
-            EGI.fk_ingredient = I.id)
+            EGI.fk_ingredient = I.id
+    UNION
+        SELECT
+            R.name AS restaurant_name,
+            D.name AS dish_name,
+            D.type AS dish_type,
+            U.id AS user_id
+        FROM "Restaurant" AS R JOIN
+            "Dish" AS D ON D.fk_restaurant = R.id JOIN
+            "Dish_Ingredient" AS DI ON DI.fk_dish = D.id JOIN
+            "Ingredient" AS I ON DI.fk_ingredient = I.id JOIN
+        	"Allergy_Ingredient" AS AI ON I.id = AI.fk_ingredient CROSS JOIN
+            "User" AS U JOIN
+            "User_Allergy" AS UA ON U.id = UA.fk_user
+        WHERE
+            U.type = 'PICKIE' AND
+            UA.fk_allergy = AI.fk_allergy)
     AND D0.type IN ('DRINK', 'APPETIZER', 'FIRST', 'CONTOUR', 'SECOND', 'DESSERT')
     GROUP BY R0.id, R0.name, R0.city, R0.phone, R0.address, U0.id
     HAVING COUNT(DISTINCT D0.type) = 6;
 
 CALL add_restaurateur('lucaR', 'luca', 'Luca', 'Gasperini', '+393332221111', '123456789', 'Pickie Express', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
-CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'luca', null);
+CALL add_restaurateur('lucaR1', 'luca', 'Luca', 'Gasperini', '+393332221111', '1111', 'Red', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
+CALL add_restaurateur('lucaR2', 'luca', 'Luca', 'Gasperini', '+393332221111', '2222', 'Green', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
+CALL add_restaurateur('lucaR3', 'luca', 'Luca', 'Gasperini', '+393332221111', '3333', 'Blue', '+391112223333', 'Via del buon gusto, 1', 'Roma', null);
+CALL add_pickie('lucaP', 'luca', 'Luca', 'Gasperini', 'lucap', null);
+CALL add_pickie('lucaP1', 'luca', 'Luca', 'Gasperini', 'lucap1', null);
+CALL add_pickie('lucaP2', 'luca', 'Luca', 'Gasperini', 'lucap2', null);
 CALL add_admin('lucaA', 'luca', 'Luca', 'Gasperini', null);
 
-CALL add_root_ingredient('Carne', null);
-CALL add_child_ingredient('Manzo', 'Carne', null);
-CALL add_child_ingredient('Suino', 'Carne', null);
-CALL add_child_ingredient('Pollo', 'Carne', null);
-CALL add_child_ingredient('Petto di pollo', 'Pollo', null);
-CALL add_root_ingredient('Pesce', null);
-CALL add_child_ingredient('Tonno', 'Pesce', null);
-CALL add_root_ingredient('Pasta', null);
-CALL add_child_ingredient('Rigatoni', 'Pasta', null);
-CALL add_root_ingredient('Pane', null);
+-------------- Ingredient table population -----------------
 CALL add_root_ingredient('Alcol', null);
+CALL add_root_ingredient('Ingrediente di origine animale', null);
+CALL add_child_ingredient('Volatile', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Pollo', 'Volatile', null);
+CALL add_child_ingredient('Petto di pollo', 'Pollo',  null);
+CALL add_child_ingredient('Coscia di pollo','Pollo', null);
+CALL add_child_ingredient('Gallina','Volatile', null);
+CALL add_child_ingredient('Uovo di gallina', 'Gallina', null);
+CALL add_child_ingredient('Collo di gallina', 'Gallina', null);
+CALL add_child_ingredient('Gallo', 'Volatile', null);
+CALL add_child_ingredient('Tacchino', 'Volatile', null);
+CALL add_child_ingredient('Quaglia', 'Volatile', null);
+CALL add_child_ingredient('Oca', 'Volatile', null);
+CALL add_child_ingredient('Fagiano', 'Volatile', null);
+CALL add_child_ingredient('Suino', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Maiale', 'Suino', null);
+CALL add_child_ingredient('Coscia di maiale', 'Maiale', null);
+CALL add_child_ingredient('Prosciutto cotto', 'Coscia di maiale', null);
+CALL add_child_ingredient('Prosciutto crudo', 'Coscia di maiale', null);
+CALL add_child_ingredient('Collo di maiale', 'Maiale', null);
+CALL add_child_ingredient('Cinghiale', 'Suino', null);
+CALL add_child_ingredient('Bovino', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Vitella', 'Bovino', null);
+CALL add_child_ingredient('Vitellone', 'Bovino', null);
+CALL add_child_ingredient('Manzo', 'Bovino', null);
+CALL add_child_ingredient('Mucca', 'Bovino', null);
+CALL add_child_ingredient('Latte di mucca', 'Mucca', null);
+CALL add_child_ingredient('Latte intero di mucca', 'Latte di mucca', null);
+CALL add_child_ingredient('Latte scremato di mucca', 'Latte di mucca', null);
+CALL add_child_ingredient('Parmigiano Reggiano', 'Latte di mucca', null);
+CALL add_child_ingredient('Equino', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Cavallo', 'Equino', null);
+CALL add_child_ingredient('Roditore', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Lepre', 'Roditore', null);
+CALL add_child_ingredient('Coniglio', 'Roditore', null);
+CALL add_child_ingredient('Anfibio o rettile', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Rana', 'Anfibio o rettile', null);
+CALL add_child_ingredient('Serpente', 'Anfibio o rettile', null);
+CALL add_child_ingredient('Ovino', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Abbacchio', 'Ovino', null);
+CALL add_child_ingredient('Pecora', 'Ovino', null);
+CALL add_child_ingredient('Pesce', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Salmone', 'Pesce', null);
+CALL add_child_ingredient('Tonno', 'Pesce', null);
+CALL add_child_ingredient('Sogliola', 'Pesce', null);
+CALL add_child_ingredient('Orata', 'Pesce', null);
+CALL add_child_ingredient('Crostaceo', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Aragosta', 'Crostaceo', null);
+CALL add_child_ingredient('Gambero', 'Crostaceo', null);
+CALL add_child_ingredient('Mollusco', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Polpo', 'Mollusco', null);
+CALL add_child_ingredient('Seppia', 'Mollusco', null);
+CALL add_child_ingredient('Vongola', 'Mollusco', null);
+CALL add_child_ingredient('Cozza', 'Mollusco', null);
+CALL add_child_ingredient('Lumaca', 'Mollusco', null);
+CALL add_child_ingredient('Insetto', 'Ingrediente di origine animale', null);
+CALL add_child_ingredient('Miele', 'Insetto', null);
+CALL add_root_ingredient('Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Cereale', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Frumento', 'Cereale', null);
+CALL add_child_ingredient('Grano tenero', 'Frumento', null);
+CALL add_child_ingredient('Farina di grano tenero', 'Grano tenero', null);
+CALL add_child_ingredient('Grano duro', 'Frumento', null);
+CALL add_child_ingredient('Farina di grano duro', 'Grano duro', null);
+CALL add_child_ingredient('Semola di grano duro', 'Grano duro', null);
+CALL add_child_ingredient('Cuscus', 'Semola di grano duro', null);
+CALL add_child_ingredient('Pasta di grano duro', 'Semola di grano duro', null);
+CALL add_child_ingredient('Bulgur', 'Grano duro', null);
+CALL add_child_ingredient('Grano saraceno', 'Cereale', null);
+CALL add_child_ingredient('Riso', 'Cereale', null);
+CALL add_child_ingredient('Riso venere', 'Riso', null);
+CALL add_child_ingredient('Riso basmati', 'Riso', null);
+CALL add_child_ingredient('Farro', 'Cereale', null);
+CALL add_child_ingredient('Avena', 'Cereale', null);
+CALL add_child_ingredient('Soia', 'Cereale', null);
+CALL add_child_ingredient('Salsa di soia', 'Soia', null);
+CALL add_child_ingredient('Olio di semi di soia', 'Soia', null);
+CALL add_child_ingredient('Olio di semi di soia raffinato', 'Olio di semi di soia', null);
+CALL add_child_ingredient('Germogli di soia', 'Soia', null);
+CALL add_child_ingredient('Tofu', 'Soia', null);
+CALL add_child_ingredient('Legume', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Lenticchia', 'Legume', null);
+CALL add_child_ingredient('Fagiolo', 'Legume', null);
+CALL add_child_ingredient('Frutto', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Mela', 'Frutto', null);
+CALL add_child_ingredient('Cocomero', 'Frutto', null);
+CALL add_child_ingredient('Pesca', 'Frutto', null);
+CALL add_child_ingredient('Mango', 'Frutto', null);
+CALL add_child_ingredient('Avocado', 'Frutto', null);
+CALL add_child_ingredient('Banana', 'Frutto', null);
+CALL add_child_ingredient('Fragola', 'Frutto', null);
+CALL add_child_ingredient('Oliva', 'Frutto', null);
+CALL add_child_ingredient('Olio di oliva', 'Oliva', null);
+CALL add_child_ingredient('Olio extravergine di oliva', 'Olio di oliva', null);
+CALL add_child_ingredient('Verdura', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Insalata', 'Verdura', null);
+CALL add_child_ingredient('Cipolla', 'Verdura', null);
+CALL add_child_ingredient('Melanzana', 'Verdura', null);
+CALL add_child_ingredient('Tubero', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Patata', 'Tubero', null);
+CALL add_child_ingredient('Carota', 'Tubero', null);
+CALL add_child_ingredient('Topinambur', 'Tubero', null);
+CALL add_child_ingredient('Frutta secca o semi', 'Ingrediente di origine vegetale', null);
+CALL add_child_ingredient('Mandorla', 'Frutta secca o semi', null);
+CALL add_child_ingredient('Arachide', 'Frutta secca o semi', null);
+CALL add_child_ingredient('Noce', 'Frutta secca o semi', null);
+CALL add_child_ingredient('Pepe', 'Frutta secca o semi', null);
+CALL add_child_ingredient('Pepe rosa', 'Pepe', null);
+CALL add_child_ingredient('Pepe nero', 'Pepe', null);
+CALL add_child_ingredient('Pepe di Sichuan', 'Pepe', null);
+CALL add_root_ingredient('Acqua', null);
+CALL add_root_ingredient('Sale', null);
+CALL add_root_ingredient('Fungo', null);
+CALL add_child_ingredient('Fungo porcino', 'Fungo', null);
+CALL add_child_ingredient('Fungo champignon', 'Fungo', null);
+CALL add_child_ingredient('Tartufo', 'Fungo', null);
+CALL add_child_ingredient('Tartufo bianco', 'Tartufo', null);
+CALL add_child_ingredient('Tartufo bianco di Alba', 'Tartufo bianco', null);
+CALL add_child_ingredient('Tartufo nero', 'Tartufo', null);
+CALL add_child_ingredient('Tartufo nero pregiato', 'Tartufo nero', null);
+CALL add_child_ingredient('Tartufo nero estivo', 'Tartufo nero', null);
+CALL add_child_ingredient('Tartufo nero invernale', 'Tartufo nero', null);
+CALL add_child_ingredient('Tartufo nero liscio', 'Tartufo nero', null);
 
-CALL add_excluded_group('HALAL', null);
-CALL add_excluded_group('CARNIVORE', null);
-CALL add_excluded_group('KOSHER', null);
-CALL add_excluded_group('PESCATARIAN', null);
-CALL add_excluded_group('VEGAN', null);
-CALL add_excluded_group('VEGETARIAN', null);
-CALL add_excluded_group('PREGNANT', null);
+CALL add_allergy('Glutine', null);
+CALL add_allergy('Crostacei', null);
+CALL add_allergy('Uova', null);
+CALL add_allergy('Pesce', null);
+CALL add_allergy('Arachidi', null);
+CALL add_allergy('Soia', null);
+CALL add_allergy('Latte', null);
+CALL add_allergy('Frutta a guscio', null);
+CALL add_allergy('Sedano', null);
+CALL add_allergy('Senape', null);
+CALL add_allergy('Semi di sesamo', null);
+CALL add_allergy('Solfiti', null);
+CALL add_allergy('Lupini', null);
+CALL add_allergy('Molluschi', null);
+CALL add_allergy('Grano saraceno', null);
+CALL add_allergy('Propoli', null);
+CALL add_allergy('Pappa reale', null);
+CALL add_allergy('Mango', null);
+CALL add_allergy('Pesca', null);
+CALL add_allergy('Maiale', null);
+CALL add_allergy('Pomodoro', null);
+CALL add_allergy('Lattice', null);
 
-CALL add_allergy('aaaa', null);
-CALL add_allergy('bbbb', null);
-CALL add_allergy('cccc', null);
+CALL add_allergy_ingredient_name('Glutine', 'Frumento');
+CALL add_allergy_ingredient_name('Glutine', 'Grano tenero');
+CALL add_allergy_ingredient_name('Glutine', 'Grano duro');
+CALL add_allergy_ingredient_name('Glutine', 'Farina di grano duro');
+CALL add_allergy_ingredient_name('Glutine', 'Semola di grano duro');
+CALL add_allergy_ingredient_name('Glutine', 'Cuscus');
+CALL add_allergy_ingredient_name('Glutine', 'Pasta di grano duro');
+CALL add_allergy_ingredient_name('Glutine', 'Bulgur');
+CALL add_allergy_ingredient_name('Glutine', 'Farro');
+CALL add_allergy_ingredient_name('Glutine', 'Avena');
+
+CALL add_allergy_ingredient_name('Crostacei', 'Crostaceo');
+CALL add_allergy_ingredient_name('Crostacei', 'Aragosta');
+CALL add_allergy_ingredient_name('Crostacei', 'Gambero');
+
+CALL add_allergy_ingredient_name('Uova', 'Uovo di gallina');
+
+CALL add_allergy_ingredient_name('Pesce', 'Salmone');
+CALL add_allergy_ingredient_name('Pesce', 'Tonno');
+CALL add_allergy_ingredient_name('Pesce', 'Sogliola');
+CALL add_allergy_ingredient_name('Pesce', 'Orata');
+
+CALL add_allergy_ingredient_name('Arachidi', 'Arachide');
+
+CALL add_allergy_ingredient_name('Soia', 'Soia');
+CALL add_allergy_ingredient_name('Soia', 'Salsa di soia');
+CALL add_allergy_ingredient_name('Soia', 'Olio di semi di soia');
+CALL add_allergy_ingredient_name('Soia', 'Tofu');
+
+CALL add_allergy_ingredient_name('Latte', 'Latte di mucca');
+CALL add_allergy_ingredient_name('Latte', 'Latte intero di mucca');
+CALL add_allergy_ingredient_name('Latte', 'Latte scremato di mucca');
+CALL add_allergy_ingredient_name('Latte', 'Parmigiano Reggiano');
+
+CALL add_allergy_ingredient_name('Frutta a guscio', 'Frutta secca o semi');
+CALL add_allergy_ingredient_name('Frutta a guscio', 'Mandorla');
+CALL add_allergy_ingredient_name('Frutta a guscio', 'Noce');
+
+CALL add_allergy_ingredient_name('Molluschi', 'Mollusco');
+CALL add_allergy_ingredient_name('Molluschi', 'Polpo');
+CALL add_allergy_ingredient_name('Molluschi', 'Seppia');
+CALL add_allergy_ingredient_name('Molluschi', 'Vongola');
+CALL add_allergy_ingredient_name('Molluschi', 'Cozza');
+CALL add_allergy_ingredient_name('Molluschi', 'Lumaca');
+
+CALL add_allergy_ingredient_name('Grano saraceno', 'Grano saraceno');
+
+CALL add_allergy_ingredient_name('Propoli', 'Miele');
+
+CALL add_allergy_ingredient_name('Pappa reale', 'Miele');
+
+CALL add_allergy_ingredient_name('Mango', 'Mango');
+
+CALL add_allergy_ingredient_name('Pesca', 'Pesca');
+
+CALL add_allergy_ingredient_name('Maiale', 'Maiale');
+CALL add_allergy_ingredient_name('Maiale', 'Coscia di maiale');
+CALL add_allergy_ingredient_name('Maiale', 'Prosciutto cotto');
+CALL add_allergy_ingredient_name('Maiale', 'Prosciutto crudo');
+CALL add_allergy_ingredient_name('Maiale', 'Collo di maiale');
 
 DO $$
 DECLARE
-	id varchar;
+	group_id varchar;
 BEGIN
-	CALL add_excluded_group('Incinta', id);
-	CALL add_excluded_group_ingredient(id, 'Alcol');
+    CALL add_excluded_group('HALAL', group_id);
+    CALL add_excluded_group('CARNIVORE', group_id);
+    CALL add_excluded_group('KOSHER', group_id);
+    CALL add_excluded_group('PESCATARIAN', group_id);
+
+    CALL add_excluded_group('VEGAN', group_id);
+    CALL add_excluded_group_ingredient(group_id, 'Maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Coscia di maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Prosciutto cotto');
+    CALL add_excluded_group_ingredient(group_id, 'Prosciutto crudo');
+    CALL add_excluded_group_ingredient(group_id, 'Collo di maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Crostaceo');
+    CALL add_excluded_group_ingredient(group_id, 'Aragosta');
+    CALL add_excluded_group_ingredient(group_id, 'Gambero');
+    CALL add_excluded_group_ingredient(group_id, 'Salmone');
+    CALL add_excluded_group_ingredient(group_id, 'Tonno');
+    CALL add_excluded_group_ingredient(group_id, 'Sogliola');
+    CALL add_excluded_group_ingredient(group_id, 'Orata');
+    CALL add_excluded_group_ingredient(group_id, 'Pesce');
+
+    CALL add_excluded_group('VEGETARIAN', group_id);
+    CALL add_excluded_group_ingredient(group_id, 'Maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Coscia di maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Prosciutto cotto');
+    CALL add_excluded_group_ingredient(group_id, 'Prosciutto crudo');
+    CALL add_excluded_group_ingredient(group_id, 'Collo di maiale');
+    CALL add_excluded_group_ingredient(group_id, 'Crostaceo');
+    CALL add_excluded_group_ingredient(group_id, 'Aragosta');
+    CALL add_excluded_group_ingredient(group_id, 'Gambero');
+    CALL add_excluded_group_ingredient(group_id, 'Salmone');
+    CALL add_excluded_group_ingredient(group_id, 'Tonno');
+    CALL add_excluded_group_ingredient(group_id, 'Sogliola');
+    CALL add_excluded_group_ingredient(group_id, 'Orata');
+    CALL add_excluded_group_ingredient(group_id, 'Pesce');
+
+    CALL add_excluded_group('PREGNANT', group_id);
+	CALL add_excluded_group_ingredient(group_id, 'Alcol');
 END;
 $$;
 
 DO $$
 DECLARE
-	id varchar;
+	restaurant_id varchar;
+	dish_id varchar;
+	phone varchar;
+	address varchar;
 BEGIN
-	CALL add_excluded_group('Halal', id);
-	CALL add_excluded_group_ingredient(id, 'Alcol');
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a1', 'DRINK', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a2', 'APPETIZER', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a3', 'FIRST', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a4', 'CONTOUR', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a5', 'SECOND', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+    CALL userinfo_rest('lucaR', phone, address, restaurant_id);
+	CALL add_dish('a6', 'DESSERT', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Maiale', false, false);
+
+
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b1', 'DRINK', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b2', 'APPETIZER', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b3', 'FIRST', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b4', 'CONTOUR', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b5', 'SECOND', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR1', phone, address, restaurant_id);
+	CALL add_dish('b6', 'DESSERT', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c1', 'DRINK', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c2', 'APPETIZER', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c3', 'FIRST', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c4', 'CONTOUR', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c5', 'SECOND', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR2', phone, address, restaurant_id);
+	CALL add_dish('c6', 'DESSERT', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d1', 'DRINK', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Alcol', false, false);
+
+	CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+    CALL add_dish('d2', 'DRINK', '', restaurant_id, dish_id);
+    CALL add_dish_ingredient(dish_id, 'Acqua', false, false);
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d3', 'APPETIZER', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d4', 'FIRST', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d5', 'CONTOUR', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d6', 'SECOND', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
+    CALL userinfo_rest('lucaR3', phone, address, restaurant_id);
+	CALL add_dish('d7', 'DESSERT', '', restaurant_id, dish_id);
+	CALL add_dish_ingredient(dish_id, 'Salmone', false, false);
+
 END;
 $$;
