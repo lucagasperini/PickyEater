@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="imageLogo" fitHeight="146.0" fitWidth="756.0" layoutX="307.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="307.2589111328125">
          <image>
@@ -26,7 +27,7 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </ImageView>
-      <VBox alignment="CENTER" layoutX="375.0" layoutY="225.0" maxWidth="-Infinity" prefHeight="270.0" prefWidth="531.0">
+      <VBox alignment="CENTER" layoutX="375.0" layoutY="225.0" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="361.0" prefWidth="531.0">
          <children>
             <Text fx:id="textTitle" fill="#843c0c" strokeType="OUTSIDE" strokeWidth="0.0" text="VIEW_TITLE">
                <font>
@@ -71,20 +72,22 @@
             </GridPane>
             <AnchorPane prefHeight="0.0" prefWidth="500.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </AnchorPane>
-            <AnchorPane prefHeight="0.0" prefWidth="500.0">
-               <children>
-                  <HBox alignment="CENTER" layoutX="133.0" layoutY="-24.0" prefHeight="31.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <HBox alignment="CENTER_LEFT" layoutX="133.0" layoutY="-24.0" prefHeight="37.0" prefWidth="531.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <CheckBox fx:id="checkboxKeepLoggedIn" mnemonicParsing="false" text="KEEPLOGGEDIN">
+                           <HBox.margin>
+                              <Insets top="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Calibri" size="14.0" />
+                           </font>
+                        </CheckBox>
+                     </children></HBox>
                </children>
             </AnchorPane>
             <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="45.0" prefWidth="576.0">
                <VBox.margin>
-                  <Insets top="30.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
                <children>
                   <Button fx:id="buttonLogin" contentDisplay="RIGHT" layoutX="117.0" layoutY="1.0" mnemonicParsing="false" onAction="#clickButtonLogin" prefHeight="37.0" prefWidth="297.0" styleClass="bt-saveChanges" text="LOGIN" />
