@@ -8,6 +8,8 @@ CREATE TABLE "Restaurant" (
     phone varchar(16) NOT NULL,
     address varchar(256) NOT NULL,
     city CITEXT NOT NULL,
+    unique(name, address, city),
+    unique(phone),
     PRIMARY KEY (id)
 );
 
